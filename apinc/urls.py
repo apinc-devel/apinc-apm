@@ -29,8 +29,6 @@ from django.conf.urls.defaults import *
 #admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Example:
-    # (r'^apinc/', include('apinc.foo.urls')),
     # Uncomment the admin/doc line below to enable admin documentation:
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
     
@@ -51,7 +49,7 @@ urlpatterns = patterns('',
         'contact'),
     (r'^legal-notice/$', 'apinc.pages.views.page', { 'page': "legal-notice" },
         'legal-notice'),
-    (r'^edit/(?P<page>[a-zA-Z\-]+)/$', 'apinc.pages.views.edit'), #reduire la regex [\w\-]+ 
+    (r'^edit/(?P<page>[\w\-]+)/$', 'apinc.pages.views.edit'),
 
     # Account authentication section
     (r'^accounts/login/$', 'apinc.pages.views.login'),
