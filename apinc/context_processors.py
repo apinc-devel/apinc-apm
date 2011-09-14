@@ -50,7 +50,7 @@ def user_groups(request):
             user_groups = request.user.person.groups.values_list('group__name', flat=True)
 
     return {
-        'superadmin'         : settings.APINC_PORTAL_ADMIN in user_groups,
+        'superadmin'         : settings.PORTAL_ADMIN in user_groups,
         'secretariat_member' : 'apinc-secretariat' in user_groups,
         'bureau_member'      : 'apinc-bureau' in user_groups,
         'secretariat_member' : 'apinc-secretariat' in user_groups,

@@ -227,7 +227,7 @@ TMP_PATH = os.path.join(SITE_PATH, "tmp") # donnees temporaires (unused yet)
 VERSION = '0.0.1'
 JQUERY_VERSION = '1.5.2'
 
-APINC_PORTAL_ADMIN = 'apinc-admin'
+PORTAL_ADMIN = 'apinc-admin'
 APINC_SIREN = '448 004 556'
 APINC_CNIL = '783317'
 
