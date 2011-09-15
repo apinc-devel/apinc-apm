@@ -1,0 +1,32 @@
+{% extends 'news/base_news.html' %}
+{% load i18n %}
+
+
+{% block content_page %}
+
+{% for news_item in news.object_list %}
+    <h2>{{ news_item.title}}</h2>
+    <p>{{ news_item.pub_date }}</p>
+     {{ news_item.body_html|truncatewords_html:"20"|safe }}
+    <p class="page-nav"><a href="{{ news_item.get_absolute_url }}">read more</a></p>
+{% empty %}
+    <p>{% trans "No news !" %}
+{% endfor %}
+
+<ul class="page-nav">
+    {% if news.has_previous %}
+        <a href="?page={{ news.previous_page_number }}">« {% trans "previous" %}</a>
+    {% endif %}
+
+    {% if news %}
+    <span class="current">
+        {% trans "page" %} {{ news.number }} of {{ news.paginator.num_pages }}
+    </span>
+    {% endif %}
+
+    {% if news.has_next %}
+        <a href="?page={{ news.next_page_number }}">{% trans "next" %} »</a>
+    {% endif %}
+</ul>
+    
+{% endblock %}

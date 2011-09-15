@@ -1,0 +1,32 @@
+{% extends 'news/base_news.html' %}
+{% load i18n %}
+
+{% block content_page %}
+
+    <h2>{{ news_item.title }}</h2>
+ 
+        <p>{{ news_item.pub_date }}</p>
+ 
+        <p>{{ news_item.body_html|safe }}</p>
+
+    <ul class="page-nav">
+        {% if news_item.get_previous_published %}
+        <a href="{{ news_item.get_previous_published.get_absolute_url }}" title=" {{news_item.get_previous_published.title}}">{% trans "« previous" %}</a>
+        {% endif %}
+ 
+        {% if news_item.get_next_published %}
+        <a href="{{ news_item.get_next_published.get_absolute_url }}" title=" {{news_item.get_next_published.title}}">{% trans "next »" %}</a>
+        {% endif %}
+    </ul>
+ 
+{% endblock %}
+
+{% block extra-actions %}
+{% if superadmin or bureau_member or secretariat_member or contributeur %}
+    {{ block.super }}
+    {% block end_ul %}{% endblock %}
+    <li><a href="{% url apinc.news.views.edit news_item.slug %}">{% trans "Edit this news" %}</a></li>
+    <li><a href="{% url apinc.news.views.delete news_item.slug %}">{% trans "Delete this news" %}</a></li>
+    </ul>
+{% endif %}
+{% endblock %}
