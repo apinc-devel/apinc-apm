@@ -1,0 +1,17 @@
+{% extends 'groups/base_groups.html' %}
+{% load i18n %}
+
+{% block pagetitle %}{% trans "Apinc groups" %}{% endblock %}
+ 
+{% block title %}Title{% endblock %}
+ 
+{% block content_page %}
+
+<ul>
+{% for group in groups %}
+{# FIXME #}
+<li><a href="/">{{ group }}</a></li>
+{% endfor %}
+</ul>
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% load  i18n %}
+
+{% block nav_news %}<li class="active">{% endblock %}
+
+{% block content %}
+    <div id="content" class="grid_8 ">
+        {% block content_page %}{% endblock %} 
+        {# FIXME #}
+    </div>
+
+    <div id="sidebar" class="grid_4 ">
+        <h2>{% trans "Actions" %}</h2>
+        <ul>
+            {% block extra-actions %} {% endblock %}
+            {# FIXME #}
+        </ul>
+
+    </div>
+	<div class="clear">&nbsp;</div>
+    
+{% endblock %}

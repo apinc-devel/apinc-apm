@@ -1,0 +1,35 @@
+{% extends 'members/base_members.html' %}
+{% load i18n %}
+
+{% block pagetitle %}{% trans "Member detail profile" %}{% endblock %}
+ 
+{% block title %}{{person.first_name }} {{ person.last_name}} {% endblock %}
+ 
+{% block content_page %}
+ 
+    <h1>{{ person.get_full_name }}</h1>
+    <div>
+        <ul>
+            {% if person.maiden_name %}
+                <li><b>{% filter capfirst %}{% trans "maiden name" %}{% endfilter %}
+                &nbsp;:</b> {{ person.maiden_name }}</li>
+            {% endif %}
+            {% if person.birthdate %}
+                <li><b>{% trans "Birthdate" %}&nbsp;:</b> {{ person.birthdate }}</li>
+            {% endif %}
+            {% if person.sex %}
+                <li><b>{% trans "Gender" %}&nbsp;:</b> {{ person.sex }}</li>
+            {% endif %}
+        </ul>
+        {% if superadmin or secretariat_member %}
+        <p>{% trans "Private data" %}</p>
+        <p>{{ personprivate.notes }}</p>
+        {% endif %}
+    </div>
+
+ 
+{% endblock %}
+
+{% block extra-actions %}
+{# FIXME #}
+{% endblock %}
