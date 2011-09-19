@@ -48,7 +48,7 @@ def page(request, page):
     text = TextBlock.objects.get(slug=page)
     return render(request, 'pages/generic_page.html', { 'text': text })
 
-@access_required(groups=['apinc-bureau', 'apinc-secretariat'])
+@access_required(groups=['apinc-bureau', 'apinc-secretariat', 'apinc-contributeur'])
 def edit(request, page):
     """Edit pseudo-static generic text block"""
 
