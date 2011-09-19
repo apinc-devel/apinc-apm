@@ -113,24 +113,31 @@ class Command(NoArgsCommand):
 
             # apinc groups
             apinc_admin = groups.Group(name='apinc-admin', slug='apinc-admin')
+            apinc_admin.email = "apinc-admin@apinc.org"
             apinc_admin.save()
             self.stdout.write("Group 'apinc-admin' inserted.\n")
             apinc_devel = groups.Group(name='apinc-devel', slug='apinc-devel')
+            apinc_devel.email = "apinc-devel@apinc.org"
             apinc_devel.save()
             self.stdout.write("Group 'apinc-devel' inserted.\n")
             apinc_bureau = groups.Group(name='apinc-bureau', slug='apinc-bureau')
+            apinc_bureau.email = "apinc-bureau@apinc.org"
             apinc_bureau.save()
             self.stdout.write("Group 'apinc-bureau' inserted.\n")
             apinc_secretariat = groups.Group(name='apinc-secretariat', slug='apinc-secretariat')
+            apinc_secretariat.email = "apinc-secretariat@apinc.org"
             apinc_secretariat.save()
             self.stdout.write("Group 'apinc-secretariat' inserted.\n")
             apinc_tresorier = groups.Group(name='apinc-tresorier', slug='apinc-tresorier')
+            apinc_tresorier.email = "apinc-tresorier@apinc.org"
             apinc_tresorier.save()
             self.stdout.write("Group 'apinc-tresorier' inserted.\n")
             apinc_contrib = groups.Group(name='apinc-contributeur', slug='apinc-contributeur')
+            apinc_contrib.email = "apinc-contrib@apinc.org"
             apinc_contrib.save()
             self.stdout.write("Group 'apinc-contributeur' inserted.\n")
             apinc_membre = groups.Group(name='apinc-membre', slug='apinc-member')
+            apinc_membre.email = "apinc-membre@apinc.org"
             apinc_membre.save()
             self.stdout.write("Group 'apinc-membre' inserted.\n")
 
@@ -151,10 +158,12 @@ class Command(NoArgsCommand):
             apinc_admin.add(laurent)
             apinc_devel.add(laurent)
             apinc_bureau.add(laurent)
+            role1.add(laurent)
+            role4.add(laurent)
 
             laurent_private = members.PersonPrivate()
             laurent_private.person = laurent
-            laurent_private.note = "Block de messages relatifs à l'utilisateur"
+            laurent_private.notes = "Block de messages relatifs à l'utilisateur"
             laurent_private.save()
             self.stdout.write("Membre 'laurent' inserted.\n")
 
@@ -173,10 +182,11 @@ class Command(NoArgsCommand):
             apinc_tresorier.add(pierre)
             apinc_devel.add(pierre)
             apinc_contrib.add(pierre)
+            role1.add(pierre)
 
             pierre_private = members.PersonPrivate()
             pierre_private.person = pierre
-            pierre_private.note = "Block de messages relatifs à l'utilisateur"
+            pierre_private.notes = "Block de messages relatifs à l'utilisateur"
             pierre_private.save()
             self.stdout.write("Membre 'pierre' inserted.\n")
 
@@ -194,10 +204,11 @@ class Command(NoArgsCommand):
 
             apinc_devel.add(evariste)
             apinc_membre.add(evariste)
+            role10.add(evariste)
 
             evariste_private = members.PersonPrivate()
             evariste_private.person = evariste
-            evariste_private.note = "Block de messages relatifs à l'utilisateur"
+            evariste_private.notes = "Block de messages relatifs à l'utilisateur"
             evariste_private.save()
             self.stdout.write("Membre 'evariste' inserted.\n")
             # news
@@ -245,6 +256,33 @@ class Command(NoArgsCommand):
             news5.title = "Morbi tellus risus"
             news5.save()
             self.stdout.write("News 5 inserted.\n")
+
+            news6 = news.News()
+            news6.status = 0 
+            news6.body_html = "<div><h2>Neque porro quisquam</h2><ol><li>Sed eget massa condimentum justo pellentesque gravida.</li><li>Aliquam lobortis eros non justo aliquam sed cursus turpis porta.</li><li>Donec tincidunt aliquet dolor, vel tempus est hendrerit eget.</li></ol><h3><em>est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...</em></h3>"
+            news6.pub_date = datetime(2010,02,15,9,35,02)
+            news6.slug = "neque-porro-quisquam"
+            news6.title = "Neque porro quisquam"
+            news6.save()
+            self.stdout.write("News 6 inserted.\n")
+
+            news7 = news.News()
+            news7.status = 1
+            news7.body_html = "<div><h2>Lorem ipsum</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam id hendrerit mi. Vivamus placerat turpis non turpis commodo posuere. <strong>Vivamus</strong> cursus bibendum iaculis. In rutrum sem non lorem malesuada in gravida leo adipiscing. Nullam ultrices bibendum pretium. Aenean condimentum, ipsum et imperdiet fringilla, magna ipsum interdum ligula, eget condimentum lacus tellus a leo. Curabitur imperdiet consequat nulla, sed rhoncus eros porttitor a. Pellentesque vel purus ut neque vehicula mollis sed ut metus. Ut interdum aliquet blandit. In urna eros, sollicitudin eu eleifend ac, mollis nec lectus. In interdum pretium <strong>venenatis</strong>. Vestibulum venenatis, risus sed rutrum elementum, justo leo gravida purus, id porttitor est tellus sed ante. Maecenas et dapibus dolor. Curabitur pulvinar, leo nec imperdiet porttitor, odio quam gravida lacus, vitae tincidunt dolor neque ut enim. In <sup>gravida</sup>, nibh ut molestie sagittis, arcu sem laoreet quam, in vehicula quam neque a risus.</p><h2>Ut interdum aliquet blandit</span></h2></div></span><div></span><div><ul><li>In eu quam et tortor mollis facilisis ut varius ipsum.</li><li>Quisque condimentum porta nibh, in congue nulla iaculis eu.</li></ul><h3>Quisque dignissim scelerisque felis, sit amet tempor justo vehicula eget.</span></h3><ul><li>Phasellus non justo neque, quis mollis lorem.</li><li>Maecenas vehicula iaculis elit, nec tempor urna elementum bibendum.</li></ul><p>Suspendisse nec mi diam, a viverra ligula. Quisque iaculis arcu eu lectus egestas malesuada egestas ac eros. Maecenas dignissim quam tincidunt quam tincidunt et tincidunt orci malesuada. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse at ante ligula, in interdum erat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p><blockquote><p>Sed id lacus nibh, ac dictum nisi. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet lorem et lorem suscipit ultricies venenatis non justo. Aenean cursus facilisis elit a feugiat. Mauris lacus diam, convallis et vulputate ut, dapibus eu lectus. In arcu quam, pharetra in egestas vitae, ultrices et urna. Nunc lobortis bibendum diam vitae venenatis. Ut scelerisque, risus sit amet tincidunt placerat, sapien massa ultricies odio, ut blandit lectus nulla eget neque.</p></blockquote></div></span></div>"
+            news7.pub_date = datetime(2010,9,07,22,00,32)
+            news7.slug = "vivamus-cursus-bibendum-iaculis"
+            news7.title = "Vivamus cursus bibendum iaculis"
+            news7.save()
+            self.stdout.write("News 7 inserted.\n")
+
+            news8 = news.News()
+            news8.status = 0 
+            news8.body_html = "Vivamus vehicula feugiat lacus id sagittis. Phasellus venenatis vulputate velit non pellentesque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse nisi enim, scelerisque at ullamcorper id, pharetra id magna. Suspendisse augue neque, faucibus nec interdum vitae, lacinia quis justo. Nullam a magna mi. Etiam hendrerit diam ut ipsum dignissim lacinia. Fusce porttitor erat eu urna porta ac tempor sapien ullamcorper. Aliquam magna massa, placerat at imperdiet at, volutpat consectetur lectus. Nulla iaculis adipiscing commodo. Pellentesque eu purus volutpat felis suscipit porttitor. In dapibus, ligula molestie fringilla posuere, mi leo laoreet enim, vitae congue purus nisl vel diam. Ut tempus sapien lacinia neque viverra at commodo orci interdum. Vivamus pellentesque pellentesque scelerisque. Mauris varius varius velit eget fermentum. Duis auctor tortor eu dui dignissim porta."
+            news8.pub_date = datetime(2011,01,13,23,12,37)
+            news8.slug = "vivamus-vehicula"
+            news8.title = "Vivamus vehicula"
+            news8.save()
+            self.stdout.write("News 8 inserted.\n")
 
             self.stdout.write('Successfully filled database\n')
 
