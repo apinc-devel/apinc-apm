@@ -67,13 +67,22 @@ class News(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('apinc.news.views.details', [str(self.slug)])
+        if self.status == PUBLISHED:
+            return ('apinc.news.views.published_details', [str(self.slug)])
+        else:
+            return ('apinc.news.views.draft_details', [str(self.slug)])
 
     def get_previous_published(self):
-        return self.get_previous_by_pub_date(status__exact=1)
+        return self.get_previous_by_pub_date(status__exact=PUBLISHED)
 
     def get_next_published(self):
-        return self.get_next_by_pub_date(status__exact=1)
+        return self.get_next_by_pub_date(status__exact=PUBLISHED)
+
+    def get_previous_drafted(self):
+        return self.get_previous_by_pub_date(status__exact=DRAFT)
+
+    def get_next_drafted(self):
+        return self.get_next_by_pub_date(status__exact=DRAFT)
 
     def save(self):
         """News save method"""

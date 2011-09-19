@@ -49,13 +49,6 @@ def index(request):
         'news': news,
         'archives': _archives() })
 
-def details(request, news_slug):
-    """News details"""
-    news_item = get_object_or_404(News, slug=news_slug)
-    return render(request, 'news/details.html', {
-        'news_item': news_item,
-        'archives': _archives() })
-
 @access_required(groups=['apinc-admin', 'apinc-secretariat', 'apinc-bureau'])
 @confirm_required(lambda news_slug: str(get_object_or_404(News, slug=news_slug)),
         'news/base_news.html',
@@ -99,6 +92,13 @@ def edit(request, news_slug=None):
         'back': request.META.get('HTTP_REFERER','/'),
         'archives': _archives() })
 
+def published_details(request, news_slug):
+    """Published news details"""
+    news_item = get_object_or_404(News, slug=news_slug)
+    return render(request, 'news/published_details.html', {
+        'news_item': news_item,
+        'archives': _archives() })
+
 def published(request, year=None, month=None, day=None):
     """Archives of published news"""
     nb_news_per_page = 5 
@@ -120,6 +120,15 @@ def published(request, year=None, month=None, day=None):
 
     return render(request, 'news/published.html', {
         'news': news,
+        'archives': _archives() })
+
+@access_required(groups=['apinc-secretariat', 'apinc-bureau',
+                    'apinc-contributeur'])
+def draft_details(request, news_slug):
+    """Drafted news details"""
+    news_item = get_object_or_404(News, slug=news_slug)
+    return render(request, 'news/draft_details.html', {
+        'news_item': news_item,
         'archives': _archives() })
 
 @access_required(groups=['apinc-secretariat', 'apinc-bureau',
