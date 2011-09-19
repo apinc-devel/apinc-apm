@@ -16,24 +16,21 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal('members', ['Role'])
 
-        # Adding model 'PersonRole'
-        db.create_table('members_personrole', (
+        # Adding model 'MemberRole'
+        db.create_table('members_memberrole', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('role', self.gf('django.db.models.fields.related.ForeignKey')(related_name='actors', to=orm['members.Role'])),
-            ('actor', self.gf('django.db.models.fields.related.ForeignKey')(related_name='roles', to=orm['members.Person'])),
-            ('start_date', self.gf('django.db.models.fields.DateField')(default=datetime.date(2011, 6, 26), null=True, blank=True)),
+            ('role', self.gf('django.db.models.fields.related.ForeignKey')(related_name='members', to=orm['members.Role'])),
+            ('member', self.gf('django.db.models.fields.related.ForeignKey')(related_name='roles', to=orm['members.Member'])),
+            ('start_date', self.gf('django.db.models.fields.DateField')(default=datetime.date(2011, 9, 19), null=True, blank=True)),
             ('end_date', self.gf('django.db.models.fields.DateField')(null=True, blank=True)),
             ('expiration_date', self.gf('django.db.models.fields.DateField')(null=True, blank=True)),
         ))
-        db.send_create_signal('members', ['PersonRole'])
+        db.send_create_signal('members', ['MemberRole'])
 
         # Adding model 'Person'
         db.create_table('members_person', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('user', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['auth.User'], unique=True)),
-            ('last_name', self.gf('django.db.models.fields.CharField')(max_length=50)),
-            ('first_name', self.gf('django.db.models.fields.CharField')(max_length=50)),
-            ('complete_name', self.gf('django.db.models.fields.CharField')(max_length=50)),
             ('maiden_name', self.gf('django.db.models.fields.CharField')(max_length=100, null=True, blank=True)),
             ('birth_date', self.gf('django.db.models.fields.DateField')(null=True, blank=True)),
             ('sex', self.gf('django.db.models.fields.CharField')(max_length=1)),
@@ -48,20 +45,30 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal('members', ['PersonPrivate'])
 
+        # Adding model 'Member'
+        db.create_table('members_member', (
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('person', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['members.Person'], unique=True)),
+        ))
+        db.send_create_signal('members', ['Member'])
+
 
     def backwards(self, orm):
         
         # Deleting model 'Role'
         db.delete_table('members_role')
 
-        # Deleting model 'PersonRole'
-        db.delete_table('members_personrole')
+        # Deleting model 'MemberRole'
+        db.delete_table('members_memberrole')
 
         # Deleting model 'Person'
         db.delete_table('members_person')
 
         # Deleting model 'PersonPrivate'
         db.delete_table('members_personprivate')
+
+        # Deleting model 'Member'
+        db.delete_table('members_member')
 
 
     models = {
@@ -101,13 +108,24 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
-        'members.person': {
-            'Meta': {'ordering': "['last_name', 'first_name']", 'object_name': 'Person'},
-            'birth_date': ('django.db.models.fields.DateField', [], {'null': 'True', 'blank': 'True'}),
-            'complete_name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
-            'first_name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
+        'members.member': {
+            'Meta': {'object_name': 'Member'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'last_name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
+            'person': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['members.Person']", 'unique': 'True'})
+        },
+        'members.memberrole': {
+            'Meta': {'object_name': 'MemberRole'},
+            'end_date': ('django.db.models.fields.DateField', [], {'null': 'True', 'blank': 'True'}),
+            'expiration_date': ('django.db.models.fields.DateField', [], {'null': 'True', 'blank': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'member': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'roles'", 'to': "orm['members.Member']"}),
+            'role': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'members'", 'to': "orm['members.Role']"}),
+            'start_date': ('django.db.models.fields.DateField', [], {'default': 'datetime.date(2011, 9, 19)', 'null': 'True', 'blank': 'True'})
+        },
+        'members.person': {
+            'Meta': {'ordering': "['user__last_name', 'user__first_name']", 'object_name': 'Person'},
+            'birth_date': ('django.db.models.fields.DateField', [], {'null': 'True', 'blank': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'maiden_name': ('django.db.models.fields.CharField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
             'sex': ('django.db.models.fields.CharField', [], {'max_length': '1'}),
             'user': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['auth.User']", 'unique': 'True'})
@@ -117,15 +135,6 @@ class Migration(SchemaMigration):
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'notes': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
             'person': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['members.Person']", 'unique': 'True'})
-        },
-        'members.personrole': {
-            'Meta': {'object_name': 'PersonRole'},
-            'actor': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'roles'", 'to': "orm['members.Person']"}),
-            'end_date': ('django.db.models.fields.DateField', [], {'null': 'True', 'blank': 'True'}),
-            'expiration_date': ('django.db.models.fields.DateField', [], {'null': 'True', 'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'role': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'actors'", 'to': "orm['members.Role']"}),
-            'start_date': ('django.db.models.fields.DateField', [], {'default': 'datetime.date(2011, 6, 26)', 'null': 'True', 'blank': 'True'})
         },
         'members.role': {
             'Meta': {'object_name': 'Role'},

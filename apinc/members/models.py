@@ -36,22 +36,52 @@ class Role(models.Model):
 
     def __unicode__(self):
         return self.name
-   
-class PersonRole(models.Model):
-    """Store a role acted by a person"""
+
+    #def all_members(self): #FIXME
+    #    """all group members"""
+    #    from django.db.models import Q
+    #    return [ ms for ms in self.members.all() ]
+
+    def add(self, member): #FIXME test unicite ?
+        member_role = MemberRole()
+        member_role.role = self
+        member_role.member = member
+        member_role.start_date = datetime.date.today()
+        member_role.save()
+
+    def remove(self, member): #FIXME test active_member ?
+        member_role = memberRole.objects.get(role=self, member=member)
+        member_role.end_date = datetime.date.today()
+        member_role.save()
+  
+class MemberRoleManager(models.Manager):
+    def get_active_members(self):
+        from django.db.models import Q
+        return self.filter(
+            Q(start_date__lte=datetime.date.today()),
+            (Q(end_date__gte=datetime.date.today()) | 
+            Q(end_date__isnull=True)))
+
+class MemberRole(models.Model):
+    """Store a role acted by a member"""
 
     role = models.ForeignKey('Role', verbose_name=_('role'),
         related_name='members')
-    person = models.ForeignKey('Person', verbose_name=_('person'),
+    member = models.ForeignKey('Member', verbose_name=_('member'),
         related_name='roles')
 
     start_date = models.DateField(verbose_name=_('start date'),
         default=datetime.date.today(), blank=True, null=True)
     end_date = models.DateField(verbose_name=_('end date'), blank=True,
         null=True)
-    expiration_date = models.DateField(verbose_name=_('expiration date'), blank=True,
-        null=True)
+    expiration_date = models.DateField(verbose_name=_('expiration date'),
+        blank=True, null=True)
 
+    objects = MemberRoleManager()
+
+    def __unicode__(self):
+        return "Role %s : Member %s" % (unicode(self.role),
+                unicode(self.member))  
 
 class Person(models.Model):
     """The main class for a person"""
@@ -89,7 +119,6 @@ class Person(models.Model):
     def get_full_name(self):
         return self.user.first_name + " " + self.user.last_name
 
-
 class PersonPrivate(models.Model):
     """private data for a person"""
 
@@ -107,3 +136,9 @@ class PersonPrivate(models.Model):
         verbose_name = _('Person Private Data')
         ordering = ['person']
 
+class Member(models.Model):
+    """Member"""
+    person = models.OneToOneField('Person', verbose_name=_('person'))
+
+    def __unicode__(self):
+        return unicode(self.person)
