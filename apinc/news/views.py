@@ -51,8 +51,8 @@ def index(request):
 
 @access_required(groups=['apinc-admin', 'apinc-secretariat', 'apinc-bureau'])
 @confirm_required(lambda news_slug: str(get_object_or_404(News, slug=news_slug)),
-        'news/base_news.html',
-        _('Do you really want to delete this news'))
+        section='news/base_news.html',
+        message=_('Do you really want to delete this news'))
 def delete(request, news_slug):
     """News delete"""
 
@@ -61,7 +61,7 @@ def delete(request, news_slug):
 
     request.user.message_set.create(message=
         _('The news has been successfully deleted.'))
-    return HttpResponseRedirect('/news/')
+    return HttpResponseRedirect(reverse(index))
 
 @access_required(groups=['apinc-secretariat', 'apinc-bureau',
                     'apinc-contributeur'])
