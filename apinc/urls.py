@@ -42,13 +42,14 @@ urlpatterns = patterns('',
         {'document_root': settings.STATIC_ROOT}),
 
     # Pages particulieres au contenu pseudo statique
-    (r'^$', 'pages.views.homepage', {}, 'homepage'),
-    (r'^about/$', 'apinc.pages.views.page', { 'page': "about" }, 'about'),
-    (r'^charte/$', 'apinc.pages.views.page', { 'page': "charte" }, 'charte'),
-    (r'^contact/$', 'apinc.pages.views.page', { 'page': "contact" },
-        'contact'),
-    (r'^legal-notice/$', 'apinc.pages.views.page', { 'page': "legal-notice" },
-        'legal-notice'),
+    url(r'^$', 'pages.views.homepage', name='homepage'),
+    url(r'^about/$', 'apinc.pages.views.page', { 'page': "about" },
+        name='about'),
+    url(r'^contact/$', 'apinc.pages.views.page', { 'page': "contact" },
+        name='contact'),
+    url(r'^legal-notice/$', 'apinc.pages.views.page',
+        { 'page': "legal-notice" }, name='legal-notice'),
+
     (r'^edit/(?P<page>[\w\-]+)/$', 'apinc.pages.views.edit'),
 
     # Account authentication section
