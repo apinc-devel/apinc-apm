@@ -191,6 +191,7 @@ MIDDLEWARE_CLASSES = (
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS + (
+    'django.core.context_processors.request',
     'apinc.context_processors.base',
     'apinc.context_processors.versions',
     'apinc.context_processors.user_groups',

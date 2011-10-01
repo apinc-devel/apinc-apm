@@ -86,9 +86,7 @@ def login(request):
 #FIXME login by email address
 #    from django.db.models import Q
 
-    next_page = request.GET.get('next','/')
-    if not next_page == "":
-        next_page = request.META.get('HTTP_REFERER', '/')
+    next_page = request.GET.get('next', '/')
 
     if request.method == 'POST':
         try:
@@ -98,9 +96,11 @@ def login(request):
             password = request.POST['password']
 #            user = auth.authenticate(username=username, password=password)
             user = auth.authenticate(username=login, password=password)
+
             if user:
                 auth.login(request, user)
                 return HttpResponseRedirect(request.POST.get('next','/'))
+
         except Exception:
            pass
         return render(request, 'auth/login.html',
