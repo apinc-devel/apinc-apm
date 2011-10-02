@@ -1,0 +1,22 @@
+{% extends 'association/base_association.html' %}
+{% load i18n %}
+
+{% block content_page %}
+
+<h1>{% trans "Board members" %}</h1>
+{% for member in board_members %}
+    <p><strong>{{ member.role }} : </strong>{{ member.member }}</p>
+{% empty %}
+    <p>{% trans "No members in the board !" %}
+{% endfor %}
+
+{% endblock %}
+
+{% block links %} 
+<h2>{% trans "Links" %}</h2>
+<ul>
+    <li><a href="{% url apinc.association.views.status %}">{% trans "Status" %}</a></li>
+    <li><a href="{% url apinc.association.views.charter %}">{% trans "Charter" %}</a></li>
+</ul>
+{% endblock %}
+

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load  i18n %}
+
+{% block pagetitle %}{% trans "The association" %}{% endblock %}
+
+{% block nav_association %}<li class="active">{% endblock %}
+
+{% block content %}
+<div id="content" class="grid_8 ">
+    {% block content_page %}{% endblock %} 
+</div>
+
+<div id="sidebar" class="grid_4 ">
+
+    {% block links %} {% endblock %}
+    {% block actions %} {% endblock %}
+    {% block extra-actions %} {% endblock %}
+
+</div>
+<div class="clear">&nbsp;</div>
+    
+{% endblock %}

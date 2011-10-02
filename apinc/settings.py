@@ -174,6 +174,7 @@ INSTALLED_APPS = (
     'apinc.groups',
     'apinc.news',
     'apinc.pages',
+    'apinc.association',
 
     # third part
     'south',
