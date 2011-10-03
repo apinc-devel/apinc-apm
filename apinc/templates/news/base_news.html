@@ -17,7 +17,9 @@
     <h2>{% trans "Actions" %}</h2>
     <ul>
         <li><a href="{% url apinc.news.views.edit %}">{% trans "Write a news" %}</a></li>
+        {% if got_draft %}
         <li><a href="{% url apinc.news.views.drafts %}">{% trans "See drafts" %}</a></li>
+        {% endif %}
     {% block end_ul %}</ul>{% endblock %}
     {% endif %}
     {% endblock %}

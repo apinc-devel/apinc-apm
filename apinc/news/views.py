@@ -47,7 +47,8 @@ def index(request):
 
     return render(request, 'news/index.html', {
         'news': news,
-        'archives': _archives() })
+        'archives': _archives(),
+        'got_draft': (News.objects.drafted().count() > 0)  })
 
 @access_required(groups=['apinc-admin', 'apinc-secretariat', 'apinc-bureau'])
 @confirm_required(lambda news_slug: str(get_object_or_404(News, slug=news_slug)),
