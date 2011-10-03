@@ -7,7 +7,7 @@
 
 {% block content %}
 
-<div id="content" class="grid_8 ">
+<div id="content" class="grid_12">
 
     <h1>{{ text.title|safe }}</h1>
 
@@ -21,25 +21,13 @@
         {% for news_item in news %}
         <h2>{{ news_item.title}}</h2>
           <p>{{ news_item.pub_date }}</p>
-           {{ news_item.body_html|truncatewords_html:"20"|safe }}
-          <p class="page-nav"><a href="{{ news_item.get_absolute_url }}">read more</a></p>
+           {{ news_item.body_html|safe }}
+          <p class="page-nav"><a href="{{ news_item.get_absolute_url }}">see details</a></p>
       {% endfor %}
 
       {% else %}
           <p>{% trans "No news !" %}
       {% endif %}
-
-</div>
-
-<div id="sidebar" class="grid_4 ">
-
-    <h2>{% trans "Actions" %}</h2>
-    <ul>
-        {% if superadmin or bureau_member or secretariat_member or contributeur %}
-        <li><a href="{% url apinc.news.views.edit %}">{% trans "Write a news" %}</a></li>
-        {% endif %}
-        {% block extra-actions %} {% endblock %}
-    </ul>
 
 </div>
 <div class="clear">&nbsp;</div>
