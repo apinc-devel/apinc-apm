@@ -84,6 +84,9 @@ class News(models.Model):
     def get_next_drafted(self):
         return self.get_next_by_pub_date(status__exact=DRAFT)
 
+    def is_published(self):
+        return self.status == PUBLISHED
+
     def save(self):
         """News save method"""
         self.slug = defaultfilters.slugify(self.title)

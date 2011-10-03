@@ -85,7 +85,12 @@ def edit(request, news_slug=None):
             news_item = form.save()
             request.user.message_set.create(message=
                 _('Modifications have been successfully saved.'))
-            return HttpResponseRedirect(reverse(details, args=[news_item.slug]))
+            if news_item.is_published():
+                return HttpResponseRedirect(reverse(
+                                      published_details, args=[news_item.slug]))
+            else:
+                return HttpResponseRedirect(reverse(
+                                      draft_details, args=[news_item.slug]))
 
     return render(request, 'news/edit.html', {
         'form': form, 'news_item': news_item,
