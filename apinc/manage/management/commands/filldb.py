@@ -127,38 +127,38 @@ class Command(NoArgsCommand):
 
             # apinc groups
             apinc_admin = groups.Group(name='apinc-admin', slug='apinc-admin')
-            apinc_admin.email = "apinc-admin@apinc.org"
+            apinc_admin.email = "a-admin@a.org"
             apinc_admin.save()
             self.stdout.write("Group 'apinc-admin' inserted.\n")
             apinc_devel = groups.Group(name='apinc-devel', slug='apinc-devel')
-            apinc_devel.email = "apinc-devel@apinc.org"
+            apinc_devel.email = "a-devel@a.org"
             apinc_devel.save()
             self.stdout.write("Group 'apinc-devel' inserted.\n")
             apinc_bureau = groups.Group(name='apinc-bureau', slug='apinc-bureau')
-            apinc_bureau.email = "apinc-bureau@apinc.org"
+            apinc_bureau.email = "a-bureau@a.org"
             apinc_bureau.save()
             self.stdout.write("Group 'apinc-bureau' inserted.\n")
             apinc_secretariat = groups.Group(name='apinc-secretariat', slug='apinc-secretariat')
-            apinc_secretariat.email = "apinc-secretariat@apinc.org"
+            apinc_secretariat.email = "a-secretariat@a.org"
             apinc_secretariat.save()
             self.stdout.write("Group 'apinc-secretariat' inserted.\n")
             apinc_tresorier = groups.Group(name='apinc-tresorier', slug='apinc-tresorier')
-            apinc_tresorier.email = "apinc-tresorier@apinc.org"
+            apinc_tresorier.email = "a-tresorier@a.org"
             apinc_tresorier.save()
             self.stdout.write("Group 'apinc-tresorier' inserted.\n")
             apinc_contrib = groups.Group(name='apinc-contributeur', slug='apinc-contributeur')
-            apinc_contrib.email = "apinc-contrib@apinc.org"
+            apinc_contrib.email = "a-contrib@a.org"
             apinc_contrib.save()
             self.stdout.write("Group 'apinc-contributeur' inserted.\n")
             apinc_membre = groups.Group(name='apinc-membre', slug='apinc-member')
-            apinc_membre.email = "apinc-membre@apinc.org"
+            apinc_membre.email = "a-membre@a.org"
             apinc_membre.save()
             self.stdout.write("Group 'apinc-membre' inserted.\n")
 
 
             # Person
             laurent = members.Person()
-            laurent.user = User.objects.create_user("laurent", "lau@apinc.org","laurent")
+            laurent.user = User.objects.create_user("laurent", "lau@a.org","laurent")
             laurent.user.is_staff = True
             laurent.user.is_superuser = True
             laurent.user.first_name = "Laurent"
@@ -184,7 +184,7 @@ class Command(NoArgsCommand):
             self.stdout.write("Membre 'laurent' inserted.\n")
 
             stephane = members.Person()
-            stephane.user = User.objects.create_user("stephane", "carxwol@apinc.org","stephane")
+            stephane.user = User.objects.create_user("stephane", "c@a.org","stephane")
             stephane.user.is_staff = False
             stephane.user.is_superuser = False
             stephane.user.first_name = "Stephane"
@@ -211,7 +211,7 @@ class Command(NoArgsCommand):
             self.stdout.write("Membre 'stephane' inserted.\n")
 
             mathieu = members.Person()
-            mathieu.user = User.objects.create_user("mathieu", "mat@apinc.org","mathieu")
+            mathieu.user = User.objects.create_user("mathieu", "m@a.org","mathieu")
             mathieu.user.is_staff = False
             mathieu.user.is_superuser = False
             mathieu.user.first_name = "Mathieu"
@@ -238,7 +238,7 @@ class Command(NoArgsCommand):
             self.stdout.write("Membre 'mathieu' inserted.\n")
 
             gregory = members.Person()
-            gregory.user = User.objects.create_user("gregory", "greg@reolight.net","gregory")
+            gregory.user = User.objects.create_user("gregory", "g@r.net","gregory")
             gregory.user.is_staff = False
             gregory.user.is_superuser = False
             gregory.user.first_name = "Gregory"
@@ -264,7 +264,7 @@ class Command(NoArgsCommand):
             self.stdout.write("Membre 'gregory' inserted.\n")
 
             olivier = members.Person()
-            olivier.user = User.objects.create_user("olivier", "olivier.tronel@clubs-unesco.org","olivier")
+            olivier.user = User.objects.create_user("olivier", "o@c.org","olivier")
             olivier.user.is_staff = False
             olivier.user.is_superuser = False
             olivier.user.first_name = "Olivier"
