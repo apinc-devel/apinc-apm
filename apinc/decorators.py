@@ -32,10 +32,14 @@ from django.utils.translation import ugettext as _
 from django.utils.decorators import available_attrs
 
 
-def access_required(view_func=None, groups=None):
+def access_required(view_func=None, groups=None, allow_myself=False):
     """
     Decorator for views that needs granted access.
     Applies the login_required decorator to the wrapped_view.
+
+    groups       : is the list of groups to test the user membership against.
+    allow_myself : requires that the decorated function be called with
+                   'user_id' kwarg.
     """
     from django.conf import settings # ici limiter la visibilité des settings
 
@@ -63,6 +67,11 @@ def access_required(view_func=None, groups=None):
                 return render(request, PERMISSION_DENIED_PAGE, {})
 
             user_groups = user.person.groups.values_list('group__name', flat=True)
+
+            if allow_myself and kwargs.has_key('user_id'):
+                if int(request.user.id) == int(kwargs['user_id']):
+                    # Go to the decorated view
+                    return view_func(request, *args, **kwargs)
 
             if settings.PORTAL_ADMIN in user_groups:
                 # Go to the decorated view
