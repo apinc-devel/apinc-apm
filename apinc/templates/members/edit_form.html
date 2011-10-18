@@ -1,0 +1,20 @@
+{% extends 'members/base_members.html' %}
+{% load i18n %}
+
+{% block content_page %}
+ 
+<h2>{{ action_title }} {{ person }}</h2>
+
+<form method="post" action="." enctype="multipart/form-data">
+<table>
+{{ form }}
+</table>
+<a class="button" href="{{ back }}">{% trans "Cancel" %}</a>
+<input type="submit" class="button" value="{% trans "Save" %}" />
+</form> 
+    
+{% endblock %}
+
+{% block extra-actions %}
+{# FIXME #}
+{% endblock %}

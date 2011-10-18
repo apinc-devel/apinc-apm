@@ -132,7 +132,7 @@ class PersonPrivate(models.Model):
         return unicode(self.person)
 
     class Meta:
-        """Person Private Data"""
+        """Person Private meta"""
         verbose_name = _('Person Private Data')
         ordering = ['person']
 
@@ -142,3 +142,7 @@ class Member(models.Model):
 
     def __unicode__(self):
         return unicode(self.person)
+
+    class Meta:
+        """Member meta"""
+        ordering = ['person']

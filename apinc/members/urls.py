@@ -28,4 +28,11 @@ urlpatterns = patterns('apinc.members.views',
     # Members
 
     url(r'^details/(?P<user_id>\d+)/$', 'details'),
+    # changecredentials
+    # sendcredentials
+    url(r'^edit/(?P<user_id>\d+)/$', 'edit'),
+    url(r'user/edit/(?P<user_id>\d+)/$', 'user_edit'),
+    url(r'^person/edit/(?P<user_id>\d+)/$', 'person_edit'),
+    url(r'^personprivate/edit/(?P<user_id>\d+)/$', 'personprivate_edit'),
+    url(r'^member/edit/(?P<user_id>\d+)/$', 'member_edit'),
 )

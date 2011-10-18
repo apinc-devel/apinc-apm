@@ -1,0 +1,62 @@
+{% extends 'members/base_members.html' %}
+{% load i18n %}
+
+{% block pagetitle %}{% trans "Member edit profile" %}{% endblock %}
+ 
+{% block title %}{{ person.first_name }} {{ person.last_name}} {% endblock %}
+ 
+{% block content_page %}
+ 
+    <h1>{{ person.user.first_name }} {{ person.user.last_name}}</h1>
+
+    <a href="{% url apinc.members.views.details person.user.id %}">{% trans "Back to personnal file" %}</a>
+
+    <h2>{% trans "Personal profile" %}</h2>
+    <div class="blockdata">
+    <ul>
+        <li><b>{% filter capfirst %}{% trans "First name" %}{% endfilter %}
+        &nbsp;:</b> {{ person.user.first_name|capfirst }}</li>
+        <li><b>{% trans "Last name" %}&nbsp;:</b> {% filter capfirst %}{{ person.user.last_name }}{% endfilter %}</li>
+        <li><b>{% trans "Email" %}&nbsp;:</b> {{ person.user.email }}</li>
+     </ul>
+    <p><a href="{% url apinc.members.views.user_edit person.user.id %}">{% trans "Modify" %}</a></p>
+    </div>
+    
+    <p>&nbsp;</p>
+    <div class="blockdata">
+    <ul>
+        <li><b>{% filter capfirst %}{% trans "maiden name" %}{% endfilter %}
+        &nbsp;:</b> {{ person.maiden_name }}</li>
+        <li><b>{% trans "Birthdate" %}&nbsp;:</b> {{ person.birthdate }}</li>
+        <li><b>{% trans "Gender" %}&nbsp;:</b> {{ person.sex }}</li>
+     </ul>
+    <p><a href="{% url apinc.members.views.person_edit person.user.id %}">{% trans "Modify" %}</a></p>
+    </div>
+
+    {% comment %}
+    {% if member %}
+    <p>&nbsp;</p>
+    <div class="blockdata">
+    <ul>
+        <li>FIXME</li>
+    </ul>
+    <p><a href="{% url apinc.members.views.member_edit person.user.id %}">{%trans "Modify" %}</a></p>
+    </div>
+    {% endif %}
+    {% endcomment %}
+
+    <p>&nbsp;</p>
+    {% if secretariat_member or superadmin %}
+    <div class="blockdata">
+    <ul>
+        <li>{{ personprivate.notes }}</li>
+    </ul>
+    <p><a href="{% url apinc.members.views.personprivate_edit person.user.id %}"> {% trans "Modify" %}</a></p>
+    </div>
+    {% endif %}
+
+{% endblock %}
+
+{% block extra-actions %}
+{# FIXME #}
+{% endblock %}

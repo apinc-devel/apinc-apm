@@ -3,33 +3,48 @@
 
 {% block pagetitle %}{% trans "Member detail profile" %}{% endblock %}
  
-{% block title %}{{person.first_name }} {{ person.last_name}} {% endblock %}
+{% block title %}{{ person.first_name }} {{ person.last_name}} {% endblock %}
  
 {% block content_page %}
  
-    <h1>{{ person.get_full_name }}</h1>
-    <div>
-        <ul>
-            {% if person.maiden_name %}
-                <li><b>{% filter capfirst %}{% trans "maiden name" %}{% endfilter %}
-                &nbsp;:</b> {{ person.maiden_name }}</li>
-            {% endif %}
-            {% if person.birthdate %}
-                <li><b>{% trans "Birthdate" %}&nbsp;:</b> {{ person.birthdate }}</li>
-            {% endif %}
-            {% if person.sex %}
-                <li><b>{% trans "Gender" %}&nbsp;:</b> {{ person.sex }}</li>
-            {% endif %}
-        </ul>
-        {% if superadmin or secretariat_member %}
-        <p>{% trans "Private data" %}</p>
-        <p>{{ personprivate.notes }}</p>
-        {% endif %}
-    </div>
+<h1>{{ person.user.first_name }} {{ person.user.last_name}}</h1>
+<h2>{% trans "Personal profile" %}</h2>
+<div>
+<ul>
+    <li><b>{% filter capfirst %}{% trans "first name" %}{% endfilter %}
+        &nbsp;: </b>{{ person.user.first_name }}</li>
+    <li><b>{% filter capfirst %}{% trans "last name" %}{% endfilter %}
+        &nbsp;: </b>{{ person.user.last_name }}</li>
+    <li><b>{% filter capfirst %}{% trans "email" %}{% endfilter %}
+        &nbsp;: </b>{{ person.user.email }}</li>
 
- 
+    {% if person.maiden_name %}
+    <li><b>{% filter capfirst %}{% trans "maiden name" %}{% endfilter %}
+    &nbsp;: </b>{{ person.maiden_name }}</li>
+    {% endif %}
+
+    {% if person.birthdate %}
+        <li><b>{% trans "Birthdate" %}&nbsp;: </b>{{ person.birthdate }}</li>
+    {% endif %}
+
+    {% if person.sex %}
+        <li><b>{% trans "Gender" %}&nbsp;: </b>{{ person.sex }}</li>
+    {% endif %}
+</ul>
+</div>
+
+<h2>{% trans "Person Private data" %}</h2>
+<div>
+    {% if superadmin or secretariat_member %}
+    <p>{{ personprivate.notes }}</p>
+    {% endif %}
+</div>
+
 {% endblock %}
 
-{% block extra-actions %}
-{# FIXME #}
+{% block actions %}
+<h2>{% trans "Actions" %}</h2>
+<ul>
+    <li><a href="{% url apinc.members.views.edit person.user.id %}">{% trans "Modify these data" %}</a></li>
+</ul>
 {% endblock %}

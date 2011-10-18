@@ -175,7 +175,7 @@ class Command(NoArgsCommand):
 
             laurent_private = members.PersonPrivate()
             laurent_private.person = laurent
-            laurent_private.notes = "Block de messages relatifs à l'utilisateur"
+            laurent_private.notes = "Donnees privees accessibles seulement par les admins ou le secretariat apinc."
             laurent_private.save()
 
             member_laurent = members.Member(person=laurent)
@@ -201,7 +201,7 @@ class Command(NoArgsCommand):
 
             stephane_private = members.PersonPrivate()
             stephane_private.person = stephane
-            stephane_private.notes = "Block de messages relatifs à l'utilisateur"
+            stephane_private.notes = "Donnees privees accessibles seulement par les admins ou le secretariat apinc."
             stephane_private.save()
 
             member_stephane = members.Member(person=stephane)
@@ -228,7 +228,7 @@ class Command(NoArgsCommand):
 
             mathieu_private = members.PersonPrivate()
             mathieu_private.person = mathieu
-            mathieu_private.notes = "Block de messages relatifs à l'utilisateur"
+            mathieu_private.notes = "Donnees privees accessibles seulement par les admins ou le secretariat apinc."
             mathieu_private.save()
 
             member_mathieu = members.Member(person=mathieu)
@@ -254,7 +254,7 @@ class Command(NoArgsCommand):
 
             gregory_private = members.PersonPrivate()
             gregory_private.person = gregory
-            gregory_private.notes = "Block de messages relatifs à l'utilisateur"
+            gregory_private.notes = "Donnees privees accessibles seulement par les admins ou le secretariat apinc."
             gregory_private.save()
 
             member_gregory = members.Member(person=gregory)
@@ -280,7 +280,7 @@ class Command(NoArgsCommand):
 
             olivier_private = members.PersonPrivate()
             olivier_private.person = olivier
-            olivier_private.notes = "Block de messages relatifs à l'utilisateur"
+            olivier_private.notes = "Donnees privees accessibles seulement par les admins ou le secretariat apinc."
             olivier_private.save()
 
             member_olivier = members.Member(person=olivier)

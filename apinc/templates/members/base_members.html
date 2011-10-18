@@ -2,9 +2,9 @@
 
 {% load  i18n %}
 
-{% comment %}
-{% block nav_members %}<li class="active">{% endblock %}
-{% endcomment %}
+{% block javascript %}{% endblock %}
+
+{% block nav_compte %}<li class="active">{% endblock %}
 
 {% block content %}
     <div id="content" class="grid_8 ">
@@ -12,11 +12,8 @@
     </div>
 
     <div id="sidebar" class="grid_4 ">
-        <h2>{% trans "Actions" %}</h2>
-        <ul>
-            {% block extra-actions %} {% endblock %}
-        </ul>
-
+        {% block actions %}{% endblock %}
+        {% block extra-actions %} {% endblock %}
     </div>
 	<div class="clear">&nbsp;</div>
     
