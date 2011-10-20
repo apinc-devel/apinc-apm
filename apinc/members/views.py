@@ -28,9 +28,9 @@ from django.shortcuts import get_object_or_404, render
 from django.utils.translation import ugettext as _
 from django.contrib.auth.models import User
 
-from apinc.members.models import Person, PersonPrivate, Member
-from apinc.members.forms import UserForm, PersonForm, PersonPrivateForm
-from apinc.decorators import access_required
+from apinc.members.models import Person, PersonPrivate, Member, Address
+from apinc.members.forms import UserForm, PersonForm, PersonPrivateForm, AddressForm
+from apinc.decorators import access_required, confirm_required
 
 @login_required
 def details(request, user_id):
@@ -65,7 +65,7 @@ def edit(request, user_id=None):
 
 @access_required(groups=['apinc-secretariat', 'apinc-bureau'], allow_myself=True)
 def user_edit(request, user_id=None):
-    user = User.objects.get(id=user_id)
+    user = get_object_or_404(User, pk=user_id)
     form = UserForm(instance=user)
 
     if request.method == 'POST':
@@ -73,17 +73,17 @@ def user_edit(request, user_id=None):
         if form.is_valid(): 
             form.save()
             request.user.message_set.create(message=
-                _('Modifications have been successfully saved.'))
+                _('User modifications have been successfully saved.'))
         
         return HttpResponseRedirect(reverse(edit, args=[user_id]))
     
     return render(request, 'members/edit_form.html',
         {'form': form, 'action_title': _("Modification of user profile for"),
-         'back': request.META.get('HTTP_REFERER', '/')})
+         'person': user.person, 'back': request.META.get('HTTP_REFERER', '/')})
 
 @access_required(groups=['apinc-secretariat', 'apinc-bureau'], allow_myself=True)
 def person_edit(request, user_id=None):
-    person = Person.objects.get(user=user_id)
+    person = get_object_or_404(Person, pk=user_id)
     form = PersonForm(instance=person)
 
     if request.method == 'POST':
@@ -91,14 +91,13 @@ def person_edit(request, user_id=None):
         if form.is_valid(): 
             form.save()
             request.user.message_set.create(message=
-                _('Modifications have been successfully saved.'))
+                _('Person modifications have been successfully saved.'))
         
         return HttpResponseRedirect(reverse(edit, args=[user_id]))
-            #'/members/edit/%s' % user_id) # FIXME reverse
     
     return render(request, 'members/edit_form.html',
         {'form': form, 'action_title': _("Modification of personal profile for"),
-         'back': request.META.get('HTTP_REFERER', '/')})
+         'person': person, 'back': request.META.get('HTTP_REFERER', '/')})
 
 @access_required(groups=['apinc-secretariat', 'apinc-bureau'], allow_myself=True)
 def personprivate_edit(request, user_id=None):
@@ -110,13 +109,59 @@ def personprivate_edit(request, user_id=None):
         if form.is_valid():
             form.save()
             request.user.message_set.create(message=
-                _('Modification have been successfully saved.'))
+                _('PersonPrivate modification have been successfully saved.'))
 
         return HttpResponseRedirect(reverse(edit, args=[user_id]))
 
     return render(request, 'members/edit_form.html',
-            {'form': form, 'action_title':_('Modification of personal data for'),
+            {'form': form,
+             'action_title': _('Modification of personal private profile for'),
+             'person': personprivate.person,
              'back': request.META.get('HTTP_REFERER', '/')})
 
 def member_edit(request, user_id=None):
     return #FIXME
+
+@access_required(groups=['apinc-secretariat', 'apinc-bureau'], allow_myself=True)
+def address_edit(request, user_id=None, address_id=None):
+    person = get_object_or_404(Person, user=user_id)
+    address = None
+    title = _('Creation of an address for')
+    form = AddressForm()
+
+    if address_id:
+        address = get_object_or_404(Address, pk=address_id)
+        form = AddressForm(instance=address)
+
+        title = _('Modification of an address for')
+                                 
+    if request.method == 'POST': 
+        form = AddressForm(request.POST, instance=address)
+        if form.is_valid():
+            adr = form.save(commit=False)
+            adr.person = person 
+            adr.save()          
+                                
+            request.user.message_set.create(message= 
+                _('Address modification have been successfully saved.'))
+
+            return HttpResponseRedirect(reverse(edit, args=[user_id]))
+
+    return render(
+        request, 'members/edit_form.html',
+        {'form': form, 'action_title': title, 'person': person,
+         'back': request.META.get('HTTP_REFERER', '/')})
+
+@access_required(groups=['apinc-secretariat', 'apinc-bureau'], allow_myself=True)
+@confirm_required(lambda user_id=None, address_id=None :
+    str(get_object_or_404(Address, pk=address_id)), 'members/base_members.html', 
+    _('Do you really want to delete this address'))
+def address_delete(request, user_id=None, address_id=None):
+    """Address delete"""
+
+    address = get_object_or_404(Address, pk=address_id)
+    address.delete()
+
+    request.user.message_set.create(message=
+        _('The address has been successfully deleted.'))
+    return HttpResponseRedirect(reverse(edit, kwargs={'user_id': user_id}))

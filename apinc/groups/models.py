@@ -43,6 +43,13 @@ class GroupMembership(models.Model):
     expiration_date = models.DateField(verbose_name=_('expiration date'),
         blank=True, null=True)
 
+    class Meta:
+        ordering = ['start_date', 'end_date', 'expiration_date', 'group__name']
+
+    def __unicode__(self):
+        return "Member '%s' : Group: '%s'" % (unicode(self.member),
+                unicode(self.group))
+
 
 class Group(models.Model):
     slug = models.SlugField(verbose_name=_('slug'), max_length=50,
@@ -66,7 +73,7 @@ class Group(models.Model):
     def has_for_member(self, person):
         """group membership test"""
         return self.members.filter(member=person)\
-            .exclude(end_date__isnull=False,\
+            .exclude(end_date__isnull=False,
             end_date__lte=datetime.datetime.now())\
             .filter(start_date__lte=datetime.datetime.now())\
             .count() != 0
@@ -84,14 +91,14 @@ class Group(models.Model):
         return [ ms for ms in self.members.all() ]
 
     def add(self, person): #FIXME
-        member = GroupMembership()
-        member.group = self
-        member.member = person
-        member.start_date = datetime.date.today()
-        member.save()
+        groupmembership = GroupMembership()
+        groupmembership.group = self
+        groupmembership.member = person
+        groupmembership.start_date = datetime.date.today()
+        groupmembership.save()
 
     def remove(self, person): #FIXME
-        member = GroupMembership.objects.get(group=self, member=person)
-        member.end_date = datetime.date.today()
-        member.save()
+        groupmembership = GroupMembership.objects.get(group=self, member=person)
+        groupmembership.end_date = datetime.date.today()
+        groupmembership.save()
 

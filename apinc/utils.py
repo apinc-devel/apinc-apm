@@ -1,6 +1,6 @@
-# -*- coding: utf-8
+# -*- coding: utf-8 -*-
 """
-apinc/members/urls.py
+ apinc/utils.py
 """
 #
 #   Copyright © 2011 APINC Devel Team
@@ -21,21 +21,16 @@ apinc/members/urls.py
 #
 #
 
-from django.conf.urls.defaults import *
+from django.db import models
+from django.utils.translation import ugettext as _
 
-urlpatterns = patterns('apinc.members.views',
+CONFIDENTIALITY_LEVELS = (
+    (0, _('public')),
+    (1, _('private')),
+    )
 
-    # Members
+def portal_website_confidential(obj):
+    if not isinstance(obj, models.Model):
+        raise NotImplementedError
+    return (obj.confidentiality>0)
 
-    url(r'^details/(?P<user_id>\d+)/$', 'details'),
-    # changecredentials
-    # sendcredentials
-    url(r'^edit/(?P<user_id>\d+)/$', 'edit'),
-    url(r'^user/edit/(?P<user_id>\d+)/$', 'user_edit'),
-    url(r'^person/edit/(?P<user_id>\d+)/$', 'person_edit'),
-    url(r'^personprivate/edit/(?P<user_id>\d+)/$', 'personprivate_edit'),
-    url(r'^member/edit/(?P<user_id>\d+)/$', 'member_edit'),
-    url(r'^address/edit/(?P<user_id>\d+)/(?P<address_id>\d+)/$', 'address_edit'),
-    url(r'^address/add/(?P<user_id>\d+)/$', 'address_edit'),
-    url(r'^address/delete/(?P<user_id>\d+)/(?P<address_id>\d+)/$', 'address_delete'),
-)

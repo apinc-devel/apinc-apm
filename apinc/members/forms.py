@@ -26,17 +26,20 @@ import datetime
 from django import forms
 from django.utils.translation import ugettext as _
 from django.contrib.auth.models import User
+from django.forms.util import ValidationError
 
-from apinc.members.models import Person, PersonPrivate
+from apinc.members.models import Person, PersonPrivate, Country, Address
 
 class UserForm(forms.ModelForm):
     """User form"""
+    first_name = forms.CharField(required=True)
+    last_name = forms.CharField(required=True)
+    email = forms.EmailField(required=True)
+
     class Meta:
         """User form meta"""
         model = User
-#        exclude = ('id', 'username', 'password', 'is_staff', 'is_active',
-#                   'is_superuser', 'last_login', 'date_joined')
-        fields = ('last_name', 'first_name', 'email')
+        fields = ('first_name', 'last_name', 'email')
 
 class PersonForm(forms.ModelForm):
     """Person form"""
@@ -55,3 +58,19 @@ class PersonPrivateForm(forms.ModelForm):
         """PersonPrivate form meta"""
         model = PersonPrivate
         exclude = ('person',)
+
+class AddressForm(forms.ModelForm):
+    """address form"""
+
+    class Meta:
+        """address form meta"""
+        model = Address 
+
+    def clean_country(self):
+        """check country"""      
+        country_name = self.cleaned_data['country']
+        try:                     
+            return Country.objects.get(name=country_name)
+        except Country.DoesNotExist:
+            raise ValidationError(_('The entered country does not exist.'))
+            return None

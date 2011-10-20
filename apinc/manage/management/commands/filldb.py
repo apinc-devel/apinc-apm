@@ -155,6 +155,15 @@ class Command(NoArgsCommand):
             apinc_membre.save()
             self.stdout.write("Group 'apinc-membre' inserted.\n")
 
+            # Country
+            france = members.Country(name=u"France", nationality=u"Française")
+            france.save()
+            self.stdout.write("Country 'france' inserted.\n")
+
+            england = members.Country(name=u"Angleterre", nationality=u"Anglaise")
+            england.save()
+            self.stdout.write("Country 'england' inserted.\n")
+
 
             # Person
             laurent = members.Person()
@@ -182,6 +191,13 @@ class Command(NoArgsCommand):
             member_laurent.save()
 
             self.stdout.write("Membre 'laurent' inserted.\n")
+
+            gm = groups.GroupMembership(start_date=date(2010,1,1), end_date=date(2011,1,1))
+            gm.group = apinc_tresorier
+            gm.member = laurent
+            gm.save()
+
+            self.stdout.write("Membership 'apinc-tresorier' to 'laurent' inserted.\n")
 
             stephane = members.Person()
             stephane.user = User.objects.create_user("stephane", "c@a.org","stephane")

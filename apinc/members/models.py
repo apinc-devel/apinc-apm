@@ -28,6 +28,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
 
+from apinc.utils import CONFIDENTIALITY_LEVELS, portal_website_confidential
 
 class Role(models.Model):
     
@@ -80,8 +81,7 @@ class MemberRole(models.Model):
     objects = MemberRoleManager()
 
     def __unicode__(self):
-        return "Role %s : Member %s" % (unicode(self.role),
-                unicode(self.member))  
+        return "Role '%s' : Member '%s'" % (unicode(self.role), unicode(self.member))  
 
 class Person(models.Model):
     """The main class for a person"""
@@ -106,7 +106,7 @@ class Person(models.Model):
 
     def __unicode__(self):
         """person unicode"""
-        return self.get_full_name()
+        return unicode(self.get_full_name())
 
     def get_absolute_url(self):
         return reverse('apinc.members.views.details', args=[self.id])
@@ -146,3 +146,67 @@ class Member(models.Model):
     class Meta:
         """Member meta"""
         ordering = ['person']
+
+class Country(models.Model):
+    """ Country (used for adresses)"""
+
+    name = models.CharField(verbose_name=_('name'), max_length=50)
+    nationality = models.CharField(verbose_name=_('nationality'), max_length=50)
+
+    def __unicode__(self):
+        """country unicode"""
+        return unicode(self.name)
+
+    class Meta:
+        """country meta"""
+        verbose_name = _('country')
+        verbose_name_plural = _('country')
+
+class Address(models.Model):
+    """address of a person"""
+
+    ADDRESS_TYPE = (
+        (0, _('Personal')),
+        (1, _('Business')),
+        )
+
+    person = models.ForeignKey(Person, related_name='addresses', editable=False)
+
+    line1 = models.CharField(verbose_name=_('address line1'), max_length=50)
+    line2 = models.CharField(verbose_name=_('address line2'), max_length=100,
+        blank=True, null=True)
+    zip_code = models.CharField(verbose_name=_('zip code'), max_length=20)
+    city = models.CharField(verbose_name=_('city'), max_length=50)
+    country = models.ForeignKey(Country, verbose_name=_('country'))
+    type = models.IntegerField(verbose_name=_('adress type'),
+        choices=ADDRESS_TYPE, default=0)
+    confidentiality = models.IntegerField(verbose_name=_('confidentiality'),
+        choices=CONFIDENTIALITY_LEVELS, default=0)
+
+    def adr_type(self):
+        return self.ADDRESS_TYPE[self.type][1]
+
+    def website_confidential(self):
+        """address confidentiality"""
+        return portal_website_confidential(self)
+
+    def confidentiality_print(self):
+        """address confidentiality print"""
+        print self.confidentiality
+        return CONFIDENTIALITY_LEVELS[self.confidentiality][1]
+
+    def __unicode__(self):
+        """address unicode"""
+        addr = self.line1
+        if self.line2:
+            addr += self.line2 + " - "
+        else:
+            addr += " - "
+        addr += self.zip_code + " " + self.city + " - "
+        addr += self.country.name
+        return unicode(addr)
+
+    class Meta:
+        """address meta"""
+        verbose_name = _('Address')
+
