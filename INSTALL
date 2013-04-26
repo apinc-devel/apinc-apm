@@ -1,22 +1,17 @@
-APINC GHS
+Portail APM
 =========
 
-Pour installer le portail APINC GHS en version de développement, il faut :
-- récupérer les sources du portail APINC GHS (à priori si vous lisez ce fichier,
-  c'est déjà fait. Sinon: git clone git@git.sloter.org:apinc.git
+Pour installer le portail APINC APM en version de développement, il faut: 
+- récupérer les sources du portail APINC APM (à priori si vous lisez ce fichier,
+  c'est déjà fait. Sinon: git clone git@git.apinc.org:apinc-apm.git
 
 - configurer l'environnement
-  pip install -r requirements.txt
+  pip install -r requirements.pip
 
-- éditer le fichier settings_local.py pour adapter la configuration
+- éditer le fichier apm/settings/local.py pour adapter la configuration
 
 - créer la base de donnée initiale (elle n'est pas comprise dans l'archive git):
-    # Si database engine est mysql
-    ./manage.py syncdb
-    ./manage.py migrate
+    ./manage.py syncdb --noinput
     ./manage.py filldb
-
-    # Si database engine est sqlite3
-    python build_database.py
 
 - lancer le serveur : python manage.py runserver

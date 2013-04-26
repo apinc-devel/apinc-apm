@@ -1,2 +1,9 @@
-The APINC GHS portal code
-=========================
+APINC APM
+---------
+
+APINC APM aims at providing a presentation of the APINC onto the Internet and
+easy the members management.
+APINC APM is a django based application (https://www.djangoproject.com/) that
+interfaces to VHFFS (http://vhffs.org/) the tool used to manage the services.
+The interface between apinc-apm and the apinc-vhffs implementation is based
+on a REST API called apinc-vhffs-rest.

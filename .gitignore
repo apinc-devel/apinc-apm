@@ -1,2 +1,3 @@
-*pyc
-settings_local.py
+*.pyc
+apm/settings/local.py
+apm/settings/local/*
