@@ -1,0 +1,24 @@
+{% extends 'association/base_association.html' %}
+{% load i18n %}
+{% load url from future %}
+
+{% block content_page %}
+<h2>{% trans "Upload report" %}</h2>
+<form method="post" action="." enctype="multipart/form-data">
+{% csrf_token %}
+<table width="100%">
+    {{ form }}
+</table>
+<a class="button" href="{{ back }}">{% trans "Cancel" %}</a>
+<input type="submit" class="button" value="{% trans "Save" %}"/>
+</form>
+{% endblock %}
+
+{% block links %} 
+<h2>{% trans "Links" %}</h2>
+<ul>
+    <li><a href="{% url "apm.apps.association.views.status" %}">{% trans "Status" %}</a></li>
+    <li><a href="{% url "apm.apps.association.views.rules" %}">{% trans "Rules" %}</a></li>
+    <li><a href="{% url "apm.apps.association.views.board" %}">{% trans "Board members" %}</a></li>
+</ul>
+{% endblock %}

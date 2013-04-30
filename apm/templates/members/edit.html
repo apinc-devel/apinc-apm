@@ -1,0 +1,56 @@
+{% extends 'members/base_members.html' %}
+{% load i18n %}
+{% load url from future %}
+
+{% block pagetitle %}{% trans "Member edit profile" %}{% endblock %}
+ 
+{% block title %}{{ person.first_name|default:"First name undefined" }} {{ person.last_name|default:"Last name undefined" }} {% endblock %}
+ 
+{% block content_page %}
+ 
+<h1>{{ person.first_name|default:"First name undefined" }} {{ person.last_name|default:"Last name undefined" }} </h1>
+
+    <a href="{% url "apm.apps.members.views.details" person.id %}">{% trans "Back to personnal file" %}</a>
+
+    <h2>{% trans "Personal profile" %}</h2>
+    <div class="blockdata">
+    <ul>
+        <li><b>{% filter capfirst %}{% trans "First name" %}{% endfilter %}
+        &nbsp;:</b> {{ person.first_name|capfirst }}</li>
+        <li><b>{% trans "Last name" %}&nbsp;:</b> {% filter capfirst %}{{ person.last_name }}{% endfilter %}</li>
+        <li><b>{% trans "Email" %}&nbsp;:</b> {{ person.email }}</li>
+        <li><b>{% filter capfirst %}{% trans "maiden name" %}{% endfilter %}
+        &nbsp;:</b> {{ person.maiden_name|default:"Empty"  }}</li>
+        <li><b>{% trans "Birthdate" %}&nbsp;:</b> {{ person.birthdate|default:"Empty"  }}</li>
+        <li><b>{% trans "Gender" %}&nbsp;:</b> {{ person.sex|default:"Empty"  }}</li>
+     </ul>
+    <p><a href="{% url "apm.apps.members.views.person_edit" person.id %}">{% trans "Modify" %}</a></p>
+    </div>
+
+    <h3>{% trans "Member data" %}</h3>
+    <div class="blockdata">
+    <h4>{% trans "Group memberships" %}</h4>
+    <ul>
+        {% for gm in person.groupmembership_set.all %}
+        <li>{{ gm.group.name }} - {{ gm.start_date }} - {{ gm.end_date|default:"On going" }}</li>
+        {% endfor %}
+    </ul>
+    <p>{# <a href="{% url "apm.apps.members.views.member_edit" person.id %}">{%trans "Modify" %}</a></p> #}
+    </div>
+
+    {% if secretariat_member or superadmin %}
+    <h3>{% trans "Private data" %}</h3>
+    <div class="blockdata">
+    <ul>
+        <li>{{ personprivate.notes|default:"Empty" }}</li>
+    </ul>
+    <p><a href="{% url "apm.apps.members.views.personprivate_edit" person.id %}"> {% trans "Modify" %}</a></p>
+    </div>
+    {% endif %}
+
+
+{% endblock %}
+
+{% block extra-actions %}
+{# FIXME #}
+{% endblock %}

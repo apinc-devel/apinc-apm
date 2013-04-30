@@ -1,0 +1,19 @@
+{% extends 'subscriptions/base_subscriptions.html' %}
+{% load i18n %}
+
+{% block content_page %}
+<h1>{% trans "Subscriptions" %}</h1>
+
+{% trans "Number of subscribers" %}: {{ count_subscribers }}
+
+{% endblock %}
+
+{% comment %}
+FIXME Ajouter des stats / tendances :
+  - number of subscribers
+  - number of pending subscription validation
+  - number of late subscription ( < 2 mois )
+  - number of late subscription ( > 2 mois )
+  - number of inactive members
+  - ... 
+{% endcomment %}

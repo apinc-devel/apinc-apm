@@ -1,0 +1,44 @@
+{% extends 'manage/base_manage.html' %}
+{% load i18n %}
+
+{% block content_page %}
+
+<h1>{% trans "Types of subscriptions" %}</h1>
+
+{% if type_list %}
+<table>
+<tr>
+    <th>{% trans "Label" %}</th>
+    <th>{% trans "Dues amount" %}</th>
+    <th>{% trans "Duration" %}</th>
+    <th>{% trans "Status" %}</th>
+</tr>
+
+{% for type in type_list %}
+<tr class="{% cycle row1,wow2 %}">
+    <td>{{ type.label }}</td>
+    <td>{{ type.dues_amount }}&nbsp;{% trans "euros" %}</td>
+    <td>{{ type.duration }}&nbsp;{% trans "year" %}{{type.duration|pluralize }}</td>
+    {% if not type.active %}
+    <td>Not active</td>
+    {% else %}
+    <td>Active</td>
+    {% endif %}
+    <td>
+    <a class="changelink" href="{% url apinc.subscriptions.views.subscription_type_edit type.id %}">{% trans "Modify" %}</a>
+    <a class="deletelink" href="{% url apinc.subscriptions.views.subscription_type_delete type.id %}">{% trans "Delete" %}</a>
+    </td>
+</tr>
+{% endfor %}
+</table>
+
+{% else %}
+<p>{% trans "No subscription types defined yet!" %}</p>
+{% endif %}
+{% endblock content_page %}
+
+{% block subscriptions %}
+    {{ block.super }}
+<li><a href="{% url apinc.subscriptions.views.subscription_type_edit %}">{% trans "Add subscription type" %}</a></li>
+{% endblock %}
+

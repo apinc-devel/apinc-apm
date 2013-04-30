@@ -1,0 +1,716 @@
+# APINC APM French Translations.
+# Copyright (C) 2013 APINC Devel Team
+# This file is distributed under the same license as the APINC APM application package.
+# Laurent Bives <lau@apinc.org>, 2013.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-03-03 07:01+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: APINC Devel Team <devel@ml.apinc.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: decorators.py:102
+msgid "Are you sure you want to do this action"
+msgstr ""
+
+#: apps/association/models.py:47
+msgid "Meeting Report"
+msgstr ""
+
+#: apps/association/models.py:48
+msgid "AG Report"
+msgstr ""
+
+#: apps/association/models.py:49
+msgid "CA Report"
+msgstr ""
+
+#: apps/association/views.py:76
+msgid "Modifications on reports have been successfully saved."
+msgstr ""
+
+#: apps/association/views.py:86
+msgid "Do you really want to delete this report"
+msgstr ""
+
+#: apps/association/views.py:91
+msgid "Reported successfully deleted"
+msgstr ""
+
+#: apps/groups/models.py:33 apps/pages/forms.py:39 apps/pages/models.py:31
+msgid "slug"
+msgstr ""
+
+#: apps/groups/models.py:35 apps/members/models.py:82
+msgid "name"
+msgstr ""
+
+#: apps/groups/models.py:36
+msgid "description"
+msgstr ""
+
+#: apps/groups/models.py:39 templates/members/details.html:20
+msgid "email"
+msgstr ""
+
+#: apps/groups/models.py:92 apps/members/models.py:119
+msgid "start date"
+msgstr ""
+
+#: apps/groups/models.py:94 apps/members/models.py:121
+msgid "end date"
+msgstr ""
+
+#: apps/groups/models.py:96 apps/members/models.py:123
+msgid "expiration date"
+msgstr ""
+
+#: apps/members/models.py:38
+msgid "Male"
+msgstr ""
+
+#: apps/members/models.py:39
+msgid "Female"
+msgstr ""
+
+#: apps/members/models.py:43 templates/members/details.html:24
+#: templates/members/edit.html:22
+msgid "maiden name"
+msgstr ""
+
+#: apps/members/models.py:45
+msgid "Birth date"
+msgstr ""
+
+#: apps/members/models.py:47
+msgid "sex"
+msgstr ""
+
+#: apps/members/models.py:54 apps/members/models.py:134
+msgid "person"
+msgstr ""
+
+#: apps/members/models.py:83
+msgid "default rank"
+msgstr ""
+
+#: apps/members/models.py:137
+msgid "Notes"
+msgstr ""
+
+#: apps/members/models.py:145
+msgid "Person Private Data"
+msgstr ""
+
+#: apps/members/views.py:71
+msgid "Person modifications have been successfully saved."
+msgstr ""
+
+#: apps/members/views.py:75
+msgid "Modification of personal profile for"
+msgstr ""
+
+#: apps/members/views.py:87
+msgid "PersonPrivate modification have been successfully saved."
+msgstr ""
+
+#: apps/members/views.py:93
+msgid "Modification of personal private profile for"
+msgstr ""
+
+#: apps/news/forms.py:35 apps/pages/forms.py:35 apps/pages/models.py:37
+msgid "title"
+msgstr ""
+
+#: apps/news/forms.py:37 apps/pages/forms.py:37
+msgid "body"
+msgstr ""
+
+#: apps/news/forms.py:39
+msgid "publication date"
+msgstr ""
+
+#: apps/news/models.py:50
+msgid "Draft"
+msgstr ""
+
+#: apps/news/models.py:51
+msgid "Published"
+msgstr ""
+
+#: apps/news/views.py:56
+msgid "Do you really want to delete this news"
+msgstr ""
+
+#: apps/news/views.py:63
+msgid "The news has been successfully deleted."
+msgstr ""
+
+#: apps/news/views.py:88
+msgid "Modifications have been successfully saved."
+msgstr ""
+
+#: apps/pages/models.py:35
+msgid "Used for urls regex matches and templates <slug>.html."
+msgstr ""
+
+#: apps/pages/views.py:69
+#, python-format
+msgid "Text %s page update."
+msgstr ""
+
+#: templates/base.html:9
+msgid "APINC Plateform"
+msgstr ""
+
+#: templates/base.html:41
+msgid "Portail web plateforme APINC"
+msgstr ""
+
+#: templates/base.html:44
+msgid "Association pour la Promotion de l'Internet Non Commercial"
+msgstr ""
+
+#: templates/base.html:54
+msgid "Log out"
+msgstr ""
+
+#: templates/base.html:57
+msgid "You are not logged-in"
+msgstr ""
+
+#: templates/base.html:57 templates/auth/login.html:30
+msgid "Log-in"
+msgstr ""
+
+#: templates/base.html:65
+msgid "Home"
+msgstr ""
+
+#: templates/base.html:67
+msgid "News"
+msgstr ""
+
+#: templates/base.html:69
+msgid "Association"
+msgstr ""
+
+#: templates/base.html:72
+msgid "Account"
+msgstr ""
+
+#: templates/base.html:78
+msgid "Help"
+msgstr ""
+
+#: templates/base.html:110
+msgid "Rss feed"
+msgstr ""
+
+#: templates/base.html:111
+msgid "Contact"
+msgstr ""
+
+#: templates/base.html:112
+msgid "About"
+msgstr ""
+
+#: templates/base.html:113
+msgid "Legal notice"
+msgstr ""
+
+#: templates/base.html:115
+msgid "Version"
+msgstr ""
+
+#: templates/base.html:115
+msgid "Unless otherwise explicitly specified, all texts are licenced"
+msgstr ""
+
+#: templates/association/base_association.html:4
+#: templates/association/index.html:6
+msgid "The association"
+msgstr ""
+
+#: templates/association/board.html:7 templates/association/index.html:12
+#: templates/association/index.html:37 templates/association/rules.html:14
+#: templates/association/status.html:14
+#: templates/association/upload_report.html:22
+#: templates/subscriptions/edit_subscriptions_type.html:13
+msgid "Board members"
+msgstr ""
+
+#: templates/association/board.html:11 templates/association/index.html:16
+msgid "No members in the board !"
+msgstr ""
+
+#: templates/association/board.html:17 templates/association/index.html:33
+#: templates/association/rules.html:11 templates/association/status.html:11
+#: templates/association/upload_report.html:18
+#: templates/subscriptions/edit_subscriptions_type.html:10
+#: templates/subscriptions/subscribe.html:65
+msgid "Links"
+msgstr ""
+
+#: templates/association/board.html:19 templates/association/index.html:35
+#: templates/association/rules.html:13
+#: templates/association/upload_report.html:20
+#: templates/subscriptions/subscription_type.html:14
+#: templates/subscriptions/user_subscriptions.html:15
+msgid "Status"
+msgstr ""
+
+#: templates/association/board.html:20 templates/association/index.html:36
+#: templates/association/status.html:13
+#: templates/association/upload_report.html:21
+#: templates/subscriptions/edit_subscriptions_type.html:12
+msgid "Rules"
+msgstr ""
+
+#: templates/association/index.html:9 templates/pages/homepage.html:18
+msgid "edit"
+msgstr ""
+
+#: templates/association/index.html:19
+msgid "Meeting reports and other documents"
+msgstr ""
+
+#: templates/association/index.html:27
+msgid "No report available !"
+msgstr ""
+
+#: templates/association/index.html:43 templates/association/rules.html:20
+#: templates/association/status.html:20 templates/groups/base_groups.html:14
+#: templates/members/details.html:49 templates/news/base_news.html:18
+#: templates/news/drafts.html:39
+#: templates/subscriptions/edit_subscriptions_type.html:19
+#: templates/subscriptions/user_subscriptions.html:62
+msgid "Actions"
+msgstr ""
+
+#: templates/association/index.html:45
+msgid "Add a report"
+msgstr ""
+
+#: templates/association/rules.html:22
+msgid "Edit the rules"
+msgstr ""
+
+#: templates/association/status.html:22
+#: templates/subscriptions/edit_subscriptions_type.html:21
+msgid "Edit the status"
+msgstr ""
+
+#: templates/association/upload_report.html:6
+msgid "Upload report"
+msgstr ""
+
+#: templates/association/upload_report.html:12
+#: templates/members/edit_form.html:13 templates/news/edit.html:15
+#: templates/pages/text_edit.html:15 templates/subscriptions/subscribe.html:57
+#: templates/subscriptions/subscription_type_edit.html:14
+msgid "Cancel"
+msgstr ""
+
+#: templates/association/upload_report.html:13
+#: templates/members/edit_form.html:14 templates/news/edit.html:16
+#: templates/pages/text_edit.html:16 templates/subscriptions/subscribe.html:58
+#: templates/subscriptions/subscription_type_edit.html:15
+msgid "Save"
+msgstr ""
+
+#: templates/auth/login.html:4 templates/auth/login.html.py:6
+msgid "Login page"
+msgstr ""
+
+#: templates/auth/login.html:11
+msgid "Your username and password didn't match. Please try again."
+msgstr ""
+
+#: templates/auth/login.html:20
+msgid "Username"
+msgstr ""
+
+#: templates/auth/login.html:24
+msgid "Password"
+msgstr ""
+
+#: templates/auth/permission_denied.html:8
+msgid "Permission denied"
+msgstr ""
+
+#: templates/auth/permission_denied.html:10
+msgid "You are not authorized to access this page."
+msgstr ""
+
+#: templates/groups/index.html:4
+msgid "Apinc groups"
+msgstr ""
+
+#: templates/manage/base_manage.html:4 templates/manage/index.html:5
+msgid "Manage"
+msgstr ""
+
+#: templates/manage/base_manage.html:17
+#: templates/subscriptions/base_subscriptions.html:4
+#: templates/subscriptions/index.html:5
+#: templates/subscriptions/subscriptions.html:8
+msgid "Subscriptions"
+msgstr ""
+
+#: templates/manage/base_manage.html:19
+msgid "Subscriptions index"
+msgstr ""
+
+#: templates/manage/base_manage.html:20
+#: templates/subscriptions/base_subscriptions.html:19
+msgid "Check all subscriptions"
+msgstr ""
+
+#: templates/manage/base_manage.html:21
+#: templates/subscriptions/base_subscriptions.html:20
+msgid "Check pending subscriptions"
+msgstr ""
+
+#: templates/manage/base_manage.html:22
+#: templates/subscriptions/base_subscriptions.html:21
+msgid "Edit subscription types"
+msgstr ""
+
+#: templates/members/details.html:5
+msgid "Member detail profile"
+msgstr ""
+
+#: templates/members/details.html:13 templates/members/edit.html:15
+msgid "Personal profile"
+msgstr ""
+
+#: templates/members/details.html:16
+msgid "first name"
+msgstr ""
+
+#: templates/members/details.html:18
+msgid "last name"
+msgstr ""
+
+#: templates/members/details.html:29 templates/members/edit.html:24
+msgid "Birthdate"
+msgstr ""
+
+#: templates/members/details.html:33 templates/members/edit.html:25
+msgid "Gender"
+msgstr ""
+
+#: templates/members/details.html:39
+msgid "Person Private data"
+msgstr ""
+
+#: templates/members/details.html:51
+msgid "Modify these data"
+msgstr ""
+
+#: templates/members/edit.html:5
+msgid "Member edit profile"
+msgstr ""
+
+#: templates/members/edit.html:13
+msgid "Back to personnal file"
+msgstr ""
+
+#: templates/members/edit.html:18
+msgid "First name"
+msgstr ""
+
+#: templates/members/edit.html:20
+msgid "Last name"
+msgstr ""
+
+#: templates/members/edit.html:21
+msgid "Email"
+msgstr ""
+
+#: templates/members/edit.html:27 templates/members/edit.html.py:47
+#: templates/subscriptions/subscription_type.html:28
+msgid "Modify"
+msgstr ""
+
+#: templates/members/edit.html:30
+msgid "Member data"
+msgstr ""
+
+#: templates/members/edit.html:32
+msgid "Group memberships"
+msgstr ""
+
+#: templates/members/edit.html:42
+msgid "Private data"
+msgstr ""
+
+#: templates/news/base_news.html:5
+msgid "Apinc news"
+msgstr ""
+
+#: templates/news/base_news.html:20 templates/news/drafts.html:41
+msgid "Write a news"
+msgstr ""
+
+#: templates/news/base_news.html:22
+msgid "See drafts"
+msgstr ""
+
+#: templates/news/base_news.html:29
+msgid "Archives"
+msgstr ""
+
+#: templates/news/draft_details.html:15
+#: templates/news/published_details.html:15
+msgid "« previous"
+msgstr ""
+
+#: templates/news/draft_details.html:19
+#: templates/news/published_details.html:19
+msgid "next »"
+msgstr ""
+
+#: templates/news/draft_details.html:29 templates/news/published.html:12
+#: templates/news/published_details.html:29
+msgid "Edit this news"
+msgstr ""
+
+#: templates/news/draft_details.html:30
+#: templates/news/published_details.html:30
+msgid "Delete this news"
+msgstr ""
+
+#: templates/news/drafts.html:7
+msgid "List of available drafts"
+msgstr ""
+
+#: templates/news/drafts.html:16
+msgid "No draft !"
+msgstr ""
+
+#: templates/news/drafts.html:21 templates/news/index.html:18
+#: templates/news/published.html:20
+msgid "previous"
+msgstr ""
+
+#: templates/news/drafts.html:26 templates/news/index.html:23
+#: templates/news/published.html:25
+msgid "page"
+msgstr ""
+
+#: templates/news/drafts.html:31 templates/news/index.html:28
+#: templates/news/published.html:30
+msgid "next"
+msgstr ""
+
+#: templates/news/index.html:13 templates/news/published.html:15
+#: templates/pages/homepage.html:30
+msgid "No news !"
+msgstr ""
+
+#: templates/pages/confirm.html:20
+msgid "No"
+msgstr ""
+
+#: templates/pages/confirm.html:21
+msgid "Yes"
+msgstr ""
+
+#: templates/pages/generic_page.html:13
+#: templates/subscriptions/user_subscriptions.html:32
+#: templates/subscriptions/user_subscriptions.html:41
+msgid "Edit"
+msgstr ""
+
+#: templates/pages/homepage.html:5
+msgid "APINC Portal"
+msgstr ""
+
+#: templates/subscriptions/base_subscriptions.html:17
+msgid "Administration"
+msgstr ""
+
+#: templates/subscriptions/index.html:7
+msgid "Number of subscribers"
+msgstr ""
+
+#: templates/subscriptions/request.html:5
+msgid "Subscription request"
+msgstr ""
+
+#: templates/subscriptions/request.html:7
+msgid "Request form to get a new member account"
+msgstr ""
+
+#: templates/subscriptions/subscribe.html:27
+msgid "Subscription"
+msgstr ""
+
+#: templates/subscriptions/subscribe.html:39
+msgid "duration"
+msgstr ""
+
+#: templates/subscriptions/subscribe.html:39
+#: templates/subscriptions/subscription_type.html:21
+msgid "year"
+msgstr ""
+
+#: templates/subscriptions/subscribe.html:40
+#: templates/subscriptions/subscribe.html:46
+#: templates/subscriptions/subscription_type.html:20
+#: templates/subscriptions/subscriptions.html:44
+msgid "euros"
+msgstr ""
+
+#: templates/subscriptions/subscribe.html:43
+msgid "No subscription types available !"
+msgstr ""
+
+#: templates/subscriptions/subscribe.html:46
+msgid "Total amount"
+msgstr ""
+
+#: templates/subscriptions/subscribe.html:67
+#: templates/subscriptions/user_subscriptions.html:64
+msgid "See account"
+msgstr ""
+
+#: templates/subscriptions/subscribe.html:68
+msgid "See subscriptions"
+msgstr ""
+
+#: templates/subscriptions/subscription_type.html:6
+msgid "Types of subscriptions"
+msgstr ""
+
+#: templates/subscriptions/subscription_type.html:11
+msgid "Label"
+msgstr ""
+
+#: templates/subscriptions/subscription_type.html:12
+msgid "Dues amount"
+msgstr ""
+
+#: templates/subscriptions/subscription_type.html:13
+msgid "Duration"
+msgstr ""
+
+#: templates/subscriptions/subscription_type.html:29
+#: templates/subscriptions/subscriptions.html:57
+#: templates/subscriptions/user_subscriptions.html:35
+msgid "Delete"
+msgstr ""
+
+#: templates/subscriptions/subscription_type.html:36
+msgid "No subscription types defined yet!"
+msgstr ""
+
+#: templates/subscriptions/subscription_type.html:42
+msgid "Add subscription type"
+msgstr ""
+
+#: templates/subscriptions/subscription_type_edit.html:6
+msgid "Subscription type editor"
+msgstr ""
+
+#: templates/subscriptions/subscriptions.html:6
+msgid "Subscriptions to validate"
+msgstr ""
+
+#: templates/subscriptions/subscriptions.html:14
+msgid "of"
+msgstr ""
+
+#: templates/subscriptions/subscriptions.html:14
+msgid "results"
+msgstr ""
+
+#: templates/subscriptions/subscriptions.html:17
+msgid "First"
+msgstr ""
+
+#: templates/subscriptions/subscriptions.html:18
+msgid "Previous"
+msgstr ""
+
+#: templates/subscriptions/subscriptions.html:19
+msgid "Next"
+msgstr ""
+
+#: templates/subscriptions/subscriptions.html:20
+msgid "Last"
+msgstr ""
+
+#: templates/subscriptions/subscriptions.html:30
+msgid "Member"
+msgstr ""
+
+#: templates/subscriptions/subscriptions.html:31
+#: templates/subscriptions/user_subscriptions.html:11
+msgid "Date"
+msgstr ""
+
+#: templates/subscriptions/subscriptions.html:32
+#: templates/subscriptions/user_subscriptions.html:14
+msgid "Amount"
+msgstr ""
+
+#: templates/subscriptions/subscriptions.html:33
+msgid "Payment"
+msgstr ""
+
+#: templates/subscriptions/subscriptions.html:48
+msgid "by"
+msgstr ""
+
+#: templates/subscriptions/subscriptions.html:50
+msgid "No payment found"
+msgstr ""
+
+#: templates/subscriptions/subscriptions.html:55
+#: templates/subscriptions/user_subscriptions.html:33
+msgid "Validate"
+msgstr ""
+
+#: templates/subscriptions/subscriptions.html:67
+msgid "No pending subscriptions!"
+msgstr ""
+
+#: templates/subscriptions/subscriptions.html:67
+msgid "No subscriptions!"
+msgstr ""
+
+#: templates/subscriptions/user_subscriptions.html:6
+msgid "Subscriptions for"
+msgstr ""
+
+#: templates/subscriptions/user_subscriptions.html:12
+msgid "Period"
+msgstr ""
+
+#: templates/subscriptions/user_subscriptions.html:13
+msgid "Tender type"
+msgstr ""
+
+#: templates/subscriptions/user_subscriptions.html:50
+msgid "No subscriptions !"
+msgstr ""
+
+#: templates/subscriptions/user_subscriptions.html:55
+msgid "Regularize user subscription"
+msgstr ""
+
+#: templates/subscriptions/user_subscriptions.html:65
+msgid "Add a subscription"
+msgstr ""

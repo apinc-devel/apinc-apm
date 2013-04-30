@@ -1,0 +1,25 @@
+{% extends 'association/base_association.html' %}
+{% load i18n %}
+{% load url from future %}
+
+{% block content_page %}
+<h1>{{ text.title }}</h1>
+{{ text.body_html|safe }}
+{% endblock %}
+
+{% block links %}
+<h2>{% trans "Links" %}</h2>
+<ul>
+    <li><a href="{% url "apm.apps.association.views.rules" %}">{% trans "Rules" %}</a></li>
+    <li><a href="{% url "apm.apps.association.views.board" %}">{% trans "Board members" %}</a></li>
+</ul>
+{% endblock %}
+
+{% block actions %}
+{% if superadmin or bureau_member or secretariat_member or contributeur %}
+<h2>{% trans "Actions" %}</h2>
+<ul>
+    <li><a href="{% url "apm.apps.pages.views.edit" text.slug %}">{% trans "Edit the status" %}</a></li>
+</ul>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load  i18n %}
+
+{% block pagetitle %}{% trans "Manage" %}{% endblock %}
+
+{% block nav_manage %}<li class="active">{% endblock %}
+
+{% block content %}
+<div id="content" class="grid_8 ">
+    {% block content_page %}{% endblock %} 
+</div>
+
+<div id="sidebar" class="grid_4 ">
+
+{% block subscriptions %}
+{% if superadmin or bureau_member or secretariat_member or tresorier_member %}
+<h2>{% trans "Subscriptions" %}</h2>
+<ul>
+<li><a href="{% url apinc.subscriptions.views.index %}">{% trans "Subscriptions index" %}</a></li>
+<li><a href="{% url all_subscriptions %}">{% trans "Check all subscriptions" %}</a></li>
+<li><a href="{% url to_validate_subscriptions %}">{% trans "Check pending subscriptions" %}</a></li>
+<li><a href="{% url apinc.subscriptions.views.subscription_types %}">{% trans "Edit subscription types" %}</a></li>
+{% endif %}
+{% endblock %}
+</ul>
+
+{% block actions %} {% endblock %}
+{% block extra-actions %} {% endblock %}
+
+</div>
+<div class="clear">&nbsp;</div>
+    
+{% endblock %}

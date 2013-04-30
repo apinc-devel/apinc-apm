@@ -12,6 +12,6 @@ Pour installer le portail APINC APM en version de développement, il faut:
 
 - créer la base de donnée initiale (elle n'est pas comprise dans l'archive git):
     ./manage.py syncdb --noinput
-    ./manage.py filldb
+    ./manage.py filldb --development
 
 - lancer le serveur : python manage.py runserver

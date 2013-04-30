@@ -1,0 +1,54 @@
+{% extends 'members/base_members.html' %}
+{% load i18n %}
+{% load url from future %}
+
+{% block pagetitle %}{% trans "Member detail profile" %}{% endblock %}
+ 
+{% block title %}{{ person.first_name|default:"First name undefined" }} {{ person.last_name|default:"Last name undefined" }} {% endblock %}
+ 
+{% block content_page %}
+ 
+<h1>{{ person.first_name|default:"First name undefined" }} {{ person.last_name|default:"Last name undefined" }} </h1>
+
+<h2>{% trans "Personal profile" %}</h2>
+<div>
+<ul>
+    <li><b>{% filter capfirst %}{% trans "first name" %}{% endfilter %}
+        &nbsp;: </b>{{ person.first_name }}</li>
+    <li><b>{% filter capfirst %}{% trans "last name" %}{% endfilter %}
+        &nbsp;: </b>{{ person.last_name }}</li>
+    <li><b>{% filter capfirst %}{% trans "email" %}{% endfilter %}
+        &nbsp;: </b>{{ person.email }}</li>
+
+    {% if person.maiden_name %}
+    <li><b>{% filter capfirst %}{% trans "maiden name" %}{% endfilter %}
+    &nbsp;: </b>{{ person.maiden_name }}</li>
+    {% endif %}
+
+    {% if person.birthdate %}
+        <li><b>{% trans "Birthdate" %}&nbsp;: </b>{{ person.birthdate }}</li>
+    {% endif %}
+
+    {% if person.sex %}
+        <li><b>{% trans "Gender" %}&nbsp;: </b>{{ person.sex }}</li>
+    {% endif %}
+</ul>
+</div>
+
+{% if superadmin or secretariat_member or bureau_member or tresorier_member %}
+<h2>{% trans "Person Private data" %}</h2>
+<div>
+    <p>{{ personprivate.notes }}</p>
+</div>
+{% endif %}
+
+{% endblock %}
+
+
+{% block actions %}
+<h2>{% trans "Actions" %}</h2>
+<ul>
+    <li><a href="{% url "apm.apps.members.views.edit" person.id %}">{% trans "Modify these data" %}</a></li>
+    {% comment %}<li><a href="{% url "apm.subscriptions.views.user_subscriptions" person.user_ptr_id %}">{% trans "See subscriptions" %}</a></li>{% endcomment %}
+</ul>
+{% endblock %}
