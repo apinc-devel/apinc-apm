@@ -18,6 +18,7 @@
 #
 
 from django.contrib import auth, messages
+from django.contrib.contenttypes.models import ContentType
 #from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404, render, redirect
@@ -28,6 +29,7 @@ from apm.apps.members.models import Person
 from apm.apps.pages.models import TextBlock
 from apm.apps.pages.forms import TextBlockForm
 from apm.apps.news.models import News
+from apm.manage.models import LogEntry
 from apm.decorators import access_required
 from apm.utils import sync_user_from_vhffs_api
 
@@ -51,8 +53,7 @@ def edit(request, page):
 
     text = get_object_or_404(TextBlock, slug=page)
 
-    form = TextBlockForm(initial={'slug': text.slug, 'title': text.title,
-        'body_html': text.body_html})
+    form = TextBlockForm(instance=text)
 
     if request.method == 'POST':
         form = TextBlockForm(request.POST)
@@ -61,7 +62,13 @@ def edit(request, page):
             text.body_html = form.cleaned_data['body_html']
             text.save()
 
-            messages.add_message(request, messages.INFO, _("Text %s page update." % page))
+            msg_log = _("Pseudo-static page modified.")
+            LogEntry.objects.log_action(
+                user_id = request.user.id,
+                content_type_id = ContentType.objects.get_for_model(text).pk,
+                object_id = text.pk, message = msg_log)
+
+            messages.add_message(request, messages.INFO, _("Pseudo-static page '%s' updated." % page))
 
             return HttpResponseRedirect(reverse(page))
 

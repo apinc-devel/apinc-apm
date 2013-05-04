@@ -31,11 +31,10 @@ class TextBlockForm(forms.ModelForm):
             required=True,widget=forms.TextInput(attrs={'size':'80'}))
     body_html = forms.CharField(label=_("body").capitalize(),
             max_length=100000000, required=False, widget=TinyMCE(attrs={'col':80, 'rows': 30}))
-    slug = forms.CharField(label=_("slug").capitalize(), max_length=16,
-            required=True, widget=forms.TextInput(attrs={'size':'50', 'read-only':True}))
 
     class Meta:
         """TextBlock form meta"""
         model = TextBlock
-        #exclude = ('slug')
+        exclude = ('slug')
+
     # TODO validators

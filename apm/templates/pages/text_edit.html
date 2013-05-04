@@ -16,5 +16,15 @@
     <input type="submit" class="button" value="{% trans "Save" %}"/>
 </form>
 
+<h3>{% trans "Logs for this pseudo-static page" %}</h3>
+{{ form.logs.all }}
+<ul>
+{% for log in form.instance.logs.all %}
+    <li>{{ log.timestamp|date:"Y/M/d H:i:s" }} | {{ log.user }} | {{ log.message }}</li>
+{% empty %}
+    <li>{% trans "No logs yet !" %}</li>
+{% endfor %}
+</ul>
+
 <div class="clear">&nbsp;</div>
 {% endblock %}

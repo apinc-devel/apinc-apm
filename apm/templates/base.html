@@ -65,7 +65,7 @@
             {% block nav_news %}<li>{% endblock %}
             <a href="{% url "apm.apps.news.views.index" %}">{% trans "News" %}</a></li>
             {% block nav_association %}<li>{% endblock %}
-            <a href="{% url "apm.apps.association.views.index" %}">{% trans "Association" %}</a></li>
+            <a href="{% url "apm.apps.association.views.index" %}">{% trans "Organization" %}</a></li>
             {% block nav_compte %}<li>{% endblock %}
             {% if user.is_authenticated %}
             <a href="{% url "apm.apps.members.views.details" user.id %}">{% trans "Account" %}</a>

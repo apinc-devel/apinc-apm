@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-26 21:53+0200\n"
+"POT-Creation-Date: 2013-05-04 18:59+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: APINC Devel Team <devel@ml.apinc.org>\n"
@@ -45,7 +45,7 @@ msgstr ""
 msgid "Reported successfully deleted"
 msgstr ""
 
-#: apps/groups/models.py:27 apps/pages/forms.py:34 apps/pages/models.py:27
+#: apps/groups/models.py:27 apps/pages/models.py:30
 msgid "slug"
 msgstr ""
 
@@ -126,7 +126,7 @@ msgstr ""
 msgid "Modification of personal private profile for"
 msgstr ""
 
-#: apps/news/forms.py:31 apps/pages/forms.py:30 apps/pages/models.py:33
+#: apps/news/forms.py:31 apps/pages/forms.py:30 apps/pages/models.py:36
 msgid "title"
 msgstr ""
 
@@ -158,20 +158,24 @@ msgstr ""
 msgid "Modifications have been successfully saved."
 msgstr ""
 
-#: apps/pages/models.py:31
+#: apps/pages/models.py:34
 msgid "Used for urls regex matches and templates <slug>.html."
 msgstr ""
 
 #: apps/pages/views.py:65
-#, python-format
-msgid "Text %s page update."
+msgid "Pseudo-static page modified."
 msgstr ""
 
-#: manage/models.py:44
+#: apps/pages/views.py:71
+#, python-format
+msgid "Pseudo-static page '%s' updated."
+msgstr ""
+
+#: manage/models.py:50
 msgid "log entry"
 msgstr ""
 
-#: manage/models.py:45
+#: manage/models.py:51
 msgid "log entries"
 msgstr ""
 
@@ -208,7 +212,7 @@ msgid "News"
 msgstr ""
 
 #: templates/base.html:68
-msgid "Association"
+msgid "Organization"
 msgstr ""
 
 #: templates/base.html:71
@@ -245,12 +249,12 @@ msgstr ""
 
 #: templates/association/base_association.html:4
 #: templates/association/index.html:6
-msgid "The association"
+msgid "The organization"
 msgstr ""
 
-#: templates/association/board.html:7 templates/association/index.html:12
-#: templates/association/index.html:37 templates/association/rules.html:14
-#: templates/association/status.html:14
+#: templates/association/board.html:7 templates/association/by_laws.html:14
+#: templates/association/index.html:12 templates/association/index.html:37
+#: templates/association/statutes.html:14
 #: templates/association/upload_report.html:22
 #: templates/subscriptions/edit_subscriptions_type.html:13
 msgid "Board members"
@@ -260,27 +264,37 @@ msgstr ""
 msgid "No members in the board !"
 msgstr ""
 
-#: templates/association/board.html:17 templates/association/index.html:33
-#: templates/association/rules.html:11 templates/association/status.html:11
+#: templates/association/board.html:17 templates/association/by_laws.html:11
+#: templates/association/index.html:33 templates/association/statutes.html:11
 #: templates/association/upload_report.html:18
 #: templates/subscriptions/edit_subscriptions_type.html:10
 #: templates/subscriptions/subscribe.html:65
 msgid "Links"
 msgstr ""
 
-#: templates/association/board.html:19 templates/association/index.html:35
-#: templates/association/rules.html:13
+#: templates/association/board.html:19 templates/association/by_laws.html:13
+#: templates/association/index.html:35
 #: templates/association/upload_report.html:20
-#: templates/subscriptions/subscription_type.html:14
-#: templates/subscriptions/user_subscriptions.html:15
-msgid "Status"
+msgid "Statutes"
 msgstr ""
 
 #: templates/association/board.html:20 templates/association/index.html:36
-#: templates/association/status.html:13
+#: templates/association/statutes.html:13
 #: templates/association/upload_report.html:21
-#: templates/subscriptions/edit_subscriptions_type.html:12
-msgid "Rules"
+msgid "By-laws"
+msgstr ""
+
+#: templates/association/by_laws.html:20 templates/association/index.html:43
+#: templates/association/statutes.html:20 templates/groups/base_groups.html:14
+#: templates/members/details.html:49 templates/news/base_news.html:17
+#: templates/news/drafts.html:39
+#: templates/subscriptions/edit_subscriptions_type.html:19
+#: templates/subscriptions/user_subscriptions.html:62
+msgid "Actions"
+msgstr ""
+
+#: templates/association/by_laws.html:22
+msgid "Edit the by-laws"
 msgstr ""
 
 #: templates/association/index.html:9 templates/pages/homepage.html:18
@@ -295,26 +309,12 @@ msgstr ""
 msgid "No report available !"
 msgstr ""
 
-#: templates/association/index.html:43 templates/association/rules.html:20
-#: templates/association/status.html:20 templates/groups/base_groups.html:14
-#: templates/members/details.html:49 templates/news/base_news.html:17
-#: templates/news/drafts.html:39
-#: templates/subscriptions/edit_subscriptions_type.html:19
-#: templates/subscriptions/user_subscriptions.html:62
-msgid "Actions"
-msgstr ""
-
 #: templates/association/index.html:45
 msgid "Add a report"
 msgstr ""
 
-#: templates/association/rules.html:22
-msgid "Edit the rules"
-msgstr ""
-
-#: templates/association/status.html:22
-#: templates/subscriptions/edit_subscriptions_type.html:21
-msgid "Edit the status"
+#: templates/association/statutes.html:22
+msgid "Edit the statutes"
 msgstr ""
 
 #: templates/association/upload_report.html:6
@@ -525,7 +525,8 @@ msgstr ""
 msgid "Logs for this news"
 msgstr ""
 
-#: templates/news/edit.html:24
+#: templates/news/edit.html:24 templates/pages/generic_page.html:18
+#: templates/pages/text_edit.html:25
 msgid "No logs yet !"
 msgstr ""
 
@@ -554,7 +555,11 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
-#: templates/pages/generic_page.html:13
+#: templates/pages/generic_page.html:13 templates/pages/text_edit.html:19
+msgid "Logs for this pseudo-static page"
+msgstr ""
+
+#: templates/pages/generic_page.html:22
 #: templates/subscriptions/user_subscriptions.html:32
 #: templates/subscriptions/user_subscriptions.html:41
 msgid "Edit"
@@ -566,6 +571,14 @@ msgstr ""
 
 #: templates/subscriptions/base_subscriptions.html:17
 msgid "Administration"
+msgstr ""
+
+#: templates/subscriptions/edit_subscriptions_type.html:12
+msgid "Rules"
+msgstr ""
+
+#: templates/subscriptions/edit_subscriptions_type.html:21
+msgid "Edit the status"
 msgstr ""
 
 #: templates/subscriptions/index.html:7
@@ -631,6 +644,11 @@ msgstr ""
 
 #: templates/subscriptions/subscription_type.html:13
 msgid "Duration"
+msgstr ""
+
+#: templates/subscriptions/subscription_type.html:14
+#: templates/subscriptions/user_subscriptions.html:15
+msgid "Status"
 msgstr ""
 
 #: templates/subscriptions/subscription_type.html:29

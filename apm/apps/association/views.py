@@ -30,7 +30,7 @@ from apm.apps.pages.models import TextBlock
 from apm.decorators import access_required, confirm_required
 
 def index(request):
-    text = TextBlock.objects.get(slug='association')
+    text = TextBlock.objects.get(slug='organization')
     board_members = MemberRole.objects.get_active_members().order_by('role__rank')
     meeting_reports = Report.objects.all()
 
@@ -44,19 +44,19 @@ def board(request):
     return render(request, 'association/board.html', 
             { 'board_members': board_members })
 
-def rules(request):
-    text = TextBlock.objects.get(slug='rules')
+def by_laws(request):
+    text = TextBlock.objects.get(slug='by-laws')
 
-    return render(request, 'association/rules.html',
+    return render(request, 'association/by_laws.html',
             {'text': text})
 
-def status(request):
-    text = TextBlock.objects.get(slug='status')
+def statutes(request):
+    text = TextBlock.objects.get(slug='statutes')
 
-    return render(request, 'association/status.html',
+    return render(request, 'association/statutes.html',
             {'text': text})
 
-def status_pdf(request):
+def statutes_pdf(request):
     return render(request, 'base.html')
 
 @access_required(groups=['apinc-secretariat', 'apinc-bureau'])

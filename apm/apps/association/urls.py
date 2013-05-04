@@ -24,12 +24,12 @@ urlpatterns = patterns('apm.apps.association.views',
     # Association
 
     # pages particulieres au contenu pseudo-statique
-    url(r'^$', 'index', name='association'),
-    url(r'^status/$', 'status', name='status'),
-    url(r'^rules/$', 'rules', name='rules'),
+    url(r'^$', 'index', name='organization'),
+    url(r'^statutes/$', 'statutes', name='statutes'),
+    url(r'^by-laws/$', 'by_laws', name='by-laws'),
 
     url(r'^report/upload/$', 'upload_report'),
     url(r'^report/(?P<report_id>\d+)/delete/$', 'delete_report'),
-    url(r'^status/pdf/$', 'status_pdf'),
+    url(r'^statutes/pdf/$', 'statutes_pdf'),
     url(r'^board/$', 'board'),
 )

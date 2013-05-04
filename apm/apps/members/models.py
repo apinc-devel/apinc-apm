@@ -29,7 +29,7 @@ from django.utils.translation import ugettext as _
 
 class PersonManager(UserManager):
     def get_sentinel_user(self):
-        return Person.objects.get_or_create(username='deleted', first_name='deleted', last_name='deleted', is_active=False)[0]
+        return Person.objects.get_or_create(username='deleted', first_name='Sentinel', last_name='User', is_active=False)[0]
 
 class Person(AbstractUser):
     """The main class for a person"""

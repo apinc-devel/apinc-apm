@@ -24,15 +24,21 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 from django.utils.translation import ugettext as _
 
+def _get_sentinel_user():
+    """Intermediate function in order to avoid direct call
+    to get_user_model inside models.SET (was source of circular import)"""
+    return get_user_model().objects.get_sentinel_user()
+
 class LogEntryManager(models.Manager):
     def log_action(self, user_id, content_type_id, object_id, message=''):
-        e = self.model(None, None, user_id, content_type_id, object_id, message)
+        e = self.model(None, None, user_id, content_type_id, object_id,
+                message[:255])
         e.save()
 
 class LogEntry(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
-             on_delete=models.SET(get_user_model().objects.get_sentinel_user))
+             on_delete=models.SET(_get_sentinel_user))
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
     logged_object = generic.GenericForeignKey('content_type', 'object_id')
@@ -49,5 +55,5 @@ class LogEntry(models.Model):
         return "%s %s %s" % (self.timestamp, self.user, self.message)
 
     def get_edited_object(self):
-        "Returns the edited object represented by this log entry"
+        """Returns the edited object represented by this log entry"""
         return self.content_type.get_object_for_this_type(pk=self.object_id)

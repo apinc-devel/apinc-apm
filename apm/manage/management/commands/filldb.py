@@ -26,12 +26,14 @@ import pytz
 import crypt
 
 from django.core.management.base import BaseCommand, CommandError
+from django.contrib.auth import get_user_model
+from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.models import Site
 
 import apm.apps.groups.models as groups
 import apm.apps.members.models as members
 import apm.apps.news.models as news
-import apm.apps.pages.models as pages
+import apm.manage.models as manage
 #import apm.apps.subscriptions.models as subscriptions
 
 PSEUDO_STATIC_PAGES = [
@@ -39,9 +41,9 @@ PSEUDO_STATIC_PAGES = [
     ("about", "About page title"),
     ("legal-notice", "Legal notice and terms of use"),
     ("contact", "Contact page title"),
-    ("association", "The association"),
-    ("status", "Statuts de l'association"),
-    ("rules", "Charte d'utilisation des services"),
+    ("organization", "The organization"),
+    ("statutes", "Statuts de l'association"),
+    ("by-laws", "Règlement intérieur"),
 ]
 
 class Command(BaseCommand):
@@ -53,13 +55,22 @@ class Command(BaseCommand):
             )
 
     def handle(self, *args, **options):
-        # cette partie regroupe les données des pages pseudos-statiques
         try:
-            # initializing pseudo-static pages
+        # cette partie regroupe les données des pages pseudos-statiques
             for slug, title in PSEUDO_STATIC_PAGES:
-                pseudo_static_page = pages.TextBlock(slug=slug, title=title)
-                pseudo_static_page.save()
-                self.stdout.write("Pseudo-static page '%s' inserted.\n" % slug)
+                pseudo_static_page, created = pages.TextBlock.objects.get_or_create(
+                        slug=slug, title=title)
+                if pseudo_static_page.logs.count() < 1:
+                    manage.LogEntry.objects.log_action(
+                        user_id = get_user_model().objects\
+                                .get_sentinel_user().id,
+                        content_type_id = ContentType.objects\
+                                .get_for_model(pseudo_static_page).pk,
+                        object_id = pseudo_static_page.pk,
+                        message = "Initialized pseudo-static page.")
+                    self.stdout.write("Log for pseudo-static page '%s' inserted.\n" % slug)
+                if created:
+                    self.stdout.write("Pseudo-static page '%s' inserted.\n" % slug)
 
         except Exception, e:
             # TODO Error message handling
@@ -284,3 +295,5 @@ class Command(BaseCommand):
             except Exception, e:
                 # TODO Error message handling
                 raise CommandError('Filldb development data "%s"' % e)
+
+import apm.apps.pages.models as pages

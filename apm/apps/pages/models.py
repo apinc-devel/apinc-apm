@@ -19,6 +19,9 @@
 
 from django.db import models
 from django.utils.translation import ugettext as _
+from django.contrib.contenttypes import generic
+
+from apm.manage.models import LogEntry
 
 class TextBlock(models.Model):
     """Text Block"""
@@ -32,6 +35,7 @@ class TextBlock(models.Model):
     )
     title = models.CharField(verbose_name=_("title"), max_length=200)
     body_html = models.TextField(blank=True)
+    logs = generic.GenericRelation(LogEntry)
 
     def __unicode__(self):
         """unicode string for text block"""

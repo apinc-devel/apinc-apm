@@ -149,7 +149,8 @@ LOCALE_PATHS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'pwi0k2=3=$%gk(hw!++jdny$wzenidmx-*^5t8s)ji)=2_sy8d'
+# https://gist.github.com/ndarville/3452907
+#SECRET_KEY = '--------------------------------------------------'
 
 #
 # Templates

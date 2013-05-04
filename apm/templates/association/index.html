@@ -3,7 +3,7 @@
 {% load url from future %}
 
 {% block content_page %}
-<h2>{% trans "The association" %}</h2>
+<h2>{% trans "The organization" %}</h2>
 {{ text.body_html|safe }}
 {% if superadmin or bureau_member or secretariat_member or contributeur %}
     <p class="page-nav"><a href="{% url "apm.apps.pages.views.edit" text.slug %}">{% trans "edit" %}</a></p>
@@ -32,8 +32,8 @@
 {% block links %}
 <h2>{% trans "Links" %}</h2>
 <ul>
-    <li><a href="{% url "apm.apps.association.views.status" %}">{% trans "Status" %}</a></li>
-    <li><a href="{% url "apm.apps.association.views.rules" %}">{% trans "Rules" %}</a></li>
+    <li><a href="{% url "apm.apps.association.views.statutes" %}">{% trans "Statutes" %}</a></li>
+    <li><a href="{% url "apm.apps.association.views.by_laws" %}">{% trans "By-laws" %}</a></li>
     <li><a href="{% url "apm.apps.association.views.board" %}">{% trans "Board members" %}</a></li>
 </ul>
 {% endblock %}
