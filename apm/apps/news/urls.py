@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-#   Copyright © 2011 APINC Devel Team
+#   Copyright © 2011-2013 APINC Devel Team
 #
 #   This program is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
@@ -19,6 +19,7 @@
 
 from django.conf.urls import *
 from apm.apps.news.models import News
+from apm.apps.news.feeds import RssNewsFeed, AtomNewsFeed
 
 urlpatterns = patterns('apm.apps.news.views',
 
@@ -36,4 +37,6 @@ urlpatterns = patterns('apm.apps.news.views',
         name='news_month_archives'),
     url(r'^(?P<year>\d{4})/(?P<month>\d{1,2})/(?P<day>\d{1,2})/$',
         'published', name='news_day_archives'),
+    url(r'^rss/$', RssNewsFeed()),
+    url(r'^atom/$', AtomNewsFeed()),
 )
