@@ -255,7 +255,7 @@ AUTH_USER_MODEL = 'members.Person'
 TMP_PATH = os.path.join(VAR_ROOT, "tmp") # donnees temporaires (unused yet) 
 
 VERSION = '0.1.0'
-JQUERY_VERSION = '1.5.2'
+JQUERY_VERSION = '1.9.1'
 
 PORTAL_ADMIN = 'apinc-admin'
 APINC_SIREN = '448 004 556'

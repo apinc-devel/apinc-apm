@@ -1,28 +1,23 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
-{% block javascript %}{% endblock %}
-
 {% block content %}
-<div id="content" class="grid_12">
-
+<div class="container">
+  <div class="row">
+    <div class="span12">
     <h2>{{ text.title }}</h2>
     {{ text.body_html|safe }}
-
     {% if superadmin or bureau_member or secretariat_member or contributeur %}
-        <h3>{% trans "Logs for this pseudo-static page" %}</h3>
-        <ul>
-        {% for log in text.logs.all %}
-            <li>{{ log.timestamp|date:"Y/M/d H:i:s" }} | {{ log.user }} | {{ log.message }}</li>
-        {% empty %}
-            <li>{% trans "No logs yet !" %}</li>
-        {% endfor %}
-        </ul>
-
-        <p><a href="{% url "apm.apps.pages.views.edit" text.slug %}">{% trans "Edit" %}</a></p>
+    <p><a class="btn btn-primary pull-right" href="{% url "apm.apps.pages.views.edit" text.slug %}">{% trans "Edit" %}</a></p>
     {% endif %}
+    </div>
+  </div> <!-- /row -->
 
-</div>
+  {% if superadmin or bureau_member or secretariat_member or contributeur %}
+  <h5>{% trans "Logs for this pseudo-static page" %}</h5>
+  {% include "manage/logs.html" with object=text %}
+  {% endif %}
 
-<div class="clear">&nbsp;</div>
+</div><!--/container -->
+
 {% endblock %}

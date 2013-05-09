@@ -60,7 +60,7 @@ def delete(request, news_slug):
     news_item = get_object_or_404(News, slug=news_slug)
     news_item.delete()
 
-    messages.add_message(request, messages.INFO, _('The news has been successfully deleted.'))
+    messages.add_message(request, messages.SUCCESS, _('The news has been successfully deleted.'))
     #request.user.message_set.create(message=
     #   _('The news has been successfully deleted.'))
     return HttpResponseRedirect(reverse(index))
@@ -92,7 +92,7 @@ def edit(request, news_slug=None):
                 content_type_id = ContentType.objects.get_for_model(news_item).pk,
                 object_id = news_item.pk, message = msg_log)
  
-            messages.add_message(request, messages.INFO, _('Modifications have been successfully saved.'))
+            messages.add_message(request, messages.SUCCESS, _('Modifications have been successfully saved.'))
             if news_item.is_published():
                 return HttpResponseRedirect(reverse(
                                       published_details, args=[news_item.slug]))

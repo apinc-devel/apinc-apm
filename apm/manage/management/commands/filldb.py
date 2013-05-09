@@ -68,7 +68,7 @@ class Command(BaseCommand):
                                 .get_for_model(pseudo_static_page).pk,
                         object_id = pseudo_static_page.pk,
                         message = "Initialized pseudo-static page.")
-                    self.stdout.write("Log for pseudo-static page '%s' inserted.\n" % slug)
+                    #self.stdout.write("Log for pseudo-static page '%s' inserted.\n" % slug)
                 if created:
                     self.stdout.write("Pseudo-static page '%s' inserted.\n" % slug)
 

@@ -1,0 +1,17 @@
+{% load i18n %}
+<table class="table">
+  <tr class="info">
+    <td>{% trans "Date" %}</td>
+    <td>{% trans "User" %}</td>
+    <td>{% trans "Message" %}</td>
+  </tr>
+{% for log in object.logs.all %}
+  <tr>
+    <td>{{ log.timestamp|date:"Y/M/d H:i:s" }}</td>
+    <td>{{ log.user }}</td>
+    <td>{{ log.message }}</td>
+  </tr>
+{% empty %}
+<tr class="error">{% trans "No logs yet !" %}</tr>
+{% endfor %}
+</table>

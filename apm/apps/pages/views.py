@@ -68,7 +68,7 @@ def edit(request, page):
                 content_type_id = ContentType.objects.get_for_model(text).pk,
                 object_id = text.pk, message = msg_log)
 
-            messages.add_message(request, messages.INFO, _("Pseudo-static page '%s' updated." % page))
+            messages.add_message(request, messages.SUCCESS, _("Pseudo-static page '%s' updated." % page))
 
             return HttpResponseRedirect(reverse(page))
 

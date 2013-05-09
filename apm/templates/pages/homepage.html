@@ -1,36 +1,40 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% load url from future %}
 
 {% block pagetitle %}{% trans "APINC Portal" %}{% endblock %}
 
 {% block nav_home %}<li class="active">{% endblock %}
 
 {% block content %}
+<div class="container">
 
-<div id="content" class="grid_12">
+  <div class="hero-unit">
 
     <h1>{{ text.title|safe }}</h1>
 
     {{ text.body_html|safe }}
 
     {% if superadmin or bureau_member or secretariat_member or contributeur %}
-        <p class="page-nav"><a href="{% url "apm.apps.pages.views.edit" text.slug %}">{% trans "edit" %}</a></p>
+    <p><a class="btn btn-primary pull-right" href="{% url "apm.apps.pages.views.edit" text.slug %}">{% trans "edit" %}</a></p>
     {% endif %}
+  </div><!-- /hero-unit -->
+</div><!-- /container -->
 
-    {% if news %}
-        {% for news_item in news %}
-        <h2>{{ news_item.title}}</h2>
-          <p>{{ news_item.pub_date }}</p>
-           {{ news_item.body_html|safe }}
-          <p class="page-nav"><a href="{{ news_item.get_absolute_url }}">see details</a></p>
-      {% endfor %}
+{% if news %}
+<div class="container">
+  <div class="row">
+    {% for news_item in news %}
+    <div class="span12">
+      <h2>{{ news_item.title}}</h2>
+      <p class="text-info">{% trans "Posted on" %} {{ news_item.pub_date }}</p>
+      {{ news_item.body_html|safe }}
+      <p><a class="btn pull-right" href="{{ news_item.get_absolute_url }}">View details &raquo;</a></p>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p class="muted">{% trans "No news !" %}
+    {% endif %}
+  </div> <!-- /row -->
+</div><!-- /container -->
 
-      {% else %}
-          <p>{% trans "No news !" %}
-      {% endif %}
-
-</div>
-<div class="clear">&nbsp;</div>
-    
 {% endblock %}

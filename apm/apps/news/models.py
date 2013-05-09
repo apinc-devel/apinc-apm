@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-#   Copyright © 2011 APINC Devel Team
+#   Copyright © 2011-2013 APINC Devel Team
 #
 #   This program is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
@@ -18,7 +18,6 @@
 #
 
 from django.db import models
-#from django.contrib.syndication.feeds import Feed
 from django.contrib.sitemaps import Sitemap
 from django.utils.translation import ugettext as _
 from django.contrib.contenttypes import generic
