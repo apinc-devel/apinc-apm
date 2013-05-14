@@ -1,8 +1,9 @@
 {% extends 'news/base_news.html' %}
 {% load i18n %}
-{% load url from future %}
 
 {% block content_page %}
+<div class="row-fluid">
+<div class="span12">
 
     <h2>{{ news_item.title }}</h2>
  
@@ -21,6 +22,12 @@
     </ul>
     {% endif %}
 
+{% if superadmin or bureau_member or secretariat_member or contributeur %}
+<a class="btn btn-mini btn-primary pull-right" href="{% url "apm.apps.news.views.edit" news_item.slug %}">{% trans "Edit this news" %}</a>
+<a class="btn btn-mini btn-danger pull-right" href="{% url "apm.apps.news.views.delete" news_item.slug %}">{% trans "Delete this news" %}</a>
+{% endif %}
+
+{% comment %}
     <ul class="page-nav">
         {% if news_item.get_previous_published %}
         <a href="{{ news_item.get_previous_published.get_absolute_url }}" title=" {{news_item.get_previous_published.title}}">{% trans "« previous" %}</a>
@@ -30,15 +37,9 @@
         <a href="{{ news_item.get_next_published.get_absolute_url }}" title=" {{news_item.get_next_published.title}}">{% trans "next »" %}</a>
         {% endif %}
     </ul>
- 
-{% endblock %}
+{% endcomment %}
 
-{% block extra-actions %}
-{% if superadmin or bureau_member or secretariat_member or contributeur %}
-    {{ block.super }}
-    {% block end_ul %}{% endblock %}
-    <li><a href="{% url "apm.apps.news.views.edit" news_item.slug %}">{% trans "Edit this news" %}</a></li>
-    <li><a href="{% url "apm.apps.news.views.delete" news_item.slug %}">{% trans "Delete this news" %}</a></li>
-    </ul>
-{% endif %}
+</div><!--/span12 -->
+</div><!--/row-fluid -->
+ 
 {% endblock %}

@@ -6,34 +6,33 @@
 {% block nav_news %}<li class="active">{% endblock %}
 
 {% block content %}
-<div id="content" class="grid_8 ">
-    {% block content_page %}{% endblock %} 
-</div>
+  <div class="row-fluid">
+    <div class="span3">
+      <div class="well sidebar-nav">
+        <ul class="nav nav-list">
+          {% block extra-actions %}
+          {% if superadmin or bureau_member or secretariat_member or contributeur %}
+          <li class="nav-header">{% trans "Actions" %}</li>
+          <li><a href="{% url "apm.apps.news.views.edit" %}">{% trans "Write a news" %}</a></li>
+          {% if got_draft %}
+          <li><a href="{% url "apm.apps.news.views.drafts" %}">{% trans "See drafts" %}</a></li>
+          {% endif %}
+          {% endif %}
+          {% endblock %}
 
-<div id="sidebar" class="grid_4 ">
+          {% if archives %}
+          <li class="nav-header">{% trans "Archives" %}</li>
+          {% for archive_date, count in archives %}
+          <li><a href="{% url "news_month_archives" year=archive_date.year month=archive_date.month %}">{{ archive_date|date:"F Y"|capfirst }} (<strong>{{ count }}</strong>)</a></li>
+          {% endfor %}
+          {% endif %}
 
-    {% block extra-actions %}
-    {% if superadmin or bureau_member or secretariat_member or contributeur %}
-    <h2>{% trans "Actions" %}</h2>
-    <ul>
-        <li><a href="{% url "apm.apps.news.views.edit" %}">{% trans "Write a news" %}</a></li>
-        {% if got_draft %}
-        <li><a href="{% url "apm.apps.news.views.drafts" %}">{% trans "See drafts" %}</a></li>
-        {% endif %}
-    {% block end_ul %}</ul>{% endblock %}
-    {% endif %}
-    {% endblock %}
+        </ul>
+      </div> <!--/.well -->
+    </div> <!--/span -->
 
-    {% if archives %}
-    <h2>{% trans "Archives" %}</h2>
-    <ul>
-    {% for archive_date, count in archives %}
-    <li><a href="{% url "news_month_archives" year=archive_date.year month=archive_date.month %}">{{ archive_date|date:"F Y"|capfirst }} (<strong>{{ count }}</strong>)</a></li>
-    {% endfor %}
-    </ul>
-    {% endif %}
-
-</div>
-<div class="clear">&nbsp;</div>
-    
+    <div class="span9">
+      {% block content_page %}{% endblock %} 
+    </div>
+  </div>
 {% endblock %}

@@ -1,16 +1,24 @@
 {% extends 'news/base_news.html' %}
 {% load i18n %}
 
-
 {% block content_page %}
 
+
 {% for news_item in news.object_list %}
+<div class="row-fluid">
+<div class="span12">
     <h2>{{ news_item.title}}</h2>
     <p>{{ news_item.pub_date }}</p>
-     {{ news_item.body_html|truncatewords_html:"20"|safe }}
-     <p class="page-nav"><a href="{{ news_item.get_absolute_url }}">{% trans "read more" %}</a></p>
+    {{ news_item.body_html|truncatewords_html:"20"|safe }}
+    <p class="page-nav"><a href="{{ news_item.get_absolute_url }}">{% trans "read more" %}</a></p>
+</div>
+</div>
 {% empty %}
+<div class="row-fluid">
+<div class="span12">
     <p>{% trans "No news !" %}
+</div>
+</div>
 {% endfor %}
 
 <ul class="page-nav">

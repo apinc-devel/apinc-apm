@@ -3,20 +3,10 @@
 
 {% block pagetitle %}{% trans "The organization" %}{% endblock %}
 
-{% block nav_association %}<li class="active">{% endblock %}
+{% block nav_who_are_we %}<li class="active">{% endblock %}
 
 {% block content %}
-<div id="content" class="grid_8 ">
-    {% block content_page %}{% endblock %} 
-</div>
-
-<div id="sidebar" class="grid_4 ">
-
-    {% block links %} {% endblock %}
-    {% block actions %} {% endblock %}
-    {% block extra-actions %} {% endblock %}
-
-</div>
-<div class="clear">&nbsp;</div>
-    
+{# <div class="container">#}
+  {% block content_page %}{% endblock %} 
+  {#</div><!--/container -->#}
 {% endblock %}

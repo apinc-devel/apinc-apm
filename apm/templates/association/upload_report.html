@@ -1,24 +1,27 @@
 {% extends 'association/base_association.html' %}
 {% load i18n %}
-{% load url from future %}
 
 {% block content_page %}
-<h2>{% trans "Upload report" %}</h2>
-<form method="post" action="." enctype="multipart/form-data">
-{% csrf_token %}
-<table width="100%">
-    {{ form }}
-</table>
-<a class="button" href="{{ back }}">{% trans "Cancel" %}</a>
-<input type="submit" class="button" value="{% trans "Save" %}"/>
-</form>
-{% endblock %}
+<div class="container">
+  <div class="row">
+    <div class="span12">
+      <h2>{% trans "Upload report" %}</h2>
+      <form class="form-horizontal" method="post" action="." enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="control-group">
+          <label class="control-label" for="id_{{ field.name }}">{{ field.label }}</label>
+          <div class="controls">
+            <input type="text" id="id_{{ field.name }}" placeholder="{{ field.label }}">
+          </div>
+        </div>
+        {% endfor %}
+        <a class="btn btn-inverse" href="{{ back }}">{% trans "Cancel" %}</a>
+        <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
+      </form>
+    </div><!--/row -->
+  </div><!--/span12 -->
+  {{form}}
+</div><!--/container -->
 
-{% block links %} 
-<h2>{% trans "Links" %}</h2>
-<ul>
-    <li><a href="{% url "apm.apps.association.views.statutes" %}">{% trans "Statutes" %}</a></li>
-    <li><a href="{% url "apm.apps.association.views.by_laws" %}">{% trans "By-laws" %}</a></li>
-    <li><a href="{% url "apm.apps.association.views.board" %}">{% trans "Board members" %}</a></li>
-</ul>
 {% endblock %}

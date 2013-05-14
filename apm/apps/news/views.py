@@ -110,7 +110,8 @@ def published_details(request, news_slug):
     news_item = get_object_or_404(News, slug=news_slug)
     return render(request, 'news/published_details.html', {
         'news_item': news_item,
-        'archives': _archives() })
+        'archives': _archives(),
+        'got_draft': (News.objects.drafted().count() > 0)  })
 
 def published(request, year=None, month=None, day=None):
     """Archives of published news"""
@@ -133,7 +134,8 @@ def published(request, year=None, month=None, day=None):
 
     return render(request, 'news/published.html', {
         'news': news,
-        'archives': _archives() })
+        'archives': _archives(),
+        'got_draft': (News.objects.drafted().count() > 0)  })
 
 @access_required(groups=['apinc-secretariat', 'apinc-bureau',
                     'apinc-contributeur'])
@@ -142,7 +144,8 @@ def draft_details(request, news_slug):
     news_item = get_object_or_404(News, slug=news_slug)
     return render(request, 'news/draft_details.html', {
         'news_item': news_item,
-        'archives': _archives() })
+        'archives': _archives(),
+        'got_draft': (News.objects.drafted().count() > 0)  })
 
 @access_required(groups=['apinc-secretariat', 'apinc-bureau',
                     'apinc-contributeur'])

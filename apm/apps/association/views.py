@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-#   Copyright © 2011 APINC Devel Team
+#   Copyright © 2011-2013 APINC Devel Team
 #
 #   This program is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
@@ -43,18 +43,6 @@ def board(request):
 
     return render(request, 'association/board.html', 
             { 'board_members': board_members })
-
-def by_laws(request):
-    text = TextBlock.objects.get(slug='by-laws')
-
-    return render(request, 'association/by_laws.html',
-            {'text': text})
-
-def statutes(request):
-    text = TextBlock.objects.get(slug='statutes')
-
-    return render(request, 'association/statutes.html',
-            {'text': text})
 
 def statutes_pdf(request):
     return render(request, 'base.html')

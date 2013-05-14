@@ -1,23 +1,30 @@
 {% extends 'news/base_news.html' %}
 {% load i18n %}
-{% load url from future %}
 
 {% block content_page %}
 
 {% for news_item in news.object_list %}
+<div class="row-fluid">
+<div class="span12">
+
     <h2>{{ news_item.title}}</h2>
     <p>{{ news_item.pub_date }}</p>
     {{ news_item.body_html|safe }}
     {% if superadmin or bureau_member or secretariat_member or contributeur %}
-        <ul class="page-nav">
-        <a href="{{ news_item.get_absolute_url }}">{% trans "see details" %}</a>
-        <a href="{% url "apm.apps.news.views.edit" news_item.slug %}">{% trans "Edit this news" %}</a>
-        </ul>
-    {% endif %}
+     <a class="btn btn-primary pull-right" href="{% url "apm.apps.news.views.edit" news_item.slug %}">{% trans "Edit" %}</a>
+     {% endif %}
+     <a class="btn pull-right" href="{{ news_item.get_absolute_url }}">{% trans "View details" %} &raquo;</a>
+</div>
+</div>
 {% empty %}
+<div class="row-fluid">
+<div class="span12">
     <p>{% trans "No news !" %}
+</div>
+</div>
 {% endfor %}
 
+{% comment %}
 <ul class="page-nav">
     {% if news.has_previous %}
         <a href="?page={{ news.previous_page_number }}">« {% trans "previous" %}</a>
@@ -33,6 +40,6 @@
         <a href="?page={{ news.next_page_number }}">{% trans "next" %} »</a>
     {% endif %}
 </ul>
-    
+{% endcomment %}
 
 {% endblock %}

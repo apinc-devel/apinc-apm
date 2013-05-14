@@ -6,8 +6,6 @@
 {% block nav_home %}<li class="active">{% endblock %}
 
 {% block content %}
-<div class="container">
-
   <div class="hero-unit">
 
     <h1>{{ text.title|safe }}</h1>
@@ -18,23 +16,24 @@
     <p><a class="btn btn-primary pull-right" href="{% url "apm.apps.pages.views.edit" text.slug %}">{% trans "edit" %}</a></p>
     {% endif %}
   </div><!-- /hero-unit -->
-</div><!-- /container -->
 
 {% if news %}
-<div class="container">
-  <div class="row">
     {% for news_item in news %}
+<div class="row-fluid">
     <div class="span12">
       <h2>{{ news_item.title}}</h2>
       <p class="text-info">{% trans "Posted on" %} {{ news_item.pub_date }}</p>
       {{ news_item.body_html|safe }}
-      <p><a class="btn pull-right" href="{{ news_item.get_absolute_url }}">View details &raquo;</a></p>
-    </div>
+      <p><a class="btn pull-right" href="{{ news_item.get_absolute_url }}">{% trans "View details" %} &raquo;</a></p>
+</div>
+</div>
     {% endfor %}
-    {% else %}
+{% else %}
+<div class="row-fluid">
+    <div class="span12">
     <p class="muted">{% trans "No news !" %}
-    {% endif %}
-  </div> <!-- /row -->
-</div><!-- /container -->
+</div>
+</div> <!-- /row -->
+{% endif %}
 
 {% endblock %}
