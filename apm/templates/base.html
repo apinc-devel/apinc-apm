@@ -47,15 +47,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            {% if superadmin or bureau_member or secretariat_member or tresorier_member %}
-            <span class="icon-bar"></span>
-            {% endif %}
           </button>
           <a class="brand" href="/">APINC</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
               {% block nav_home %}<li>{% endblock %}<a href="/"><!--<i class="icon-home icon-white"></i>--> {% trans "Home" %}</a></li>
+              {% block nav_news %}<li>{% endblock %}<a href="{% url "apm.apps.news.views.index" %}">{% trans "News" %}</a></li>
               {% block nav_who_are_we %}<li class="dropdown">{% endblock %}
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><!--<i class="icon-eye-open icon-white"></i>--> {% trans "Who are we" %}<b class="caret"></b></a>
               <ul class="dropdown-menu">
@@ -89,8 +86,10 @@
             {% if user.is_authenticated %}
             <form class="navbar pull-right" method="post" action="{% url "apm.apps.pages.views.logout" %}">
               {% csrf_token %}
-              <ul class="pull-right">
-              <li><a href="{% url "apm.apps.members.views.details" user.id %}">{{ user.first_name }} {{ user.last_name }}</a>&nbsp;<input class="btn" type="submit" value="{% trans "Log out" %}" /></li></ul>
+              <a href="{% url "apm.apps.members.views.details" user.id %}">{{ user.first_name }} {{ user.last_name }}</a>
+              <div class="btn-group">
+                  <input class="btn btn-mini" type="submit" value="{% trans "Log out" %}" />
+              </div>
             </form>
             {% else %}
             {# <div class="navbar pull-right">{% trans "You are not logged-in" %} - <a class="btn" href="{% url "apm.apps.pages.views.login" %}?next={{ request.path }}">{% trans "Log-in" %}</a></div> #}
@@ -122,21 +121,21 @@
 
     {% block content %}{% endblock %}
 
-      <hr>
+  <hr>
 
-      <footer>
-      <small>
-        <ul class="inline">
-          <li><a href="{% url "news_rss_feed" %}">Rss</a></li>
-          <li><a href="{% url "news_atom_feed" %}">Atom</a></li>
-          <li><a href="/about/">{% trans "About" %}</a></li>
-          <li><a href="/legal-notice">{% trans "Legal notice" %}</a></li>
-          <li class="pull-right">&copy; {{ current_year }} APINC - Version {{ portal_version }} - {% trans "Unless otherwise explicitly specified, all texts are licenced" %} <a href="http://creativecommons.org/licenses/by-sa/3.0/deed.fr">CC by-sa 3.0</a>.</li>
-        </ul>
-      </small>
-      </footer>
-
-    </div> <!--/container-fluid -->
+  <footer>
+  <div class="container-fluid">
+  <small>
+    <ul class="inline">
+      <li><a href="{% url "news_rss_feed" %}">Rss</a></li>
+      <li><a href="{% url "news_atom_feed" %}">Atom</a></li>
+      <li><a href="/about/">{% trans "About" %}</a></li>
+      <li><a href="/legal-notice">{% trans "Legal notice" %}</a></li>
+      <li class="pull-right">&copy; {{ current_year }} APINC - Version {{ portal_version }} - {% trans "Unless otherwise explicitly specified, all texts are licenced" %} <a href="http://creativecommons.org/licenses/by-sa/3.0/deed.fr">CC by-sa 3.0</a>.</li>
+    </ul>
+  </small>
+  </div>
+  </footer>
 
     {% block javascript %}
     {# Par defaut, on importe ces codes javascript sur toutes les pages. #}

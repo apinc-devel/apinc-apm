@@ -7,9 +7,9 @@
 
     <h2>{{ news_item.title }}</h2>
  
-        <p>{{ news_item.pub_date }}</p>
+    <p class="text-info">{% trans "Posted on" %} {{ news_item.pub_date }}</p>
  
-        <p>{{ news_item.body_html|safe }}</p>
+    <p>{{ news_item.body_html|safe }}</p>
 
     {% if superadmin or bureau_member or secretariat_member or contributeur %}
     <h3>{% trans "Logs for this news" %}</h3>
@@ -17,27 +17,35 @@
     {% for log in news_item.logs.all %}
         <li>{{ log.timestamp|date:"Y/M/d H:i:s" }} | {{ log.user }} | {{ log.message }}</li>
     {% empty %}
-        <li>{% trans "No logs ERROR !" %}</li>
+        <li class="text-error">{% trans "No logs ERROR !" %}</li>
     {% endfor %}
     </ul>
     {% endif %}
 
 {% if superadmin or bureau_member or secretariat_member or contributeur %}
-<a class="btn btn-mini btn-primary pull-right" href="{% url "apm.apps.news.views.edit" news_item.slug %}">{% trans "Edit this news" %}</a>
-<a class="btn btn-mini btn-danger pull-right" href="{% url "apm.apps.news.views.delete" news_item.slug %}">{% trans "Delete this news" %}</a>
+<div class="text-right">
+<div class="btn-group">
+<a class="btn btn-primary pull-right" href="{% url "apm.apps.news.views.edit" news_item.slug %}">{% trans "Edit" %}</a>
+</div>
+<div class="btn-group">
+<a class="btn btn-danger pull-right" href="{% url "apm.apps.news.views.delete" news_item.slug %}">{% trans "Delete" %}</a>
+</div>
+</div><!-- text-right -->
 {% endif %}
 
-{% comment %}
-    <ul class="page-nav">
-        {% if news_item.get_previous_published %}
-        <a href="{{ news_item.get_previous_published.get_absolute_url }}" title=" {{news_item.get_previous_published.title}}">{% trans "« previous" %}</a>
-        {% endif %}
- 
-        {% if news_item.get_next_published %}
-        <a href="{{ news_item.get_next_published.get_absolute_url }}" title=" {{news_item.get_next_published.title}}">{% trans "next »" %}</a>
-        {% endif %}
-    </ul>
-{% endcomment %}
+<div class"text-right">
+    {% if news_item.get_previous_drafted %}
+    <div class="btn-group">
+        <a class="btn" href="{{ news_item.get_previous_published.get_absolute_url }}" title=" {{news_item.get_previous_published.title}}">{% trans "previous" %}</a>
+    </div>
+    {% endif %}
+
+    {% if news_item.get_next_drafted %}
+    <div class="btn-group">
+        <a class="btn" href="{{ news_item.get_next_published.get_absolute_url }}" title=" {{news_item.get_next_published.title}}">{% trans "next" %}</a>
+    </div>
+    {% endif %}
+</div><!--/text-right --> 
 
 </div><!--/span12 -->
 </div><!--/row-fluid -->

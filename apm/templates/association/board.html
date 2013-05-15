@@ -2,12 +2,12 @@
 {% load i18n %}
 
 {% block content_page %}
-
-<h1>{% trans "Board members" %}</h1>
+<div class="container-fluid">
+<h2>{% trans "Board members" %}</h2>
 {% for member in board_members %}
     <p><strong>{{ member.role }} : </strong>{{ member.member }}</p>
 {% empty %}
     <p class="text-error">{% trans "No members identified in the board !" %}
 {% endfor %}
-
+</div><!--/container-fluid -->
 {% endblock %}

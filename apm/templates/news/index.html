@@ -8,9 +8,9 @@
 <div class="row-fluid">
 <div class="span12">
     <h2>{{ news_item.title}}</h2>
-    <p>{{ news_item.pub_date }}</p>
+    <p class="text-info">{% trans "Posted on" %} {{ news_item.pub_date }}</p>
     {{ news_item.body_html|truncatewords_html:"20"|safe }}
-    <p class="page-nav"><a href="{{ news_item.get_absolute_url }}">{% trans "read more" %}</a></p>
+    <p><a class="btn pull-right" href="{{ news_item.get_absolute_url }}">{% trans "View details" %} &raquo;</a></p>
 </div>
 </div>
 {% empty %}
@@ -21,20 +21,21 @@
 </div>
 {% endfor %}
 
-<ul class="page-nav">
+<div class"text-right">
     {% if news.has_previous %}
-        <a href="?page={{ news.previous_page_number }}">« {% trans "previous" %}</a>
+    <div class="btn-group">
+        <a class="btn" href="?page={{ news.previous_page_number }}">« {% trans "previous" %}</a>
+    </div>
     {% endif %}
 
     {% if news %}
-    <span class="current">
-        {% trans "page" %} {{ news.number }} of {{ news.paginator.num_pages }}
-    </span>
+    <p>{% trans "page" %} {{ news.number }} of {{ news.paginator.num_pages }}</p>
     {% endif %}
 
     {% if news.has_next %}
+    <div class="btn-group">
         <a href="?page={{ news.next_page_number }}">{% trans "next" %} »</a>
+    </div>
     {% endif %}
-</ul>
-    
+</div><!--/text-right --> 
 {% endblock %}

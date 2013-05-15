@@ -2,6 +2,7 @@
 {% load i18n %}
 
 {% block content %}
+<div class="container-fluid">
   <div class="row-fluid">
     <div class="span12">
     <h2>{{ text.title }}</h2>
@@ -17,6 +18,6 @@
   {% include "manage/logs.html" with object=text %}
   {% endif %}
 
-</div><!--/container -->
+</div><!--/container-fluid -->
 
 {% endblock %}

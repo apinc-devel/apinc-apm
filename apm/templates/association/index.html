@@ -2,19 +2,31 @@
 {% load i18n %}
 
 {% block content_page %}
+<div class="container-fluid">
+
+<div class="row-fluid">
+    <div class="span12">
 <h2>{% trans "The organization" %}</h2>
 {{ text.body_html|safe }}
 {% if superadmin or bureau_member or secretariat_member or contributeur %}
   <p><a class="btn btn-primary pull-right" href="{% url "apm.apps.pages.views.edit" text.slug %}">{% trans "Edit" %}</a></p>
 {% endif %}
+</div>
+</div>
 
+<div class="row-fluid">
+    <div class="span12">
 <h2>{% trans "Board members" %}</h2>
   {% for member in board_members %}
     <strong>{{ member.role }} : </strong>{{ member.member }}</p>
   {% empty %}
     <p class="text-error">{% trans "No members in the board !" %}
   {% endfor %}
+</div>
+</div>
 
+<div class="row-fluid">
+    <div class="span12">
 <h2>{% trans "Meeting reports and other documents" %}</h2>
 <ul class="nav nav-list">
   {% for report  in meeting_reports %}
@@ -28,4 +40,7 @@
       <li><a class="btn btn-success" href="{% url "apm.apps.association.views.upload_report" %}">{% trans "Add a report" %}</a></li>
     {% endif %}
   {% endfor %}
+  </div>
+  </div>
+  </div><!--/container-fluid -->
 {% endblock %}

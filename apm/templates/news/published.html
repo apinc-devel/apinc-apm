@@ -7,19 +7,25 @@
 <div class="row-fluid">
 <div class="span12">
 
-    <h2>{{ news_item.title}}</h2>
-    <p>{{ news_item.pub_date }}</p>
+    <h3>{{ news_item.title}}</h3>
+    <p class="text-info">{%trans "Posted on" %} {{ news_item.pub_date }}</p>
     {{ news_item.body_html|safe }}
+    <div class="text-right">
     {% if superadmin or bureau_member or secretariat_member or contributeur %}
-     <a class="btn btn-primary pull-right" href="{% url "apm.apps.news.views.edit" news_item.slug %}">{% trans "Edit" %}</a>
-     {% endif %}
-     <a class="btn pull-right" href="{{ news_item.get_absolute_url }}">{% trans "View details" %} &raquo;</a>
+    <div class="btn-group">
+      <a class="btn btn-primary pull-right" href="{% url "apm.apps.news.views.edit" news_item.slug %}">{% trans "Edit" %}</a>
+    </div>
+    {% endif %}
+    <div class="btn-group">
+      <a class="btn pull-right" href="{{ news_item.get_absolute_url }}">{% trans "View details" %} &raquo;</a>
+    </div>
+</div><!--/text-right -->
 </div>
 </div>
 {% empty %}
 <div class="row-fluid">
 <div class="span12">
-    <p>{% trans "No news !" %}
+    <p class="text-info">{% trans "No news !" %}
 </div>
 </div>
 {% endfor %}
