@@ -4,26 +4,43 @@
 {% block extra_head %}{{ form.media }}{% endblock extra_head %}
 
 {% block content %}
-<div id="content" class="grid_12">
-    
-    <form method="post" action="." enctype="multipart/form-data">
-    {% csrf_token %}    
-    <table width="100%">
-        {{ form }}
-    </table>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="page-header">
+			<h4>{% trans "News editor" %}</h4>
+		</div>
+		<form class="form-horizontal" method="post" action="." enctype="multipart/form-data">
+			{% csrf_token %}
+			{{ form.as_p }}
 
-    <a class="button" href="{{ back }}">{% trans "Cancel" %}</a>
-    <input type="submit" class="button" value="{% trans "Save" %}"/>
-</form>
+			{% comment %}
+			<div class="control-group">
+				<label class="control-label" for="id_title">{{ form.title.label }}</label>
+				<div class="controls">
+					<input type="text" id="id_title" placeholder="{% trans "Title" %}" value="{{ form.title.value }}">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="id_body_html">{{ form.body_html.label }}</label>
+				<div class="controls">
+					<input type="textarea" id="id_body_html" placeholder="{% trans "Body" %}" value="{{ form.body_html.value }}">
+				</div>
+			</div>
+			{% endcomment %}
 
-<h3>{% trans "Logs for this news" %}</h3>
-<ul>
-{% for log in form.instance.logs.all %}
-    <li>{{ log.timestamp|date:"Y/M/d H:i:s" }} | {{ log.user }} | {{ log.message }}</li>
-{% empty %}
-    <li>{% trans "No logs yet !" %}</li>
-{% endfor %}
-</ul>
+			<div class="control-group">
+				<div class="controls" >
+					<a class="btn btn-inverse" href="{{ back }}">{% trans "Cancel" %}</a>
+					<input type="submit" class="btn btn-primary" value="{% trans "Save" %}"/>
+				</div>
+			</div>
+		</form>
 
-<div class="clear">&nbsp;</div>
+		{% if superadmin or bureau_member or secretariat_member or contributeur %}
+		<h5>{% trans "Logs for this news" %}</h5>
+		{% include "manage/logs.html" with object=form.instance %}
+		{% endif %}
+
+	</div><!--/ row-fluid -->
+</div><!--/container-fluid -->
 {% endblock %}

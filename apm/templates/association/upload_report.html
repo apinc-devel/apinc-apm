@@ -3,25 +3,24 @@
 
 {% block content_page %}
 <div class="container-fluid">
-  <div class="row-fluid">
-    <div class="span12">
-      <h2>{% trans "Upload report" %}</h2>
-      <form class="form-horizontal" method="post" action="." enctype="multipart/form-data">
-        {% csrf_token %}
-        {% for field in form %}
-        <div class="control-group">
-          <label class="control-label" for="id_{{ field.name }}">{{ field.label }}</label>
-          <div class="controls">
-            <input type="text" id="id_{{ field.name }}" placeholder="{{ field.label }}">
-          </div>
-        </div>
-        {% endfor %}
-        <a class="btn btn-inverse" href="{{ back }}">{% trans "Cancel" %}</a>
-        <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
-      </form>
-    </div><!--/row -->
-  </div><!--/span12 -->
-  {{form}}
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="page-header">
+			<h2>{% trans "Upload report" %}</h2>
+		</div>
+			<form class="form-horizontal" method="post" action="." enctype="multipart/form-data">
+				{% csrf_token %}
+				{{ form.as_p }}
+
+				<div class="control-group">
+					<div class="controls">
+						<a class="btn btn-inverse" href="{{ back }}">{% trans "Cancel" %}</a>
+						<button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
+					</div>
+				</div>
+			</form>
+		</div><!--/row -->
+	</div><!--/span12 -->
 </div><!--/container-fluid -->
 
 {% endblock %}

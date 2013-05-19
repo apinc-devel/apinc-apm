@@ -1,159 +1,162 @@
 {% load  i18n %}
 {% load static from staticfiles %}
 
-<!DOCTYPE>
+<!DOCTYPE html>
 
 <html>
-  <head>
-    <title>{% block pagetitle %}{% trans "APINC Plateform" %}{% endblock %}</title>
-    <meta name="author" content="APINC Devel Team (http://apinc.org)" />
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta http-equiv="content-style-type" content="text/css" />
+	<head>
+		<title>{% block pagetitle %}{% trans "APINC Plateform" %}{% endblock %}</title>
+		<meta name="author" content="APINC Devel Team (http://apinc.org)" />
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta http-equiv="content-style-type" content="text/css" />
 
-    {% block meta %}{{ meta }}{% endblock %}
+		{% block meta %}{{ meta }}{% endblock %}
 
-    {% block stylesheet %}
-    <link href="{% static "bootstrap/css/bootstrap.css" %}" rel="stylesheet">
-    <style type="text/css">
-      body {
-        padding-top: 60px;
-        padding-bottom: 40px;
-      }
-    </style>
-    <link href="{% static "bootstrap/css/bootstrap-responsive.css" %}" rel="stylesheet">
+		{% block stylesheet %}
+		<link href="{% static "bootstrap/css/bootstrap.css" %}" rel="stylesheet">
+		<style type="text/css">
+			body {
+				padding-top: 60px;
+				padding-bottom: 40px;
+			}
+		</style>
+		<link href="{% static "bootstrap/css/bootstrap-responsive.css" %}" rel="stylesheet">
 
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-    <script src="{% static "bootstrap/js/html5shiv.js" %}"></script>
-    <![endif]-->
-    {% endblock %}
+		<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+		<!--[if lt IE 9]>
+		<script src="{% static "bootstrap/js/html5shiv.js" %}"></script>
+		<![endif]-->
+		{% endblock %}
 
-    <!-- Fav and touch icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="bootstrap/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="bootstrap/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="bootstrap/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="bootstrap/ico/apple-touch-icon-57-precomposed.png">
-    <link rel="shortcut icon" type="image/x-icon" href="{% static "images/apinc.ico" %}" />
+		<!-- Fav and touch icons -->
+		<link rel="apple-touch-icon-precomposed" sizes="144x144" href="bootstrap/ico/apple-touch-icon-144-precomposed.png">
+		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="bootstrap/ico/apple-touch-icon-114-precomposed.png">
+		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="bootstrap/ico/apple-touch-icon-72-precomposed.png">
+		<link rel="apple-touch-icon-precomposed" href="bootstrap/ico/apple-touch-icon-57-precomposed.png">
+		<link rel="shortcut icon" type="image/x-icon" href="{% static "images/apinc.ico" %}" />
 
-    {% block extra_head %}{% endblock extra_head %}
+		{% block extra_head %}{% endblock extra_head %}
 
-  </head>
+	</head>
 
-  <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container-fluid">
-          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="brand" href="/">APINC</a>
-          <div class="nav-collapse collapse">
-            <ul class="nav">
-              {% block nav_home %}<li>{% endblock %}<a href="/"><!--<i class="icon-home icon-white"></i>--> {% trans "Home" %}</a></li>
-              {% block nav_news %}<li>{% endblock %}<a href="{% url "apm.apps.news.views.index" %}">{% trans "News" %}</a></li>
-              {% block nav_who_are_we %}<li class="dropdown">{% endblock %}
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><!--<i class="icon-eye-open icon-white"></i>--> {% trans "Who are we" %}<b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="{% url "apm.apps.association.views.index" %}">{% trans "Organization" %}</a></li>
-                <li><a href="/association/by-laws/">{% trans "By-laws" %}</a></li>
-                <li><a href="/association/statutes/">{% trans "Statutes" %}</a></li>
-                <li><a href="{% url "apm.apps.association.views.board" %}">{% trans "Board members" %}</a></li>
-              </ul>
-              </li>
-              {% block nav_account %}<li class="dropdown">{% endblock %}
-              {% if user.is_authenticated %}
-              <a href="{% url "apm.apps.members.views.details" user.id %}" class="dropdown-toggle" data-toggle="dropdown"><!--<i class="icon-user icon-white"></i>--> {% trans "Member access" %}<b class="caret"></b></a>
-              {% else %}{% comment %} <a href="{% url "apm.apps.subscriptions.views.index" %}">{% trans "Subscriptions" %}</a> {% endcomment %}
-              {% endif %}
-              <ul class="dropdown-menu">
-                <li><a href="https://panel.apinc.org">{% trans "Panel vhffs" %}</a></li>
-                <li class="divider"></li>
-                <li><a href="http://squirrelmail.apinc.org/">{% trans "Webmail" %}</a></li>
-                <li><a href="http://phpmyadmin.apinc.org/">{% trans "Administration MySQL" %}</a></li>
-              </ul>
-              </li>
+	<body>
+		<div class="navbar navbar-inverse navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container-fluid">
+					<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="brand" href="/">APINC</a>
+					<div class="nav-collapse collapse">
 
-              {% block nav_contact %}<li>{% endblock %}<a href="/contact/">{% trans "Contact" %}</a></li>
+						{% if user.is_authenticated %}
+						<form class="navbar-form pull-right" method="post" action="{% url "apm.apps.pages.views.logout" %}">
+							{% csrf_token %}
+							<ul class="nav">
+								<li><a href="{% url "apm.apps.members.views.details" user.id %}">{{ user.first_name }} {{ user.last_name }}</a></li>
+								<button type="submit" class="btn">{% trans "Log out" %}</button>
+							</ul>
+						</form>
+						{% else %}
+						<form class="navbar-form pull-right" method="post" action="{% url "apm.apps.pages.views.login" %}">
+							{% csrf_token %}
+							<input class="span2" type="text" name="username" placeholder="Username">
+							<input class="span2" type="password" name="password" placeholder="Password">
+							<input type="hidden" name="next" value="{{ request.path }}">
+							<button type="submit" class="btn">{% trans "Sign in" %}</button>
+						</form>
+						{% endif %}    
 
-              {% if superadmin or bureau_member or secretariat_member or tresorier_member %}
-              {% block nav_manage %}<li>{% endblock %}<a href="/">{% trans "Manage" %}</a></li>
-              {% comment %}<a href="{% url "apm.manage.views.index" %}">{% trans "Manage" %}</a></li>{% endcomment %}
-              {% endif %}
-            </ul>
+						<ul class="nav">
+							{% block nav_home %}<li>{% endblock %}<a href="/">{% trans "Home" %}</a></li>
+							{% block nav_news %}<li>{% endblock %}<a href="{% url "apm.apps.news.views.index" %}">{% trans "News" %}</a></li>
+							{% block nav_who_are_we %}<li class="dropdown">{% endblock %}
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "Who are we" %}<b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="{% url "apm.apps.association.views.index" %}">{% trans "Organization" %}</a></li>
+								<li><a href="/association/by-laws/">{% trans "By-laws" %}</a></li>
+								<li><a href="/association/statutes/">{% trans "Statutes" %}</a></li>
+								<li><a href="{% url "apm.apps.association.views.board" %}">{% trans "Board members" %}</a></li>
+							</ul>
+							</li>
+							{% block nav_account %}<li class="dropdown">{% endblock %}
+							{% if user.is_authenticated %}
+							<a href="{% url "apm.apps.members.views.details" user.id %}" class="dropdown-toggle" data-toggle="dropdown">{% trans "Member access" %}<b class="caret"></b></a>
+							{% else %}{% comment %} <a href="{% url "apm.apps.subscriptions.views.index" %}">{% trans "Subscriptions" %}</a> {% endcomment %}
+							{% endif %}
+							<ul class="dropdown-menu">
+								<li><a href="https://panel.apinc.org">{% trans "Panel vhffs" %}</a></li>
+								<li class="divider"></li>
+								<li><a href="http://squirrelmail.apinc.org/">{% trans "Webmail" %}</a></li>
+								<li><a href="http://phpmyadmin.apinc.org/">{% trans "Administration MySQL" %}</a></li>
+							</ul>
+							</li>
 
-            {% if user.is_authenticated %}
-            <form class="navbar pull-right" method="post" action="{% url "apm.apps.pages.views.logout" %}">
-              {% csrf_token %}
-              <a href="{% url "apm.apps.members.views.details" user.id %}">{{ user.first_name }} {{ user.last_name }}</a>
-              <div class="btn-group">
-                  <input class="btn btn-mini" type="submit" value="{% trans "Log out" %}" />
-              </div>
-            </form>
-            {% else %}
-            {# <div class="navbar pull-right">{% trans "You are not logged-in" %} - <a class="btn" href="{% url "apm.apps.pages.views.login" %}?next={{ request.path }}">{% trans "Log-in" %}</a></div> #}
-            <form class="navbar-form pull-right" method="post" action="{% url "apm.apps.pages.views.login" %}">
-              {% csrf_token %}
-              <input class="span2" type="text" name="username" placeholder="Username">
-              <input class="span2" type="password" name="password" placeholder="Password">
-              <input type="hidden" name="next" value="{{ request.path }}">
-              <button type="submit" class="btn">{% trans "Sign in" %}</button>
-            </form>
-            {% endif %}    
-          </div><!--/.nav-collapse -->
-      </div><!--/container-fluid -->
-    </div><!--/navbar-inner -->
-    </div><!--/navbar /navbar-inverse /navbar-fixed-top -->
+							{% block nav_contact %}<li>{% endblock %}<a href="/contact/">{% trans "Contact" %}</a></li>
 
-    <div class="container-fluid">
-      {% if messages %}
-      <div class="row-fluid">
-        <div class="span12">
-        {% for message in messages %}
-        <div class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %}">
-            {{ message|safe }}
-        </div>
-        {% endfor %}
-        </div><!--/span12 -->
-      </div><!--/row-fluid -->
-    {% endif %}
+							{% if superadmin or bureau_member or secretariat_member or tresorier_member %}
+							{% block nav_manage %}<li>{% endblock %}<a href="/">{% trans "Manage" %}</a></li>
+							{% comment %}<a href="{% url "apm.manage.views.index" %}">{% trans "Manage" %}</a></li>{% endcomment %}
+							{% endif %}
+						</ul>
 
-    {% block content %}{% endblock %}
+					</div><!--/.nav-collapse -->
+				</div><!--/container-fluid -->
+			</div><!--/navbar-inner -->
+		</div><!--/navbar /navbar-inverse /navbar-fixed-top -->
 
-  <hr>
+			{% if messages %}
+		<div class="container-fluid">
+			<div class="row-fluid">
+				<div class="span12">
+					{% for message in messages %}
+					<div class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %}">
+					  <button type="button" class="close" data-dismiss="alert">&times;</button>
+						<strong>{{ message.tags|capfirst }}!</strong> {{ message|safe }}
+					</div>
+					{% endfor %}
+				</div><!--/span12 -->
+			</div><!--/row-fluid -->
+		</div><!--/container-fluid -->
+			{% endif %}
 
-  <footer>
-  <div class="container-fluid">
-  <small>
-    <ul class="inline">
-      <li><a href="{% url "news_rss_feed" %}">Rss</a></li>
-      <li><a href="{% url "news_atom_feed" %}">Atom</a></li>
-      <li><a href="/about/">{% trans "About" %}</a></li>
-      <li><a href="/legal-notice">{% trans "Legal notice" %}</a></li>
-      <li class="pull-right">&copy; {{ current_year }} APINC - Version {{ portal_version }} - {% trans "Unless otherwise explicitly specified, all texts are licenced" %} <a href="http://creativecommons.org/licenses/by-sa/3.0/deed.fr">CC by-sa 3.0</a>.</li>
-    </ul>
-  </small>
-  </div>
-  </footer>
+			{% block content %}{% endblock %}
 
-    {% block javascript %}
-    {# Par defaut, on importe ces codes javascript sur toutes les pages. #}
-    {# Rien n'empeche de redefinir ce bloc pour certaines pages... #}
-    {# Placed at the end of the document so the pages load faster #}
-    <script type="text/javascript" src="{% static "jquery/jquery-" %}{{ jquery_version }}.min.js"></script>
-    <script src="{% static "bootstrap/js/bootstrap-transition.js" %}"></script>
-    <script src="{% static "bootstrap/js/bootstrap-alert.js" %}"></script>
-    <script src="{% static "bootstrap/js/bootstrap-modal.js" %}"></script>
-    <script src="{% static "bootstrap/js/bootstrap-dropdown.js" %}"></script>
-    <script src="{% static "bootstrap/js/bootstrap-scrollspy.js" %}"></script>
-    <script src="{% static "bootstrap/js/bootstrap-tab.js" %}"></script>
-    <script src="{% static "bootstrap/js/bootstrap-tooltip.js" %}"></script>
-    <script src="{% static "bootstrap/js/bootstrap-popover.js" %}"></script>
-    <script src="{% static "bootstrap/js/bootstrap-button.js" %}"></script>
-    <script src="{% static "bootstrap/js/bootstrap-collapse.js" %}"></script>
-    <script src="{% static "bootstrap/js/bootstrap-carousel.js" %}"></script>
-    <script src="{% static "bootstrap/js/bootstrap-typeahead.js" %}"></script>
-    {% endblock javascript %}
-  </body>
-</html>
+			<hr>
+
+			<footer>
+			<div class="container-fluid">
+				<small>
+					<ul class="inline">
+						<li><a href="{% url "news_rss_feed" %}">Rss</a></li>
+						<li><a href="{% url "news_atom_feed" %}">Atom</a></li>
+						<li><a href="/about/">{% trans "About" %}</a></li>
+						<li><a href="/legal-notice">{% trans "Legal notice" %}</a></li>
+						<li class="pull-right">&copy; {{ current_year }} APINC - Version {{ portal_version }} - {% trans "Unless otherwise explicitly specified, all texts are licenced" %} <a href="http://creativecommons.org/licenses/by-sa/3.0/deed.fr">CC by-sa 3.0</a>.</li>
+					</ul>
+				</small>
+			</div>
+			</footer>
+
+			{% block javascript %}
+			{# Par defaut, on importe ces codes javascript sur toutes les pages. #}
+			{# Rien n'empeche de redefinir ce bloc pour certaines pages... #}
+			{# Placed at the end of the document so the pages load faster #}
+			<script type="text/javascript" src="{% static "jquery/jquery-" %}{{ jquery_version }}.min.js"></script>
+			<script src="{% static "bootstrap/js/bootstrap-transition.js" %}"></script>
+			<script src="{% static "bootstrap/js/bootstrap-alert.js" %}"></script>
+			<script src="{% static "bootstrap/js/bootstrap-modal.js" %}"></script>
+			<script src="{% static "bootstrap/js/bootstrap-dropdown.js" %}"></script>
+			<script src="{% static "bootstrap/js/bootstrap-scrollspy.js" %}"></script>
+			<script src="{% static "bootstrap/js/bootstrap-tab.js" %}"></script>
+			<script src="{% static "bootstrap/js/bootstrap-tooltip.js" %}"></script>
+			<script src="{% static "bootstrap/js/bootstrap-popover.js" %}"></script>
+			<script src="{% static "bootstrap/js/bootstrap-button.js" %}"></script>
+			<script src="{% static "bootstrap/js/bootstrap-collapse.js" %}"></script>
+			<script src="{% static "bootstrap/js/bootstrap-carousel.js" %}"></script>
+			<script src="{% static "bootstrap/js/bootstrap-typeahead.js" %}"></script>
+			{% endblock javascript %}
+		</body>
+	</html>

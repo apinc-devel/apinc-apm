@@ -7,11 +7,11 @@
   </tr>
 {% for log in object.logs.all %}
 <tr>
-    <td><small>{{ log.timestamp|date:"Y/M/d H:i:s" }}</small></td>
+    <td class="text-info"><small>{{ log.timestamp|date:"Y/M/d H:i:s" }}</small></td>
     <td><small>{{ log.user }}</small></td>
       <td><small>{{ log.message }}</small></td>
   </tr>
 {% empty %}
-<tr class="error">{% trans "No logs yet !" %}</tr>
+<tr><td class="text-error">{% trans "No logs yet !" %}</td></tr>
 {% endfor %}
 </table>

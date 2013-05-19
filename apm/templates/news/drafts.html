@@ -17,7 +17,7 @@
 <div class="span12">
     <h2>{{ news_item.title}}</h2>
     <p>{{ news_item.pub_date }}</p>
-     {{ news_item.body_html|truncatewords_html:"20"|safe }}
+     {{ news_item.body_html|truncatewords_html:"150"|safe }}
       <p><a class="btn pull-right" href="{{ news_item.get_absolute_url }}">{% trans "View details" %} &raquo;</a></p>
 </div>
 </div>

@@ -1,22 +1,34 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
+{% if text.slug == "statutes" or text.slug == "by-laws" %}
+  {# :( #}
+  {% block nav_who_are_we %}<li class="active dropdown">{% endblock %}
+{% endif %}
+
+{% if text.slug == "contact" %}
+  {# :( #}
+  {% block nav_contact %}<li class="active">{% endblock %}
+{% endif %}
+
 {% block content %}
 <div class="container-fluid">
-  <div class="row-fluid">
-    <div class="span12">
-    <h2>{{ text.title }}</h2>
-    {{ text.body_html|safe }}
-    {% if superadmin or bureau_member or secretariat_member or contributeur %}
-    <p><a class="btn btn-primary pull-right" href="{% url "apm.apps.pages.views.edit" text.slug %}">{% trans "Edit" %}</a></p>
-    {% endif %}
-    </div>
-  </div> <!-- /row -->
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="page-header">
+				<h2>{{ text.title }}</h2>
+			</div>
+			{{ text.body_html|safe }}
+			{% if superadmin or bureau_member or secretariat_member or contributeur %}
+			<p><a class="btn btn-primary pull-right" href="{% url "apm.apps.pages.views.edit" text.slug %}">{% trans "Edit" %}</a></p>
+			{% endif %}
+		</div>
+	</div> <!-- /row -->
 
-  {% if superadmin or bureau_member or secretariat_member or contributeur %}
-  <h5>{% trans "Logs for this pseudo-static page" %}</h5>
-  {% include "manage/logs.html" with object=text %}
-  {% endif %}
+	{% if superadmin or bureau_member or secretariat_member or contributeur %}
+	<h5>{% trans "Logs for this pseudo-static page" %}</h5>
+	{% include "manage/logs.html" with object=text %}
+	{% endif %}
 
 </div><!--/container-fluid -->
 

@@ -3,11 +3,13 @@
 
 {% block content_page %}
 <div class="container-fluid">
-<h2>{% trans "Board members" %}</h2>
-{% for member in board_members %}
-    <p><strong>{{ member.role }} : </strong>{{ member.member }}</p>
-{% empty %}
-    <p class="text-error">{% trans "No members identified in the board !" %}
-{% endfor %}
+	<div class="page-header">
+		<h2>{% trans "Board members" %}</h2>
+	</div>
+	{% for member in board_members %}
+	<p><strong>{{ member.role }} : </strong>{{ member.member }}</p>
+	{% empty %}
+	<p class="text-error">{% trans "No members identified in the board !" %}
+	{% endfor %}
 </div><!--/container-fluid -->
 {% endblock %}

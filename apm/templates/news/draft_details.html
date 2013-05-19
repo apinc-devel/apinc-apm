@@ -6,20 +6,13 @@
 <div class="span12">
 
     <h2>{{ news_item.title }}</h2>
-    <p class="text-info">{% trans "Posted on" %} {{ news_item.pub_date }}</p>
-        <p>{{ news_item.body_html|safe }}</p>
+    <p class="text-info">{% trans "Drafted on" %} {{ news_item.pub_date }}</p>
+    <p>{{ news_item.body_html|safe }}</p>
 
-    {% if superadmin or bureau_member or secretariat_member or contributeur %}
-    <h3>{% trans "Logs for this news" %}</h3>
-    <ul>
-    {% for log in news_item.logs.all %}
-        <li>{{ log.timestamp|date:"Y/M/d H:i:s" }} | {{ log.user }} | {{ log.message }}</li>
-    {% empty %}
-        <li>{% trans "No logs ERROR !" %}</li>
-    {% endfor %}
-    </ul>
-    {% endif %}
-
+  {% if superadmin or bureau_member or secretariat_member or contributeur %}
+  <h5>{% trans "Logs for this news" %}</h5>
+  {% include "manage/logs.html" with object=news_item %}
+  {% endif %}
 
 {% if superadmin or bureau_member or secretariat_member or contributeur %}
 <div class="text-right">
