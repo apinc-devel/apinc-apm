@@ -4,47 +4,48 @@
 {% block content_page %}
 
 <div class="row-fluid">
-<div class="span12">
+	<div class="span12">
 
-<h1>{% trans "List of available drafts" %}</h1>
-</div>
+		<div class="page-header">
+			<h2>{% trans "List of available drafts" %}</h2>
+		</div>
+	</div>
 </div>
 
 
 {# TODO identifier les drafts sur la page background différent ou autre #}
 {% for news_item in news.object_list %}
 <div class="row-fluid">
-<div class="span12">
-    <h2>{{ news_item.title}}</h2>
-    <p>{{ news_item.pub_date }}</p>
-     {{ news_item.body_html|truncatewords_html:"150"|safe }}
-      <p><a class="btn pull-right" href="{{ news_item.get_absolute_url }}">{% trans "View details" %} &raquo;</a></p>
-</div>
+	<div class="span12">
+		<h2>{{ news_item.title}}</h2>
+		<p>{{ news_item.pub_date }}</p>
+		{{ news_item.body_html|truncatewords_html:"150"|safe }}
+		<p><a class="btn pull-right" href="{{ news_item.get_absolute_url }}">{% trans "View details" %} &raquo;</a></p>
+	</div>
 </div>
 {% empty %}
 <div class="row-fluid">
-<div class="span12">
-    <p>{% trans "No draft !" %}
-</div>
+	<div class="span12">
+		<p class="text-info">{% trans "No draft available !" %}
+	</div>
 </div>
 {% endfor %}
 
-{% comment %}
-<ul class="page-nav">
-    {% if news.has_previous %}
-        <a href="?page={{ news.previous_page_number }}">« {% trans "previous" %}</a>
-    {% endif %}
+<div class"row-fluid">
+	<div class="span12">
+		<ul class="inline">
+			{% if news.has_previous %}
+				<li><a class="btn btn-info" href="?page={{ news.previous_page_number }}">{% trans "previous" %}</a></li>
+			{% endif %}
 
-    {% if news %}
-    <span class="current">
-        {% trans "page" %} {{ news.number }} of {{ news.paginator.num_pages }}
-    </span>
-    {% endif %}
+			{% if news %}
+				<li class="text-info">{% trans "page" %} {{ news.number }} {% trans "of" %} {{ news.paginator.num_pages }}</li>
+			{% endif %}
 
-    {% if news.has_next %}
-        <a href="?page={{ news.next_page_number }}">{% trans "next" %} »</a>
-    {% endif %}
-</ul>
-{% endcomment %}
-
+			{% if news.has_next %}
+				<li><a class="btn btn-info" href="?page={{ news.next_page_number }}">{% trans "next" %}</a></li>
+			{% endif %}
+		</ul>
+	</div><!--/span12 -->
+</div><!--/row-fluid --> 
 {% endblock %}

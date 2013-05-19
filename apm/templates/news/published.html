@@ -30,22 +30,21 @@
 </div>
 {% endfor %}
 
-{% comment %}
-<ul class="page-nav">
-    {% if news.has_previous %}
-        <a href="?page={{ news.previous_page_number }}">« {% trans "previous" %}</a>
-    {% endif %}
+<div class"row-fluid">
+	<div class="span12">
+		<ul class="inline">
+			{% if news.has_previous %}
+				<li><a class="btn btn-info" href="?page={{ news.previous_page_number }}">{% trans "previous" %}</a></li>
+			{% endif %}
 
-    {% if news %}
-    <span class="current">
-        {% trans "page" %} {{ news.number }} of {{ news.paginator.num_pages }}
-    </span>
-    {% endif %}
+			{% if news %}
+				<li class="text-info">{% trans "page" %} {{ news.number }} {% trans "of" %} {{ news.paginator.num_pages }}</li>
+			{% endif %}
 
-    {% if news.has_next %}
-        <a href="?page={{ news.next_page_number }}">{% trans "next" %} »</a>
-    {% endif %}
-</ul>
-{% endcomment %}
-
+			{% if news.has_next %}
+				<li><a class="btn btn-info" href="?page={{ news.next_page_number }}">{% trans "next" %}</a></li>
+			{% endif %}
+		</ul>
+	</div><!--/span12 -->
+</div><!--/row-fluid --> 
 {% endblock %}
