@@ -48,6 +48,9 @@ urlpatterns = patterns('',
 
     (r'^edit/(?P<page>[\w\-]+)/$', 'apm.apps.pages.views.edit'),
 
+    # Page particulière client irc
+    url(r'^irc/$', 'apm.apps.pages.views.irc', name='irc'),
+
     # Account authentication section
     (r'^account/login/$', 'apm.apps.pages.views.login'),
     (r'^account/logout/$', 'apm.apps.pages.views.logout'),

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block pagetitle %}{% trans "APINC IRC web client" %}{% endblock %}
+
+{% block nav_contact %}<li class="active dropdown">{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+	<div class="row-fluid">
+		<iframe class="container well well-small span12" 
+			src="http://webirc.apinc.org/" style="height: 480px;">
+		</iframe>
+	</div><!--/row-fluid -->
+
+</div><!--/container-fluid -->
+{% endblock %}

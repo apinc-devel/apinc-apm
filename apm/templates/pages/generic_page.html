@@ -1,15 +1,23 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
-{% if text.slug == "statutes" or text.slug == "by-laws" %}
-  {# :( #}
-  {% block nav_who_are_we %}<li class="active dropdown">{% endblock %}
-{% endif %}
+{% block nav_who_are_we %}
+{# pas le plus élégant, en plus block pas nested dans les if ?! #}
+  {% if text.slug == "statutes" or text.slug == "by-laws" %}
+    <li class="active dropdown">
+	{% else %}
+		<li class="dropdown">
+	{% endif %}
+{% endblock %}
 
-{% if text.slug == "contact" %}
-  {# :( #}
-  {% block nav_contact %}<li class="active">{% endblock %}
-{% endif %}
+{% block nav_contact %}
+{# pas le plus élégant, en plus block pas nested dans les if ?! #}
+	{% if text.slug == "contact" %}
+		<li class="active dropdown">
+	{% else %}
+		<li class="dropdown">
+	{% endif %}
+{% endblock %}
 
 {% block content %}
 <div class="container-fluid">

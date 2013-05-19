@@ -118,3 +118,7 @@ def login(request):
         return render(request, 'auth/login.html',
             {'error': False, 'next': next_page})
 
+def irc(request):
+    """Irc iframe based on http://webirc.apinc.org"""
+    return render(request, 'pages/irc.html')
+

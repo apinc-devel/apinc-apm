@@ -43,11 +43,14 @@
 		<div class="navbar navbar-inverse navbar-fixed-top">
 			<div class="navbar-inner">
 				<div class="container-fluid">
+				{% comment %}
 					<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
 					</button>
+				{% endcomment %}
 					<a class="brand" href="/">APINC</a>
 					<div class="nav-collapse collapse">
 
@@ -72,18 +75,20 @@
 						<ul class="nav">
 							{% block nav_home %}<li>{% endblock %}<a href="/">{% trans "Home" %}</a></li>
 							{% block nav_news %}<li>{% endblock %}<a href="{% url "apm.apps.news.views.index" %}">{% trans "News" %}</a></li>
+
 							{% block nav_who_are_we %}<li class="dropdown">{% endblock %}
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "Who are we" %}<b class="caret"></b></a>
+							<a href="{% url "apm.apps.association.views.index" %}" class="dropdown-toggle" data-toggle="dropdown">{% trans "Who are we" %} <b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="{% url "apm.apps.association.views.index" %}">{% trans "Organization" %}</a></li>
-								<li><a href="/association/by-laws/">{% trans "By-laws" %}</a></li>
-								<li><a href="/association/statutes/">{% trans "Statutes" %}</a></li>
+								<li><a href="{% url "by-laws" %}">{% trans "By-laws" %}</a></li>
+								<li><a href="{% url "statutes" %}">{% trans "Statutes" %}</a></li>
 								<li><a href="{% url "apm.apps.association.views.board" %}">{% trans "Board members" %}</a></li>
 							</ul>
 							</li>
+
 							{% block nav_account %}<li class="dropdown">{% endblock %}
 							{% if user.is_authenticated %}
-							<a href="{% url "apm.apps.members.views.details" user.id %}" class="dropdown-toggle" data-toggle="dropdown">{% trans "Member access" %}<b class="caret"></b></a>
+							<a href="{% url "apm.apps.members.views.details" user.id %}" class="dropdown-toggle" data-toggle="dropdown">{% trans "Member access" %} <b class="caret"></b></a>
 							{% else %}{% comment %} <a href="{% url "apm.apps.subscriptions.views.index" %}">{% trans "Subscriptions" %}</a> {% endcomment %}
 							{% endif %}
 							<ul class="dropdown-menu">
@@ -94,7 +99,13 @@
 							</ul>
 							</li>
 
-							{% block nav_contact %}<li>{% endblock %}<a href="/contact/">{% trans "Contact" %}</a></li>
+						  {% block nav_contact %}<li class="dropdown">{% endblock %}
+							<a href="{% url "contact" %}" class="dropdown-toggle" data-toggle="dropdown">{% trans "Contact" %} <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="{% url "contact" %}">{% trans "Getting help" %}</a></li>
+								<li><a href="{% url "irc" %}">{% trans "IRC webclient" %}</a></li>
+							</ul>
+							</li>
 
 							{% if superadmin or bureau_member or secretariat_member or tresorier_member %}
 							{% block nav_manage %}<li>{% endblock %}<a href="/">{% trans "Manage" %}</a></li>
@@ -107,56 +118,56 @@
 			</div><!--/navbar-inner -->
 		</div><!--/navbar /navbar-inverse /navbar-fixed-top -->
 
-			{% if messages %}
+		{% if messages %}
 		<div class="container-fluid">
 			<div class="row-fluid">
 				<div class="span12">
 					{% for message in messages %}
 					<div class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %}">
-					  <button type="button" class="close" data-dismiss="alert">&times;</button>
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
 						<strong>{{ message.tags|capfirst }}!</strong> {{ message|safe }}
 					</div>
 					{% endfor %}
 				</div><!--/span12 -->
 			</div><!--/row-fluid -->
 		</div><!--/container-fluid -->
-			{% endif %}
+		{% endif %}
 
-			{% block content %}{% endblock %}
+		{% block content %}{% endblock %}
 
-			<hr>
+		<hr>
 
-			<footer>
-			<div class="container-fluid">
-				<small>
-					<ul class="inline">
-						<li><a href="{% url "news_rss_feed" %}">Rss</a></li>
-						<li><a href="{% url "news_atom_feed" %}">Atom</a></li>
-						<li><a href="/about/">{% trans "About" %}</a></li>
-						<li><a href="/legal-notice">{% trans "Legal notice" %}</a></li>
-						<li class="pull-right">&copy; {{ current_year }} APINC - Version {{ portal_version }} - {% trans "Unless otherwise explicitly specified, all texts are licenced" %} <a href="http://creativecommons.org/licenses/by-sa/3.0/deed.fr">CC by-sa 3.0</a>.</li>
-					</ul>
-				</small>
-			</div>
-			</footer>
+		<footer>
+		<div class="container-fluid">
+			<small>
+				<ul class="inline">
+					<li><a href="{% url "news_rss_feed" %}">Rss</a></li>
+					<li><a href="{% url "news_atom_feed" %}">Atom</a></li>
+					<li><a href="/about/">{% trans "About" %}</a></li>
+					<li><a href="/legal-notice">{% trans "Legal notice" %}</a></li>
+					<li class="pull-right">&copy; {{ current_year }} APINC - Version {{ portal_version }} - {% trans "Unless otherwise explicitly specified, all texts are licenced" %} <a href="http://creativecommons.org/licenses/by-sa/3.0/deed.fr">CC by-sa 3.0</a>.</li>
+				</ul>
+			</small>
+		</div>
+		</footer>
 
-			{% block javascript %}
-			{# Par defaut, on importe ces codes javascript sur toutes les pages. #}
-			{# Rien n'empeche de redefinir ce bloc pour certaines pages... #}
-			{# Placed at the end of the document so the pages load faster #}
-			<script type="text/javascript" src="{% static "jquery/jquery-" %}{{ jquery_version }}.min.js"></script>
-			<script src="{% static "bootstrap/js/bootstrap-transition.js" %}"></script>
-			<script src="{% static "bootstrap/js/bootstrap-alert.js" %}"></script>
-			<script src="{% static "bootstrap/js/bootstrap-modal.js" %}"></script>
-			<script src="{% static "bootstrap/js/bootstrap-dropdown.js" %}"></script>
-			<script src="{% static "bootstrap/js/bootstrap-scrollspy.js" %}"></script>
-			<script src="{% static "bootstrap/js/bootstrap-tab.js" %}"></script>
-			<script src="{% static "bootstrap/js/bootstrap-tooltip.js" %}"></script>
-			<script src="{% static "bootstrap/js/bootstrap-popover.js" %}"></script>
-			<script src="{% static "bootstrap/js/bootstrap-button.js" %}"></script>
-			<script src="{% static "bootstrap/js/bootstrap-collapse.js" %}"></script>
-			<script src="{% static "bootstrap/js/bootstrap-carousel.js" %}"></script>
-			<script src="{% static "bootstrap/js/bootstrap-typeahead.js" %}"></script>
-			{% endblock javascript %}
-		</body>
-	</html>
+		{% block javascript %}
+		{# Par defaut, on importe ces codes javascript sur toutes les pages. #}
+		{# Rien n'empeche de redefinir ce bloc pour certaines pages... #}
+		{# Placed at the end of the document so the pages load faster #}
+		<script type="text/javascript" src="{% static "jquery/jquery-" %}{{ jquery_version }}.min.js"></script>
+		<script src="{% static "bootstrap/js/bootstrap-transition.js" %}"></script>
+		<script src="{% static "bootstrap/js/bootstrap-alert.js" %}"></script>
+		<script src="{% static "bootstrap/js/bootstrap-modal.js" %}"></script>
+		<script src="{% static "bootstrap/js/bootstrap-dropdown.js" %}"></script>
+		<script src="{% static "bootstrap/js/bootstrap-scrollspy.js" %}"></script>
+		<script src="{% static "bootstrap/js/bootstrap-tab.js" %}"></script>
+		<script src="{% static "bootstrap/js/bootstrap-tooltip.js" %}"></script>
+		<script src="{% static "bootstrap/js/bootstrap-popover.js" %}"></script>
+		<script src="{% static "bootstrap/js/bootstrap-button.js" %}"></script>
+		<script src="{% static "bootstrap/js/bootstrap-collapse.js" %}"></script>
+		<script src="{% static "bootstrap/js/bootstrap-carousel.js" %}"></script>
+		<script src="{% static "bootstrap/js/bootstrap-typeahead.js" %}"></script>
+		{% endblock javascript %}
+	</body>
+</html>
