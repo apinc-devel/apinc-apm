@@ -26,7 +26,7 @@ urlpatterns = patterns('apm.apps.members.views',
     url(r'^details/(?P<user_id>\d+)/$', 'details'),
     # changecredentials
     # sendcredentials
-    url(r'^edit/(?P<user_id>\d+)/$', 'edit'),
-    url(r'^person/edit/(?P<user_id>\d+)/$', 'person_edit'),
+#    url(r'^edit/(?P<user_id>\d+)/$', 'edit'),
+#    url(r'^person/edit/(?P<user_id>\d+)/$', 'person_edit'),
     url(r'^personprivate/edit/(?P<user_id>\d+)/$', 'personprivate_edit'),
 )

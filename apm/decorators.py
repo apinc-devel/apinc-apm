@@ -24,10 +24,10 @@ except ImportError:
     from django.utils.functional import wraps  # Python 2.4 fallback.
 
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import render
 from django.utils.translation import ugettext as _
 from django.utils.decorators import available_attrs
-
 
 def access_required(view_func=None, groups=None, allow_myself=False):
     """
@@ -47,7 +47,7 @@ def access_required(view_func=None, groups=None, allow_myself=False):
         Decorator that checks if user belongs to groups
         """
         @wraps(view_func, assigned=available_attrs(view_func))
-        @login_required
+        @login_required(login_url=reverse_lazy('apm.apps.pages.views.login'))
         def _wrapped_view(request, *args, **kwargs):
             """
             Main decorator function that test user group membership against list

@@ -65,8 +65,8 @@
 						{% else %}
 						<form class="navbar-form pull-right" method="post" action="{% url "apm.apps.pages.views.login" %}">
 							{% csrf_token %}
-							<input class="span2" type="text" name="username" placeholder="APINC panel Username">
-							<input class="span2" type="password" name="password" placeholder="APINC panel Password">
+							<input class="span2" type="text" name="username" placeholder="APINC panel username">
+							<input class="span2" type="password" name="password" placeholder="APINC panel password">
 							<input type="hidden" name="next" value="{{ request.path }}">
 							<button type="submit" class="btn">{% trans "Sign in" %}</button>
 						</form>
@@ -77,7 +77,7 @@
 							{% block nav_news %}<li>{% endblock %}<a href="{% url "apm.apps.news.views.index" %}">{% trans "News" %}</a></li>
 
 							{% block nav_who_are_we %}<li class="dropdown">{% endblock %}
-							<a href="{% url "apm.apps.association.views.index" %}" class="dropdown-toggle" data-toggle="dropdown">{% trans "Who are we" %} <b class="caret"></b></a>
+							<a href="{% url "apm.apps.association.views.index" %}" class="dropdown-toggle" data-toggle="dropdown" data-target="#">{% trans "Who are we" %} <b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="{% url "apm.apps.association.views.index" %}">{% trans "Organization" %}</a></li>
 								<li><a href="{% url "by-laws" %}">{% trans "By-laws" %}</a></li>
@@ -87,20 +87,22 @@
 							</li>
 
 							{% block nav_account %}<li class="dropdown">{% endblock %}
-							{% if user.is_authenticated %}
-							<a href="{% url "apm.apps.members.views.details" user.id %}" class="dropdown-toggle" data-toggle="dropdown">{% trans "Member access" %} <b class="caret"></b></a>
-							{% else %}{% comment %} <a href="{% url "apm.apps.subscriptions.views.index" %}">{% trans "Subscriptions" %}</a> {% endcomment %}
-							{% endif %}
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "Member access" %} <b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="https://panel.apinc.org">{% trans "Panel vhffs" %}</a></li>
 								<li class="divider"></li>
 								<li><a href="http://squirrelmail.apinc.org/">{% trans "Webmail" %}</a></li>
 								<li><a href="http://phpmyadmin.apinc.org/">{% trans "Administration MySQL" %}</a></li>
+							  {% if user.is_authenticated %}
+                  <li class="divider"></li>
+                  <li><a href="{% url "apm.apps.members.views.details" user.id %}">{% trans "Account" %}</a></li>
+							  {% else %}{% comment %} <a href="{% url "apm.apps.subscriptions.views.index" %}">{% trans "Subscriptions" %}</a> {% endcomment %}
+							  {% endif %}
 							</ul>
 							</li>
 
 						  {% block nav_contact %}<li class="dropdown">{% endblock %}
-							<a href="{% url "contact" %}" class="dropdown-toggle" data-toggle="dropdown">{% trans "Contact" %} <b class="caret"></b></a>
+							<a href="{% url "contact" %}" class="dropdown-toggle" data-toggle="dropdown" data-target="#">{% trans "Contact" %} <b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="{% url "contact" %}">{% trans "Getting help" %}</a></li>
 								<li><a href="{% url "irc" %}">{% trans "IRC webclient" %}</a></li>

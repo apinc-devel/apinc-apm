@@ -79,6 +79,7 @@ def edit(request, page):
 def logout(request):
     """logout page"""
     auth.logout(request)
+
     if request.META.has_key('HTTP_REFERER'):
         return HttpResponseRedirect(request.META['HTTP_REFERER'])
     else:

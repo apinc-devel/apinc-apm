@@ -1,13 +1,12 @@
-{% extends "auth/base_auth.html" %}
+{% extends "base.html" %}
 {% load i18n %}
 
-{% block javascript %}{% endblock %}
-
-{% block content_page %}
-
-<h2>{% trans "Permission denied" %}</h2>
-
-<h3>{% trans "You are not authorized to access this page." %}</h3>
-
-
+{% block content %}
+<div class="container-fluid">
+	<div class="alert alert-block alert-error">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		<h4>{% trans "Permission denied!" %}</h4>
+		{% trans "You are not authorized to access this page." %}
+	</div>
+</div><!--/container-fluid -->
 {% endblock %}

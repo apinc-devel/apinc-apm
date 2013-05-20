@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-#   Copyright © 2011 APINC Devel Team
+#   Copyright © 2011-2013 APINC Devel Team
 #
 #   This program is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
 
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.shortcuts import get_object_or_404, render
 from django.utils.translation import ugettext as _
 #from django.contrib.auth.models import User
@@ -29,7 +29,7 @@ from apm.apps.members.models import Person, PersonPrivate
 from apm.apps.members.forms import PersonForm, PersonPrivateForm
 from apm.decorators import access_required, confirm_required
 
-@login_required
+@login_required(login_url=reverse_lazy('apm.apps.pages.views.login'))
 def details(request, user_id):
 
     person = get_object_or_404(Person, pk=user_id)
@@ -44,34 +44,34 @@ def details(request, user_id):
          'personprivate': personprivate, 
          'is_myself': int(request.user.id) == int(user_id)}) #, 'last_activity': last_activity})
 
-@access_required(groups=['apinc-secretariat', 'apinc-bureau'], allow_myself=True)
-def edit(request, user_id=None):
-                                
-    person = get_object_or_404(Person, pk=user_id)
-    personprivate = get_object_or_404(PersonPrivate, person=person)
+#@access_required(groups=['apinc-secretariat', 'apinc-bureau'], allow_myself=True)
+#def edit(request, user_id=None):
+#                                
+#    person = get_object_or_404(Person, pk=user_id)
+#    personprivate = get_object_or_404(PersonPrivate, person=person)
+#
+#    return render(request, 'members/edit.html',
+#        {'person': person, 
+#         'personprivate': personprivate,
+#         'is_myself': int(request.user.id) == int(user_id)})
 
-    return render(request, 'members/edit.html',
-        {'person': person, 
-         'personprivate': personprivate,
-         'is_myself': int(request.user.id) == int(user_id)})
+#@access_required(groups=['apinc-secretariat', 'apinc-bureau'], allow_myself=True)
+#def person_edit(request, user_id=None):
+#    person = get_object_or_404(Person, pk=user_id)
+#    form = PersonForm(instance=person)
+#
+#    if request.method == 'POST':
+#        form = PersonForm(request.POST, instance=person)
+#        if form.is_valid(): 
+#            form.save()
+#            messages.add_message(request, messages.INFO, _('Person modifications have been successfully saved.'))
+#            return HttpResponseRedirect(reverse(edit, args=[user_id]))
+#
+#    return render(request, 'members/edit_form.html',
+#        {'form': form, 'action_title': _("Modification of personal profile for"),
+#         'person': person, 'back': request.META.get('HTTP_REFERER', '/')})
 
-@access_required(groups=['apinc-secretariat', 'apinc-bureau'], allow_myself=True)
-def person_edit(request, user_id=None):
-    person = get_object_or_404(Person, pk=user_id)
-    form = PersonForm(instance=person)
-
-    if request.method == 'POST':
-        form = PersonForm(request.POST, instance=person)
-        if form.is_valid(): 
-            form.save()
-            messages.add_message(request, messages.INFO, _('Person modifications have been successfully saved.'))
-            return HttpResponseRedirect(reverse(edit, args=[user_id]))
-
-    return render(request, 'members/edit_form.html',
-        {'form': form, 'action_title': _("Modification of personal profile for"),
-         'person': person, 'back': request.META.get('HTTP_REFERER', '/')})
-
-@access_required(groups=['apinc-secretariat', 'apinc-bureau'], allow_myself=True)
+@access_required(groups=['apinc-secretariat', 'apinc-bureau'])
 def personprivate_edit(request, user_id=None):
     personprivate = PersonPrivate.objects.get(person=user_id)
     form = PersonPrivateForm(instance=personprivate)
@@ -80,9 +80,9 @@ def personprivate_edit(request, user_id=None):
         form = PersonPrivateForm(request.POST, instance=personprivate)
         if form.is_valid():
             form.save()
-            messages.add_message(request, messages.INFO, _('PersonPrivate modification have been successfully saved.'))
+            messages.add_message(request, messages.SUCCESS, _('PersonPrivate modification have been successfully saved.'))
 
-        return HttpResponseRedirect(reverse(edit, args=[user_id]))
+        return HttpResponseRedirect(reverse(details, args=[user_id]))
 
     return render(request, 'members/edit_form.html',
             {'form': form,
