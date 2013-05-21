@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-20 11:21+0200\n"
+"POT-Creation-Date: 2013-05-21 19:10+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: APINC Devel Team <devel@ml.apinc.org>\n"
@@ -199,7 +199,7 @@ msgid "News"
 msgstr ""
 
 #: templates/base.html:81
-msgid "Who are we"
+msgid "Who we are"
 msgstr ""
 
 #: templates/base.html:83
@@ -253,19 +253,19 @@ msgid "IRC webclient"
 msgstr ""
 
 #: templates/base.html:115 templates/manage/base_manage.html:4
-#: templates/manage/index.html:5
+#: templates/manage/index.html:6
 msgid "Manage"
 msgstr ""
 
-#: templates/base.html:151
+#: templates/base.html:149
 msgid "About"
 msgstr ""
 
-#: templates/base.html:152
+#: templates/base.html:150
 msgid "Legal notice"
 msgstr ""
 
-#: templates/base.html:153
+#: templates/base.html:151
 msgid "Unless otherwise explicitly specified, all texts are licenced"
 msgstr ""
 
@@ -311,14 +311,14 @@ msgid "Upload report"
 msgstr ""
 
 #: templates/association/upload_report.html:17
-#: templates/members/edit_form.html:16 templates/news/edit.html:34
+#: templates/members/edit_form.html:14 templates/news/edit.html:34
 #: templates/pages/text_edit.html:18 templates/subscriptions/subscribe.html:57
 #: templates/subscriptions/subscription_type_edit.html:14
 msgid "Cancel"
 msgstr ""
 
 #: templates/association/upload_report.html:18
-#: templates/members/edit_form.html:17 templates/news/edit.html:35
+#: templates/members/edit_form.html:15 templates/news/edit.html:35
 #: templates/pages/text_edit.html:19 templates/subscriptions/subscribe.html:58
 #: templates/subscriptions/subscription_type_edit.html:15
 msgid "Save"
@@ -356,7 +356,7 @@ msgstr ""
 msgid "You are not authorized to access this page."
 msgstr ""
 
-#: templates/groups/base_groups.html:14 templates/news/base_news.html:16
+#: templates/groups/base_groups.html:13 templates/news/base_news.html:16
 #: templates/subscriptions/edit_subscriptions_type.html:19
 #: templates/subscriptions/user_subscriptions.html:62
 msgid "Actions"
@@ -367,29 +367,18 @@ msgid "Apinc groups"
 msgstr ""
 
 #: templates/manage/base_manage.html:17
+msgid "Groups"
+msgstr ""
+
+#: templates/manage/base_manage.html:18
+msgid "List Apinc groups"
+msgstr ""
+
+#: templates/manage/base_manage.html:25
 #: templates/subscriptions/base_subscriptions.html:4
 #: templates/subscriptions/index.html:5
 #: templates/subscriptions/subscriptions.html:8
 msgid "Subscriptions"
-msgstr ""
-
-#: templates/manage/base_manage.html:19
-msgid "Subscriptions index"
-msgstr ""
-
-#: templates/manage/base_manage.html:20
-#: templates/subscriptions/base_subscriptions.html:19
-msgid "Check all subscriptions"
-msgstr ""
-
-#: templates/manage/base_manage.html:21
-#: templates/subscriptions/base_subscriptions.html:20
-msgid "Check pending subscriptions"
-msgstr ""
-
-#: templates/manage/base_manage.html:22
-#: templates/subscriptions/base_subscriptions.html:21
-msgid "Edit subscription types"
 msgstr ""
 
 #: templates/manage/logs.html:4 templates/subscriptions/subscriptions.html:31
@@ -566,6 +555,18 @@ msgstr ""
 
 #: templates/subscriptions/base_subscriptions.html:17
 msgid "Administration"
+msgstr ""
+
+#: templates/subscriptions/base_subscriptions.html:19
+msgid "Check all subscriptions"
+msgstr ""
+
+#: templates/subscriptions/base_subscriptions.html:20
+msgid "Check pending subscriptions"
+msgstr ""
+
+#: templates/subscriptions/base_subscriptions.html:21
+msgid "Edit subscription types"
 msgstr ""
 
 #: templates/subscriptions/edit_subscriptions_type.html:10

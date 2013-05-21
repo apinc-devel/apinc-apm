@@ -17,5 +17,7 @@
 #   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 
-django-admin.py makemessages -l fr -l en --no-wrap
+django-admin.py makemessages -l en --no-wrap
+django-admin.py makemessages -l fr --no-wrap
+
 django-admin.py compilemessages

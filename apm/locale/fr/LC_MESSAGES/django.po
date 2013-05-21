@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-03 07:01+0100\n"
+"POT-Creation-Date: 2013-05-21 19:10+0200\n"
 "PO-Revision-Date: 2013-05-20 11:01+0100\n"
 "Last-Translator: Laurent Bives <lau@apinc.org>\n"
 "Language-Team: APINC Devel Team <devel@ml.apinc.org>\n"
@@ -18,59 +18,59 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: decorators.py:102
+#: decorators.py:99
 msgid "Are you sure you want to do this action"
 msgstr "Etes-vous sûr de vouloir faire cette action"
 
-#: apps/association/models.py:47
+#: apps/association/models.py:43
 msgid "Meeting Report"
 msgstr "Compte-rendu de réunion"
 
-#: apps/association/models.py:48
+#: apps/association/models.py:44
 msgid "AG Report"
 msgstr "Compte-rendu d'AG"
 
-#: apps/association/models.py:49
+#: apps/association/models.py:45
 msgid "CA Report"
 msgstr "Compte-rendu de CA"
 
-#: apps/association/views.py:76
+#: apps/association/views.py:60
 msgid "Modifications on reports have been successfully saved."
 msgstr "Les modifications sur les documents ont été sauvées avec succès."
 
-#: apps/association/views.py:86
+#: apps/association/views.py:70
 msgid "Do you really want to delete this report"
 msgstr "Voulez-vous vraiment supprimer ce document"
 
-#: apps/association/views.py:91
+#: apps/association/views.py:75
 msgid "Reported successfully deleted"
 msgstr "Document supprimé avec succès"
 
-#: apps/groups/models.py:33 apps/pages/forms.py:39 apps/pages/models.py:31
+#: apps/groups/models.py:27 apps/pages/models.py:30
 msgid "slug"
 msgstr "slug"
 
-#: apps/groups/models.py:35 apps/members/models.py:82
+#: apps/groups/models.py:29 apps/members/models.py:80
 msgid "name"
 msgstr "nom"
 
-#: apps/groups/models.py:36
+#: apps/groups/models.py:30
 msgid "description"
 msgstr "description"
 
-#: apps/groups/models.py:39 templates/members/details.html:20
+#: apps/groups/models.py:33 templates/members/details.html:17
 msgid "email"
 msgstr "courriel"
 
-#: apps/groups/models.py:92 apps/members/models.py:119
+#: apps/groups/models.py:86 apps/members/models.py:117
 msgid "start date"
 msgstr "date de début"
 
-#: apps/groups/models.py:94 apps/members/models.py:121
+#: apps/groups/models.py:88 apps/members/models.py:119
 msgid "end date"
 msgstr "date de fin"
 
-#: apps/groups/models.py:96 apps/members/models.py:123
+#: apps/groups/models.py:90 apps/members/models.py:121
 msgid "expiration date"
 msgstr "date d'expiration"
 
@@ -82,8 +82,7 @@ msgstr "Homme"
 msgid "Female"
 msgstr "Femme"
 
-#: apps/members/models.py:43 templates/members/details.html:24
-#: templates/members/edit.html:22
+#: apps/members/models.py:43 templates/members/details.html:21
 msgid "maiden name"
 msgstr "Nom de jeune fille"
 
@@ -95,55 +94,56 @@ msgstr "Date de naissance"
 msgid "sex"
 msgstr "sexe"
 
-#: apps/members/models.py:54 apps/members/models.py:134
+#: apps/members/models.py:54 apps/members/models.py:132
 msgid "person"
 msgstr "personne"
 
-#: apps/members/models.py:83
+#: apps/members/models.py:81
 msgid "default rank"
 msgstr "classement par défault"
 
-#: apps/members/models.py:137
+#: apps/members/models.py:135
 msgid "Notes"
 msgstr "Notes"
 
-#: apps/members/models.py:145
+#: apps/members/models.py:143
 msgid "Person Private Data"
 msgstr "Données personnelles privées"
 
-#: apps/members/views.py:71
-msgid "Person modifications have been successfully saved."
-msgstr "Les modifications sur la personne ont été sauvées avec succès."
-
-#: apps/members/views.py:75
-msgid "Modification of personal profile for"
-msgstr "Modification du profil personnel pour"
-
-#: apps/members/views.py:87
+#: apps/members/views.py:83
 msgid "PersonPrivate modification have been successfully saved."
 msgstr "Les données personnelles privées ont été sauvées avec succès."
 
-#: apps/members/views.py:93
+#: apps/members/views.py:89
 msgid "Modification of personal private profile for"
 msgstr "Modification des données personnelles privées pour"
 
-#: apps/news/forms.py:35 apps/pages/forms.py:35 apps/pages/models.py:37
+#: apps/news/feeds.py:26
+#, fuzzy
+msgid "apinc.org site news"
+msgstr "Nouvelles de l'APINC"
+
+#: apps/news/feeds.py:28
+msgid "Updates on changes and additions to apinc.org."
+msgstr ""
+
+#: apps/news/forms.py:31 apps/pages/forms.py:30 apps/pages/models.py:36
 msgid "title"
 msgstr "titre"
 
-#: apps/news/forms.py:37 apps/pages/forms.py:37
+#: apps/news/forms.py:33 apps/pages/forms.py:32
 msgid "body"
 msgstr "corps"
 
-#: apps/news/forms.py:39
+#: apps/news/forms.py:35
 msgid "publication date"
 msgstr "date de publication"
 
-#: apps/news/models.py:50
+#: apps/news/models.py:51
 msgid "Draft"
 msgstr "Brouillon"
 
-#: apps/news/models.py:51
+#: apps/news/models.py:52
 msgid "Published"
 msgstr "Publiée"
 
@@ -155,367 +155,389 @@ msgstr "Voulez-vous vraiment supprimer cette nouvelle"
 msgid "The news has been successfully deleted."
 msgstr "La nouvelle a été supprimée avec succès."
 
-#: apps/news/views.py:88
+#: apps/news/views.py:95
 msgid "Modifications have been successfully saved."
 msgstr "Les modifications ont été sauvées avec succès."
 
-#: apps/pages/models.py:35
+#: apps/pages/models.py:34
 msgid "Used for urls regex matches and templates <slug>.html."
 msgstr "Utilisé pour les expressions régulières et templates <slug>.html."
 
-#: apps/pages/views.py:69
-#, python-format
-msgid "Text %s page update."
-msgstr "Text %s page mise à jour."
+#: apps/pages/views.py:65
+msgid "Pseudo-static page modified."
+msgstr ""
 
-#: templates/base.html:9
+#: apps/pages/views.py:71
+#, python-format
+msgid "Pseudo-static page '%s' updated."
+msgstr ""
+
+#: manage/models.py:50
+msgid "log entry"
+msgstr ""
+
+#: manage/models.py:51
+msgid "log entries"
+msgstr ""
+
+#: templates/base.html:8
 msgid "APINC Plateform"
 msgstr "Plateforme APINC"
 
-#: templates/base.html:41
-msgid "Portail web plateforme APINC"
-msgstr "Portail web plateforme APINC"
-
-#: templates/base.html:44
-msgid "Association pour la Promotion de l'Internet Non Commercial"
-msgstr "Association pour la Promotion de l'Internet Non Commercial"
-
-#: templates/base.html:54
+#: templates/base.html:63
 msgid "Log out"
 msgstr "Déconnexion"
 
-#: templates/base.html:57
-msgid "You are not logged-in"
-msgstr "Vous n'êtes pas authentifié"
-
-#: templates/base.html:57 templates/auth/login.html:30
-msgid "Log-in"
+#: templates/base.html:72
+msgid "Sign in"
 msgstr "Connexion"
 
-#: templates/base.html:65
+#: templates/base.html:77
 msgid "Home"
 msgstr "Accueil"
 
-#: templates/base.html:67
+#: templates/base.html:78
 msgid "News"
 msgstr "News"
 
-#: templates/base.html:69
-msgid "Association"
+#: templates/base.html:81
+msgid "Who we are"
+msgstr "Qui nous sommes"
+
+#: templates/base.html:83
+msgid "Organization"
 msgstr "Association"
 
-#: templates/base.html:72
-msgid "Account"
-msgstr "Compte"
+#: templates/base.html:84
+msgid "By-laws"
+msgstr "Règlement intérieur"
 
-#: templates/base.html:78
-msgid "Help"
-msgstr "Aide"
+#: templates/base.html:85
+#, fuzzy
+msgid "Statutes"
+msgstr "Statuts"
 
-#: templates/base.html:110
-msgid "Rss feed"
-msgstr "Rss feed"
-
-#: templates/base.html:111
-msgid "Contact"
-msgstr ""
-
-#: templates/base.html:112
-msgid "About"
-msgstr "A propos"
-
-#: templates/base.html:113
-msgid "Legal notice"
-msgstr "Mentions légales"
-
-#: templates/base.html:115
-msgid "Version"
-msgstr ""
-
-#: templates/base.html:115
-msgid "Unless otherwise explicitly specified, all texts are licenced"
-msgstr ""
-
-#: templates/association/base_association.html:4
-#: templates/association/index.html:6
-msgid "The association"
-msgstr ""
-
-#: templates/association/board.html:7 templates/association/index.html:12
-#: templates/association/index.html:37 templates/association/rules.html:14
-#: templates/association/status.html:14
-#: templates/association/upload_report.html:22
+#: templates/base.html:86 templates/association/board.html:7
+#: templates/association/index.html:22
 #: templates/subscriptions/edit_subscriptions_type.html:13
 msgid "Board members"
 msgstr "Bureau"
 
-#: templates/association/board.html:11 templates/association/index.html:16
+#: templates/base.html:91
+#, fuzzy
+msgid "Member access"
+msgstr "Données membre"
+
+#: templates/base.html:93
+msgid "Panel vhffs"
+msgstr ""
+
+#: templates/base.html:95
+#, fuzzy
+msgid "Webmail"
+msgstr "courriel"
+
+#: templates/base.html:96
+msgid "Administration MySQL"
+msgstr ""
+
+#: templates/base.html:99
+msgid "Account"
+msgstr "Compte"
+
+#: templates/base.html:107
+msgid "Contact"
+msgstr ""
+
+#: templates/base.html:109
+#, fuzzy
+msgid "Getting help"
+msgstr "Aide"
+
+#: templates/base.html:110
+msgid "IRC webclient"
+msgstr "Client web IRC"
+
+#: templates/base.html:115 templates/manage/base_manage.html:4
+#: templates/manage/index.html:6
+msgid "Manage"
+msgstr ""
+
+#: templates/base.html:149
+msgid "About"
+msgstr "A propos"
+
+#: templates/base.html:150
+msgid "Legal notice"
+msgstr "Mentions légales"
+
+#: templates/base.html:151
+msgid "Unless otherwise explicitly specified, all texts are licenced"
+msgstr ""
+
+#: templates/association/base_association.html:4
+msgid "The organization"
+msgstr "L'association"
+
+#: templates/association/board.html:12
+#, fuzzy
+msgid "No members identified in the board !"
+msgstr "Pas de membre dans le bureau !"
+
+#: templates/association/index.html:11
+msgid "Who are we ?"
+msgstr "Qui sommes nous ?"
+
+#: templates/association/index.html:15 templates/members/details.html:49
+#: templates/news/draft_details.html:20 templates/news/published.html:16
+#: templates/news/published_details.html:23
+#: templates/pages/generic_page.html:31
+#: templates/subscriptions/user_subscriptions.html:32
+#: templates/subscriptions/user_subscriptions.html:41
+msgid "Edit"
+msgstr "Editer"
+
+#: templates/association/index.html:26
 msgid "No members in the board !"
 msgstr "Pas de membre dans le bureau !"
 
-#: templates/association/board.html:17 templates/association/index.html:33
-#: templates/association/rules.html:11 templates/association/status.html:11
-#: templates/association/upload_report.html:18
-#: templates/subscriptions/edit_subscriptions_type.html:10
-#: templates/subscriptions/subscribe.html:65
-msgid "Links"
-msgstr "Liens"
-
-#: templates/association/board.html:19 templates/association/index.html:35
-#: templates/association/rules.html:13
-#: templates/association/upload_report.html:20
-#: templates/subscriptions/subscription_type.html:14
-#: templates/subscriptions/user_subscriptions.html:15
-msgid "Status"
-msgstr "Statuts"
-
-#: templates/association/board.html:20 templates/association/index.html:36
-#: templates/association/status.html:13
-#: templates/association/upload_report.html:21
-#: templates/subscriptions/edit_subscriptions_type.html:12
-msgid "Rules"
-msgstr "Règlement intérieur"
-
-#: templates/association/index.html:9 templates/pages/homepage.html:18
-msgid "edit"
-msgstr ""
-
-#: templates/association/index.html:19
+#: templates/association/index.html:33
 msgid "Meeting reports and other documents"
 msgstr "Compte-rendus et autres documents"
 
-#: templates/association/index.html:27
+#: templates/association/index.html:41
 msgid "No report available !"
 msgstr "Pas de document trouvé !"
 
-#: templates/association/index.html:43 templates/association/rules.html:20
-#: templates/association/status.html:20 templates/groups/base_groups.html:14
-#: templates/members/details.html:49 templates/news/base_news.html:18
-#: templates/news/drafts.html:39
-#: templates/subscriptions/edit_subscriptions_type.html:19
-#: templates/subscriptions/user_subscriptions.html:62
-msgid "Actions"
-msgstr ""
-
-#: templates/association/index.html:45
+#: templates/association/index.html:43
 msgid "Add a report"
 msgstr "Ajouter un document"
 
-#: templates/association/rules.html:22
-msgid "Edit the rules"
-msgstr "Editer le règlement intérieur"
-
-#: templates/association/status.html:22
-#: templates/subscriptions/edit_subscriptions_type.html:21
-msgid "Edit the status"
-msgstr "Editer les statuts"
-
-#: templates/association/upload_report.html:6
+#: templates/association/upload_report.html:9
 msgid "Upload report"
 msgstr "Ajouter un document"
 
-#: templates/association/upload_report.html:12
-#: templates/members/edit_form.html:13 templates/news/edit.html:15
-#: templates/pages/text_edit.html:15 templates/subscriptions/subscribe.html:57
+#: templates/association/upload_report.html:17
+#: templates/members/edit_form.html:14 templates/news/edit.html:34
+#: templates/pages/text_edit.html:18 templates/subscriptions/subscribe.html:57
 #: templates/subscriptions/subscription_type_edit.html:14
 msgid "Cancel"
 msgstr "Annuler"
 
-#: templates/association/upload_report.html:13
-#: templates/members/edit_form.html:14 templates/news/edit.html:16
-#: templates/pages/text_edit.html:16 templates/subscriptions/subscribe.html:58
+#: templates/association/upload_report.html:18
+#: templates/members/edit_form.html:15 templates/news/edit.html:35
+#: templates/pages/text_edit.html:19 templates/subscriptions/subscribe.html:58
 #: templates/subscriptions/subscription_type_edit.html:15
 msgid "Save"
 msgstr "Sauver"
 
 #: templates/auth/login.html:4 templates/auth/login.html.py:6
 msgid "Login page"
-msgstr ""
+msgstr "Page d'authentification"
 
-#: templates/auth/login.html:11
+#: templates/auth/login.html:14
+msgid "Error!"
+msgstr "Erreur!"
+
+#: templates/auth/login.html:14
 msgid "Your username and password didn't match. Please try again."
 msgstr "Vos identifiants n'ont pas été reconnus. Merci d'essayer à nouveau."
 
-#: templates/auth/login.html:20
+#: templates/auth/login.html:24
 msgid "Username"
 msgstr ""
 
-#: templates/auth/login.html:24
+#: templates/auth/login.html:28
 msgid "Password"
 msgstr ""
 
+#: templates/auth/login.html:34
+msgid "Log-in"
+msgstr "Connexion"
+
 #: templates/auth/permission_denied.html:8
-msgid "Permission denied"
+#, fuzzy
+msgid "Permission denied!"
 msgstr "Autorisation refusée"
 
-#: templates/auth/permission_denied.html:10
+#: templates/auth/permission_denied.html:9
 msgid "You are not authorized to access this page."
 msgstr "Vous n'êtes pas autorisé à accéder à cette page."
+
+#: templates/groups/base_groups.html:13 templates/news/base_news.html:16
+#: templates/subscriptions/edit_subscriptions_type.html:19
+#: templates/subscriptions/user_subscriptions.html:62
+msgid "Actions"
+msgstr ""
 
 #: templates/groups/index.html:4
 msgid "Apinc groups"
 msgstr "Groupes Apinc"
 
-#: templates/manage/base_manage.html:4 templates/manage/index.html:5
-msgid "Manage"
-msgstr ""
-
 #: templates/manage/base_manage.html:17
+msgid "Groups"
+msgstr "Groupes"
+
+#: templates/manage/base_manage.html:18
+#, fuzzy
+msgid "List Apinc groups"
+msgstr "Lister les groupes Apinc"
+
+#: templates/manage/base_manage.html:25
 #: templates/subscriptions/base_subscriptions.html:4
 #: templates/subscriptions/index.html:5
 #: templates/subscriptions/subscriptions.html:8
 msgid "Subscriptions"
 msgstr ""
 
-#: templates/manage/base_manage.html:19
-msgid "Subscriptions index"
+#: templates/manage/logs.html:4 templates/subscriptions/subscriptions.html:31
+#: templates/subscriptions/user_subscriptions.html:11
+msgid "Date"
 msgstr ""
 
-#: templates/manage/base_manage.html:20
-#: templates/subscriptions/base_subscriptions.html:19
-msgid "Check all subscriptions"
+#: templates/manage/logs.html:5
+msgid "User"
+msgstr "Utilisateur"
+
+#: templates/manage/logs.html:6
+msgid "Message"
 msgstr ""
 
-#: templates/manage/base_manage.html:21
-#: templates/subscriptions/base_subscriptions.html:20
-msgid "Check pending subscriptions"
-msgstr ""
+#: templates/manage/logs.html:15
+msgid "No logs yet !"
+msgstr "Pas de message log trouvé !"
 
-#: templates/manage/base_manage.html:22
-#: templates/subscriptions/base_subscriptions.html:21
-msgid "Edit subscription types"
-msgstr ""
+#: templates/members/base_members.html:13
+msgid "Treasury"
+msgstr "Trésorerie"
 
-#: templates/members/details.html:5
+#: templates/members/base_members.html:14
+msgid "Bank details"
+msgstr "Relevé d'identitié bancaire"
+
+#: templates/members/details.html:4
 msgid "Member detail profile"
 msgstr "Profil détaillé"
 
-#: templates/members/details.html:13 templates/members/edit.html:15
+#: templates/members/details.html:11
 msgid "Personal profile"
 msgstr "Profil personnel"
 
-#: templates/members/details.html:16
+#: templates/members/details.html:13
 msgid "first name"
 msgstr "prénom"
 
-#: templates/members/details.html:18
+#: templates/members/details.html:15
 msgid "last name"
 msgstr "nom"
 
-#: templates/members/details.html:29 templates/members/edit.html:24
+#: templates/members/details.html:26
 msgid "Birthdate"
 msgstr "Date de naissance"
 
-#: templates/members/details.html:33 templates/members/edit.html:25
+#: templates/members/details.html:30
 msgid "Gender"
 msgstr "Genre"
 
-#: templates/members/details.html:39
-msgid "Person Private data"
-msgstr "Données personnelles privées"
+#: templates/members/details.html:34
+msgid "These data are synced from APINC VHFFS Panel, to update these data please edit them from the"
+msgstr "Ces données sont synchronisées depuis le panel APINC VHFFS, pour les mettre à jour merci d'utiliser l'"
 
-#: templates/members/details.html:51
-msgid "Modify these data"
-msgstr "Modifier ces informations"
+#: templates/members/details.html:34
+msgid "panel user preference tab"
+msgstr "onglet user préférence du panel"
 
-#: templates/members/edit.html:5
-msgid "Member edit profile"
-msgstr "Editer le profil membre"
-
-#: templates/members/edit.html:13
-msgid "Back to personnal file"
-msgstr "Retour au profil personnel"
-
-#: templates/members/edit.html:18
-msgid "First name"
-msgstr "Prénom"
-
-#: templates/members/edit.html:20
-msgid "Last name"
-msgstr "Nom"
-
-#: templates/members/edit.html:21
-msgid "Email"
-msgstr "Courriel"
-
-#: templates/members/edit.html:27 templates/members/edit.html.py:47
-#: templates/subscriptions/subscription_type.html:28
-msgid "Modify"
-msgstr "Modifier"
-
-#: templates/members/edit.html:30
-msgid "Member data"
-msgstr "Données membre"
-
-#: templates/members/edit.html:32
+#: templates/members/details.html:36
 msgid "Group memberships"
 msgstr ""
 
-#: templates/members/edit.html:42
-msgid "Private data"
-msgstr ""
+#: templates/members/details.html:45
+msgid "Person Private data"
+msgstr "Données personnelles privées"
 
-#: templates/news/base_news.html:5
+#: templates/news/base_news.html:4
 msgid "Apinc news"
 msgstr "Nouvelles de l'APINC"
 
-#: templates/news/base_news.html:20 templates/news/drafts.html:41
+#: templates/news/base_news.html:17
 msgid "Write a news"
 msgstr "Ecrire une nouvelle"
 
-#: templates/news/base_news.html:22
+#: templates/news/base_news.html:19
 msgid "See drafts"
 msgstr "Voir les brouillons"
 
-#: templates/news/base_news.html:29
+#: templates/news/base_news.html:25
 msgid "Archives"
 msgstr ""
 
-#: templates/news/draft_details.html:15
-#: templates/news/published_details.html:15
-msgid "« previous"
-msgstr "« précédent"
+#: templates/news/draft_details.html:9
+#, fuzzy
+msgid "Drafted on"
+msgstr "Brouillon"
 
-#: templates/news/draft_details.html:19
-#: templates/news/published_details.html:19
-msgid "next »"
-msgstr "suivant »"
+#: templates/news/draft_details.html:13 templates/news/edit.html:41
+#: templates/news/published_details.html:16
+#, fuzzy
+msgid "Logs for this news"
+msgstr "Logs pour cette nouvelle"
 
-#: templates/news/draft_details.html:29 templates/news/published.html:12
-#: templates/news/published_details.html:29
-msgid "Edit this news"
-msgstr "Editer cette nouvelle"
+#: templates/news/draft_details.html:23
+#: templates/news/published_details.html:26
+#: templates/subscriptions/subscription_type.html:29
+#: templates/subscriptions/subscriptions.html:57
+#: templates/subscriptions/user_subscriptions.html:35
+msgid "Delete"
+msgstr "Supprimer"
 
-#: templates/news/draft_details.html:30
-#: templates/news/published_details.html:30
-msgid "Delete this news"
-msgstr "Supprimer cette nouvelle"
-
-#: templates/news/drafts.html:7
-msgid "List of available drafts"
-msgstr "List des brouillons en cours"
-
-#: templates/news/drafts.html:16
-msgid "No draft !"
-msgstr "Pas de brouillon !"
-
-#: templates/news/drafts.html:21 templates/news/index.html:18
-#: templates/news/published.html:20
+#: templates/news/draft_details.html:32 templates/news/drafts.html:38
+#: templates/news/index.html:28 templates/news/published.html:37
+#: templates/news/published_details.html:34
 msgid "previous"
 msgstr "précédent"
 
-#: templates/news/drafts.html:26 templates/news/index.html:23
-#: templates/news/published.html:25
-msgid "page"
-msgstr ""
-
-#: templates/news/drafts.html:31 templates/news/index.html:28
-#: templates/news/published.html:30
+#: templates/news/draft_details.html:38 templates/news/drafts.html:46
+#: templates/news/index.html:36 templates/news/published.html:45
+#: templates/news/published_details.html:40
 msgid "next"
 msgstr "suivant"
 
-#: templates/news/index.html:13 templates/news/published.html:15
-#: templates/pages/homepage.html:30
+#: templates/news/drafts.html:10
+msgid "List of available drafts"
+msgstr "List des brouillons en cours"
+
+#: templates/news/drafts.html:23 templates/news/index.html:13
+#: templates/news/published.html:20 templates/pages/homepage.html:28
+msgid "View details"
+msgstr "Voir détails"
+
+#: templates/news/drafts.html:29
+#, fuzzy
+msgid "No draft available !"
+msgstr "Pas de document trouvé !"
+
+#: templates/news/drafts.html:42 templates/news/index.html:32
+#: templates/news/published.html:41
+msgid "page"
+msgstr ""
+
+#: templates/news/drafts.html:42 templates/news/index.html:32
+#: templates/news/published.html:41
+#: templates/subscriptions/subscriptions.html:14
+msgid "of"
+msgstr "de"
+
+#: templates/news/edit.html:10
+msgid "News editor"
+msgstr "Editeur de nouvelle"
+
+#: templates/news/index.html:11 templates/news/published.html:11
+#: templates/news/published_details.html:10 templates/pages/homepage.html:26
+msgid "Posted on"
+msgstr "Posté le"
+
+#: templates/news/index.html:19 templates/news/published.html:28
+#: templates/pages/homepage.html:35
 msgid "No news !"
 msgstr "Pas de nouvelles !"
 
@@ -527,19 +549,50 @@ msgstr "Non"
 msgid "Yes"
 msgstr "Oui"
 
-#: templates/pages/generic_page.html:13
-#: templates/subscriptions/user_subscriptions.html:32
-#: templates/subscriptions/user_subscriptions.html:41
-msgid "Edit"
-msgstr ""
+#: templates/pages/generic_page.html:37 templates/pages/text_edit.html:25
+msgid "Logs for this pseudo-static page"
+msgstr "Logs pour cette page pseudo-statique"
 
-#: templates/pages/homepage.html:5
+#: templates/pages/homepage.html:4
 msgid "APINC Portal"
 msgstr "Portail APINC"
+
+#: templates/pages/homepage.html:17
+msgid "edit"
+msgstr "editer"
+
+#: templates/pages/irc.html:4
+msgid "APINC IRC web client"
+msgstr "Client web APINC IRC"
 
 #: templates/subscriptions/base_subscriptions.html:17
 msgid "Administration"
 msgstr ""
+
+#: templates/subscriptions/base_subscriptions.html:19
+msgid "Check all subscriptions"
+msgstr ""
+
+#: templates/subscriptions/base_subscriptions.html:20
+msgid "Check pending subscriptions"
+msgstr ""
+
+#: templates/subscriptions/base_subscriptions.html:21
+msgid "Edit subscription types"
+msgstr ""
+
+#: templates/subscriptions/edit_subscriptions_type.html:10
+#: templates/subscriptions/subscribe.html:65
+msgid "Links"
+msgstr "Liens"
+
+#: templates/subscriptions/edit_subscriptions_type.html:12
+msgid "Rules"
+msgstr "Règlement intérieur"
+
+#: templates/subscriptions/edit_subscriptions_type.html:21
+msgid "Edit the status"
+msgstr "Editer les statuts"
 
 #: templates/subscriptions/index.html:7
 msgid "Number of subscribers"
@@ -606,11 +659,14 @@ msgstr ""
 msgid "Duration"
 msgstr ""
 
-#: templates/subscriptions/subscription_type.html:29
-#: templates/subscriptions/subscriptions.html:57
-#: templates/subscriptions/user_subscriptions.html:35
-msgid "Delete"
-msgstr ""
+#: templates/subscriptions/subscription_type.html:14
+#: templates/subscriptions/user_subscriptions.html:15
+msgid "Status"
+msgstr "Statuts"
+
+#: templates/subscriptions/subscription_type.html:28
+msgid "Modify"
+msgstr "Modifier"
 
 #: templates/subscriptions/subscription_type.html:36
 msgid "No subscription types defined yet!"
@@ -626,10 +682,6 @@ msgstr ""
 
 #: templates/subscriptions/subscriptions.html:6
 msgid "Subscriptions to validate"
-msgstr ""
-
-#: templates/subscriptions/subscriptions.html:14
-msgid "of"
 msgstr ""
 
 #: templates/subscriptions/subscriptions.html:14
@@ -654,11 +706,6 @@ msgstr ""
 
 #: templates/subscriptions/subscriptions.html:30
 msgid "Member"
-msgstr ""
-
-#: templates/subscriptions/subscriptions.html:31
-#: templates/subscriptions/user_subscriptions.html:11
-msgid "Date"
 msgstr ""
 
 #: templates/subscriptions/subscriptions.html:32
@@ -714,3 +761,63 @@ msgstr ""
 #: templates/subscriptions/user_subscriptions.html:65
 msgid "Add a subscription"
 msgstr ""
+
+#~ msgid "Person modifications have been successfully saved."
+#~ msgstr "Les modifications sur la personne ont été sauvées avec succès."
+
+#~ msgid "Modification of personal profile for"
+#~ msgstr "Modification du profil personnel pour"
+
+#~ msgid "Text %s page update."
+#~ msgstr "Text %s page mise à jour."
+
+#~ msgid "Portail web plateforme APINC"
+#~ msgstr "Portail web plateforme APINC"
+
+#~ msgid "Association pour la Promotion de l'Internet Non Commercial"
+#~ msgstr "Association pour la Promotion de l'Internet Non Commercial"
+
+#~ msgid "You are not logged-in"
+#~ msgstr "Vous n'êtes pas authentifié"
+
+#~ msgid "Association"
+#~ msgstr "Association"
+
+#~ msgid "Help"
+#~ msgstr "Aide"
+
+#~ msgid "Rss feed"
+#~ msgstr "Rss feed"
+
+#~ msgid "Edit the rules"
+#~ msgstr "Editer le règlement intérieur"
+
+#~ msgid "Modify these data"
+#~ msgstr "Modifier ces informations"
+
+#~ msgid "Member edit profile"
+#~ msgstr "Editer le profil membre"
+
+#~ msgid "Back to personnal file"
+#~ msgstr "Retour au profil personnel"
+
+#~ msgid "First name"
+#~ msgstr "Prénom"
+
+#~ msgid "Last name"
+#~ msgstr "Nom"
+
+#~ msgid "Email"
+#~ msgstr "Courriel"
+
+#~ msgid "« previous"
+#~ msgstr "« précédent"
+
+#~ msgid "next »"
+#~ msgstr "suivant »"
+
+#~ msgid "Delete this news"
+#~ msgstr "Supprimer cette nouvelle"
+
+#~ msgid "No draft !"
+#~ msgstr "Pas de brouillon !"
