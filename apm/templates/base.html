@@ -76,8 +76,8 @@
 							{% block nav_home %}<li>{% endblock %}<a href="/">{% trans "Home" %}</a></li>
 							{% block nav_news %}<li>{% endblock %}<a href="{% url "apm.apps.news.views.index" %}">{% trans "News" %}</a></li>
 
-							{% block nav_who_are_we %}<li class="dropdown">{% endblock %}
-							<a href="{% url "apm.apps.association.views.index" %}" class="dropdown-toggle" data-toggle="dropdown" data-target="#">{% trans "Who are we" %} <b class="caret"></b></a>
+							{% block nav_who_we_are %}<li class="dropdown">{% endblock %}
+							<a href="{% url "apm.apps.association.views.index" %}" class="dropdown-toggle" data-toggle="dropdown" data-target="#">{% trans "Who we are" %} <b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="{% url "apm.apps.association.views.index" %}">{% trans "Organization" %}</a></li>
 								<li><a href="{% url "by-laws" %}">{% trans "By-laws" %}</a></li>
@@ -110,8 +110,7 @@
 							</li>
 
 							{% if superadmin or bureau_member or secretariat_member or tresorier_member %}
-							{% block nav_manage %}<li>{% endblock %}<a href="/">{% trans "Manage" %}</a></li>
-							{% comment %}<a href="{% url "apm.manage.views.index" %}">{% trans "Manage" %}</a></li>{% endcomment %}
+                              {% block nav_manage %}<li>{% endblock %}<a href="{% url "apm.manage.views.index" %}">{% trans "Manage" %}</a></li>
 							{% endif %}
 						</ul>
 

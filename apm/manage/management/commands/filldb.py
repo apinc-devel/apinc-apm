@@ -23,7 +23,6 @@ from optparse import make_option
 
 from datetime import date, datetime
 import pytz
-import crypt
 
 from django.core.management.base import BaseCommand, CommandError
 from django.contrib.auth import get_user_model
@@ -160,7 +159,7 @@ class Command(BaseCommand):
                         first_name="Laurent", last_name="Bives", sex="M",
                         is_staff=True, is_superuser=True)
                 laurent.birth_date = date(1988,03,20)
-                laurent.set_password(crypt.crypt("laurent", "laurent"))
+                laurent.set_password("laurent")
                 laurent.save()
 
                 apinc_admin.add(laurent)
@@ -181,7 +180,7 @@ class Command(BaseCommand):
 
                 self.stdout.write("Membership 'apinc-tresorier' to 'laurent' inserted.\n")
 
-                contributeur = members.Person.objects.create_user("contributeur", "cont@ribu.ter", crypt.crypt("contributeur", "contributeur"))
+                contributeur = members.Person.objects.create_user("contributeur", "cont@ribu.ter", "contributeur")
                 contributeur.is_staff = True
                 contributeur.is_superuser = True
                 contributeur.first_name = "Contrib"
@@ -199,7 +198,7 @@ class Command(BaseCommand):
                 apinc_contrib.add(contributeur)
                 self.stdout.write("Membre 'contributeur' joins 'apinc_contrib' group.\n")
 
-                misric = members.Person.objects.create_user("misric", "m@sric.cc", crypt.crypt("misric", "misric"))
+                misric = members.Person.objects.create_user("misric", "m@sric.cc", "misric")
                 misric.is_staff = True
                 misric.is_superuser = True
                 misric.first_name = "Misric"

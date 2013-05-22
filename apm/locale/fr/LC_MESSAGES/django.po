@@ -8,11 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-21 20:31+0200\n"
+"POT-Creation-Date: 2013-05-22 23:48+0200\n"
 "PO-Revision-Date: 2013-05-20 11:01+0100\n"
 "Last-Translator: Laurent Bives <lau@apinc.org>\n"
 "Language-Team: APINC Devel Team <devel@ml.apinc.org>\n"
-"Language: \n"
+"Language: French\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -50,7 +50,7 @@ msgstr "Document supprimé avec succès"
 msgid "slug"
 msgstr "slug"
 
-#: apps/groups/models.py:29 apps/members/models.py:80
+#: apps/groups/models.py:29 apps/members/models.py:74
 msgid "name"
 msgstr "nom"
 
@@ -62,15 +62,15 @@ msgstr "description"
 msgid "email"
 msgstr "courriel"
 
-#: apps/groups/models.py:86 apps/members/models.py:117
+#: apps/groups/models.py:86 apps/members/models.py:111
 msgid "start date"
 msgstr "date de début"
 
-#: apps/groups/models.py:88 apps/members/models.py:119
+#: apps/groups/models.py:88 apps/members/models.py:113
 msgid "end date"
 msgstr "date de fin"
 
-#: apps/groups/models.py:90 apps/members/models.py:121
+#: apps/groups/models.py:90 apps/members/models.py:115
 msgid "expiration date"
 msgstr "date d'expiration"
 
@@ -84,7 +84,7 @@ msgstr "Femme"
 
 #: apps/members/models.py:43 templates/members/details.html:21
 msgid "maiden name"
-msgstr "Nom de jeune fille"
+msgstr "nom de jeune fille"
 
 #: apps/members/models.py:45
 msgid "Birth date"
@@ -94,19 +94,19 @@ msgstr "Date de naissance"
 msgid "sex"
 msgstr "sexe"
 
-#: apps/members/models.py:54 apps/members/models.py:132
+#: apps/members/models.py:54 apps/members/models.py:126
 msgid "person"
 msgstr "personne"
 
-#: apps/members/models.py:81
+#: apps/members/models.py:75
 msgid "default rank"
 msgstr "classement par défault"
 
-#: apps/members/models.py:135
+#: apps/members/models.py:129
 msgid "Notes"
 msgstr "Notes"
 
-#: apps/members/models.py:143
+#: apps/members/models.py:137
 msgid "Person Private Data"
 msgstr "Données personnelles privées"
 
@@ -125,7 +125,7 @@ msgstr "Nouvelles de l'APINC"
 
 #: apps/news/feeds.py:28
 msgid "Updates on changes and additions to apinc.org."
-msgstr ""
+msgstr "Suivi de la plate-forme APINC"
 
 #: apps/news/forms.py:31 apps/pages/forms.py:30 apps/pages/models.py:36
 msgid "title"
@@ -165,12 +165,12 @@ msgstr "Utilisé pour les expressions régulières et templates <slug>.html."
 
 #: apps/pages/views.py:65
 msgid "Pseudo-static page modified."
-msgstr ""
+msgstr "Page pseudo-statique modifiée."
 
 #: apps/pages/views.py:71
 #, python-format
 msgid "Pseudo-static page '%s' updated."
-msgstr ""
+msgstr "Page pseudo-statique '%s' mise à jour."
 
 #: manage/models.py:50
 msgid "log entry"
@@ -273,7 +273,7 @@ msgstr "Mentions légales"
 
 #: templates/base.html:151
 msgid "Unless otherwise explicitly specified, all texts are licenced"
-msgstr ""
+msgstr "Sauf mention spécifique, tous les textes sont sous licence"
 
 #: templates/association/base_association.html:4
 msgid "The organization"
@@ -440,12 +440,14 @@ msgid "Gender"
 msgstr "Genre"
 
 #: templates/members/details.html:34
-msgid "These data are synced from APINC VHFFS Panel, to update these data please edit them from the"
-msgstr "Ces données sont synchronisées depuis le panel APINC VHFFS, pour les mettre à jour merci d'utiliser l'"
+#, fuzzy
+msgid "These data are synced from APINC VHFFS Panel, to update these data please edit them from"
+msgstr "Ces données sont synchronisées depuis le panel APINC VHFFS, pour les mettre à jour merci d'utiliser"
 
 #: templates/members/details.html:34
-msgid "panel user preference tab"
-msgstr "onglet user préférence du panel"
+#, fuzzy
+msgid "the panel user preference tab"
+msgstr "l'onglet user préférence du panel"
 
 #: templates/members/details.html:36
 msgid "Group memberships"

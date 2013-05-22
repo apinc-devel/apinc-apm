@@ -31,13 +31,13 @@
 <div class"text-right">
     {% if news_item.get_previous_drafted %}
     <div class="btn-group">
-        <a class="btn" href="{{ news_item.get_previous_published.get_absolute_url }}" title=" {{news_item.get_previous_published.title}}">{% trans "previous" %}</a>
+        <a class="btn btn-info" href="{{ news_item.get_previous_published.get_absolute_url }}" title=" {{news_item.get_previous_published.title}}">{% trans "previous" %}</a>
     </div>
     {% endif %}
 
     {% if news_item.get_next_drafted %}
     <div class="btn-group">
-        <a class="btn" href="{{ news_item.get_next_published.get_absolute_url }}" title=" {{news_item.get_next_published.title}}">{% trans "next" %}</a>
+        <a class="btn btn-info" href="{{ news_item.get_next_published.get_absolute_url }}" title=" {{news_item.get_next_published.title}}">{% trans "next" %}</a>
     </div>
     {% endif %}
 </div><!--/text-right --> 

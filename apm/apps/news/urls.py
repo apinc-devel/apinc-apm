@@ -19,7 +19,7 @@
 
 from django.conf.urls import *
 from apm.apps.news.models import News
-from apm.apps.news.feeds import RssNewsFeed, AtomNewsFeed
+#from apm.apps.news.feeds import RssNewsFeed, AtomNewsFeed
 
 urlpatterns = patterns('apm.apps.news.views',
 
@@ -37,6 +37,6 @@ urlpatterns = patterns('apm.apps.news.views',
         name='news_month_archives'),
     url(r'^(?P<year>\d{4})/(?P<month>\d{1,2})/(?P<day>\d{1,2})/$',
         'published', name='news_day_archives'),
-    url(r'^rss/$', RssNewsFeed(), name='news_rss_feed'),
-    url(r'^atom/$', AtomNewsFeed(), name='news_atom_feed'),
+    #url(r'^rss/$', RssNewsFeed(), name='news_rss_feed'),
+    #url(r'^atom/$', AtomNewsFeed(), name='news_atom_feed'),
 )

@@ -2,7 +2,6 @@
 {% load i18n %}
 
 {% block content_page %}
-
 <div class="page-header">
 	<h2>{{ action_title }} {{ person }}</h2>
 </div>
@@ -10,7 +9,6 @@
 <form class="horizontal-form" method="post" action="." enctype="multipart/form-data">
 	{% csrf_token %}
 	{{ form.as_p }}
-
 	<div class="control-group">
 		<div="controls">
 			<a class="btn btn-inverse" href="{{ back }}">{% trans "Cancel" %}</a>
@@ -18,7 +16,6 @@
 		</div>
 	</div>
 </form> 
-
 {% endblock %}
 
 {% block extra-actions %}

@@ -22,6 +22,8 @@ from django.conf.urls.static import static
 from django.conf.urls import patterns, include, url
 from django.conf import settings
 
+from apm.apps.news.feeds import RssNewsFeed, AtomNewsFeed
+
 # Uncomment the next two lines to enable the admin:
 #from django.contrib import admin
 #admin.autodiscover()
@@ -51,6 +53,10 @@ urlpatterns = patterns('',
     # Page particulière client irc
     url(r'^irc/$', 'apm.apps.pages.views.irc', name='irc'),
 
+    # Feeds 
+    url(r'^rss/$', RssNewsFeed(), name='news_rss_feed'),
+    url(r'^atom/$', AtomNewsFeed(), name='news_atom_feed'),
+
     # Account authentication section
     (r'^account/login/$', 'apm.apps.pages.views.login'),
     (r'^account/logout/$', 'apm.apps.pages.views.logout'),
@@ -60,6 +66,7 @@ urlpatterns = patterns('',
     (r'^news/', include('apm.apps.news.urls')),
     (r'^groups/', include('apm.apps.groups.urls')),
     (r'^association/', include('apm.apps.association.urls')),
+    (r'^manage/', include('apm.manage.urls')),
 
 )
 
