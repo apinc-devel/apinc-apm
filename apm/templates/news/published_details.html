@@ -29,13 +29,13 @@
 {% endif %}
 
 <div class"text-right">
-    {% if news_item.get_previous_drafted %}
+    {% if news_item.get_previous_published %}
     <div class="btn-group">
         <a class="btn btn-info" href="{{ news_item.get_previous_published.get_absolute_url }}" title=" {{news_item.get_previous_published.title}}">{% trans "previous" %}</a>
     </div>
     {% endif %}
 
-    {% if news_item.get_next_drafted %}
+    {% if news_item.get_next_published %}
     <div class="btn-group">
         <a class="btn btn-info" href="{{ news_item.get_next_published.get_absolute_url }}" title=" {{news_item.get_next_published.title}}">{% trans "next" %}</a>
     </div>
