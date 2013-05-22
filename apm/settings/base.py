@@ -219,6 +219,10 @@ TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS + (
     'apm.context_processors.user_groups',
 )
 
+PASSWORD_HASHERS = DEFAULT_SETTINGS.PASSWORD_HASHERS + (
+    'apm.vhffs.VhffsPasswordHasher',
+)
+
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error when DEBUG=False.

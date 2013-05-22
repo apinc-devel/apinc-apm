@@ -22,7 +22,7 @@ import requests
 from django.core.management.base import NoArgsCommand, CommandError
 
 import apm.apps.members.models as members
-from apm.utils import vhffs_rest_api_url
+from apm.vhffs import vhffs_rest_api_url
 
 USERS_REST_URL = "/api/users/"
 

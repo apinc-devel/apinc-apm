@@ -65,15 +65,9 @@ class Person(AbstractUser):
     def get_full_name(self):
         return self.first_name + " " + self.last_name
 
-    def set_password(self, vhffs_hashed_passwd):
+    def set_password_hash(self, vhffs_hashed_passwd):
         self.password = vhffs_hashed_passwd
 
-    def check_password(self, raw_password):
-        """
-        Returns a boolean of whether the raw_password was correct. Handles
-        vhffs sha-512 hashing formats here. (see vhffs r2126)
-        """
-        return crypt.crypt(raw_password, self.password) == self.password
 
 class Role(models.Model):
     

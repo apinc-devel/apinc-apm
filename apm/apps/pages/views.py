@@ -31,7 +31,7 @@ from apm.apps.pages.forms import TextBlockForm
 from apm.apps.news.models import News
 from apm.manage.models import LogEntry
 from apm.decorators import access_required
-from apm.utils import sync_user_from_vhffs_api
+from apm.vhffs import sync_user_from_vhffs_api
 
 def homepage(request):
     """APINC homepage"""
