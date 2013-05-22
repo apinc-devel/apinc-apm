@@ -66,7 +66,7 @@ urlpatterns = patterns('',
     (r'^news/', include('apm.apps.news.urls')),
     (r'^groups/', include('apm.apps.groups.urls')),
     (r'^association/', include('apm.apps.association.urls')),
-    #(r'^manage/', include('apm.manage.urls')),
+    (r'^manage/', include('apm.manage.urls')),
 )
 
 # servir le contenu statique pendant le dev
