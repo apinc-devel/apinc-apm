@@ -187,9 +187,8 @@ INSTALLED_APPS = (
     #'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     #'django.contrib.admindocs',
-    'apm.manage',
+    'apm.apps.manage',
     'apm.apps.members',
-    'apm.apps.groups',
     'apm.apps.pages',
     'apm.apps.association',
     'apm.apps.news',

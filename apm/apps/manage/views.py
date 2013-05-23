@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-#   Copyright © 2011 APINC Devel Team
+#   Copyright © 2011-2013 APINC Devel Team
 #
 #   This program is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
@@ -17,12 +17,19 @@
 #   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 
-from django.conf.urls import *
-#from apm.apps.groups.models import Group
+from django.shortcuts import render
 
-urlpatterns = patterns('apm.apps.groups.views',
+from apm.decorators import access_required
+from django.contrib.auth import get_user_model as Person
 
-    # Group 
+@access_required(groups=['apinc-admin', 'apinc-secretariat', 'apinc-bureau'])
+def index(request):
+    """Manage index"""
 
-    url(r'^$','index'),
-)
+    return render(request, 'manage/index.html')
+
+@access_required(groups=['apinc-admin', 'apinc-secretariat', 'apinc-bureau'])
+def members(request):
+    """List all APINC members"""
+    
+    return render(request, 'manage/members.html', { 'members': Person().objects.all() })

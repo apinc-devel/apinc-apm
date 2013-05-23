@@ -14,8 +14,8 @@
                     {% block actions %} {% endblock %}
                     {% block extra-actions %}
                     {% if superadmin or bureau_member or secretariat_member or contributeur %}
-                    <li class="nav-header">{% trans "Groups" %}</li>
-                    {# <li><a href="{% url "apm.apps.groups.views.index" %}">{% trans "List Apinc groups" %}</a></li> #}
+                    <li class="nav-header">{% trans "Actions" %}</li>
+                    <li><a href="{% url "apm.apps.manage.views.members" %}">{% trans "List all APINC members" %}</a></li>
                     {# <li><a href="{% url "apm.apps.members.views.users" %}">{% trans "List Vhffs groups" %}</a></li> #}
                     {% endif %}
                     {% endblock %}

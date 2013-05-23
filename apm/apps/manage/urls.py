@@ -19,9 +19,10 @@
 
 from django.conf.urls import *
 
-urlpatterns = patterns('apm.manage.views',
+urlpatterns = patterns('apm.apps.manage.views',
 
     # Manage
 
     url(r'^$','index'),
+    url(r'^members/$','members'),
 )

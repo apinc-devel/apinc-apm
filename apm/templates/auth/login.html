@@ -15,7 +15,9 @@
 	</div>
 	{% endif %}
 
-	<form method="post" action=".">
+    <div class="row-fluid">
+    <div class="offset4 span4">
+	<form class="well form-horizontal" method="post" action=".">
 		{% csrf_token %}
 		<table cellpadding="2" cellspacing="0" id="login-form">
 			<tbody id="login-form-body">
@@ -37,12 +39,18 @@
 				</tr>
 			</tbody>
 		</table>
-	</form>
 
+        <br />
+        <p class="text-center"><a href="https://panel.apinc.org/?do=lost">{% trans "I don't know my password" %}</a></p>
+        <p class="text-center"><a href="https://panel.apinc.org/?do=subscribe">{% trans "Subscribe" %}</a></p>
+	</form>
+    </div><!--/offset4 span4 -->
+    </div><!--/row-fluid -->
 
 	{% comment %}
 	<p style="text-align: center;"><a href="{% url apinc.members.views.lostpassword %}">{% trans "If you have lost your login and/or your password follow this link" %}.</a></p>
 	{% endcomment %}
+
 </div><!--/container-fluid --> 
 {% endblock %}
 

@@ -22,6 +22,8 @@ import crypt
 
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.contrib.auth.models import User, UserManager, AbstractUser
 from django.utils.translation import ugettext as _
 
@@ -71,7 +73,7 @@ class Person(AbstractUser):
 
 class Role(models.Model):
     
-    name =  models.CharField(verbose_name=_('name'), max_length=100)
+    name =  models.CharField(verbose_name=_('name'), max_length=100, unique=True)
     rank = models.IntegerField(verbose_name=_('default rank'))
     members = models.ManyToManyField(Person, through='MemberRole')
 
@@ -126,7 +128,8 @@ class PersonPrivate(models.Model):
     person = models.OneToOneField(Person, verbose_name=_('person'))
 
     # Administration
-    notes = models.TextField(verbose_name=_('Notes'), blank=True, null=True)
+    notes = models.TextField(verbose_name=_('Notes'), blank=True, null=True,
+            default=_("Donnees privees accessibles seulement par les admins ou le secretariat apinc."))
 
     def __unicode__(self):
         """Person private unicode"""
@@ -136,6 +139,13 @@ class PersonPrivate(models.Model):
         """Person Private meta"""
         verbose_name = _('Person Private Data')
         ordering = ['person']
+
+
+@receiver(post_save, sender=Person)
+def create_person_private(sender, instance, created, **kwargs):
+    if created:
+        person_private, created = PersonPrivate.objects.get_or_create(person=instance)
+    print "Create person private %s" % instance
 
 #class Member(Person):
 #    """Member"""

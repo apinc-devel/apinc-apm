@@ -29,13 +29,13 @@ from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.models import Site
 
-import apm.apps.groups.models as groups
 import apm.apps.members.models as members
 import apm.apps.news.models as news
-import apm.manage.models as manage
+import apm.apps.manage.models as manage
 #import apm.apps.subscriptions.models as subscriptions
 
 PSEUDO_STATIC_PAGES = [
+	#(slug, title),
     ("homepage", "Bienvenue !"),
     ("about", "About page title"),
     ("legal-notice", "Legal notice and terms of use"),
@@ -44,6 +44,32 @@ PSEUDO_STATIC_PAGES = [
     ("statutes", "Statuts de l'association"),
     ("by-laws", "Règlement intérieur"),
 ]
+
+APM_GROUPS = [
+	#(name, slug, email),
+	("apinc-admin", "apinc-admin", "a-admin@a.a"),
+    ("apinc-devel", "apinc-devel", "a-devel@a.org"),
+    ("apinc-bureau", "apinc-bureau", "a-bureau@a.org"),
+	("apinc-secretariat", "apinc-secretariat", "a-secretariat@a.org"),
+	("apinc-tresorier", "apinc-tresorier", "a-tresorier@a.org"),
+	("apinc-contributeur", "apinc-contributeur", "a-contrib@a.org"),
+    #("apinc-membre", "apinc-member", "a-membre@a.org"),
+]
+
+APM_ROLES = [
+    #(name, rank),
+    ("Administrateur", 10),
+    ("President", 30),
+    ("Vice-president", 40),
+    ("Tresorier", 50),
+    ("Tresorier adjoint", 60),
+    ("Secretaire", 70),
+    ("Secretaire adjoint", 80),
+    #("Membre du bureau", 90),
+    #("Membre", 100),
+    #("Demandeur", 110),
+]
+
 
 class Command(BaseCommand):
     help = 'Fill the database with initial data.'
@@ -75,6 +101,28 @@ class Command(BaseCommand):
             # TODO Error message handling
             raise CommandError('Filldb pseudo-static pages "%s"' % e)
 
+			
+        try:
+        # cette partie regroupe les groups APM
+            for name, slug, email in APM_GROUPS:
+                apm_group, created = manage.Group.objects.get_or_create(name=name, slug=slug, email=email)
+                if created:
+                    self.stdout.write("APM group '%s' inserted.\n" % slug)
+        except Exception, e:
+            # TODO Error message handling
+            raise CommandError('Filldb apm group "%s"' % e)				
+
+            
+        try:
+        # cette partie regroupe les roles APM
+            for name, rank in APM_ROLES:
+                apm_role, created = members.Role.objects.get_or_create(name=name, rank=rank)
+                if created:
+                    self.stdout.write("APM role '%s' inserted.\n" % name)
+        except Exception, e:
+            # TODO Error message handling
+            raise CommandError('Filldb apm role "%s"' % e)		
+            
         if options.get('development', False):
             # Cette partie regroupe les valeurs fixes de la base,
             # que l'on s'autorise donc à tester en dur dans le code.
@@ -92,68 +140,6 @@ class Command(BaseCommand):
                 sys.exit(0)
 
             try:
-                # apinc roles
-                #role_admin = members.Role(name='Administrateur', rank = 10)
-                #role_admin.save()
-                #self.stdout.write("\nRole 'administrateur' inserted.\n")
-                role_president = members.Role(name='President', rank = 30)
-                role_president.save()
-                self.stdout.write("Role 'président' inserted.\n")
-                role_vice_president = members.Role(name='Vice-president', rank = 40)
-                role_vice_president.save()
-                self.stdout.write("Role 'vice-président' inserted.\n")
-                role_tresorier = members.Role(name='Tresorier', rank = 50)
-                role_tresorier.save()
-                self.stdout.write("Role 'trésorier' inserted.\n")
-                role_tresorier_adjoint = members.Role(name='Tresorier adjoint', rank = 60)
-                role_tresorier_adjoint.save()
-                self.stdout.write("Role 'trésorier adjoint' inserted.\n")
-                role_secretaire = members.Role(name='Secretaire', rank = 70)
-                role_secretaire.save()
-                self.stdout.write("Role 'secrétaire' inserted.\n")
-                role_secretaire_adjoint = members.Role(name='Secretaire adjoint', rank = 80)
-                role_secretaire_adjoint.save()
-                self.stdout.write("Role 'secrétaire adjoint' inserted.\n")
-                #role_membre_bureau = members.Role(name='Membre du bureau', rank = 90)
-                #role_membre_bureau.save()
-                #self.stdout.write("Role 'membre du bureau' inserted.\n")
-                #role_membre = members.Role(name='Membre', rank = 100)
-                #role_membre.save()
-                #self.stdout.write("Role 'membre' inserted.\n")
-                #role_demandeur = members.Role(name='Demandeur', rank = 110)
-                #role_demandeur.save()
-                #self.stdout.write("Role 'demandeur' inserted.\n")
-
-                # apinc groups
-                apinc_admin = groups.Group(name='apinc-admin', slug='apinc-admin')
-                apinc_admin.email = "a-admin@a.org"
-                apinc_admin.save()
-                self.stdout.write("Group 'apinc-admin' inserted.\n")
-                apinc_devel = groups.Group(name='apinc-devel', slug='apinc-devel')
-                apinc_devel.email = "a-devel@a.org"
-                apinc_devel.save()
-                self.stdout.write("Group 'apinc-devel' inserted.\n")
-                apinc_bureau = groups.Group(name='apinc-bureau', slug='apinc-bureau')
-                apinc_bureau.email = "a-bureau@a.org"
-                apinc_bureau.save()
-                self.stdout.write("Group 'apinc-bureau' inserted.\n")
-                apinc_secretariat = groups.Group(name='apinc-secretariat', slug='apinc-secretariat')
-                apinc_secretariat.email = "a-secretariat@a.org"
-                apinc_secretariat.save()
-                self.stdout.write("Group 'apinc-secretariat' inserted.\n")
-                apinc_tresorier = groups.Group(name='apinc-tresorier', slug='apinc-tresorier')
-                apinc_tresorier.email = "a-tresorier@a.org"
-                apinc_tresorier.save()
-                self.stdout.write("Group 'apinc-tresorier' inserted.\n")
-                apinc_contrib = groups.Group(name='apinc-contributeur', slug='apinc-contributeur')
-                apinc_contrib.email = "a-contrib@a.org"
-                apinc_contrib.save()
-                self.stdout.write("Group 'apinc-contributeur' inserted.\n")
-                apinc_membre = groups.Group(name='apinc-membre', slug='apinc-member')
-                apinc_membre.email = "a-membre@a.org"
-                apinc_membre.save()
-                self.stdout.write("Group 'apinc-membre' inserted.\n")
-
                 # Persons
                 laurent = members.Person(username="laurent", email="lau@a.org",
                         first_name="Laurent", last_name="Bives", sex="M",
@@ -162,19 +148,22 @@ class Command(BaseCommand):
                 laurent.set_password("laurent")
                 laurent.save()
 
+                apinc_admin = manage.Group.objects.get(slug="apinc-admin")
                 apinc_admin.add(laurent)
+                apinc_devel = manage.Group.objects.get(slug="apinc-devel")
                 apinc_devel.add(laurent)
+                apinc_bureau = manage.Group.objects.get(slug="apinc-bureau")
                 apinc_bureau.add(laurent)
 
-                laurent_private = members.PersonPrivate()
-                laurent_private.person = laurent
-                laurent_private.notes = "Donnees privees accessibles seulement par les admins ou le secretariat apinc."
-                laurent_private.save()
+                #laurent_private = members.PersonPrivate()
+                #laurent_private.person = laurent
+                #laurent_private.notes = "Donnees privees accessibles seulement par les admins ou le secretariat apinc."
+                #laurent_private.save()
 
                 self.stdout.write("Membre 'laurent' inserted.\n")
 
-                gm = groups.GroupMembership(start_date=date(2010,1,1), end_date=date(2011,1,1))
-                gm.group = apinc_tresorier
+                gm = manage.GroupMembership(start_date=date(2010,1,1), end_date=date(2011,1,1))
+                gm.group = manage.Group.objects.get(slug="apinc-tresorier")
                 gm.member = laurent
                 gm.save()
 
@@ -189,12 +178,13 @@ class Command(BaseCommand):
                 contributeur.birth_date = date(1961,11,10)
                 contributeur.save()
 
-                contributeur_private = members.PersonPrivate()
-                contributeur_private.person = contributeur
-                contributeur_private.notes = "Donnees privees du membre 'contributeur' accessibles seulement par les admins ou le secretariat apinc."
-                contributeur_private.save()
-                self.stdout.write("Membre 'contributeur' (generic) inserted.\n")
+                #contributeur_private = members.PersonPrivate()
+                #contributeur_private.person = contributeur
+                #contributeur_private.notes = "Donnees privees du membre 'contributeur' accessibles seulement par les admins ou le secretariat apinc."
+                #contributeur_private.save()
+                #self.stdout.write("Membre 'contributeur' (generic) inserted.\n")
 
+                apinc_contrib = manage.Group.objects.get(slug="apinc-contributeur")
                 apinc_contrib.add(contributeur)
                 self.stdout.write("Membre 'contributeur' joins 'apinc_contrib' group.\n")
 
@@ -207,11 +197,11 @@ class Command(BaseCommand):
                 misric.birth_date = date(1961,11,10)
                 misric.save()
 
-                misric_private = members.PersonPrivate()
-                misric_private.person = misric
-                misric_private.notes = "Donnees privees du membre 'misric' accessibles seulement par les admins ou le secretariat apinc."
-                misric_private.save()
-                self.stdout.write("Membre 'misric' (generic) inserted.\n")
+                #misric_private = members.PersonPrivate()
+                #misric_private.person = misric
+                #misric_private.notes = "Donnees privees du membre 'misric' accessibles seulement par les admins ou le secretariat apinc."
+                #misric_private.save()
+                #self.stdout.write("Membre 'misric' (generic) inserted.\n")
 
                 apinc_contrib.add(misric)
                 self.stdout.write("Membre 'misric' joins 'apinc_contrib' group.\n")

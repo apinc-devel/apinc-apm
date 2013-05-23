@@ -21,7 +21,7 @@ from django.db import models
 from django.utils.translation import ugettext as _
 from django.contrib.contenttypes import generic
 
-from apm.manage.models import LogEntry
+from apm.apps.manage.models import LogEntry
 
 class TextBlock(models.Model):
     """Text Block"""

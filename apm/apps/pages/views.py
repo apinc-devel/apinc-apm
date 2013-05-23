@@ -29,7 +29,7 @@ from apm.apps.members.models import Person
 from apm.apps.pages.models import TextBlock
 from apm.apps.pages.forms import TextBlockForm
 from apm.apps.news.models import News
-from apm.manage.models import LogEntry
+from apm.apps.manage.models import LogEntry
 from apm.decorators import access_required
 from apm.vhffs import sync_user_from_vhffs_api
 

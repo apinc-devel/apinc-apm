@@ -30,7 +30,7 @@ from django.utils import timezone
 
 from apm.apps.news.models import News
 from apm.apps.news.forms import NewsForm
-from apm.manage.models import LogEntry
+from apm.apps.manage.models import LogEntry
 from apm.decorators import access_required, confirm_required
 
 def index(request):

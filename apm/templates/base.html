@@ -110,7 +110,7 @@
 							</li>
 
 							{% if superadmin or bureau_member or secretariat_member or tresorier_member %}
-                              {% block nav_manage %}<li>{% endblock %}<a href="{% url "apm.manage.views.index" %}">{% trans "Manage" %}</a></li>
+                              {% block nav_manage %}<li>{% endblock %}<a href="{% url "apm.apps.manage.views.index" %}">{% trans "Manage" %}</a></li>
 							{% endif %}
 						</ul>
 

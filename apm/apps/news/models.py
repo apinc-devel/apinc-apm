@@ -23,7 +23,7 @@ from django.utils.translation import ugettext as _
 from django.contrib.contenttypes import generic
 
 from apm.apps.news.utils import get_available_slug
-from apm.manage.models import LogEntry
+from apm.apps.manage.models import LogEntry
 
 DRAFT = 0
 PUBLISHED = 1
