@@ -28,7 +28,7 @@ class TextBlock(models.Model):
 
     slug = models.SlugField(
         verbose_name=_("slug"),
-        max_length=16,
+        max_length=128,
         unique=True,
         editable=False,
         help_text=_('Used for urls regex matches and templates <slug>.html.')
