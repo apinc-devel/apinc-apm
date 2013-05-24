@@ -37,10 +37,14 @@ def homepage(request):
     """APINC homepage"""
     news = News.objects.filter(status__exact=1).order_by('-pub_date')[:5]
 
-    text = TextBlock.objects.get(slug='homepage')
+    homepage_organization = TextBlock.objects.get(slug="homepage-organization")
+    homepage_services = TextBlock.objects.get(slug="homepage-services")
+    homepage_infrastructure = TextBlock.objects.get(slug="homepage-infrastructure")
 
     return render(request, 'pages/homepage.html',
-            {'news': news, 'text': text})
+            {'news': news, 'homepage_organization': homepage_organization,
+             'homepage_services': homepage_services,
+             'homepage_infrastructure': homepage_infrastructure})
 
 def page(request, page):
     """APINC pseudo-static generic page"""
@@ -70,7 +74,10 @@ def edit(request, page):
 
             messages.add_message(request, messages.SUCCESS, _("Pseudo-static page '%s' updated." % page))
 
-            return HttpResponseRedirect(reverse(page))
+            if text.slug.startswith("homepage") :
+                return HttpResponseRedirect(reverse('homepage'))
+            else:
+                return HttpResponseRedirect(reverse(page))
 
     return render(request, 'pages/text_edit.html',
             { 'text': text, 'form': form,

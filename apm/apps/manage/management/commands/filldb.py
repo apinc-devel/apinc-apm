@@ -24,6 +24,7 @@ from optparse import make_option
 from datetime import date, datetime
 import pytz
 
+from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.models import ContentType
@@ -33,43 +34,6 @@ import apm.apps.members.models as members
 import apm.apps.news.models as news
 import apm.apps.manage.models as manage
 #import apm.apps.subscriptions.models as subscriptions
-
-PSEUDO_STATIC_PAGES = [
-	#(slug, title),
-    ("homepage", "Bienvenue !"),
-    ("about", "About page title"),
-    ("legal-notice", "Legal notice and terms of use"),
-    ("contact", "Contact page title"),
-    ("organization", "The organization"),
-    ("statutes", "Statuts de l'association"),
-    ("by-laws", "Règlement intérieur"),
-]
-
-APM_GROUPS = [
-	#(name, slug, email),
-	("apinc-admin", "apinc-admin", "a-admin@a.a"),
-    ("apinc-devel", "apinc-devel", "a-devel@a.org"),
-    ("apinc-bureau", "apinc-bureau", "a-bureau@a.org"),
-	("apinc-secretariat", "apinc-secretariat", "a-secretariat@a.org"),
-	("apinc-tresorier", "apinc-tresorier", "a-tresorier@a.org"),
-	("apinc-contributeur", "apinc-contributeur", "a-contrib@a.org"),
-    #("apinc-membre", "apinc-member", "a-membre@a.org"),
-]
-
-APM_ROLES = [
-    #(name, rank),
-    ("Administrateur", 10),
-    ("President", 30),
-    ("Vice-president", 40),
-    ("Tresorier", 50),
-    ("Tresorier adjoint", 60),
-    ("Secretaire", 70),
-    ("Secretaire adjoint", 80),
-    #("Membre du bureau", 90),
-    #("Membre", 100),
-    #("Demandeur", 110),
-]
-
 
 class Command(BaseCommand):
     help = 'Fill the database with initial data.'
@@ -82,9 +46,9 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         try:
         # cette partie regroupe les données des pages pseudos-statiques
-            for slug, title in PSEUDO_STATIC_PAGES:
+            for slug, title in settings.PSEUDO_STATIC_PAGES:
                 pseudo_static_page, created = pages.TextBlock.objects.get_or_create(
-                        slug=slug, title=title)
+                        slug=slug)
                 if pseudo_static_page.logs.count() < 1:
                     manage.LogEntry.objects.log_action(
                         user_id = get_user_model().objects\
@@ -95,7 +59,9 @@ class Command(BaseCommand):
                         message = "Initialized pseudo-static page.")
                     #self.stdout.write("Log for pseudo-static page '%s' inserted.\n" % slug)
                 if created:
-                    self.stdout.write("Pseudo-static page '%s' inserted.\n" % slug)
+                    pseudo_static_page.title = title
+                    pseudo_static_page.save()
+                    self.stdout.write("Pseudo-static page '%s' '%s' inserted.\n" % (slug, title))
 
         except Exception, e:
             # TODO Error message handling
@@ -104,7 +70,7 @@ class Command(BaseCommand):
 			
         try:
         # cette partie regroupe les groups APM
-            for name, slug, email in APM_GROUPS:
+            for name, slug, email in settings.APM_GROUPS:
                 apm_group, created = manage.Group.objects.get_or_create(name=name, slug=slug, email=email)
                 if created:
                     self.stdout.write("APM group '%s' inserted.\n" % slug)
@@ -115,7 +81,7 @@ class Command(BaseCommand):
             
         try:
         # cette partie regroupe les roles APM
-            for name, rank in APM_ROLES:
+            for name, rank in settings.APM_ROLES:
                 apm_role, created = members.Role.objects.get_or_create(name=name, rank=rank)
                 if created:
                     self.stdout.write("APM role '%s' inserted.\n" % name)

@@ -254,6 +254,47 @@ LOGGING = {
 # App settings
 AUTH_USER_MODEL = 'members.Person'
 
+# App pseudo-static pages
+PSEUDO_STATIC_PAGES = [
+	#(slug, title),
+    ("homepage-organization", "homepage-organization"),
+    ("homepage-services", "homepage-services"),
+    ("homepage-infrastructure", "homepage-infrastructure"),
+    ("about", "About page title"),
+    ("legal-notice", "Legal notice and terms of use"),
+    ("contact", "Contact page title"),
+    ("organization", "The organization"),
+    ("statutes", "Statuts de l'association"),
+    ("by-laws", "Règlement intérieur"),
+]
+
+# App groups
+APM_GROUPS = [
+	#(name, slug, email),
+	("apinc-admin", "apinc-admin", "a-admin@a.a"),
+    ("apinc-devel", "apinc-devel", "a-devel@a.org"),
+    ("apinc-bureau", "apinc-bureau", "a-bureau@a.org"),
+	("apinc-secretariat", "apinc-secretariat", "a-secretariat@a.org"),
+	("apinc-tresorier", "apinc-tresorier", "a-tresorier@a.org"),
+	("apinc-contributeur", "apinc-contributeur", "a-contrib@a.org"),
+    #("apinc-membre", "apinc-member", "a-membre@a.org"),
+]
+
+# App roles
+APM_ROLES = [
+    #(name, rank),
+    ("Administrateur", 10),
+    ("President", 30),
+    ("Vice-president", 40),
+    ("Tresorier", 50),
+    ("Tresorier adjoint", 60),
+    ("Secretaire", 70),
+    ("Secretaire adjoint", 80),
+    #("Membre du bureau", 90),
+    #("Membre", 100),
+    #("Demandeur", 110),
+]
+
 #SITE_PATH = os.path.dirname(PROJECT_DIR)
 TMP_PATH = os.path.join(VAR_ROOT, "tmp") # donnees temporaires (unused yet) 
 
