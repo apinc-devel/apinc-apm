@@ -3,7 +3,8 @@ Portail APM
 
 Pour installer le portail APINC APM en version de développement, il faut: 
 - récupérer les sources du portail APINC APM (à priori si vous lisez ce fichier,
-  c'est déjà fait. Sinon: git clone git@git.apinc.org:apinc-apm.git
+  c'est déjà fait. Sinon: git clone git@git.apinc.org:apinc-apm.git suivi de
+  git checkout --track -b develop origin/develop 
 
 - configurer l'environnement
   pip install -r requirements.pip
