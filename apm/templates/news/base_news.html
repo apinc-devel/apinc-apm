@@ -1,40 +1,53 @@
 {% extends "base.html" %}
 {% load  i18n %}
+{% load static from staticfiles %}
 
 {% block pagetitle %}{% trans "Apinc news" %}{% endblock %}
 
 {% block nav_news %}<li class="active">{% endblock %}
 
 {% block content %}
+<div class="img-header">
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span3 offset1">
+        <img class="align-left" src="{% static "images/news.png" %}" alt>
+      </div>
+      <div class="span8">
+        <p class="text-center">{% trans "News" %}</p>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="container-fluid">
-	<div class="row-fluid">
-		<div class="span3">
-			<div class="well sidebar-nav">
-				<ul class="nav nav-list">
-					{% block extra-actions %}
-					{% if superadmin or bureau_member or secretariat_member or contributeur %}
-					<li class="nav-header">{% trans "Actions" %}</li>
-					<li><a href="{% url "apm.apps.news.views.edit" %}">{% trans "Write a news" %}</a></li>
-					{% if got_draft %}
-					<li><a href="{% url "apm.apps.news.views.drafts" %}">{% trans "See drafts" %}</a></li>
-					{% endif %}
-					{% endif %}
-					{% endblock %}
+  <div class="row-fluid">
+    <div class="span3">
+      <div class="well sidebar-nav">
+        <ul class="nav nav-list">
+          {% block extra-actions %}
+          {% if superadmin or bureau_member or secretariat_member or contributeur %}
+          <li class="nav-header">{% trans "Actions" %}</li>
+          <li><a href="{% url "apm.apps.news.views.edit" %}">{% trans "Write a news" %}</a></li>
+          {% if got_draft %}
+          <li><a href="{% url "apm.apps.news.views.drafts" %}">{% trans "See drafts" %}</a></li>
+          {% endif %}
+          {% endif %}
+          {% endblock %}
 
-					{% if archives %}
-					<li class="nav-header">{% trans "Archives" %}</li>
-					{% for archive_date, count in archives %}
-					<li><a href="{% url "news_month_archives" year=archive_date.year month=archive_date.month %}">{{ archive_date|date:"F Y"|capfirst }} (<strong>{{ count }}</strong>)</a></li>
-					{% endfor %}
-					{% endif %}
+          {% if archives %}
+          <li class="nav-header">{% trans "Archives" %}</li>
+          {% for archive_date, count in archives %}
+          <li><a href="{% url "news_month_archives" year=archive_date.year month=archive_date.month %}">{{ archive_date|date:"F Y"|capfirst }} (<strong>{{ count }}</strong>)</a></li>
+          {% endfor %}
+          {% endif %}
 
-				</ul>
-			</div> <!--/.well -->
-		</div> <!--/span -->
+        </ul>
+      </div> <!--/.well -->
+    </div> <!--/span -->
 
-		<div class="span9">
-			{% block content_page %}{% endblock %} 
-		</div>
-	</div>
+    <div class="span9">
+      {% block content_page %}{% endblock %} 
+    </div>
+  </div>
 </div><!--/container-fluid -->
 {% endblock %}

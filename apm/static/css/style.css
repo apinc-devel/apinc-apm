@@ -1,8 +1,18 @@
-/* Inspired from view-source:http://twitter.github.io/bootstrap/examples/carousel.html */
+.img-header {
+    margin-bottom: 20px;
+    line-height: 100px;
+    background-color: #006dcc;
+    color: #fff;
+    font-size: 35px;
+    font-style: bold;
+}
 
-/* CUSTOMIZE THE CAROUSEL
--------------------------------------------------- */
+.img-header .img {
+    height: 100px;
+}
 
+/* Inspired from http://twitter.github.io/bootstrap/examples/carousel.html */
+/* CUSTOMIZE THE CAROUSEL------------------------------------------------- */
 .carousel .container {
     position: relative;
     z-index: 9;

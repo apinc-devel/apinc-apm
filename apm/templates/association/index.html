@@ -3,13 +3,8 @@
 
 {% block content_page %}
 <div class="container-fluid">
-
 	<div class="row-fluid">
 		<div class="span12">
-
-			<div class="page-header">
-				<h2>{% trans "Who are we ?" %}</h2>
-			</div>
 			{{ text.body_html|safe }}
 			{% if superadmin or bureau_member or secretariat_member or contributeur %}
 			<p><a class="btn btn-primary pull-right" href="{% url "apm.apps.pages.views.edit" text.slug %}">{% trans "Edit" %}</a></p>

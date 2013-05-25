@@ -26,6 +26,7 @@
 		<![endif]-->
 		{% endblock %}
 
+        <link href="{% static "css/style.css" %}" rel="stylesheet" type="text/css">
         {% block extra_stylesheet %}{% endblock %}
         
 		<!-- Fav and touch icons -->
@@ -78,9 +79,10 @@
 							<a href="{% url "apm.apps.association.views.index" %}" class="dropdown-toggle" data-toggle="dropdown" data-target="#">{% trans "Who we are" %} <b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="{% url "apm.apps.association.views.index" %}">{% trans "Organization" %}</a></li>
-								<li><a href="{% url "by-laws" %}">{% trans "By-laws" %}</a></li>
 								<li><a href="{% url "statutes" %}">{% trans "Statutes" %}</a></li>
+								<li><a href="{% url "by-laws" %}">{% trans "By-laws" %}</a></li>
 								<li><a href="{% url "apm.apps.association.views.board" %}">{% trans "Board members" %}</a></li>
+                                {# <li><a href="{% url "history" %}">{% trans "History" %}</a></li> #}
 							</ul>
 							</li>
 
@@ -169,13 +171,5 @@
 		<script src="{% static "bootstrap/js/bootstrap-carousel.js" %}"></script>
 		<script src="{% static "bootstrap/js/bootstrap-typeahead.js" %}"></script>
 		{% endblock javascript %}
-    <script>
-      !function ($) {
-        $(function(){
-          // carousel demo
-          $('#myCarousel').carousel()
-        })
-      }(window.jQuery)
-    </script>
 	</body>
 </html>

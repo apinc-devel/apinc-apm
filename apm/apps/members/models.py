@@ -125,7 +125,7 @@ class MemberRole(models.Model):
 class PersonPrivate(models.Model):
     """private data for a person"""
 
-    person = models.OneToOneField(Person, verbose_name=_('person'))
+    person = models.OneToOneField(Person, verbose_name=_('person'), related_name="private")
 
     # Administration
     notes = models.TextField(verbose_name=_('Notes'), blank=True, null=True,
@@ -145,7 +145,6 @@ class PersonPrivate(models.Model):
 def create_person_private(sender, instance, created, **kwargs):
     if created:
         person_private, created = PersonPrivate.objects.get_or_create(person=instance)
-    print "Create person private %s" % instance
 
 #class Member(Person):
 #    """Member"""

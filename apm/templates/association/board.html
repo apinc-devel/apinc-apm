@@ -4,7 +4,7 @@
 {% block content_page %}
 <div class="container-fluid">
 	<div class="page-header">
-		<h2>{% trans "Board members" %}</h2>
+		<h4>{% trans "Board members" %}</h4>
 	</div>
 	{% for member in board_members %}
 	<p><strong>{{ member.role }} : </strong>{{ member.member }}</p>
