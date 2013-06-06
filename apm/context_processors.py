@@ -22,6 +22,7 @@ import datetime
 from django.conf import settings
 
 from apm.apps.members.models import Person
+from apm.utils import get_or_none
 
 def base(request):
     """ Returns the current year """
@@ -40,13 +41,13 @@ def versions(request):
 def user_groups(request):
 
     user_groups = []
+    p = get_or_none(Person, username=request.user.username)
 
-    if (request.user.is_authenticated() and
-        Person.objects.filter(username=request.user.username)):
-            user_groups = Person.objects.get(username=request.user.username).group_set.values_list('name', flat=True)
+    if request.user.is_authenticated() and p:
+            user_groups = p.group_set.values_list('name', flat=True)
 
     return {
-        'superadmin'         : settings.PORTAL_ADMIN in user_groups,
+        'superadmin'         : settings.PORTAL_ADMIN in user_groups or p.is_superuser,
         'secretariat_member' : 'apinc-secretariat' in user_groups,
         'bureau_member'      : 'apinc-bureau' in user_groups,
         'secretariat_member' : 'apinc-secretariat' in user_groups,

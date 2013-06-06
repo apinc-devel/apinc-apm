@@ -29,6 +29,8 @@ from django.shortcuts import render
 from django.utils.translation import ugettext as _
 from django.utils.decorators import available_attrs
 
+from apm.utils import get_or_none
+
 def access_required(view_func=None, groups=None, allow_myself=False):
     """
     Decorator for views that needs granted access.
@@ -59,11 +61,16 @@ def access_required(view_func=None, groups=None, allow_myself=False):
             if not request.user:
                 return render(request, PERMISSION_DENIED_PAGE, {})
 
-            if not Person.objects.filter(username=request.user.username):
+            p = get_or_none(Person, username=request.user.username)
+
+            if not p:
                 return render(request, PERMISSION_DENIED_PAGE, {})
 
-            user_groups = Person.objects.get(username=request.user.username).\
-                    group_set.values_list('name', flat=True)
+            if p.is_superuser:
+                # Go to the decorated view
+                return view_func(request, *args, **kwargs)
+
+            user_groups = p.group_set.values_list('name', flat=True)
 
             if allow_myself and kwargs.has_key('user_id'):
                 if int(request.user.id) == int(kwargs['user_id']):
