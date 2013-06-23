@@ -44,7 +44,7 @@ class ContributionType(models.Model):
         . those who do not extend the subscription duration (donation for instance)
     The management interface allows to define a label and if the type extends or not the subscription duration.
     """
-    label = models.CharField(max_length=256, unique=True)
+    label = models.CharField(max_length=255, unique=True)
     extends_duration = models.PositiveIntegerField(default=None, blank=True, 
         null=True, verbose_name=_('duration (month)'))
     dues_amount = PositiveNormalizedDecimalField(max_digits=6, decimal_places=2,
