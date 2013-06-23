@@ -33,7 +33,8 @@ from django.contrib.sites.models import Site
 import apm.apps.members.models as members
 import apm.apps.news.models as news
 import apm.apps.manage.models as manage
-#import apm.apps.subscriptions.models as subscriptions
+import apm.apps.pages.models as pages
+import apm.apps.contributions.models as contributions
 
 class Command(BaseCommand):
     help = 'Fill the database with initial data.'
@@ -136,8 +137,8 @@ class Command(BaseCommand):
                 self.stdout.write("Membership 'apinc-tresorier' to 'laurent' inserted.\n")
 
                 contributeur = members.Person.objects.create_user("contributeur", "cont@ribu.ter", "contributeur")
-                contributeur.is_staff = True
-                contributeur.is_superuser = True
+                contributeur.is_staff = False
+                contributeur.is_superuser = False
                 contributeur.first_name = "Contrib"
                 contributeur.last_name = "Uter"
                 contributeur.sex = 'F'
@@ -155,8 +156,8 @@ class Command(BaseCommand):
                 self.stdout.write("Membre 'contributeur' joins 'apinc_contrib' group.\n")
 
                 misric = members.Person.objects.create_user("misric", "m@sric.cc", "misric")
-                misric.is_staff = True
-                misric.is_superuser = True
+                misric.is_staff = False
+                misric.is_superuser = False
                 misric.first_name = "Misric"
                 misric.last_name = "Msrc"
                 misric.sex = 'M'
@@ -245,10 +246,86 @@ class Command(BaseCommand):
                 news8.save()
                 self.stdout.write("News 8 inserted.\n")
 
-                self.stdout.write('Successfully filled database\n')
+                # contributions
+                cotisation_annuelle = contributions.ContributionType()
+                cotisation_annuelle.label = "Cotisation annuelle"
+                cotisation_annuelle.extends_duration = 12
+                cotisation_annuelle.dues_amount = 15
+                cotisation_annuelle.save()
+                self.stdout.write("Type cotisation annuelle inserted.\n")
 
+                donation = contributions.ContributionType()
+                donation.label = "Donation"
+                donation.extends_duration = None
+                donation.save()
+                self.stdout.write("Type donation inserted.\n")
+
+                contribution_type = contributions.ContributionType()
+                contribution_type.label = "Type contribution innactif"
+                contribution_type.extends_duration = 1
+                contribution_type.dues_amount = 3.25
+                contribution_type.active = False
+                contribution_type.save()
+                self.stdout.write("Type inactive contribution inserted.\n")
+
+                cotisation_mensuelle = contributions.ContributionType()
+                cotisation_mensuelle.label = "Cotisation mensuelle"
+                cotisation_mensuelle.extends_duration = 1
+                cotisation_mensuelle.dues_amount = 1.25
+                cotisation_mensuelle.save()
+                self.stdout.write("Type cotisation mensuelle inserted.\n")
+
+                #contribution_contributeur = contributions.Contribution()
+                #contribution_contributeur.person = contributeur
+                #contribution_contributeur.type = cotisation_annuelle
+                #contribution_contributeur.dues_amount = cotisation_annuelle.dues_amount
+                #contribution_contributeur.save()
+                #self.stdout.write("Yearly subscription added to %s.\n" % contributeur)
+
+                #contribution_contributeur = contributions.Contribution()
+                #contribution_contributeur.person = contributeur
+                #contribution_contributeur.type = donation
+                #contribution_contributeur.dues_amount = donation.dues_amount
+                #contribution_contributeur.save()
+                #self.stdout.write("Donation added to %s.\n" % contributeur)
+
+                #contribution_contributeur = contributions.Contribution()
+                #contribution_contributeur.person = contributeur
+                #contribution_contributeur.type = cotisation_annuelle
+                #contribution_contributeur.dues_amount = cotisation_annuelle.dues_amount
+                #contribution_contributeur.save()
+                #self.stdout.write("Yearly subscription added to %s.\n" % contributeur)
+
+                #contribution_contributeur = contributions.Contribution()
+                #contribution_contributeur.person = contributeur
+                #contribution_contributeur.type = cotisation_mensuelle
+                #contribution_contributeur.dues_amount = cotisation_mensuelle.dues_amount
+                #contribution_contributeur.save()
+                #self.stdout.write("Monthly subscription added to %s.\n" % contributeur)
+
+                # projects
+                project = members.Project()
+                project.groupname = "project1"
+                project.owner = contributeur
+                project.creation_date = date(2013,6,12)
+                project.save()
+                self.stdout.write('Project %s successfully added for %s\n' % (project, project.owner))
+                
+                project = members.Project()
+                project.groupname = "project2"
+                project.owner = contributeur
+                project.creation_date = date(2010,1,27)
+                project.save()
+                self.stdout.write('Project %s successfully added for %s\n' % (project, project.owner))
+
+                project = members.Project()
+                project.groupname = "project3"
+                project.owner = laurent
+                project.creation_date = date(2006,8,12)
+                project.save()
+                self.stdout.write('Project %s successfully added for %s\n' % (project, project.owner))
+
+                self.stdout.write('Successfully filled database\n')
             except Exception, e:
                 # TODO Error message handling
                 raise CommandError('Filldb development data "%s"' % e)
-
-import apm.apps.pages.models as pages

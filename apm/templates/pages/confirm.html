@@ -1,28 +1,30 @@
-{% extends section %}
+{% extends "base.html" %}
 {% load i18n %}
 
-{% block javascript %}{% endblock %}
-
 {% block content %}
-<div class="grid_12">
-    
-    <form method="post" action=".">
-        {% csrf_token %}
-        <div class="confirm">
+<div class="container-fluid">
+	<div class="row-fluid">
+    <div class="span12">
+        <form class="form-horizontal" method="post" action=".">
+            {% csrf_token %}
             <p><strong>
-            {% if description %}
+                {% if description %}
                 {{ message }} "{{ description|escape }}" ?
-            {% else %}
+                {% else %}
                 {{ message }} ?
-            {% endif %}
+                {% endif %}
             </strong></p>
-            <p>
-                <a class="button" href="{{ back }}">{% trans "No" %}</a>
-                <input type="submit" class="button" name="_confirm" value="{% trans "Yes" %}" />
-                <input type="hidden" name="next" value="{{ next }}" />
-            </p>
-        </div>
-    </form>
 
-<div class="clear">&nbsp;</div>
+            <input type="hidden" name="next" value="{{ next }}" />
+
+            <div class="control-group">
+                <div class="controls" >
+                    <a class="btn btn-inverse" href="{{ back }}">{% trans "No" %}</a>
+                    <input type="submit" class="btn btn-primary" name="_confirm" value="{% trans "Yes" %}"/>
+                </div>
+            </div>
+        </form>
+    </div>
+</div><!--/row-fluid -->
+</div><!--/container-fluid -->
 {% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'manage/base_manage.html' %}
+{% load i18n %}
+
+{% block content_page %}
+<div class="page-header">
+  <h2>{% trans "Contribution types" %}</h2>
+</div>
+
+<div class="row-fluid">
+    <div class="span12">
+        <table class="table table-bordered table-striped">
+            <colgroup>
+                <col span="1" style="width: 40%;">
+                <col span="1" style="width: 30%;">
+                <col span="1" style="width: 15%;">
+                <col span="1" style="width: 15%;">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>{% trans "Label" %}</th>
+                    <th class="text-center">{% trans "Extends duration (month)" %}</th>
+                    <th class="text-center">{% trans "Dues amount €" %}</th>
+                    <th class="text-center">{% trans "Active" %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for type in type_list %}
+                {% if type.active %}<tr>{% else %}<tr class="muted">{% endif %}
+                    <td><a href="{% url "apm.apps.contributions.views.contribution_type_edit" type.id %}">{{ type.label }}</a></td>
+                    <td class="text-center">{{ type.extends_duration }}</td>
+                    <td class="text-center">{{ type.dues_amount }}</td>
+                    <td class="text-center">{{ type.active }}</td>
+                </tr>
+                {% empty %}
+                <tr><td class="text-error">{% trans "No type defined yet !" %}</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

@@ -11,8 +11,14 @@
     height: 100px;
 }
 
-/* Inspired from http://twitter.github.io/bootstrap/examples/carousel.html */
-/* CUSTOMIZE THE CAROUSEL------------------------------------------------- */
+/* --------------------------------------------------------------------------*/
+.table th.text-center, .table td.text-center {
+    text-align: center;
+}
+
+/* --------------------------------------------------------------------------*/
+/*  Inspired from http://twitter.github.io/bootstrap/examples/carousel.html  */
+/* CUSTOMIZE THE CAROUSEL -------------------------------------------------- */
 .carousel .container {
     position: relative;
     z-index: 9;

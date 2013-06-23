@@ -25,7 +25,7 @@ from django.utils.translation import ugettext as _
 #from django.contrib.auth.models import User
 from django.contrib import messages
 
-from apm.apps.members.models import Person, PersonPrivate
+from apm.apps.members.models import Person, PersonPrivate, Project
 from apm.apps.members.forms import PersonForm, PersonPrivateForm
 from apm.decorators import access_required, confirm_required
 
@@ -42,7 +42,8 @@ def details(request, user_id):
     return render(request, 'members/details.html',
         {'person': person,
          'personprivate': personprivate, 
-         'is_myself': int(request.user.id) == int(user_id)}) #, 'last_activity': last_activity})
+         'is_myself': int(request.user.id) == int(user_id),
+         'projects': Project.objects.get_active_for(person)}) #, 'last_activity': last_activity})
 
 #@access_required(groups=['apinc-secretariat', 'apinc-bureau'], allow_myself=True)
 #def edit(request, user_id=None):

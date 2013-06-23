@@ -9,10 +9,12 @@ import string
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import BasePasswordHasher
+from django.contrib.auth import get_user_model
 
 from apm.apps.members.models import PersonPrivate
 
-USER_REST_URL = '/api/user/'
+USER_REST_URL = '/api/users/'
+MEMBERS_REST_URL = '/api/members/'
 
 ### TODO check and raise ImproperlyConfigured
 
@@ -27,7 +29,7 @@ def _vhffs_rest_api_url(url):
 def sync_user_from_vhffs_api(username):
     """
     Update user data (password (hash), email, last_name, first_name) or
-    create user if it does not exist according to vhffs rest api answer.
+    create user if it does not exist according to vhffs rest api answer.  
     """
     try:
         r = requests.get(_vhffs_rest_api_url(
@@ -40,11 +42,12 @@ def sync_user_from_vhffs_api(username):
         vhffs_user = r.json()
 
         if vhffs_user.has_key('username'): #FIXME tester le code http retour plutot
+            u = None
             try:
-                u = User.objects.get(username=username)
-            except User.DoesNotExist:
-                u = User.objects.create(username=username)
-                pp = PersonPrivate.objects.create(person=u)
+                u = get_user_model().objects.get(username=username)
+            except get_user_model().DoesNotExist:
+                u = get_user_model().objects.create(username=username)
+                #pp = PersonPrivate.objects.create(person=u)
             finally:
                 u.set_password_hash("vhffs" + vhffs_user['passwd'])
                 if vhffs_user['mail']:
@@ -70,7 +73,7 @@ def sync_user_from_vhffs_api(username):
     except requests.RequestException as e:
         # TODO log erreur ambigue lors de l'appel a le requete de l'api vhffs rest
         # l'api rest vhffs est indisponible => on utilise auth_user
-        print "pass the requests api not available."
+        print "pass the requests api not available. %s" % e
         pass
 
 
@@ -97,3 +100,7 @@ class VhffsPasswordHasher(BasePasswordHasher):
     def verify(self, password, encoded):
         salt, hash = encoded[5:].rsplit("$", 1)
         return encoded == self.encode(password, salt)
+
+#  local_tz = pytz.timezone("Europe/Paris")
+#  local_dt = local_tz.normalize(datetime.datetime.utcfromtimestamp(float('1336579459')).replace(tzinfo=pytz.utc).astimezone(local_tz))
+

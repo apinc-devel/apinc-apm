@@ -1,0 +1,39 @@
+{% extends 'manage/base_manage.html' %}
+{% load i18n %}
+
+{% block content_page %}
+<div class="page-header">
+  <h2>{% trans "Contribution type editor" %}</h2>
+</div>
+
+<div class="row-fluid">
+    <div class="span12">
+		<form class="form-horizontal" method="post" action="." enctype="multipart/form-data">
+			{% csrf_token %}
+			{{ form.as_p }}
+
+			{% comment %}
+			<div class="control-group">
+				<label class="control-label" for="id_title">{{ form.title.label }}</label>
+				<div class="controls">
+					<input type="text" id="id_title" placeholder="{% trans "Title" %}" value="{{ form.title.value }}">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="id_body_html">{{ form.body_html.label }}</label>
+				<div class="controls">
+					<input type="textarea" id="id_body_html" placeholder="{% trans "Body" %}" value="{{ form.body_html.value }}">
+				</div>
+			</div>
+			{% endcomment %}
+            {# http://stackoverflow.com/questions/11321767/how-should-i-style-django-validation-errors-with-bootstrap #}
+			<div class="control-group">
+				<div class="controls" >
+					<a class="btn btn-inverse" href="{{ back }}">{% trans "Cancel" %}</a>
+					<input type="submit" class="btn btn-primary" value="{% trans "Save" %}"/>
+				</div>
+			</div>
+		</form>
+    </div>
+</div>
+{% endblock %}

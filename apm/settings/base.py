@@ -192,6 +192,7 @@ INSTALLED_APPS = (
     'apm.apps.pages',
     'apm.apps.association',
     'apm.apps.news',
+    'apm.apps.contributions',
     # third party applications
     'tinymce',
 )
@@ -309,6 +310,9 @@ VHFFS_REST_API_SCHEME = ''
 VHFFS_REST_API_SERVER = ''
 VHFFS_REST_API_PORT = ''
 VHFFS_REST_API_TIMEOUT = 0.050 # seconds
+
+VHFFS_PANEL_SUBSCRIBE_URL = "https://panel.apinc.org/?do=subscribe"
+VHFFS_PANEL_LOST_PASSWORD_URL = "https://panel.apinc.org/?do=lost"
 
 # -----------------------------------------------------------------------------
 # Third party application settings

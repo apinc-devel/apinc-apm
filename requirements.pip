@@ -1,6 +1,8 @@
 Django==1.5.1
 django-tinymce==1.5.1b4
 requests==1.1.0
+python-dateutil==2.1
+pytz==2013b
 #pexpect==2.4
 
 MySQL-python==1.2.4
@@ -10,5 +12,4 @@ MySQL-python==1.2.4
 gunicorn==0.17.4
 
 # for the dev
-#pytz
 #django-debug-toolbar==0.9.4

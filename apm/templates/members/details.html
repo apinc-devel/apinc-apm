@@ -10,6 +10,8 @@
 	<h3 class="muted">{{ person.first_name|default:"First name undefined" }} {{ person.last_name|default:"Last name undefined" }}</h3>
 	<h4 class="muted">{% trans "Personal profile" %}</h4>
 	<ul class="muted">
+		<li><b>{% filter capfirst %}{% trans "username" %}{% endfilter %}
+			&nbsp;: </b>{{ person.username }}</li>
 		<li><b>{% filter capfirst %}{% trans "first name" %}{% endfilter %}
 			&nbsp;: </b>{{ person.first_name }}</li>
 		<li><b>{% filter capfirst %}{% trans "last name" %}{% endfilter %}
@@ -33,7 +35,18 @@
 
 	<p class="text-warning">{% trans "These data are synced from APINC VHFFS Panel, to update these data please edit them from" %} <a href="https://panel.apinc.org/?do=userprefs">{% trans "the panel user preference tab" %}</a>.</p>
 
-	<h4>{% trans "Group memberships" %}</h4>
+    {% if projects %}
+	<h4 class="muted">{% trans "VHFFS projects eligible for membership" %}</h4>
+	<ul class="muted">
+        {% for project in projects %}
+        <li>{{ project.groupname }}</li>
+        {% endfor %}
+    </ul>
+	<p class="text-warning">{% trans "These data are synced from APINC VHFFS Panel, to update these data please edit them from" %} <a href="https://panel.apinc.org/?do=groupindex">{% trans "the panel project tab" %}</a>.</p>
+    {% endif %}
+
+
+	<h4>{% trans "APM group memberships" %}</h4>
 	<ul class="unstyled">
 		{% for gm in person.groupmembership_set.all %}
 		  <li>{{ gm.group.name }} - {{ gm.start_date }} - {{ gm.end_date|default:"On going" }}</li>

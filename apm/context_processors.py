@@ -41,13 +41,15 @@ def versions(request):
 def user_groups(request):
 
     user_groups = []
+    superadmin = False
     p = get_or_none(Person, username=request.user.username)
 
     if request.user.is_authenticated() and p:
             user_groups = p.group_set.values_list('name', flat=True)
+            superadmin = p.is_superuser
 
     return {
-        'superadmin'         : settings.PORTAL_ADMIN in user_groups or p.is_superuser,
+        'superadmin'         : superadmin or settings.PORTAL_ADMIN in user_groups,
         'secretariat_member' : 'apinc-secretariat' in user_groups,
         'bureau_member'      : 'apinc-bureau' in user_groups,
         'secretariat_member' : 'apinc-secretariat' in user_groups,

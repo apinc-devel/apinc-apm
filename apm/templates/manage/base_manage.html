@@ -11,10 +11,10 @@
         <div class="span3">
             <div class="well sidebar-nav">
                 <ul class="nav nav-list">
-                    {% block actions %} {% endblock %}
+                    {% block actions %}{% endblock %}
                     {% block extra-actions %}
                     {% if superadmin or bureau_member or secretariat_member or contributeur %}
-                    <li class="nav-header">{% trans "Actions" %}</li>
+                    <li class="nav-header">{% trans "Members" %}</li>
                     <li><a href="{% url "apm.apps.manage.views.members" %}">{% trans "List members" %}</a></li>
                     {# <li><a href="{% url "apm.apps.members.views.users" %}">{% trans "List Vhffs groups" %}</a></li> #}
                     {% endif %}
@@ -22,10 +22,11 @@
 
                     {% block subscriptions %}
                     {% if superadmin or bureau_member or secretariat_member or tresorier_member %}
-                    <li class="nav-header">{% trans "Subscriptions" %}</li>
+                    <li class="nav-header">{% trans "Treasury" %}</li>
+                    <li><a href="{% url "apm.apps.contributions.views.contributions" %}">{% trans "List contributions" %}</a></li>
+                    <li><a href="{% url "apm.apps.contributions.views.contribution_types" %}">{% trans "List contribution types" %}</a></li>
+                    <li><a href="{% url "apm.apps.contributions.views.contribution_type_edit" %}">{% trans "Add a contribution type" %}</a></li>
                     {% comment %}
-                    <li><a href="{% url apinc.subscriptions.views.index %}">{% trans "Subscriptions index" %}</a></li>
-                    <li><a href="{% url all_subscriptions %}">{% trans "Check all subscriptions" %}</a></li>
                     <li><a href="{% url to_validate_subscriptions %}">{% trans "Check pending subscriptions" %}</a></li>
                     <li><a href="{% url apinc.subscriptions.views.subscription_types %}">{% trans "Edit subscription types" %}</a></li>
                     {% endcomment %}
@@ -40,4 +41,4 @@
             </div>
         </div>
     </div><!--/container-fluid -->
-    {% endblock %}
+{% endblock %}

@@ -1,0 +1,143 @@
+{% extends 'members/base_members.html' %}
+{% load i18n %}
+{% load static from staticfiles %}
+
+{% block content_page %}
+
+<h3>{{ action_title }}</h3>
+
+<form class="form-horizontal" method="post" action="." enctype="multipart/form-data">
+  {% csrf_token %}
+
+  <div class="form_errors">
+        {% for err in form.errors %}
+          <div class="form_error_message">{{ err }}</div>
+            {% endfor %}
+        </div>  
+
+  <div class="control-group">
+    <label class="control-label" for="id_person">{{ form.person.label }}</label>
+    <div class="controls">
+      <select id="id_person" name="person">
+      {% for p in form.fields.person.queryset %}
+      <option value="{{ p.id }}">{{ p.first_name|capfirst }} {{ p.last_name|capfirst }}</option>
+      {% endfor %}
+      </select>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="id_type">{{ form.type.label }}</label>
+    <div class="controls">
+      <select id="id_type" name="type">
+      <option value="" {% if not form.instance %}selected="selected"{% endif %}>{{ form.fields.type.empty_label }}</option>
+      {% for t in form.fields.type.queryset %}
+      <option value="{{ t.id }}" {% if form.instance.type.id == t.id %}selected="selected"{% endif %}>{{ t.label|capfirst }}</option>
+      {% endfor %}
+      </select>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="id_dues_amount">Dues amount</label>
+    <div class="controls">
+        <input id="id_dues_amount" name="dues_amount" type="text" placeholder="{% trans "Dues amount" %}" value="{{ form.dues_amount.value }}"/>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="id_duration">Duration</label>
+    <div class="controls">
+        <input id="id_duration" name="duration" type="text" placeholder="{% trans "Duration (month)" %}" readonly value="{{ form.instance.type.extends_duration }}"/>
+    </div>
+  </div>
+        
+  <div class="control-group">
+    <div class="controls">
+      <a class="btn btn-inverse" href="{{ back }}">{% trans "Cancel" %}</a>
+      <input type="submit" class="btn btn-primary" value="{% trans "Save" %}" />
+    </div>
+  </div>
+</form>
+
+{% endblock %}
+
+{% block extra_javascript %}
+<script type="text/javascript" src="{% static "js/apm.js" %}"></script>
+
+<script type="text/javascript">
+// variable to hold request
+var request;
+// bind to the submit event of our form
+$("#id_type").change(function(event){
+    // abort any pending request
+    if (request) {
+        request.abort();
+    }
+
+    // setup some local variables
+    var $contribution_type = $(this).val();
+    // let's select and cache all the fields
+    //var $inputs = $form.find("input, select, button, textarea");
+    // serialize the data in the form
+    //var serializedData = $form.serialize();
+
+    // let's disable the inputs for the duration of the ajax request
+    //$inputs.prop("disabled", true);
+
+    // fire off the request to /ajax/contribution_type/(\d+)/
+    var request = $.ajax({
+        url: "/ajax/contribution_type/" + $contribution_type + "/",
+        type: "post",
+        //data: ""
+    });
+
+    // callback handler that will be called on success
+    request.done(function (response, textStatus, jqXHR){
+        // log a message to the console
+        // console.log("Hooray, it worked!");
+        var dues_amount = response[0]['dues_amount'];
+        var extends_duration = response[0]['extends_duration'];
+
+        $("#id_duration").val(extends_duration);
+        $("#id_dues_amount").val(dues_amount);
+
+        if (! dues_amount){
+            $("#id_dues_amount").attr('readonly', false);
+        } else {
+            $("#id_dues_amount").attr('readonly', true);
+        };
+        if (! extends_duration){
+            $('label[for=id_duration], input#id_duration').hide();
+        } else {
+            $('label[for=id_duration], input#id_duration').show();
+        };
+    });
+
+    // callback handler that will be called on failure
+    request.fail(function (jqXHR, textStatus, errorThrown){
+        // log the error to the console
+        //console.error(
+        //    "The following error occured: "+
+        //    textStatus, errorThrown
+        //);
+        $("#id_dues_amount").val(undefined);
+        $("#id_duration").val(undefined);
+        $("#id_dues_amount").attr('readonly', false);
+        $('label[for=id_duration], input#id_duration').show();
+    });
+
+    // callback handler that will be called regardless
+    // if the request failed or succeeded
+    request.always(function () {
+        // reenable the inputs
+        //$inputs.prop("disabled", false);
+    });
+
+    // prevent default posting of form
+    event.preventDefault();
+});
+
+</script>
+
+{% endblock %}

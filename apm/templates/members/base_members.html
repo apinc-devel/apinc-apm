@@ -19,25 +19,28 @@
 </div>
 
 <div class="container-fluid">
-	<div class="row-fluid">
-		<div class="span3">
-			<div class="well sidebar-nav">
-				<ul class="nav nav-list">
-            <li class="nav-header">{% trans "Treasury" %}</li>
-            <li><a href="{% static "images/rib_bplc.png" %}">{% trans "Bank details" %}</a></li>
-					{% block extra-actions %}
-					{% if superadmin or bureau_member or secretariat_member or contributeur %}
-                    {# <li class="nav-header">{% trans "Actions" %}</li> #}
-                    {# <li><a href="{% url "apm.apps.news.views.edit" %}">{% trans "Write a news" %}</a></li> #}
-					{% endif %}
-					{% endblock %}
-				</ul>
-			</div> <!--/.well -->
-		</div> <!--/span -->
+  <div class="row-fluid">
+    <div class="span3">
+      <div class="well sidebar-nav">
+        <ul class="nav nav-list">
+          <li class="nav-header">{% trans "Treasury" %}</li>
+          <li><a href="{% static "images/rib_bplc.png" %}">{% trans "Bank details" %}</a></li>
+          {% block extra-actions %}
+          {% if superadmin or bureau_member or secretariat_member or contributeur %}
+          {# <li class="nav-header">{% trans "Actions" %}</li> #}
+          {# <li><a href="{% url "apm.apps.news.views.edit" %}">{% trans "Write a news" %}</a></li> #}
+          {% endif %}
+          {% endblock %}
+          <li class="nav-header">{% trans "Contributions" %}</li>
+          <li><a href="{% url "apm.apps.contributions.views.user_contributions" person.id %}">{% trans "List contributions" %}</a></li>
+          <li><a href="{% url "apm.apps.contributions.views.contribution_edit" person.id %}">{% trans "Add a contribution" %}</a></li>
+        </ul>
+      </div> <!--/.well -->
+    </div> <!--/span -->
 
-		<div class="span9">
-			{% block content_page %}{% endblock %} 
-		</div>
-	</div>
+    <div class="span9">
+      {% block content_page %}{% endblock %} 
+    </div>
+  </div>
 </div><!--/container-fluid -->
 {% endblock %}

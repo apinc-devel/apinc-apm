@@ -18,6 +18,7 @@
 #
 
 import datetime
+from dateutil.relativedelta import relativedelta
 import crypt
 
 from django.core.urlresolvers import reverse
@@ -29,9 +30,14 @@ from django.utils.translation import ugettext as _
 
 #from apm.apps.utils import CONFIDENTIALITY_LEVELS, portal_website_confidential
 
+ACTIVE = 6
+INACTIVE = 2 
+
+
 class PersonManager(UserManager):
     def get_sentinel_user(self):
         return Person.objects.get_or_create(username='deleted', first_name='Sentinel', last_name='User', is_active=False)[0]
+
 
 class Person(AbstractUser):
     """The main class for a person"""
@@ -70,6 +76,56 @@ class Person(AbstractUser):
     def set_password_hash(self, vhffs_hashed_passwd):
         self.password = vhffs_hashed_passwd
 
+    def get_first_subscription_date(self):
+        """Returns the oldest project creation date, none if no projects found"""
+        projects = Project.objects.get_active_for(self)
+        if projects:
+            return projects[0].creation_date
+
+        # log error
+        return None
+
+    def pending_subscriptions(self):
+        """
+        /!\ local import to avoid recursive imports
+        """
+        from apm.apps.contributions.models import Contribution
+
+        return Contribution.objects.filter(person=self).filter(
+            validated=False).count() > 0
+
+    def is_subscriber(self, date=None):
+        """
+        /!\ local import to avoid recursive imports
+        """
+        from apm.apps.contributions.models import Contribution
+
+        if not date:
+            date = datetime.date.today()
+
+        result = False
+        result = Contribution.objects.filter(person=self).filter(
+            validated=True).exclude(start_date__gt=date).exclude(
+            end_date__lt=date)
+        return result
+
+    def get_next_subscription_start_date(self):
+        """
+        /!\ local import to avoid recursive imports
+        """
+        from apm.apps.contributions.models import Contribution
+        
+        result = None
+
+        if Contribution.objects.filter(person=self).count() > 0:
+            result = Contribution.objects.filter(person=self).order_by('-subscription_end_date')[0].subscription_end_date + relativedelta(days=+1)
+
+        if not result:
+            result = self.get_first_subscription_date()
+
+        # raise error
+        return result
+
 
 class Role(models.Model):
     
@@ -89,7 +145,8 @@ class Role(models.Model):
         member_role = memberRole.objects.get(role=self, member=member)
         member_role.end_date = datetime.date.today()
         member_role.save()
-  
+
+
 class MemberRoleManager(models.Manager):
     def get_active_members(self):
         from django.db.models import Q
@@ -122,6 +179,7 @@ class MemberRole(models.Model):
     def __unicode__(self):
         return "Role '%s' : Member '%s'" % (unicode(self.role), unicode(self.member))
 
+
 class PersonPrivate(models.Model):
     """private data for a person"""
 
@@ -146,9 +204,22 @@ def create_person_private(sender, instance, created, **kwargs):
     if created:
         person_private, created = PersonPrivate.objects.get_or_create(person=instance)
 
-#class Member(Person):
-#    """Member"""
-# http://stackoverflow.com/questions/4064808/django-model-inheritance-create-sub-instance-of-existing-instance-downcast
-#import snippets.contribute_to_model
-#snippets.contribute_to_model.contribute_to_model(Person, User)
 
+class ProjectManager(models.Manager):
+    def get_active_for(self, person):
+        return self.filter(owner=person).filter(status__exact=ACTIVE).order_by('creation_date')
+
+
+class Project(models.Model):
+    """Represents a vhffs group"""
+    groupname = models.CharField(verbose_name=_('groupname'), max_length=50, unique=True)
+    owner = models.ForeignKey(Person)
+    creation_date = models.DateField(verbose_name=_('creation date'),
+        null=True, blank=True)
+    PROJECT_STATUS = (
+        (ACTIVE, _('Active')),
+        (INACTIVE, _('Inactive')),
+    )
+    status = models.IntegerField(choices=PROJECT_STATUS, default=ACTIVE)
+
+    objects = ProjectManager()
