@@ -39,13 +39,14 @@
 	<h4 class="muted">{% trans "VHFFS projects eligible for membership" %}</h4>
 	<ul class="muted">
         {% for project in projects %}
-        <li>{{ project.groupname }}</li>
+        <li>{{ project.groupname }} ({{ project.creation_date }})</li>
         {% endfor %}
     </ul>
 	<p class="text-warning">{% trans "These data are synced from APINC VHFFS Panel, to update these data please edit them from" %} <a href="https://panel.apinc.org/?do=groupindex">{% trans "the panel project tab" %}</a>.</p>
     {% endif %}
 
 
+    {% if person.groupmembership_set.all %}
 	<h4>{% trans "APM group memberships" %}</h4>
 	<ul class="unstyled">
 		{% for gm in person.groupmembership_set.all %}
@@ -53,6 +54,7 @@
 		{% endfor %}
 	</ul>
 	{# <p> <a href="{% url "apm.apps.members.views.member_edit" person.id %}">{%trans "Modify" %}</a></p> #}
+    {% endif %}
 
 	{% if superadmin or secretariat_member or bureau_member or tresorier_member %}
 	<h4>{% trans "Person Private data" %}</h4>

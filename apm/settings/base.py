@@ -192,6 +192,7 @@ INSTALLED_APPS = (
     'apm.apps.pages',
     'apm.apps.association',
     'apm.apps.news',
+    'apm.apps.payments',
     'apm.apps.contributions',
     # third party applications
     'tinymce',

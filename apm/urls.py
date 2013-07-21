@@ -67,6 +67,7 @@ urlpatterns = patterns('',
     (r'^association/', include('apm.apps.association.urls')),
     (r'^manage/', include('apm.apps.manage.urls')),
     (r'^contributions/', include('apm.apps.contributions.urls')),
+    (r'^payments/', include('apm.apps.payments.urls')),
     (r'^ajax/', include('apm.apps.ajax.urls')),
 )
 

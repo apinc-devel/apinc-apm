@@ -79,6 +79,22 @@ def contribution_type_edit(request, contribution_type_id=None):
 
 
 @access_required(groups=['apinc-secretariat', 'apinc-tresorier'])
+@confirm_required(lambda contribution_type_id=None :
+    str(get_object_or_404(ContributionType, pk=contribution_type_id)),
+    'manage/base_manage.html',
+    _('Do you really want to delete this contribution type'))
+def contribution_type_delete(request, contribution_type_id=None):
+
+    """delete a contribution type"""
+
+    contribution_type = get_object_or_404(ContributionType, pk=contribution_type_id)
+    contribution_type.delete()
+    messages.add_message(request, messages.SUCCESS, _('Contribution type successfully deleted'))
+
+    return redirect(contribution_types)
+
+
+@access_required(groups=['apinc-secretariat', 'apinc-tresorier'])
 def contributions(request, to_validate=False):
 
     """list contributions"""
@@ -125,6 +141,12 @@ def contribution_edit(request, user_id=None, contribution_id=None):
     person = None
     if user_id:
         person = get_object_or_404(Person, id=user_id)
+        if not person.get_first_subscription_date():
+            messages.add_message(request, messages.INFO, _('Person is not elligible for membership.' + \
+                                                           ' You may check if person owns an APINC VHFFS project.'))
+
+            return HttpResponseRedirect(reverse('apm.apps.members.views.details', kwargs={'user_id':user_id}))
+        
 
     if contribution_id:
         contribution = get_object_or_404(Contribution, id=contribution_id)
@@ -180,22 +202,6 @@ def contribution_edit(request, user_id=None, contribution_id=None):
 @confirm_required(lambda contribution_id=None :
     str(get_object_or_404(Contribution, pk=contribution_id)),
     'manage/base_manage.html',
-    _('Do you really want to validate this contribution'))
-def contribution_validate(request, contribution_id=None):
-
-    """validate a contribution"""
-
-    contribution = get_object_or_404(Contribution, pk=contribution_id)
-    contribution.validated = True
-    contribution.save()
-    messages.add_message(request, messages.SUCCESS, _('Contribution successfully validated.'))
-    return redirect(request.POST.get('next', '/'))
-
-
-@access_required(groups=['apinc-secretariat', 'apinc-tresorier'])
-@confirm_required(lambda contribution_id=None :
-    str(get_object_or_404(Contribution, pk=contribution_id)),
-    'manage/base_manage.html',
     _('Do you really want to delete this contribution'))
 def contribution_delete(request, contribution_id=None):
 
@@ -205,6 +211,7 @@ def contribution_delete(request, contribution_id=None):
     contribution.delete()
     messages.add_message(request, messages.SUCCESS, _('Contribution successfully deleted.'))
     return redirect(request.POST.get('next', '/'))
+
 
 @access_required(groups=['apinc-secretariat', 'apinc-tresorier'],
         allow_myself=True)
@@ -223,45 +230,61 @@ def user_contributions(request, user_id=None):
 
 
 @access_required(groups=['apinc-secretariat', 'apinc-tresorier'])
-def regularize_user(request, user_id=None):
+@confirm_required(lambda contribution_id=None :
+    str(get_object_or_404(Contribution, pk=contribution_id)),
+    'manage/base_manage.html',
+    _('Do you really want to validate this contribution'))
+def contribution_validate(request, contribution_id=None):
 
-    """regularize user subscriptions"""
+    """validate a contribution"""
 
-    person = get_object_or_404(Person, id=user_id)
-    #member = get_object_or_404(Member, person=person)
+    contribution = get_object_or_404(Contribution, pk=contribution_id)
+    contribution.validated = True
+    contribution.save()
+    messages.add_message(request, messages.SUCCESS, _('Contribution successfully validated.'))
+    return redirect(request.POST.get('next', '/'))
 
-    if person.is_subscriber():
-        messages.add_message(request, messages.INFO, _('No need to regularize, member has a valid subscription.'))
-        return redirect(user_subscriptions, user_id=user_id)
-    if person.pending_subscriptions():
-        messages.add_message(request, messages.INFO, _('No need to regularize, member has a pending subscription.'))
-        return redirect(user_subscriptions, user_id=user_id)
 
-    last_subscription_end_date = person.last_subscription_end_date()
-    if not last_subscription_end_date:
-        last_subscription_end_date = datetime.date.today()
-
-    subscription = Subscription()
-    subscription.dues_amount = 0
-    subscription.payment = None
-    subscription.tender_type = Subscription.OTHER
-    subscription.start_date = datetime.date(
-        datetime.date.today().year,
-        last_subscription_end_date.month,
-        last_subscription_end_date.day)
-    subscription.end_date = datetime.date(
-        datetime.date.today().year + 1,
-        last_subscription_end_date.month,
-        last_subscription_end_date.day)
-    subscription.date = datetime.datetime.now()
-    subscription.validated = True
-    subscription.member = person
-    subscription.save()
-
-    messages.add_message(request, messages.SUCCESS, _('The member subscription has been successfully regularized.'))
-
-    return redirect(user_subscriptions, user_id=user_id)
-
+#@access_required(groups=['apinc-secretariat', 'apinc-tresorier'])
+#def regularize_user(request, user_id=None):
+#
+#    """regularize user subscriptions"""
+#
+#    person = get_object_or_404(Person, id=user_id)
+#    #member = get_object_or_404(Member, person=person)
+#
+#    if person.is_subscriber():
+#        messages.add_message(request, messages.INFO, _('No need to regularize, member has a valid subscription.'))
+#        return redirect(user_subscriptions, user_id=user_id)
+#    if person.pending_subscriptions():
+#        messages.add_message(request, messages.INFO, _('No need to regularize, member has a pending subscription.'))
+#        return redirect(user_subscriptions, user_id=user_id)
+#
+#    last_subscription_end_date = person.last_subscription_end_date()
+#    if not last_subscription_end_date:
+#        last_subscription_end_date = datetime.date.today()
+#
+#    subscription = Subscription()
+#    subscription.dues_amount = 0
+#    subscription.payment = None
+#    subscription.tender_type = Subscription.OTHER
+#    subscription.start_date = datetime.date(
+#        datetime.date.today().year,
+#        last_subscription_end_date.month,
+#        last_subscription_end_date.day)
+#    subscription.end_date = datetime.date(
+#        datetime.date.today().year + 1,
+#        last_subscription_end_date.month,
+#        last_subscription_end_date.day)
+#    subscription.date = datetime.datetime.now()
+#    subscription.validated = True
+#    subscription.member = person
+#    subscription.save()
+#
+#    messages.add_message(request, messages.SUCCESS, _('The member subscription has been successfully regularized.'))
+#
+#    return redirect(user_subscriptions, user_id=user_id)
+#
 #@access_required(groups=['apinc-secretariat', 'apinc-tresorier'])
 #def subscription_type_edit(request, type_id=None):
 #    
@@ -288,24 +311,3 @@ def regularize_user(request, user_id=None):
 #    return render(request, 'contributions/subscription_type_edit.html',
 #            {'form': form, 
 #             'back': request.META.get('HTTP_REFERER', '/')})
-
-@access_required(groups=['apinc-secretariat', 'apinc-tresorier'])
-@confirm_required(lambda type_id=None :
-    str(get_object_or_404(ContributionType, pk=type_id)),
-    'manage/base_manage.html',
-    _('Do you really want to delete this contribution type'))
-def contribution_type_delete(request, type_id=None):
-
-    """delete a contribution type"""
-
-    contribution_type = get_object_or_404(ContributionType, pk=type_id)
-    contribution_type.delete()
-    messages.add_message(request, messages.SUCCESS, _('Contribution type successfully deleted'))
-
-    return redirect(contribution_types)
-
-
-def subscription_request(request):
-    # TODO
-    return render(request, 'contributions/request.html')
-

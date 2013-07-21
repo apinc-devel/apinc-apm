@@ -62,50 +62,6 @@ class ContributionType(models.Model):
         verbose_name = _('contribution type')
         ordering = ['-active', 'id']
 
-#    CARD = 0
-#    TRANSFER = 1
-#    PAYPAL = 2
-#    CHEQUE = 3
-#    OTHER = 4
-#
-#    TENDER_TYPE = (
-#                   (CARD, _('Card')),
-#                   (TRANSFER, _('Transfer')),
-#                   (PAYPAL, _('Paypal')),
-#                   (CHEQUE, _('Cheque')),
-#                   (OTHER, _('Other')),
-#                   )
-
-class Payment(models.Model):
-    """
-    A payment correspond to an overall payment for a member.
-
-    A few data are required to create a payment :
-        . a brief description,
-        . the emitter,
-        . the date (default to day date),
-        . the amount
-
-    Each payment it then shared out as contributions against payment amount.
-    Consequently a payment has no incidence over a member subscription end date
-    nor duration.
-    """
-    person = models.ForeignKey(Person, verbose_name=_('member'),
-        related_name='payment')
-    description = models.CharField(max_length=512, blank=False)
-    amount = PositiveNormalizedDecimalField(max_digits=6, decimal_places=2)
-    date = models.DateTimeField(verbose_name=_('payment date'),
-        null=True, blank=True)
-    
-    def __unicode__(self):
-        """unicode string for payment object"""
-        return u'%s %s → %s' % (self.person, self.description, self.date)
-
-    class Meta:
-        """Meta"""
-        verbose_name = _('Payment')
-        ordering = ['id']
-
 
 class ContributionManager(models.Manager):
     def validated(self):
@@ -152,7 +108,6 @@ class Contribution(models.Model):
         related_name='contribution')
     type = models.ForeignKey(ContributionType, verbose_name=_('contribution type'), 
         related_name='type', blank=False, null=False)
-    payments = models.ManyToManyField('Payment', null=True, blank=True)
     dues_amount = PositiveNormalizedDecimalField(max_digits=6, decimal_places=2)
     validated = models.BooleanField(verbose_name=_('validated'), default=False)
     recorded_date = models.DateTimeField(verbose_name=_('record date'),

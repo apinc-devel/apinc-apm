@@ -1,0 +1,52 @@
+{% extends 'members/base_members.html' %}
+{% load i18n %}
+
+{% block content_page %}
+<div class="page-header">
+  <h2>{% trans "Payments for" %} {{ person.first_name }} {{ person.last_name }}</h2>
+</div>
+
+<div class="row-fluid">
+<div class="span12">
+<table class="table table-condensed">
+  <tr class="info">
+    <td>{% trans "Date" %}</td>
+    <td>{% trans "Description" %}</td>
+    <td>{% trans "Emitter" %}</td>
+    <td>{% trans "Amount" %}</td>
+  </tr>
+{% for payment in payments_list %}
+    <tr>
+    <td class="text-info">{{ payment.date|date:"d/M/Y H:i" }}</td>
+    <td>{{ payment.description }}</td>
+    <td>{{ payment.emitter }}</td>
+    <td>{{ payment.amount }}&nbsp;{% trans "euros" %}</td>
+    <td>
+
+    {% if superadmin or secretariat_member or tresorier_member %}
+    <td>
+    <a class="btn" href="{% url "apm.apps.payments.views.payment_edit" payment.emitter.id payment.id %}?next={% url "apm.apps.payments.views.user_payments" payment.emitter.id %}">{% trans "Edit" %}</a>
+    </td>
+    <td>
+    <a class="btn" href="{% url "apm.apps.payments.views.payment_delete" payment.id %}?next={% url "apm.apps.payments.views.user_payments" payment.emitter.id %}">{% trans "Delete" %}</a>
+    </td>
+    </tr>
+    {% endif %}
+
+{% empty %}
+<tr><td class="text-info">{% trans "No payments yet !" %}</td></tr>
+{% endfor %}
+
+</table>
+</div><!--/span12 -->
+</div><!--/row-fluid -->
+
+{% comment %}
+{% if superadmin or secretariat_member or tresorier_member %}
+    {% if not is_subscriber %}
+    <p class=alert>{{ person }} has no valid payment !</p>&nbsp;<a href="{% url "apm.apps.payments.views.regularize_user" user.id %}?next={% url "apm.apps.payments.views.user_payments" user.id %}">{% trans "Regularize user payment"%}</a>
+    {% endif %}
+{% endif %}
+{% endcomment %}
+
+{% endblock %}

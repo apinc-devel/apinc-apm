@@ -22,7 +22,11 @@
 
                     {% block subscriptions %}
                     {% if superadmin or bureau_member or secretariat_member or tresorier_member %}
-                    <li class="nav-header">{% trans "Treasury" %}</li>
+                    <li class="nav-header">{% trans "Administrative tasks" %}</li>
+                    <li><a href="{% url "apm.apps.payments.views.payments" %}">{% trans "List payments" %}</a></li>
+                    <li><a href="{% url "apm.apps.payments.views.payment_edit" %}">{% trans "Add a payment" %}</a></li>
+                    <li><a href="{% url "apm.apps.contributions.views.contributions" %}">{% trans "List contributions" %}</a></li>
+                    <li><a href="{% url "apm.apps.contributions.views.contribution_edit" %}">{% trans "Add a contribution" %}</a></li>
                     <li><a href="{% url "apm.apps.contributions.views.contributions" %}">{% trans "List contributions" %}</a></li>
                     <li><a href="{% url "apm.apps.contributions.views.contribution_types" %}">{% trans "List contribution types" %}</a></li>
                     <li><a href="{% url "apm.apps.contributions.views.contribution_type_edit" %}">{% trans "Add a contribution type" %}</a></li>

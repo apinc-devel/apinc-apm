@@ -49,7 +49,7 @@ class ContributionForm(forms.ModelForm):
     class Meta:
         """ContributionForm meta"""
         model = Contribution
-        exclude = ('validated', 'subscription_end_date', 'payments',
+        exclude = ('validated', 'subscription_end_date', 
                    'subscription_start_date', 'recorded_date')
 
 

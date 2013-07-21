@@ -85,6 +85,16 @@ class Person(AbstractUser):
         # log error
         return None
 
+
+    def get_subscriptions(self):
+        """
+        /!\ local import to avoid recursive imports
+        """
+        from apm.apps.contributions.models import Contribution
+
+        return Contribution.objects.filter(person=self).filter(type__extends_duration__gt=0)
+
+
     def pending_subscriptions(self):
         """
         /!\ local import to avoid recursive imports
@@ -117,13 +127,12 @@ class Person(AbstractUser):
         
         result = None
 
-        if Contribution.objects.filter(person=self).count() > 0:
+        if self.get_subscriptions().count() > 0:
             result = Contribution.objects.filter(person=self).order_by('-subscription_end_date')[0].subscription_end_date + relativedelta(days=+1)
 
-        if not result:
+        if self.get_first_subscription_date():
             result = self.get_first_subscription_date()
 
-        # raise error
         return result
 
 
