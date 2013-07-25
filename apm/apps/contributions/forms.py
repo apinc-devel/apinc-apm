@@ -23,7 +23,7 @@ from django import forms
 from django.utils.translation import ugettext as _
 
 from apm.apps.contributions.models import Contribution, ContributionType
-from apm.apps.members.models import Person
+from django.contrib.auth import get_user_model as Person
 
 class ContributionForm(forms.ModelForm):
     """Contribution form"""
@@ -36,7 +36,7 @@ class ContributionForm(forms.ModelForm):
         self.fields['type'].empty_label = _('-- Select contribution type --')
 
         if person_id:
-            self.fields['person'].queryset = Person.objects.filter(id=person_id)
+            self.fields['person'].queryset = Person().objects.filter(id=person_id)
 
     def clean_dues_amount(self):
         dues_amount = self.cleaned_data['dues_amount']

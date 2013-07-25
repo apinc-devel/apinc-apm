@@ -75,14 +75,14 @@ def payment_edit(request, user_id=None, payment_id=None):
 
     if payment_id:
         payment = get_object_or_404(Payment, id=payment_id)
-        form = PaymentForm(instance=payment)
+        form = PaymentForm(instance=payment, emitter_id=user_id)
         msg_log = "Payment modified."
 
     if request.method == 'POST':
         if payment_id:
-            form = PaymentForm(request.POST, instance=payment)
+            form = PaymentForm(request.POST, instance=payment, emitter_id=user_id)
         else:
-            form = PaymentForm(request.POST)
+            form = PaymentForm(request.POST, emitter_id=user_id)
 
         if form.is_valid():
             payment = form.save()

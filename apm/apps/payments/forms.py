@@ -19,9 +19,9 @@
 
 from django import forms
 from django.utils.translation import ugettext as _
+from django.contrib.auth import get_user_model as Person
 
 from apm.apps.payments.models import Payment
-from apm.apps.members.models import Person
 
 
 class PaymentForm(forms.ModelForm):
@@ -33,7 +33,7 @@ class PaymentForm(forms.ModelForm):
         super(PaymentForm, self).__init__(*args, **kwargs)
 
         if emitter_id:
-            self.fields['emitter'].queryset = Person.objects.filter(id=emitter_id)
+            self.fields['emitter'].queryset = Person().objects.filter(id=emitter_id)
 
     class Meta:
         """Payment meta"""

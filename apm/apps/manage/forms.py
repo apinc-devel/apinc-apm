@@ -17,16 +17,24 @@
 #   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 
-from django.conf.urls import *
+from django import forms
+from django.utils.translation import ugettext as _
+from django.contrib.auth import get_user_model as Person
 
-urlpatterns = patterns('apm.apps.manage.views',
+from apm.apps.manage.models import GroupMembership
 
-    # Manage
 
-    url(r'^$','index'),
-    url(r'^members/$','members'),
-    url(r'^roles/$','roles'),
-    url(r'^groups/$','groups'),
-    url(r'^groupmembership/add/(?P<user_id>\d+)/$','groupmembership_edit'),
-    url(r'^groupmembership/add/(?P<user_id>\d+)/(?P<gm_id>\d+)/$','groupmembership_edit'),
-)
+class GroupMembershipForm(forms.ModelForm):
+
+    """GroupMembership Form"""
+
+    def __init__(self, *args, **kwargs):
+        member_id = kwargs.pop('member_id', None)
+        super(GroupMembershipForm, self).__init__(*args, **kwargs)
+
+        if member_id:
+            self.fields['member'].queryset = Person().objects.filter(id=member_id)
+
+    class Meta:
+        """GroupMembership meta"""
+        model = GroupMembership

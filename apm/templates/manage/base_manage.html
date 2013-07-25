@@ -11,12 +11,19 @@
         <div class="span3">
             <div class="well sidebar-nav">
                 <ul class="nav nav-list">
-                    {% block actions %}{% endblock %}
-                    {% block extra-actions %}
+                    {% block members %}
                     {% if superadmin or bureau_member or secretariat_member or contributeur %}
                     <li class="nav-header">{% trans "Members" %}</li>
                     <li><a href="{% url "apm.apps.manage.views.members" %}">{% trans "List members" %}</a></li>
                     {# <li><a href="{% url "apm.apps.members.views.users" %}">{% trans "List Vhffs groups" %}</a></li> #}
+                    {% endif %}
+                    {% endblock %}
+
+                    {% block organization %}
+                    {% if superadmin or bureau_member or secretariat_member or contributeur %}
+                    <li class="nav-header">{% trans "Organization" %}</li>
+                    <li><a href="{% url "apm.apps.manage.views.roles" %}">{% trans "List roles" %}</a></li>
+                    <li><a href="{% url "apm.apps.manage.views.groups" %}">{% trans "List groups" %}</a></li>
                     {% endif %}
                     {% endblock %}
 
@@ -27,7 +34,6 @@
                     <li><a href="{% url "apm.apps.payments.views.payment_edit" %}">{% trans "Add a payment" %}</a></li>
                     <li><a href="{% url "apm.apps.contributions.views.contributions" %}">{% trans "List contributions" %}</a></li>
                     <li><a href="{% url "apm.apps.contributions.views.contribution_edit" %}">{% trans "Add a contribution" %}</a></li>
-                    <li><a href="{% url "apm.apps.contributions.views.contributions" %}">{% trans "List contributions" %}</a></li>
                     <li><a href="{% url "apm.apps.contributions.views.contribution_types" %}">{% trans "List contribution types" %}</a></li>
                     <li><a href="{% url "apm.apps.contributions.views.contribution_type_edit" %}">{% trans "Add a contribution type" %}</a></li>
                     {% comment %}

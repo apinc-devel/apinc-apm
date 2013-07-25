@@ -122,10 +122,10 @@ class GroupMembership(models.Model):
     """Store a person membership to a group"""
 
     group = models.ForeignKey(Group)
-    member = models.ForeignKey(settings.AUTH_USER_MODEL)
+    member = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_('member'))
 
     start_date = models.DateField(verbose_name=_('start date'),
-        default=datetime.date.today(), blank=True, null=True)
+        default=datetime.date.today())
     end_date = models.DateField(verbose_name=_('end date'), blank=True,
         null=True)
     expiration_date = models.DateField(verbose_name=_('expiration date'),

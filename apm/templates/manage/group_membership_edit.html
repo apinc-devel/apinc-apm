@@ -1,0 +1,82 @@
+{% extends person.id|yesno:'members/base_members.html,manage/base_manage.html' %}
+{% load i18n %}
+
+{% block content_page %}
+<div class="page-header">
+    <h2>{% trans "Add an apm group membership" %}</h2>
+</div>
+
+<div class="row-fluid">
+    <div class="span12">
+        <form class="form-horizontal" method="post" action="." enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="form_errors">
+                {% for err in form.errors %}
+                <div class="form_error_message">{{ err }}</div>
+                {% endfor %}
+            </div>  
+
+            <div class="control-group">
+                <label class="control-label" for="id_group">{{ form.group.label }}</label>
+                <div class="controls">
+                    <select id="id_group" name="group">
+                        {% for g in form.fields.group.queryset %}
+                        <option value="{{ g.id }}">{{ g.slug }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="id_member">{{ form.member.label }}</label>
+                <div class="controls">
+                    <select id="id_member" name="member">
+                        {% for p in form.fields.member.queryset %}
+                        <option value="{{ p.id }}">{{ p.first_name|capfirst }} {{ p.last_name|capfirst }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="id_start_date">{{ form.start_date.label }}</label>
+                <div class="controls">
+                    <input id="id_start_date" name="start_date" type="text" placeholder="{% trans "start_date" %}" value="{{ form.start_date.value }}"/>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="id_end_date">{{ form.end_date.label }}</label>
+                <div class="controls">
+                    <input id="id_end_date" name="end_date" type="text" placeholder="{% trans "end_date" %}" value="{{ form.end_date.value }}"/>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="id_expiration_date">{{ form.expiration_date.label }}</label>
+                <div class="controls">
+                    <input id="id_expiration_date" name="expiration_date" type="text" value="{{ form.expiration_date.value }}"/>
+                </div>
+            </div>
+
+            {# http://stackoverflow.com/questions/11321767/how-should-i-style-django-validation-errors-with-bootstrap #}
+            <div class="control-group">
+                <div class="controls" >
+                    <a class="btn btn-inverse" href="{{ back }}">{% trans "Cancel" %}</a>
+                    <input type="submit" class="btn btn-primary" value="{% trans "Save" %}"/>
+                    {% if form.instance.id %}
+                    {#<a class="btn btn-danger" href="{% url "apm.apps.manage.views.groupmembership_delete" form.instance.id %}">{% trans "Delete" %}</a>#}
+                    {% endif %}
+                </div>
+            </div>
+            
+            
+        </form> 
+        {% endblock %}
+
+        {% block extra-actions %}
+        {# FIXME #}
+        {% endblock %}
+    </div><!--/span12-->
+</div><!--/raw-fluid-->

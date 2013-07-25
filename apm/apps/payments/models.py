@@ -56,8 +56,7 @@ class Payment(models.Model):
         related_name='payment')
     description = models.CharField(max_length=512, blank=False)
     amount = PositiveNormalizedDecimalField(max_digits=6, decimal_places=2)
-    date = models.DateTimeField(verbose_name=_('payment date'),
-        null=True, blank=True)
+    date = models.DateTimeField(verbose_name=_('payment date'))
     contributions = models.ManyToManyField(Contribution, null=True, blank=True, related_name='payments')
 
     

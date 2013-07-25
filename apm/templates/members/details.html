@@ -33,35 +33,41 @@
 		{% endif %}
 	</ul>
 
-	<p class="text-warning">{% trans "These data are synced from APINC VHFFS Panel, to update these data please edit them from" %} <a href="https://panel.apinc.org/?do=userprefs">{% trans "the panel user preference tab" %}</a>.</p>
-
     {% if projects %}
-	<h4 class="muted">{% trans "VHFFS projects eligible for membership" %}</h4>
-	<ul class="muted">
+    <div class="muted">
+	<h4>{% trans "VHFFS projects eligible for membership" %}</h4>
+	<ul>
         {% for project in projects %}
         <li>{{ project.groupname }} ({{ project.creation_date }})</li>
         {% endfor %}
     </ul>
-	<p class="text-warning">{% trans "These data are synced from APINC VHFFS Panel, to update these data please edit them from" %} <a href="https://panel.apinc.org/?do=groupindex">{% trans "the panel project tab" %}</a>.</p>
+    </div>
     {% endif %}
 
 
-    {% if person.groupmembership_set.all %}
+	<p class="text-warning">{% trans "These data are synced from APINC VHFFS Panel, to update these data please edit them from" %} <a href="https://panel.apinc.org/">{% trans "the appropriate panel tab" %}</a>.</p>
+
+
+	{% if superadmin or secretariat_member or bureau_member or tresorier_member %}
+    <div class="text-success">
 	<h4>{% trans "APM group memberships" %}</h4>
+    {% if person.groupmembership_set.all %}
 	<ul class="unstyled">
 		{% for gm in person.groupmembership_set.all %}
 		  <li>{{ gm.group.name }} - {{ gm.start_date }} - {{ gm.end_date|default:"On going" }}</li>
 		{% endfor %}
 	</ul>
-	{# <p> <a href="{% url "apm.apps.members.views.member_edit" person.id %}">{%trans "Modify" %}</a></p> #}
+    {% else %}
+    <p>{% trans "No apm group membership" %}</p>
     {% endif %}
+	<p><a class="btn btn-success" href="{% url "apm.apps.manage.views.groupmembership_edit" person.id %}">{%trans "Add" %}</a></p>
+    </div>
 
-	{% if superadmin or secretariat_member or bureau_member or tresorier_member %}
+    <div class="text-info">
 	<h4>{% trans "Person Private data" %}</h4>
-	<div>
-		<p>{{ personprivate.notes }}</p>
-	</div>
-  <p><a class="btn btn-primary" href="{% url "apm.apps.members.views.personprivate_edit" person.id %}">{% trans "Edit" %}</a></p>
+	<div> <p>{{ personprivate.notes }}</p> </div>
+    <p><a class="btn btn-primary" href="{% url "apm.apps.members.views.personprivate_edit" person.id %}">{% trans "Edit" %}</a></p>
+    </div>
 	{% endif %}
 
 	{% endblock %}

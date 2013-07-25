@@ -72,7 +72,6 @@ class ContributionManager(models.Manager):
             .filter(type__extends_duration__gt=0).order_by('recorded_date'))
         first_subscription_date = person.get_first_subscription_date()
 
-        print first_subscription_date
         if not first_subscription_date:
             # TODO log error
             return
