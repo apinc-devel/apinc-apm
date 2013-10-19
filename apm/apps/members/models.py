@@ -127,11 +127,11 @@ class Person(AbstractUser):
         
         result = None
 
-        if self.get_subscriptions().count() > 0:
-            result = Contribution.objects.filter(person=self).order_by('-subscription_end_date')[0].subscription_end_date + relativedelta(days=+1)
-
         if self.get_first_subscription_date():
             result = self.get_first_subscription_date()
+
+        if self.get_subscriptions().count() > 0:
+            result = Contribution.objects.filter(person=self).order_by('-subscription_end_date')[0].subscription_end_date + relativedelta(days=+1)
 
         return result
 

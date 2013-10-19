@@ -136,7 +136,7 @@ def contribution_edit(request, user_id=None, contribution_id=None):
     today = datetime.date.today()
     form = ContributionForm(person_id=user_id)
     msg_log = "Contribution has been successfully created."
-    title = _('Adding a subscription for')
+    title = _('Adding a contribution for')
 
     person = None
     if user_id:
@@ -179,6 +179,13 @@ def contribution_edit(request, user_id=None, contribution_id=None):
             if contribution.type.extends_duration:
                 contribution.subscription_start_date = contribution.person\
                                             .get_next_subscription_start_date()
+
+                if not contribution.subscription_start_date:
+                    messages.add_message(request, messages.WARNING,
+                        _('No project found for member %s' % contribution.person))
+                    page_dict.update({'form': form})
+                    return render(request, 'contributions/contribution_edit.html', page_dict)
+
                 contribution.subscription_end_date = contribution\
                     .subscription_start_date + relativedelta(
                      months=contribution.type.extends_duration, days=-1)
