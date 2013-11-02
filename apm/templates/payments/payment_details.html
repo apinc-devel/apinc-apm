@@ -1,0 +1,49 @@
+{% extends 'members/base_members.html' %}
+{% load i18n %}
+
+{% block content_page %}
+<div class="page-header">
+  <h2>{% trans "Payment details" %}</h2>
+</div>
+
+<div class="row-fluid">
+  <div class="span12">
+    <table class="table table-condensed">
+      <tbody>
+        <tr><td>{% trans "Id" %}</td><td>{{ payment.id }}</td></tr>
+        <tr><td>{% trans "Date" %}</td><td>{{ payment.date }}</td></tr>
+        <tr><td>{% trans "Description" %}</td><td>{{ payment.description }}</td></tr>
+        <tr><td>{% trans "Emitter" %}</td><td>{{ payment.emitter }}</td></tr>
+        <tr><td>{% trans "Amount" %}</td><td>{{ payment.amount }} {% trans "euros" %}</td></tr>
+        <tr><td>{% trans "Available amount" %}</td><td>{{ payment.amount_to_use }}</td></tr>
+        </tbody>
+      </table>
+      <table class="table">
+        <tbody>
+          <tr>{% trans "Attached contributions" %}</tr>
+          {% for ca in payment.contributions.all %}
+          <tr><td>#{{ ca.id }}</td>
+            <td>{{ ca.person }}</td>
+            <td>{{ ca.type.label }}</td>
+            <td>[{{ ca.dues_amount }} {% trans "euros" %}]</td>
+            <td>{{ ca.recorded_date }}</td>
+          </tr>
+          {% empty %}
+          <tr>{% trans "No contribution attached yet." %}</tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      {% if superadmin or secretariat_member or tresorier_member %}
+      <td>
+        <a class="btn" href="{% url "apm.apps.payments.views.payment_edit" payment.emitter.id payment.id %}?next={% url "apm.apps.payments.views.payment_details" payment.id %}">{% trans "Edit" %}</a>
+      </td>
+      <td>
+        <a class="btn" href="{% url "apm.apps.payments.views.payment_delete" payment.id %}?next={% url "apm.apps.payments.views.user_payments" payment.emitter.id %}">{% trans "Delete" %}</a>
+      </td>
+    </tr>
+    {% endif %}
+</div><!--/span12 -->
+</div><!--/row-fluid -->
+
+{% endblock %}
