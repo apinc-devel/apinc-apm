@@ -25,7 +25,9 @@ def get_or_none(model, **kwargs):
     except model.DoesNotExist:
         return None
 
-def unprivileged_user(username):
+def unprivileged_user(username, groups=None):
+    from django.conf import settings # ici limiter la visibilité des settings
+
     p = get_or_none(Person, username=username)
 
     if not p:
