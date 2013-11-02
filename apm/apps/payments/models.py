@@ -40,7 +40,7 @@ from apm.fields import PositiveNormalizedDecimalField
 
 class Payment(models.Model):
     """
-    A payment correspond to an overall payment for a member.
+    A payment corresponds to an overall payment for a member.
 
     A few data are required to create a payment :
         . a brief description,
@@ -48,18 +48,25 @@ class Payment(models.Model):
         . the date (default to day date),
         . the amount
 
-    Each payment it then shared out as contributions against payment amount.
+    Each payment is then shared out as contributions against payment amount.
     Consequently a payment has no incidence over a member subscription end date
     nor duration.
     """
     emitter = models.ForeignKey(Person, verbose_name=_('emitter'),
         related_name='payment')
-    description = models.CharField(max_length=512, blank=False)
-    amount = PositiveNormalizedDecimalField(max_digits=6, decimal_places=2)
-    date = models.DateTimeField(verbose_name=_('payment date'))
+    description = models.CharField(max_length=512, blank=False, default="")
+    amount = PositiveNormalizedDecimalField(max_digits=6, decimal_places=2, blank=False, default=0)
+    date = models.DateTimeField(verbose_name=_('payment date'), blank=False, default="")
     contributions = models.ManyToManyField(Contribution, null=True, blank=True, related_name='payments')
 
-    
+    def amount_to_use(self):
+        """amount still to be used"""
+        amount_to_use = self.amount
+        for c in self.contributions.all():
+            amount_to_use -= c.dues_amount
+        return amount_to_use
+
+
     def __unicode__(self):
         """unicode string for payment object"""
         return u'%s %s received on %s' % (self.emitter, self.description, self.date)

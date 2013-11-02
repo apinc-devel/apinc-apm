@@ -1,6 +1,6 @@
-# -*- coding: utf-8 -*-
+# -*- coding: utf-8 _*_
 #
-#   Copyright © 2011-2013 APINC Devel Team
+#   Copyright © 2013 Project Devel Team
 #
 #   This program is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
@@ -17,19 +17,16 @@
 #   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 
-from django.conf.urls.defaults import *
+from django import template
+from apm.apps.contributions.models import Contribution
 
-urlpatterns = patterns('apm.apps.payments.views',
+register = template.Library()
 
-    # Contributions
-
-    url(r'^$', 'payments'),
-    url(r'^list/(?P<user_id>\d+)/$','user_payments'),
-    url(r'^details/(?P<payment_id>\d+)/$','payment_details'),
-    url(r'^add/$', 'payment_edit'),
-    url(r'^add/user/(?P<user_id>\d+)/$', 'payment_edit'),
-    url(r'^edit/(?P<user_id>\d+)/(?P<payment_id>\d+)/$', 'payment_edit'),
-    url(r'^delete/(?P<payment_id>\d+)/$', 'payment_delete'),
-    url(r'^distribute/(?P<payment_id>\d+)/$', 'payment_distribute'),
-    #url(r'^request/$', 'subscription_request'),
-)
+@register.filter
+def is_selected_contribution(value, contributions):
+    selected = ""
+    for c in contributions:
+        if c.id == value.id:
+            selected = 'selected="selected"'
+            break
+    return selected

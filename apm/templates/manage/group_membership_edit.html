@@ -1,5 +1,13 @@
 {% extends person.id|yesno:'members/base_members.html,manage/base_manage.html' %}
 {% load i18n %}
+{% load static from staticfiles %}
+
+{% block extra_stylesheet %}
+{#<link rel="stylesheet" type="text/css" href="{% static "jquery-ui/jquery-ui-" %}{{ jquery_ui_version }}.custom.min.css">#}
+
+{#<link rel="stylesheet" href="{% static "bootstrap-datepicker/css/datepicker.css" %}">#}
+<link rel="stylesheet" href="{% static "bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" %}">
+{% endblock %}
 
 {% block content_page %}
 <div class="page-header">
@@ -21,8 +29,9 @@
                 <label class="control-label" for="id_group">{{ form.group.label }}</label>
                 <div class="controls">
                     <select id="id_group" name="group">
+                        <option value"" {% if not form.instance %}selected="selected"{% endif %}>{{ form.fields.group.empty_label }}</option>
                         {% for g in form.fields.group.queryset %}
-                        <option value="{{ g.id }}">{{ g.slug }}</option>
+                        <option value="{{ g.id }}" {% if form.instance.group.id == g.id %}selected="selected"{% endif %}>{{ g.slug }}</option>
                         {% endfor %}
                     </select>
                 </div>
@@ -42,21 +51,21 @@
             <div class="control-group">
                 <label class="control-label" for="id_start_date">{{ form.start_date.label }}</label>
                 <div class="controls">
-                    <input id="id_start_date" name="start_date" type="text" placeholder="{% trans "start_date" %}" value="{{ form.start_date.value }}"/>
+                    <input class="datepicker" id="id_start_date" name="start_date" type="text" placeholder="{% trans "Start date" %}" value="{{ form.start_date.value|date:"Y-m-d" }}"/>
                 </div>
             </div>
 
             <div class="control-group">
                 <label class="control-label" for="id_end_date">{{ form.end_date.label }}</label>
                 <div class="controls">
-                    <input id="id_end_date" name="end_date" type="text" placeholder="{% trans "end_date" %}" value="{{ form.end_date.value }}"/>
+                    <input class="datepicker" id="id_end_date" name="end_date" type="text" value="{{ form.end_date.value|default:"" }}"/>
                 </div>
             </div>
 
             <div class="control-group">
                 <label class="control-label" for="id_expiration_date">{{ form.expiration_date.label }}</label>
                 <div class="controls">
-                    <input id="id_expiration_date" name="expiration_date" type="text" value="{{ form.expiration_date.value }}"/>
+                    <input class="datepicker" id="id_expiration_date" name="expiration_date" type="text" value="{{ form.expiration_date.value|default:"" }}"/>
                 </div>
             </div>
 
@@ -70,13 +79,32 @@
                     {% endif %}
                 </div>
             </div>
-            
-            
         </form> 
-        {% endblock %}
 
-        {% block extra-actions %}
-        {# FIXME #}
-        {% endblock %}
     </div><!--/span12-->
 </div><!--/raw-fluid-->
+{% endblock %}
+
+{% block extra_javascript %}
+<script type="text/javascript" src="{% static "jquery-ui/jquery-ui-" %}{{ jquery_ui_version }}.custom.min.js"></script>
+{#<script type="text/javascript" src="{% static "bootstrap-datepicker/js/bootstrap-datepicker.js" %}"></script>#}
+<script type="text/javascript" src="{% static "bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" %}"></script>
+
+<script type="text/javascript">
+$(function() {
+        $( '.datepicker' ).datetimepicker({
+            format: "yyyy-MM-dd",
+            pickDate: true,            // disables the date picker
+            pickTime: false,            // disables de time picker
+            pick12HourFormat: false,   // enables the 12-hour format time picker
+            pickSeconds: false, 
+        });
+//          $('.datepicker').datepicker({
+//            //"setDate": new Date(),
+//            "format": 'yyyy-mm-dd',
+//            "autoclose": true,
+//            "todayBtn": true,
+//          });
+});
+</script>
+{% endblock %}

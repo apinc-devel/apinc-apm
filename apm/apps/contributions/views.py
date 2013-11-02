@@ -31,6 +31,7 @@ from apm.apps.members.models import Person
 from apm.apps.contributions.models import Contribution, ContributionType
 from apm.apps.contributions.forms import ContributionForm, ContributionTypeForm
 from apm.decorators import access_required, confirm_required
+from apm.utils import unprivileged_user
 
 
 @access_required(groups=['apinc-secretariat', 'apinc-tresorier'])
@@ -136,7 +137,7 @@ def contribution_edit(request, user_id=None, contribution_id=None):
     today = datetime.date.today()
     form = ContributionForm(person_id=user_id)
     msg_log = "Contribution has been successfully created."
-    title = _('Adding a contribution for')
+    title = _('Adding a contribution')
 
     person = None
     if user_id:
@@ -147,15 +148,14 @@ def contribution_edit(request, user_id=None, contribution_id=None):
 
             return HttpResponseRedirect(reverse('apm.apps.members.views.details', kwargs={'user_id':user_id}))
         
-
     if contribution_id:
         contribution = get_object_or_404(Contribution, id=contribution_id)
-        if contribution.validated == True:
+        if unprivileged_user(request.user.username) and contribution.validated:
             return render(request, 'auth/permission_denied.html', {})
 
         form = ContributionForm(instance=contribution,
                      person_id=contribution.person.id)
-        title = _('Editing a subscription for')
+        title = _('Contribution editor')
         msg_log = "Contribution has been successfully modified."
 
     page_dict = {'action_title': title, 'person': person,
@@ -198,7 +198,6 @@ def contribution_edit(request, user_id=None, contribution_id=None):
             # TODO send email to user
             
             # TODO si payment par card (tender_type) vérifier avec l'api de la banque ?
-
             return redirect(user_contributions, user_id=contribution.person.id)
             
     page_dict.update({'form': form})

@@ -38,24 +38,17 @@
                     <td class="text-center">{{ c.type.label }}</td>
                     <td class="text-center">{{ c.dues_amount }}&nbsp;{% trans "euros" %}</td>
                     <td class="text-center">
-                    {% if c.payment %}
-                    <a href="/">#{{ c.payment.id }}</a> {% trans "by" %} {{ c.payment.get_type_display }}
-                    {% else %}
+                    {% for p in c.payments.all %}
+                    <a href="{% url "apm.apps.payments.views.payment_details" p.id %}">#{{ p.id }}</a> {% trans "by" %} {{ p.type_display }}
+                    {% empty %}
                     {% trans "No payment found" %}
-                    {% endif %}
+                    {% endfor %}
                     </td>
 
                     {% if not c.validated %}
                     <td>
                     <a class="btn" href="{% url "apm.apps.contributions.views.contribution_edit" c.person.id c.id %}?next={% url "all_contributions" %}">{% trans "Edit" %}</a>
                     </td>
-
-                    {% if superadmin or secretariat_member or tresorier_member %}
-                    <td>
-                    <a class="btn btn-success" href="{% url "apm.apps.contributions.views.contribution_validate" c.id %}?next={% url "all_contributions" %}">{% trans "Validate" %}</a>
-                    </td>
-                    {% endif %}
-
                     {% endif %}
 
                     {% if superadmin or secretariat_member or tresorier_member %}
@@ -70,7 +63,7 @@
                 {% endfor %}
 
             </tbody>
-        </table>
+        </table>        
 	</div><!--/span12 -->
 </div><!--/row-fluid --> 
 

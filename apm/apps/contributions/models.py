@@ -67,6 +67,9 @@ class ContributionManager(models.Manager):
     def validated(self):
         return self.filter(validated__exact=True)
 
+    def not_validated(self):
+        return self.filter(validated__exact=False)
+
     def order_subscriptions_for(self, person):
         subscriptions = list(self.filter(person=person)\
             .filter(type__extends_duration__gt=0).order_by('recorded_date'))

@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -ù-
+# -*- coding: utf-8 -*-
 #
 #   Copyright © 2013 APINC Devel Team
 #
@@ -17,8 +17,35 @@
 #   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 
+from apm.apps.members.models import Person
+
 def get_or_none(model, **kwargs):
     try:
         return model.objects.get(**kwargs)
     except model.DoesNotExist:
         return None
+
+def unprivileged_user(username):
+    p = get_or_none(Person, username=username)
+
+    if not p:
+        return True
+
+    if p.is_superuser:
+        return False
+
+    user_groups = p.group_set.values_list('name', flat=True)
+
+    if settings.PORTAL_ADMIN in user_groups:
+        return False
+
+    if not groups:
+        return True
+
+    for group in user_groups:
+        if group in groups:
+            # Go to the decorated view
+            return False
+
+    return True
+

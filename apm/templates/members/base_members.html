@@ -25,7 +25,7 @@
         <ul class="nav nav-list">
           <li class="nav-header">{% trans "Treasury" %}</li>
           <li><a href="{% url "apm.apps.payments.views.user_payments" person.id %}">{% trans "List payments" %}</a></li>
-          {% if superadmin or bureau_member or secretariat_member or contributeur %}
+          {% if superadmin or bureau_member or secretariat_member %}
           <li><a href="{% url "apm.apps.payments.views.payment_edit" person.id %}">{% trans "Add payment" %}</a></li>
           {% endif %}
           <li><a href="{% static "images/rib_bplc.png" %}">{% trans "Bank details" %}</a></li>

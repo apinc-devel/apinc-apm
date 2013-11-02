@@ -13,7 +13,38 @@
         {% for err in form.errors %}
           <div class="form_error_message">{{ err }}</div>
             {% endfor %}
-        </div>  
+  </div>  
+
+  {% if form.instance.payments.all %}
+  <div class="panel panel-default">
+  <div class="panel-heading">{% trans "Payment attached details" %}</div>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>{% trans "Date" %}</th>
+      <th>{% trans "Emitter" %}</th>
+      <th>{% trans "Amount" %}</th>
+      <th>{% trans "Available amount" %}</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    {% for p in form.instance.payments.all %}
+    <tr>
+    <td>{{ p.id }}</td>
+    <td>{{ p.date }}</td>
+    <td>{{ p.emitter }}</td>
+    <td>{{ p.amount }}</td>
+    <td>{{ p.amount_to_use }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+  </div><!-- panel -->
+
+  {% endif %}
 
   <div class="control-group">
     <label class="control-label" for="id_person">{{ form.person.label }}</label>

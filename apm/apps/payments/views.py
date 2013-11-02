@@ -33,7 +33,6 @@ from apm.apps.payments.forms import PaymentForm
 from apm.decorators import access_required, confirm_required
 
 
-
 @access_required(groups=['apinc-secretariat', 'apinc-tresorier'])
 def payments(request):
 
@@ -59,6 +58,20 @@ def user_payments(request, user_id=None):
         #'is_subscriber': person.is_subscriber()})
 
 
+@access_required(groups=['apinc-secretariat', 'apinc-tresorier'],
+    allow_myself=True)
+def payment_details(request, payment_id=None):
+
+    """Display payment detailed content"""
+
+    payment = get_object_or_404(Payment, id=payment_id)
+    person = get_object_or_404(Person, id=payment.emitter.id)
+
+    return render(request, 'payments/payment_details.html',
+        {'person': person, 'payment': payment,
+         'next' : request.GET.get('next', '/')})
+
+
 @access_required(groups=['apinc-secretariat', 'apinc-tresorier'])
 def payment_edit(request, user_id=None, payment_id=None):
 
@@ -79,22 +92,36 @@ def payment_edit(request, user_id=None, payment_id=None):
         msg_log = "Payment modified."
 
     if request.method == 'POST':
+        #print request.POST.getlist('contributions')
         if payment_id:
             form = PaymentForm(request.POST, instance=payment, emitter_id=user_id)
         else:
             form = PaymentForm(request.POST, emitter_id=user_id)
 
-        if form.is_valid():
+        if form.is_valid():      
+            contributions = form.cleaned_data['contributions']
+            try:
+                if form.instance:
+                    for c in form.instance.contributions.all():
+                        if c not in contributions:
+                            c.validated = False
+                            c.save()
+            except:
+                pass
+
+            for c in contributions:
+                c.validated = True
+                c.save()
+
             payment = form.save()
+
             #LogEntry.objects.log_action(
             #    user_id = request.user.id,
             #    content_type_id = ContentType.objects.get_for_model(payment).pk,
             #    object_id = payment.pk, message = msg_log)
- 
             messages.add_message(request, messages.SUCCESS,
                 _('Payment has been successfully saved.'))
             return redirect(user_payments, user_id=payment.emitter.id)
-
 
     return render(request, 'payments/payment_edit.html', {
         'form': form, 'payment': payment,

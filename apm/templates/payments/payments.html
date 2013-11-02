@@ -21,6 +21,7 @@
                     <th class="text-center">{% trans "Emitter" %}</th>
                     <th class="text-center">{% trans "Date" %}</th>
                     <th class="text-center">{% trans "Amount" %}</th>
+                    <th class="text-center">{% trans "Available amount" %}</th>
                 </tr>
             </thead>
             <tbody>
@@ -30,6 +31,7 @@
                     <td class="text-center">{{ payment.emitter }}</td>
                     <td class="text-center">{{ payment.date }}</td>
                     <td class="text-center">{{ payment.amount }}</td>
+                    <td class="text-center">{{ payment.amount_to_use }}</td>
                 </tr>
                 {% empty %}
                 <tr><td class="text-error">{% trans "No payment defined yet !" %}</td></tr>

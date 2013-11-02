@@ -32,22 +32,14 @@
     {% endif %}
     </td>
 
-    {% if not c.validated %}
+    {% if not c.validated or superadmin or secretariat_member or tresorier_member %}
     <td>
     <a class="btn" href="{% url "apm.apps.contributions.views.contribution_edit" c.person.id c.id %}?next={% url "apm.apps.contributions.views.user_contributions" c.person.id %}">{% trans "Edit" %}</a>
     </td>
-
-    {% if superadmin or secretariat_member or tresorier_member %}
-    <td>
-    <a class="btn btn-success" href="{% url "apm.apps.contributions.views.contribution_validate" c.id %}?next={% url "apm.apps.contributions.views.user_contributions" c.person.id %}">{% trans "Validate" %}</a>
-    </td>
-    {% endif %}
-
-    {% endif %}
-
     <td>
     <a class="btn btn-danger" href="{% url "apm.apps.contributions.views.contribution_delete" c.id %}?next={% url "apm.apps.contributions.views.user_contributions" c.person.id %}">{% trans "Delete" %}</a>
     </td>
+    {% endif %}
 </tr>
 
 {% empty %}

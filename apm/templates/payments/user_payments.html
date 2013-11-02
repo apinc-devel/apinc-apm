@@ -10,17 +10,21 @@
 <div class="span12">
 <table class="table table-condensed">
   <tr class="info">
+    <td>{% trans "Id" %}</td>
     <td>{% trans "Date" %}</td>
     <td>{% trans "Description" %}</td>
     <td>{% trans "Emitter" %}</td>
     <td>{% trans "Amount" %}</td>
+    <td>{% trans "Available amount" %}</td>
   </tr>
 {% for payment in payments_list %}
     <tr>
+    <td>{{ payment.id }}</td>
     <td class="text-info">{{ payment.date|date:"d/M/Y H:i" }}</td>
     <td>{{ payment.description }}</td>
     <td>{{ payment.emitter }}</td>
     <td>{{ payment.amount }}&nbsp;{% trans "euros" %}</td>
+    <td>{{ payment.amount_to_use }}&nbsp;{% trans "euros" %}</td>
     <td>
 
     {% if superadmin or secretariat_member or tresorier_member %}

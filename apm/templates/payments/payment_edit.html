@@ -1,6 +1,7 @@
-{% extends 'manage/base_manage.html' %}
+﻿{% extends 'manage/base_manage.html' %}
 {% load i18n %}
 {% load static from staticfiles %}
+{% load is_selected_contribution %}
 
 {% block content_page %}
 <div class="page-header">
@@ -12,11 +13,13 @@
         <form class="form-horizontal" method="post" action="." enctype="multipart/form-data">
             {% csrf_token %}
 
-            <div class="form_errors">
-                {% for err in form.errors %}
-                <div class="form_error_message">{{ err }}</div>
+            {% if form.errors %}
+            <div class="alert alert-error">
+                {% for key, value in form.errors.items %}
+                {{ value }}
                 {% endfor %}
             </div>  
+            {%endif %}
 
             <div class="control-group">
                 <label class="control-label" for="id_emitter">{{ form.emitter.label }}</label>
@@ -32,41 +35,76 @@
             <div class="control-group">
                 <label class="control-label" for="id_description">{{ form.description.label }}</label>
                 <div class="controls">
-                    <input id="id_description" name="description" type="text" placeholder="{% trans "Description" %}" value="{{ form.description.value }}"/>
+                    <input id="id_description" name="description" type="text" placeholder="{% trans "Description" %}" value="{{ form.description.value }}" />
                 </div>
             </div>
 
             <div class="control-group">
                 <label class="control-label" for="id_amount">{{ form.amount.label }}</label>
                 <div class="controls">
-                    <input id="id_amount" name="amount" type="text" placeholder="{% trans "Amount" %}" value="{{ form.amount.value }}"/>
+                    <input id="id_amount" name="amount" type="text" placeholder="{% trans "Amount" %}" value="{{ form.amount.value }}" />
+                    {% if form.instance.id %} 
+                    {% trans "Amount to use" %} : {{ form.instance.amount_to_use }}
+                    {% endif %}
                 </div>
             </div>
 
             <div class="control-group">
                 <label class="control-label" for="id_date">{% trans "Payment date" %}</label>
                 <div class="controls">
-                    <input id="id_date" name="date" type="text" value="{{ form.date.value }}"/>
+                    {# <input id="id_date" name="date" type="text" placeholder="{% trans "Payment date" %}" value="{{ form.date.value|date:"Y/m/d H:i:s" }}" /> #}
+                    {{ form.date }}
                 </div>
             </div>
 
+            
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#attached_contributions" data-toggle="tab">{% trans "Attached contributions" %}</a></li>
+                <li><a href="#selection_contributions" data-toggle="tab">{% trans "Select contributions" %}</a></li>
+                <li><a href="{% url "apm.apps.contributions.views.contribution_edit" %}" >{% trans "New contribution" %}</a></li>
+            </ul>
+            
+            <div class="tab-content">
+            <div class="tab-pane active" id="attached_contributions">
+                  <table class="table">
+                    <tbody>
+                    {% if form.instance.id %}
+                    {% for ca in form.instance.contributions.all %}
+                    <tr>
+                    <td>#{{ ca.id }}</td>
+                    <td>{{ ca.person }}</td>
+                    <td>[{{ ca.dues_amount }} {% trans "euros" %}]</td>
+                    <td>{{ ca.recorded_date }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>{% trans "No contribution attached yet." %}</tr>
+                    {% endfor %}
+                    {% else %}
+                    <tr>{% trans "No contribution attached yet." %}</tr>
+                    {% endif %}
+                    </tbody>
+                  </table>
+            </div><!-- #attached_contributions -->
+            
+            <div class="tab-pane" id="selection_contributions">
             <div class="control-group">
                 <label class="control-label" for="id_contributions">{% trans "Contributions" %}</label>
                 <div class="controls">
-                    <select multiple="multiple" id="id_contributions" name="contributions">
-                        {% for c in form.contributions_set.all %}
-                        <option value="{{ c.id }}">{{ c.label|capfirst }}</option>
+                    <select class="input-xxlarge" multiple="multiple" id="id_contributions" name="contributions">
+                        {% for c in form.fields.contributions.queryset %}
+                        <option value="{{ c.id }}" {% if form.instance.id %}{{ c|is_selected_contribution:form.instance.contributions.all }}{% endif %} >#{{ c.id }} | {{ c.person }} [{{ c.type.label }} {{ c.dues_amount }} {% trans "euros" %}] {{ c.recorded_date }}</option>
                         {% endfor %}
-                    </select> <span class="helptext">{% trans "Maintain « Ctrl », to select multiple" %}</span></p>
-
+                    </select>
                 </div>
             </div>
-
+            </div><!-- selection_contributions -->
+            </div><!-- tab-content -->
+            
             {# http://stackoverflow.com/questions/11321767/how-should-i-style-django-validation-errors-with-bootstrap #}
             <div class="control-group">
                 <div class="controls" >
                     <a class="btn btn-inverse" href="{{ back }}">{% trans "Cancel" %}</a>
-                    <input type="submit" class="btn btn-primary" value="{% trans "Save" %}"/>
+                    <input type="submit" class="btn btn-primary" value="{% trans "Save" %}" />
                     {% if form.instance.id %}
                     <a class="btn btn-danger" href="{% url "apm.apps.payments.views.payment_delete" form.instance.id %}">{% trans "Delete" %}</a>
                     {% endif %}
@@ -76,3 +114,18 @@
     </div><!--/span12-->
 </div><!--/raw-fluid-->
 {% endblock %}
+
+{% block extra_javascript %}
+<script type="text/javascript">
+function NASort(a, b) {    
+    if (a.innerHTML == 'NA') {
+        return 1;   
+    }
+    else if (b.innerHTML == 'NA') {
+        return -1;   
+    }       
+    return (a.innerHTML > b.innerHTML) ? 1 : -1;
+};
+
+$('#id_contributions option').sort(NASort).app
+{% endblock extra_javascript %}

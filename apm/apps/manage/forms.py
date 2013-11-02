@@ -23,7 +23,6 @@ from django.contrib.auth import get_user_model as Person
 
 from apm.apps.manage.models import GroupMembership
 
-
 class GroupMembershipForm(forms.ModelForm):
 
     """GroupMembership Form"""
@@ -31,6 +30,8 @@ class GroupMembershipForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         member_id = kwargs.pop('member_id', None)
         super(GroupMembershipForm, self).__init__(*args, **kwargs)
+
+        self.fields['group'].empty_label = _('-- Select apm group --')
 
         if member_id:
             self.fields['member'].queryset = Person().objects.filter(id=member_id)
