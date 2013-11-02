@@ -38,12 +38,6 @@ def index(request):
             {'text': text, 'board_members': board_members,
              'meeting_reports': meeting_reports})
     
-def board(request):
-    board_members = MemberRole.objects.get_active_members().order_by('role__rank')
-
-    return render(request, 'association/board.html', 
-            { 'board_members': board_members })
-
 def statutes_pdf(request):
     return render(request, 'base.html')
 

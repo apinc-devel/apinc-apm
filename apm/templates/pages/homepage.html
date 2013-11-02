@@ -36,7 +36,7 @@
         <div class="carousel-caption">
           {% if homepage_services.body_html %}
           {{ homepage_services.body_html|safe }}
-          <a class="btn btn-large btn-primary" href="{% url "about" %}">{% trans "Learn more" %}</a>
+          <a class="btn btn-large btn-primary" href="{% url "services" %}">{% trans "Learn more" %}</a>
           {% endif %}
           {% if superadmin or bureau_member or secretariat_member or contributeur %}
           <a class="btn btn-large" href="{% url "apm.apps.pages.views.edit" homepage_services.slug %}">{% trans "Edit" %}</a>

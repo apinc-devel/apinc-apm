@@ -24,7 +24,6 @@ urlpatterns = patterns('apm.apps.association.views',
     url(r'^report/upload/$', 'upload_report'),
     url(r'^report/(?P<report_id>\d+)/delete/$', 'delete_report'),
     url(r'^statutes/pdf/$', 'statutes_pdf'),
-    url(r'^board/$', 'board'),
 )
 
 # Pages particulieres au contenu pseudo-statique
@@ -33,4 +32,6 @@ urlpatterns += patterns('',
         { 'page': "statutes" }, name='statutes'),
     url(r'^by-laws/$', 'apm.apps.pages.views.page',
         { 'page': "by-laws" }, name='by-laws'),
+    url(r'^services/$', 'apm.apps.pages.views.page',
+        { 'page': "services" }, name='services'),
 )
