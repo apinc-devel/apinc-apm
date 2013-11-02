@@ -53,7 +53,7 @@
                     <td class="text-center">
                     {% if c.validated %}
                     <a class="btn" href="{% url "apm.apps.contributions.views.contribution_receipt" c.person.id c.id %}?next={% url "all_contributions" %}">{% trans "Receipt" %}</a>
-
+                    {% endif %}
                     {% if not c.validated or superadmin or secretariat_member or tresorier_member %}
                     <a class="btn" href="{% url "apm.apps.contributions.views.contribution_edit" c.person.id c.id %}?next={% url "all_contributions" %}">{% trans "Edit" %}</a>
                     <a class="btn btn-danger" href="{% url "apm.apps.contributions.views.contribution_delete" c.id %}?next={% url "all_contributions" %}">{% trans "Delete" %}</a>

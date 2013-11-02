@@ -17,6 +17,7 @@
 #   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 
+import os
 import datetime
 from dateutil.relativedelta import relativedelta
 
@@ -283,7 +284,7 @@ def contribution_receipt(request, user_id=None, contribution_id=None):
                             rightMargin=72,leftMargin=72,
                             topMargin=72,bottomMargin=18)
     apinc_receipt=[]
-    logo = settings.STATIC_ROOT + "images/entete_recu.png"
+    logo = os.path.join(settings.STATIC_ROOT, "images/entete_recu.png")
      
     full_name = "%s %s" % (person.last_name, person.first_name)
     address_parts = ["c/o FFCU", "173 rue de Charenton", "75012, PARIS"]
