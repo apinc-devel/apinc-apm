@@ -3,7 +3,10 @@ django-tinymce==1.5.1b4
 requests==1.1.0
 python-dateutil==2.1
 pytz==2013b
+reportlab==2.7
+pillow==2.2.1
 #pexpect==2.4
+
 
 MySQL-python==1.2.4
 #south==0.7.3

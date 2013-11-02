@@ -268,6 +268,7 @@ PSEUDO_STATIC_PAGES = [
     ("organization", "The organization"),
     ("statutes", "Statuts de l'association"),
     ("by-laws", "Règlement intérieur"),
+    ("services", "Services fournis par l'association"),
 ]
 
 # App groups
@@ -302,6 +303,7 @@ TMP_PATH = os.path.join(VAR_ROOT, "tmp") # donnees temporaires (unused yet)
 
 VERSION = '0.1.0'
 JQUERY_VERSION = '1.9.1'
+JQUERY_UI_VERSION = '1.10.3'
 
 PORTAL_ADMIN = 'apinc-admin'
 APINC_SIREN = '448 004 556'

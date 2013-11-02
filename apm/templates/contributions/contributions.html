@@ -12,15 +12,18 @@
 
 <div class="row-fluid">
     <div class="span12">
-        <table class="table table-condensed">
-        {#<table class="table table-bordered table-striped">#}
+        {#<table class="table table-condensed">#}
+        <table class="table table-bordered table-striped">
+            {% comment %}
             <colgroup>
                 <col span="1" style="width: 20%;">
                 <col span="1" style="width: 20%;">
                 <col span="1" style="width: 20%;">
                 <col span="1" style="width: 20%;">
                 <col span="1" style="width: 20%;">
+                {% if superadmin or secretariat_member or tresorier_member %}<col span="1" style="width: 20%;">{% endif %}
             </colgroup>
+            {% endcomment %}
             <thead>
                 <tr class="info">
                     <th class="text-center">{% trans "Member" %}</th>
@@ -28,6 +31,8 @@
                     <th class="text-center">{% trans "Type" %}</th>
                     <th class="text-center">{% trans "Amount" %}</th>
                     <th class="text-center">{% trans "Payment" %}</th>
+                   
+                    {% if superadmin or secretariat_member or tresorier_member %}<th class="text-center">{% trans "Action" %}</th>{% endif %}
                 </tr>
             </thead>
             <tbody>
@@ -39,23 +44,21 @@
                     <td class="text-center">{{ c.dues_amount }}&nbsp;{% trans "euros" %}</td>
                     <td class="text-center">
                     {% for p in c.payments.all %}
-                    <a href="{% url "apm.apps.payments.views.payment_details" p.id %}">#{{ p.id }}</a> {% trans "by" %} {{ p.type_display }}
+                    <a href="{% url "apm.apps.payments.views.payment_details" p.id %}">(#{{ p.id }} {{ p.description }})</a>
                     {% empty %}
                     {% trans "No payment found" %}
                     {% endfor %}
                     </td>
 
-                    {% if not c.validated %}
-                    <td>
-                    <a class="btn" href="{% url "apm.apps.contributions.views.contribution_edit" c.person.id c.id %}?next={% url "all_contributions" %}">{% trans "Edit" %}</a>
-                    </td>
-                    {% endif %}
+                    <td class="text-center">
+                    {% if c.validated %}
+                    <a class="btn" href="{% url "apm.apps.contributions.views.contribution_receipt" c.person.id c.id %}?next={% url "all_contributions" %}">{% trans "Receipt" %}</a>
 
-                    {% if superadmin or secretariat_member or tresorier_member %}
-                    <td>
+                    {% if not c.validated or superadmin or secretariat_member or tresorier_member %}
+                    <a class="btn" href="{% url "apm.apps.contributions.views.contribution_edit" c.person.id c.id %}?next={% url "all_contributions" %}">{% trans "Edit" %}</a>
                     <a class="btn btn-danger" href="{% url "apm.apps.contributions.views.contribution_delete" c.id %}?next={% url "all_contributions" %}">{% trans "Delete" %}</a>
-                    </td>
                     {% endif %}
+                    </td>
                 </tr>
 
                 {% empty %}

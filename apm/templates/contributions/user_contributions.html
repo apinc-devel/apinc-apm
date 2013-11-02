@@ -32,14 +32,15 @@
     {% endif %}
     </td>
 
-    {% if not c.validated or superadmin or secretariat_member or tresorier_member %}
     <td>
-    <a class="btn" href="{% url "apm.apps.contributions.views.contribution_edit" c.person.id c.id %}?next={% url "apm.apps.contributions.views.user_contributions" c.person.id %}">{% trans "Edit" %}</a>
-    </td>
-    <td>
-    <a class="btn btn-danger" href="{% url "apm.apps.contributions.views.contribution_delete" c.id %}?next={% url "apm.apps.contributions.views.user_contributions" c.person.id %}">{% trans "Delete" %}</a>
-    </td>
+    {% if c.validated %}
+    <a class="btn" href="{% url "apm.apps.contributions.views.contribution_receipt" c.person.id c.id %}?next={% url "apm.apps.contributions.views.user_contributions" c.person.id %}">{% trans "Receipt" %}</a>
     {% endif %}
+    {% if not c.validated or superadmin or secretariat_member or tresorier_member %}
+    <a class="btn" href="{% url "apm.apps.contributions.views.contribution_edit" c.person.id c.id %}?next={% url "apm.apps.contributions.views.user_contributions" c.person.id %}">{% trans "Edit" %}</a>
+    <a class="btn btn-danger" href="{% url "apm.apps.contributions.views.contribution_delete" c.id %}?next={% url "apm.apps.contributions.views.user_contributions" c.person.id %}">{% trans "Delete" %}</a>
+    {% endif %}
+    </td>
 </tr>
 
 {% empty %}
