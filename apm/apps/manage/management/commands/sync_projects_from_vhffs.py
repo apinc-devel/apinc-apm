@@ -19,14 +19,14 @@
 
 from django.core.management.base import NoArgsCommand, CommandError
 
-from apm.vhffs import sync_users_from_vhffs_api
+from apm.vhffs import sync_projects_from_vhffs_api
 
 class Command(NoArgsCommand):
     help = 'Sync django auth_users table from vhffs_users table using vhffs-rest-api.'
 
     def handle_noargs(self, *args, **options):
         try:
-            sync_users_from_vhffs_api()
+            sync_projects_from_vhffs_api()
         except Exception, e:
             # TODO Error message handling
-            raise CommandError('sync_users_from_vhffs "%s"' % e)
+            raise CommandError('sync_projects_from_vhffs "%s"' % e)

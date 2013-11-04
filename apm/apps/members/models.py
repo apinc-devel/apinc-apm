@@ -232,3 +232,8 @@ class Project(models.Model):
     status = models.IntegerField(choices=PROJECT_STATUS, default=ACTIVE)
 
     objects = ProjectManager()
+
+    def __unicode__(self):
+        """Project unicode"""
+        return unicode(self.groupname)
+
