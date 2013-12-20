@@ -47,11 +47,12 @@ def _vhffs_rest_api_url(url):
 
 def _set_user(vhffs_user):
     """Internal"""
+    ### TODO adapter les contraintes AbstractUser django/contrib/auth/models.py
     u = None
     try:
-        u = get_user_model().objects.get(username=vhffs_user['username'])
+        u = get_user_model().objects.get(username=vhffs_user['username'][:30])
     except get_user_model().DoesNotExist:
-        u = get_user_model().objects.create(username=vhffs_user['username'])
+        u = get_user_model().objects.create(username=vhffs_user['username'][:30])
     finally:
         u.set_password_hash("vhffs" + vhffs_user['passwd'])
         if vhffs_user['mail']:
@@ -60,12 +61,12 @@ def _set_user(vhffs_user):
             #raise error
             pass
         if vhffs_user['lastname']:
-            u.last_name=vhffs_user['lastname']
+            u.last_name=vhffs_user['lastname'][:30]
         else:
             #raise error
             pass
         if vhffs_user['firstname']:
-            u.first_name=vhffs_user['firstname']
+            u.first_name=vhffs_user['firstname'][:30]
         else:
             #raise error
             pass
