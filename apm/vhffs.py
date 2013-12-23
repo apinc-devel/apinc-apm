@@ -50,9 +50,9 @@ def _set_user(vhffs_user):
     ### TODO adapter les contraintes AbstractUser django/contrib/auth/models.py
     u = None
     try:
-        u = get_user_model().objects.get(username=vhffs_user['username'][:30])
+        u = get_user_model().objects.get(username=vhffs_user['username'])
     except get_user_model().DoesNotExist:
-        u = get_user_model().objects.create(username=vhffs_user['username'][:30])
+        u = get_user_model().objects.create(username=vhffs_user['username'])
     finally:
         u.set_password_hash("vhffs" + vhffs_user['passwd'])
         if vhffs_user['mail']:
