@@ -21,6 +21,7 @@ import datetime
 from dateutil.relativedelta import relativedelta
 import crypt
 
+from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models.signals import post_save
@@ -174,7 +175,7 @@ class MemberRole(models.Model):
     """Store a role acted by a member"""
 
     role = models.ForeignKey(Role)
-    member = models.ForeignKey(Person)
+    member = models.ForeignKey(settings.AUTH_USER_MODEL)
 
     start_date = models.DateField(verbose_name=_('start date'),
         default=datetime.date.today(), blank=True, null=True)

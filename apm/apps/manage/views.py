@@ -106,7 +106,7 @@ def groupmembership_edit(request, user_id=None, gm_id=None):
 
 @access_required(groups=['apinc-admin', 'apinc-secretariat', 'apinc-bureau'])
 @confirm_required(lambda gm_id: str(get_object_or_404(GroupMembership, id=gm_id)),
-        section='news/base_news.html',
+        section='manage/base_manage.html',
         message=_('Do you really want to delete this APM group membership'))
 def groupmembership_delete(request, gm_id):
     """Group membership delete"""

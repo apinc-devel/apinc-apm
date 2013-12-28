@@ -73,12 +73,41 @@
     </table>
     {% else %}
         <p>{% trans "No apm group membership" %}</p>
-	</table>
     {% endif %}
 	<p><a class="btn btn-success" href="{% url "apm.apps.manage.views.groupmembership_edit" person.id %}">{%trans "Add" %}</a></p>
     </div>
     {% endif %}
 
+
+	{% if superadmin or secretariat_member or bureau_member or tresorier_member %}
+    <div class="text-danger">
+	<h4>{% trans "APINC roles" %}</h4>
+    {% if person.memberrole_set.all %}
+    <table class="table table-condensed">
+        <tr>
+          <td>{% trans "Role name" %}</td>
+          <td>{% trans "Start date" %}</td>
+          <td>{% trans "End date" %}</td>
+          <td></td>
+        </tr>
+		{% for mr in person.memberrole_set.all %}
+        <tr>
+            <td>{{ mr.role.name }}</td>
+            <td>{{ mr.start_date }}</td>
+            <td>{{ mr.end_date|default:"On going" }}</td>
+            <td>
+                <a class="btn btn-danger" href="{% url "apm.apps.members.views.member_role_edit" person.id mr.id %}">{% trans "Edit" %}</a>
+                <a class="btn btn-danger" href="{% url "apm.apps.members.views.member_role_delete" mr.id %}">{% trans "Delete" %}</a>
+            </td>
+        </tr>
+		{% endfor %}
+    </table>
+    {% else %}
+        <p>{% trans "No apinc role" %}</p>
+    {% endif %}
+	<p><a class="btn btn-danger" href="{% url "apm.apps.members.views.member_role_edit" person.id %}">{%trans "Add" %}</a></p>
+    </div>
+    {% endif %}
 
 	{% if superadmin or secretariat_member or bureau_member or tresorier_member %}
     <div class="text-info">

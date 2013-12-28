@@ -29,4 +29,7 @@ urlpatterns = patterns('apm.apps.members.views',
 #    url(r'^edit/(?P<user_id>\d+)/$', 'edit'),
 #    url(r'^person/edit/(?P<user_id>\d+)/$', 'person_edit'),
     url(r'^personprivate/edit/(?P<user_id>\d+)/$', 'personprivate_edit'),
+    url(r'^member_role/delete/(?P<mr_id>\d+)/$','member_role_delete'),
+    url(r'^member_role/add/(?P<user_id>\d+)/$','member_role_edit'),
+    url(r'^member_role/edit/(?P<user_id>\d+)/(?P<mr_id>\d+)/$','member_role_edit'),
 )

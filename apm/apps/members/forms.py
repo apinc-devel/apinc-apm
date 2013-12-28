@@ -20,8 +20,8 @@
 from django import forms
 from django.utils.translation import ugettext as _
 
-#from django.contrib.auth.models import User
-from apm.apps.members.models import Person, PersonPrivate
+from django.contrib.auth import get_user_model as Person
+from apm.apps.members.models import PersonPrivate, MemberRole
 
 class PersonForm(forms.ModelForm):
     """Person form"""
@@ -37,3 +37,20 @@ class PersonPrivateForm(forms.ModelForm):
         """PersonPrivate form meta"""
         model = PersonPrivate
         exclude = ('person',)
+
+class MemberRoleForm(forms.ModelForm):
+
+    """MemberRole Form"""
+
+    def __init__(self, *args, **kwargs):
+        member_id = kwargs.pop('member_id', None)
+        super(MemberRoleForm, self).__init__(*args, **kwargs)
+
+        self.fields['role'].empty_label = _('-- Select member role --')
+
+        if member_id:
+            self.fields['member'].queryset = Person().objects.filter(id=member_id)
+
+    class Meta:
+        """MemberRole meta"""
+        model = MemberRole

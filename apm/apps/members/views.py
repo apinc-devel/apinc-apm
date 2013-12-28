@@ -20,19 +20,19 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse, reverse_lazy
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.utils.translation import ugettext as _
-#from django.contrib.auth.models import User
 from django.contrib import messages
+from django.contrib.auth import get_user_model as Person
 
-from apm.apps.members.models import Person, PersonPrivate, Project
-from apm.apps.members.forms import PersonForm, PersonPrivateForm
+from apm.apps.members.models import PersonPrivate, MemberRole, Project
+from apm.apps.members.forms import PersonForm, PersonPrivateForm, MemberRoleForm
 from apm.decorators import access_required, confirm_required
 
 @login_required(login_url=reverse_lazy('apm.apps.pages.views.login'))
 def details(request, user_id):
 
-    person = get_object_or_404(Person, pk=user_id)
+    person = get_object_or_404(Person(), pk=user_id)
     personprivate = get_object_or_404(PersonPrivate, person=person)
 
 #FIXME
@@ -90,3 +90,57 @@ def personprivate_edit(request, user_id=None):
              'action_title': _('Modification of personal private profile for'),
              'person': personprivate.person,
              'back': request.META.get('HTTP_REFERER', '/')})
+
+
+@access_required(groups=['apinc-admin', 'apinc-secretariat', 'apinc-bureau'])
+def member_role_edit(request, user_id=None, mr_id=None):
+
+    """edit member role"""
+
+    mr = None
+    form = MemberRoleForm(member_id=user_id)
+    person = None
+    if user_id:
+        person = get_object_or_404(Person(), id=user_id)
+
+    if mr_id:
+        mr = get_object_or_404(MemberRole, id=mr_id)
+        form = MemberRoleForm(instance=mr, member_id=user_id)
+        msg_log = "Member role modified."
+
+    if request.method == 'POST':
+        if mr_id:
+            form = MemberRoleForm(request.POST, instance=mr,
+                    member_id=user_id)
+        else:
+            form = MemberRoleForm(request.POST, member_id=user_id)
+
+        if form.is_valid():
+            mr = form.save()
+            #LogEntry.objects.log_action(
+            #    user_id = request.user.id,
+            #    content_type_id = ContentType.objects.get_for_model(payment).pk,
+            #    object_id = payment.pk, message = msg_log)
+
+            messages.add_message(request, messages.SUCCESS,
+                _('Member role has been successfully saved.'))
+            return redirect('apm.apps.members.views.details', user_id=mr.member.id)
+
+
+    return render(request, 'members/member_role_edit.html', {
+        'form': form, 'person': person,
+        'back': request.META.get('HTTP_REFERER','/')})
+
+
+@access_required(groups=['apinc-admin', 'apinc-secretariat', 'apinc-bureau'])
+@confirm_required(lambda mr_id: str(get_object_or_404(MemberRole, id=mr_id)),
+        section='members/base_members.html',
+        message=_('Do you really want to delete this member role'))
+def member_role_delete(request, mr_id):
+    """Member role delete"""
+
+    mr = get_object_or_404(MemberRole, id=mr_id)
+    mr.delete()
+
+    messages.add_message(request, messages.SUCCESS, _('The member role has been successfully deleted.'))
+    return redirect('apm.apps.members.views.details', user_id=mr.member.id)
