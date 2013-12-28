@@ -52,17 +52,35 @@
     <div class="text-success">
 	<h4>{% trans "APM group memberships" %}</h4>
     {% if person.groupmembership_set.all %}
-	<ul class="unstyled">
+    <table class="table table-condensed">
+        <tr>
+          <td>{% trans "Group name" %}</td>
+          <td>{% trans "Start date" %}</td>
+          <td>{% trans "End date" %}</td>
+          <td></td>
+        </tr>
 		{% for gm in person.groupmembership_set.all %}
-		  <li>{{ gm.group.name }} - {{ gm.start_date }} - {{ gm.end_date|default:"On going" }}</li>
+        <tr>
+            <td>{{ gm.group.name }}</td>
+            <td>{{ gm.start_date }}</td>
+            <td>{{ gm.end_date|default:"On going" }}</td>
+            <td>
+                <a class="btn btn-success" href="{% url "apm.apps.manage.views.groupmembership_edit" person.id gm.id %}">{%trans "Edit" %}</a>
+                <a class="btn btn-success" href="{% url "apm.apps.manage.views.groupmembership_delete" gm.id %}">{%trans "Delete" %}</a>
+            </td>
+        </tr>
 		{% endfor %}
-	</ul>
+    </table>
     {% else %}
-    <p>{% trans "No apm group membership" %}</p>
+        <p>{% trans "No apm group membership" %}</p>
+	</table>
     {% endif %}
 	<p><a class="btn btn-success" href="{% url "apm.apps.manage.views.groupmembership_edit" person.id %}">{%trans "Add" %}</a></p>
     </div>
+    {% endif %}
 
+
+	{% if superadmin or secretariat_member or bureau_member or tresorier_member %}
     <div class="text-info">
 	<h4>{% trans "Person Private data" %}</h4>
 	<div> <p>{{ personprivate.notes }}</p> </div>

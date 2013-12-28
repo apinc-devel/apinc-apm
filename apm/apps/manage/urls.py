@@ -29,4 +29,5 @@ urlpatterns = patterns('apm.apps.manage.views',
     url(r'^groups/$','groups'),
     url(r'^groupmembership/add/(?P<user_id>\d+)/$','groupmembership_edit'),
     url(r'^groupmembership/add/(?P<user_id>\d+)/(?P<gm_id>\d+)/$','groupmembership_edit'),
+    url(r'^groupmembership/delete/(?P<gm_id>\d+)/$','groupmembership_delete'),
 )

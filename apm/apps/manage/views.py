@@ -23,9 +23,9 @@ from django.contrib.auth import get_user_model as Person
 from django.utils.translation import ugettext as _
 
 from apm.apps.members.models import Role
-from apm.apps.manage.models import Group
+from apm.apps.manage.models import Group, GroupMembership
 from apm.apps.manage.forms import GroupMembershipForm
-from apm.decorators import access_required
+from apm.decorators import access_required, confirm_required
 
 @access_required(groups=['apinc-admin', 'apinc-secretariat', 'apinc-bureau'])
 def index(request):
@@ -82,7 +82,7 @@ def groupmembership_edit(request, user_id=None, gm_id=None):
 
     if request.method == 'POST':
         if gm_id:
-            form = GroupMembershipForm(request.POST, instance=payment,
+            form = GroupMembershipForm(request.POST, instance=gm,
                     member_id=user_id)
         else:
             form = GroupMembershipForm(request.POST, member_id=user_id)
@@ -103,3 +103,16 @@ def groupmembership_edit(request, user_id=None, gm_id=None):
         'form': form, 'person': person,
         'back': request.META.get('HTTP_REFERER','/')})
 
+
+@access_required(groups=['apinc-admin', 'apinc-secretariat', 'apinc-bureau'])
+@confirm_required(lambda gm_id: str(get_object_or_404(GroupMembership, id=gm_id)),
+        section='news/base_news.html',
+        message=_('Do you really want to delete this APM group membership'))
+def groupmembership_delete(request, gm_id):
+    """Group membership delete"""
+
+    gm = get_object_or_404(GroupMembership, id=gm_id)
+    gm.delete()
+
+    messages.add_message(request, messages.SUCCESS, _('The groupmembership has been successfully deleted.'))
+    return redirect('apm.apps.members.views.details', user_id=gm.member.id)
