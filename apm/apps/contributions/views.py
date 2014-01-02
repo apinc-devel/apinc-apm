@@ -35,8 +35,9 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.contrib import messages
 from django.utils.translation import ugettext as _
+from django.contrib.auth import get_user_model as Person
 
-from apm.apps.members.models import Person
+from apm.apps.members.models import MemberRole 
 from apm.apps.contributions.models import Contribution, ContributionType
 from apm.apps.contributions.forms import ContributionForm, ContributionTypeForm
 from apm.decorators import access_required, confirm_required
@@ -150,7 +151,7 @@ def contribution_edit(request, user_id=None, contribution_id=None):
 
     person = None
     if user_id:
-        person = get_object_or_404(Person, id=user_id)
+        person = get_object_or_404(Person(), id=user_id)
         if not person.get_first_subscription_date():
             messages.add_message(request, messages.INFO, _('Person is not elligible for membership.' + \
                                                            ' You may check if person owns an APINC VHFFS project.'))
@@ -234,7 +235,7 @@ def user_contributions(request, user_id=None):
 
     """show user contributions"""
 
-    person = get_object_or_404(Person, id=user_id)
+    person = get_object_or_404(Person(), id=user_id)
 
     contributions_list = Contribution.objects.filter(person=person)
 
@@ -268,7 +269,8 @@ def contribution_receipt(request, user_id=None, contribution_id=None):
 
     from django.conf import settings # import here to limit settings visibility
 
-    person = get_object_or_404(Person, id=user_id)
+    tresorier = MemberRole.objects.get_tresorier()
+    person = get_object_or_404(Person(), id=user_id)
     contribution = get_object_or_404(Contribution, pk=contribution_id)
     if not contribution.validated:
         messages.add_message(request, messages.ERROR, _('Contribution is not yet validated.'))
@@ -308,7 +310,7 @@ def contribution_receipt(request, user_id=None, contribution_id=None):
 
     # body 
     apinc_receipt.append(Spacer(1, 12))
-    ptext = '<font size=12>Je soussigné FIXME FIXME, trésorier de l\'APINC, certifie que %(lastname)s %(firstname)s a versé la somme de %(amount)s euros en date du %(date)s en règlement d\'une %(contribution_type)s.</font>'.decode('utf-8', 'ignore') % ({'lastname': person.last_name, 'firstname': person.first_name, 'amount': contribution.dues_amount, 'date': contribution.payments.all()[0].date.strftime('%Y-%m-%d'), 'contribution_type': contribution.type.label.lower()})
+    ptext = '<font size=12>Je soussigné %(tresorier_firstname)s %(tresorier_lastname)s, trésorier de l\'APINC, certifie que %(lastname)s %(firstname)s a versé la somme de %(amount)s euros en date du %(date)s en règlement d\'une %(contribution_type)s.</font>'.decode('utf-8', 'ignore') % ({'tresorier_firstname':tresorier.first_name, 'tresorier_lastname':tresorier.last_name, 'lastname':person.last_name, 'firstname':person.first_name, 'amount':contribution.dues_amount,'date':contribution.payments.all()[0].date.strftime('%Y-%m-%d'),'contribution_type':contribution.type.label.lower()})
     apinc_receipt.append(Paragraph(ptext, styles["Justify"]))
 
     apinc_receipt.append(Spacer(1, 100))

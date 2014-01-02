@@ -136,7 +136,6 @@ class Person(AbstractUser):
 
         return result
 
-
 class Role(models.Model):
     
     name =  models.CharField(verbose_name=_('name'), max_length=100, unique=True)
@@ -156,7 +155,6 @@ class Role(models.Model):
         member_role.end_date = datetime.date.today()
         member_role.save()
 
-
 class MemberRoleManager(models.Manager):
     def get_active_members(self):
         from django.db.models import Q
@@ -165,6 +163,21 @@ class MemberRoleManager(models.Manager):
             (Q(end_date__gte=datetime.date.today()) | 
             Q(end_date__isnull=True)))
     
+    def get_by_name(self, name):
+        from django.db.models import Q
+        return self.filter(role__name=name).filter(
+            Q(start_date__lte=datetime.date.today()),
+            (Q(end_date__gte=datetime.date.today()) | 
+            Q(end_date__isnull=True))).order_by('-start_date')
+
+    def get_tresorier(self):
+        tresorier = None
+        try:
+            tresorier = self.get_by_name('Tresorier')[0].member
+        except:
+            tresorier = Person.objects.get_sentinel_user()
+        return tresorier
+
     #def all_members(self): #FIXME
     #    """all group members"""
     #    from django.db.models import Q
