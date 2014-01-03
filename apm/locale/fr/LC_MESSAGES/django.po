@@ -3,20 +3,20 @@
 # This file is distributed under the same license as the APINC APM application package.
 # Laurent Bives <lau@apinc.org>, 2013.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: APINC APM\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-05-22 23:48+0200\n"
-"PO-Revision-Date: 2013-05-20 11:01+0100\n"
+"PO-Revision-Date: 2014-01-03 23:05+0100\n"
 "Last-Translator: Laurent Bives <lau@apinc.org>\n"
 "Language-Team: APINC Devel Team <devel@ml.apinc.org>\n"
-"Language: French\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 1.6.3\n"
 
 #: decorators.py:99
 msgid "Are you sure you want to do this action"
@@ -202,7 +202,7 @@ msgstr "News"
 
 #: templates/base.html:81
 msgid "Who we are"
-msgstr "Qui nous sommes"
+msgstr "Qui sommes-nous"
 
 #: templates/base.html:83
 msgid "Organization"
@@ -441,8 +441,12 @@ msgstr "Genre"
 
 #: templates/members/details.html:34
 #, fuzzy
-msgid "These data are synced from APINC VHFFS Panel, to update these data please edit them from"
-msgstr "Ces données sont synchronisées depuis le panel APINC VHFFS, pour les mettre à jour merci d'utiliser"
+msgid ""
+"These data are synced from APINC VHFFS Panel, to update these data please "
+"edit them from"
+msgstr ""
+"Ces données sont synchronisées depuis le panel APINC VHFFS, pour les mettre "
+"à jour merci d'utiliser"
 
 #: templates/members/details.html:34
 #, fuzzy
