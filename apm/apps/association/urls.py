@@ -23,13 +23,13 @@ urlpatterns = patterns('apm.apps.association.views',
     url(r'^$', 'index', name='organization'),
     url(r'^report/upload/$', 'upload_report'),
     url(r'^report/(?P<report_id>\d+)/delete/$', 'delete_report'),
-    url(r'^statutes/pdf/$', 'statutes_pdf'),
+    url(r'^statuts/pdf/$', 'statuts_pdf'),
 )
 
 # Pages particulieres au contenu pseudo-statique
 urlpatterns += patterns('',
-    url(r'^statutes/$', 'apm.apps.pages.views.page',
-        { 'page': "statutes" }, name='statutes'),
+    url(r'^statuts/$', 'apm.apps.pages.views.page',
+        { 'page': "statuts" }, name='statuts'),
     url(r'^by-laws/$', 'apm.apps.pages.views.page',
         { 'page': "by-laws" }, name='by-laws'),
     url(r'^services/$', 'apm.apps.pages.views.page',

@@ -38,7 +38,7 @@ def index(request):
             {'text': text, 'board_members': board_members,
              'meeting_reports': meeting_reports})
     
-def statutes_pdf(request):
+def statuts_pdf(request):
     return render(request, 'base.html')
 
 @access_required(groups=['apinc-secretariat', 'apinc-bureau'])
