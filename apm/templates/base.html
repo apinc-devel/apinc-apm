@@ -64,8 +64,8 @@
 						{% else %}
 						<form class="navbar-form pull-right" method="post" action="{% url "apm.apps.pages.views.login" %}">
 							{% csrf_token %}
-							<input class="span2" type="text" name="username" placeholder="APINC panel username">
-							<input class="span2" type="password" name="password" placeholder="APINC panel password">
+							<input class="span2" type="text" name="username" placeholder="{% trans "APINC panel username" %}">
+							<input class="span2" type="password" name="password" placeholder="{% trans "APINC panel password" %}">
 							<input type="hidden" name="next" value="{{ request.path }}">
 							<button type="submit" class="btn">{% trans "Sign in" %}</button>
 						</form>
