@@ -2,15 +2,16 @@
 # Copyright (C) 2013 APINC Devel Team
 # This file is distributed under the same license as the APINC APM application package.
 # Laurent Bives <lau@apinc.org>, 2013.
+# Yann Verry <yann@verry.org>, 2014.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: APINC APM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-03 23:59+0100\n"
+"POT-Creation-Date: 2014-01-04 00:27+0100\n"
 "PO-Revision-Date: 2014-01-04 00:03+0100\n"
 "Last-Translator: \n"
-"Language-Team: APINC Devel Team <devel@ml.apinc.org>\n"
+"Language-Team: APINC Devel Team <devel@list.apinc.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -108,7 +109,6 @@ msgid "Contribution type has been successfully saved."
 msgstr "Les modifications ont été sauvées avec succès."
 
 #: apps/contributions/views.py:96
-#, fuzzy
 msgid "Do you really want to delete this contribution type"
 msgstr "Voulez-vous vraiment supprimer ce document"
 
@@ -122,9 +122,7 @@ msgid "Adding a contribution"
 msgstr ""
 
 #: apps/contributions/views.py:156
-msgid ""
-"Person is not elligible for membership. You may check if person owns an "
-"APINC VHFFS project."
+msgid "Person is not elligible for membership."
 msgstr ""
 
 #: apps/contributions/views.py:168
@@ -210,9 +208,7 @@ msgid "Following are listed organization board member roles."
 msgstr ""
 
 #: apps/manage/views.py:60
-msgid ""
-"Following are listed all apinc-apm groups used to manage permissions on "
-"apinc-apm application. These groups are handled statically."
+msgid "Following are listed all apinc-apm groups used to manage permissions on apinc-apm application. These groups are handled statically."
 msgstr ""
 
 #: apps/manage/views.py:98
@@ -263,8 +259,7 @@ msgid "Notes"
 msgstr "Notes"
 
 #: apps/members/models.py:213
-msgid ""
-"Donnees privees accessibles seulement par les admins ou le secretariat apinc."
+msgid "Donnees privees accessibles seulement par les admins ou le secretariat apinc."
 msgstr ""
 
 #: apps/members/models.py:221
@@ -442,8 +437,7 @@ msgid "Organization"
 msgstr "Association"
 
 #: templates/base.html:82
-#, fuzzy
-msgid "Statuts"
+msgid "Statutes"
 msgstr "Statuts"
 
 #: templates/base.html:83
@@ -463,9 +457,8 @@ msgid "Panel vhffs"
 msgstr ""
 
 #: templates/base.html:94
-#, fuzzy
 msgid "Webmail"
-msgstr "courriel"
+msgstr "Courriel"
 
 #: templates/base.html:95
 msgid "Administration MySQL"
@@ -961,12 +954,8 @@ msgstr ""
 
 #: templates/members/details.html:48
 #, fuzzy
-msgid ""
-"These data are synced from APINC VHFFS Panel, to update these data please "
-"edit them from"
-msgstr ""
-"Ces données sont synchronisées depuis le panel APINC VHFFS, pour les mettre "
-"à jour merci d'utiliser"
+msgid "These data are synced from APINC VHFFS Panel, to update these data please edit them from"
+msgstr "Ces données sont synchronisées depuis le panel APINC VHFFS, pour les mettre à jour merci d'utiliser"
 
 #: templates/members/details.html:48
 msgid "the appropriate panel tab"

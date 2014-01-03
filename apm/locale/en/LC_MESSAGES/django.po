@@ -2,16 +2,17 @@
 # Copyright (C) 2013 APINC Devel Team
 # This file is distributed under the same license as the APINC APM application package.
 # Laurent Bives <lau@apinc.org, 2013.
+# Yann Verry <yann@verry.org, 2014.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-03 23:59+0100\n"
+"POT-Creation-Date: 2014-01-04 00:27+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: APINC Devel Team <devel@ml.apinc.org>\n"
+"Language-Team: APINC Devel Team <devel@lists.apinc.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -115,7 +116,7 @@ msgid "Adding a contribution"
 msgstr ""
 
 #: apps/contributions/views.py:156
-msgid "Person is not elligible for membership. You may check if person owns an APINC VHFFS project."
+msgid "Person is not elligible for membership."
 msgstr ""
 
 #: apps/contributions/views.py:168
@@ -411,7 +412,7 @@ msgid "Organization"
 msgstr ""
 
 #: templates/base.html:82
-msgid "Statuts"
+msgid "Statutes"
 msgstr ""
 
 #: templates/base.html:83

@@ -266,7 +266,7 @@ PSEUDO_STATIC_PAGES = [
     ("legal-notice", "Legal notice and terms of use"),
     ("contact", "Contact page title"),
     ("organization", "The organization"),
-    ("statuts", "Statuts de l'association"),
+    ("statutes", "Statuts de l'association"),
     ("by-laws", "Règlement intérieur"),
     ("services", "Services fournis par l'association"),
 ]
