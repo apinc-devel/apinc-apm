@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-04 00:27+0100\n"
+"POT-Creation-Date: 2014-01-05 19:55+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: APINC Devel Team <devel@lists.apinc.org>\n"
@@ -116,7 +116,7 @@ msgid "Adding a contribution"
 msgstr ""
 
 #: apps/contributions/views.py:156
-msgid "Person is not elligible for membership."
+msgid "Person is not elligible for membership. You may check if person owns an APINC VHFFS project."
 msgstr ""
 
 #: apps/contributions/views.py:168

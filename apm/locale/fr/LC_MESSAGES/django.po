@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: APINC APM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-04 00:27+0100\n"
-"PO-Revision-Date: 2014-01-04 00:03+0100\n"
+"POT-Creation-Date: 2014-01-05 19:55+0100\n"
+"PO-Revision-Date: 2014-01-05 20:08+0100\n"
 "Last-Translator: \n"
 "Language-Team: APINC Devel Team <devel@list.apinc.org>\n"
 "Language: fr\n"
@@ -122,7 +122,9 @@ msgid "Adding a contribution"
 msgstr ""
 
 #: apps/contributions/views.py:156
-msgid "Person is not elligible for membership."
+msgid ""
+"Person is not elligible for membership. You may check if person owns an "
+"APINC VHFFS project."
 msgstr ""
 
 #: apps/contributions/views.py:168
@@ -208,7 +210,9 @@ msgid "Following are listed organization board member roles."
 msgstr ""
 
 #: apps/manage/views.py:60
-msgid "Following are listed all apinc-apm groups used to manage permissions on apinc-apm application. These groups are handled statically."
+msgid ""
+"Following are listed all apinc-apm groups used to manage permissions on "
+"apinc-apm application. These groups are handled statically."
 msgstr ""
 
 #: apps/manage/views.py:98
@@ -259,7 +263,8 @@ msgid "Notes"
 msgstr "Notes"
 
 #: apps/members/models.py:213
-msgid "Donnees privees accessibles seulement par les admins ou le secretariat apinc."
+msgid ""
+"Donnees privees accessibles seulement par les admins ou le secretariat apinc."
 msgstr ""
 
 #: apps/members/models.py:221
@@ -373,7 +378,7 @@ msgstr ""
 
 #: apps/payments/models.py:55
 msgid "emitter"
-msgstr ""
+msgstr "émetteur"
 
 #: apps/payments/models.py:59
 #, fuzzy
@@ -382,7 +387,7 @@ msgstr "date de fin"
 
 #: apps/payments/models.py:76 templates/contributions/contributions.html:34
 msgid "Payment"
-msgstr ""
+msgstr "Paiement"
 
 #: apps/payments/views.py:123
 #, fuzzy
@@ -572,11 +577,11 @@ msgstr "Vos identifiants n'ont pas été reconnus. Merci d'essayer à nouveau."
 
 #: templates/auth/login.html:26 templates/manage/members.html:19
 msgid "Username"
-msgstr ""
+msgstr "Utilisateur"
 
 #: templates/auth/login.html:30
 msgid "Password"
-msgstr ""
+msgstr "Mot de passe"
 
 #: templates/auth/login.html:36
 msgid "Log-in"
@@ -584,11 +589,11 @@ msgstr "Connexion"
 
 #: templates/auth/login.html:44
 msgid "I don't know my password"
-msgstr ""
+msgstr "Je ne sais pas mon mot de passe"
 
 #: templates/auth/login.html:45
 msgid "Subscribe"
-msgstr ""
+msgstr "Souscrire"
 
 #: templates/auth/permission_denied.html:8
 #, fuzzy
@@ -624,7 +629,7 @@ msgstr ""
 #: templates/payments/payment_edit.html:45 templates/payments/payments.html:23
 #: templates/payments/user_payments.html:17
 msgid "Amount"
-msgstr ""
+msgstr "Montant"
 
 #: templates/contributions/contribution_edit.html:28
 #: templates/payments/payment_details.html:18
@@ -725,7 +730,7 @@ msgstr ""
 #: templates/contributions/contributions.html:56
 #: templates/contributions/user_contributions.html:37
 msgid "Receipt"
-msgstr ""
+msgstr "Reçu"
 
 #: templates/contributions/contributions.html:66
 msgid "No contribution yet !"
@@ -766,11 +771,11 @@ msgstr ""
 
 #: templates/contributions/user_contributions.html:15
 msgid "Start"
-msgstr ""
+msgstr "Début"
 
 #: templates/contributions/user_contributions.html:16
 msgid "End"
-msgstr ""
+msgstr "Fin"
 
 #: templates/contributions/user_contributions.html:18
 msgid "Status"
@@ -865,7 +870,7 @@ msgstr ""
 #: templates/manage/groups.html:21 templates/manage/members.html:20
 #: templates/manage/roles.html:19
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #: templates/manage/groups.html:23 templates/manage/members.html:21
 msgid "Email"
@@ -895,7 +900,7 @@ msgstr "Bureau"
 
 #: templates/manage/roles.html:18
 msgid "Rank"
-msgstr ""
+msgstr "Rang"
 
 #: templates/manage/roles.html:29
 msgid "No roles !"
@@ -953,13 +958,16 @@ msgid "VHFFS projects eligible for membership"
 msgstr ""
 
 #: templates/members/details.html:48
-#, fuzzy
-msgid "These data are synced from APINC VHFFS Panel, to update these data please edit them from"
-msgstr "Ces données sont synchronisées depuis le panel APINC VHFFS, pour les mettre à jour merci d'utiliser"
+msgid ""
+"These data are synced from APINC VHFFS Panel, to update these data please "
+"edit them from"
+msgstr ""
+"Ces données sont synchronisées depuis le panel APINC VHFFS, pour les mettre "
+"à jour merci d'utiliser"
 
 #: templates/members/details.html:48
 msgid "the appropriate panel tab"
-msgstr ""
+msgstr "l'onglet du panneau approprié"
 
 #: templates/members/details.html:53
 msgid "APM group memberships"
