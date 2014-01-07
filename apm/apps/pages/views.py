@@ -113,7 +113,12 @@ def login(request):
 
             if user:
                 auth.login(request, user)
-                return redirect(request.POST.get('next','/'))
+                next_page = request.POST.get('next', '/')
+                if next_page == '/' \
+                        or next_page == reverse('apm.apps.pages.views.login'):
+                    return redirect(reverse('apm.apps.members.views.details',
+                                            args=(user.id,)))
+                return redirect(next_page)
 
         except Exception, e:
             #pass
