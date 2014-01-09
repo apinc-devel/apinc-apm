@@ -61,19 +61,19 @@ def _set_user(vhffs_user):
             #raise error
             pass
         if vhffs_user['lastname']:
-            u.last_name=vhffs_user['lastname'][:30]
+            u.last_name=vhffs_user['lastname'][:30].encode('iso-8859-15').decode('utf-8')
         else:
             #raise error
             pass
         if vhffs_user['firstname']:
-            u.first_name=vhffs_user['firstname'][:30]
+            u.first_name=vhffs_user['firstname'][:30].encode('iso-8859-15').decode('utf-8')
         else:
             #raise error
             pass
         u.save()
 
-        print "User %s up to date." % (u)
-
+        print "User %s (%s %s) up to date." % (u, repr(vhffs_user['firstname'][:30]),
+                repr(vhffs_user['lastname'][:30]))
 
 def _set_project(vhffs_project):
     """Internal"""
