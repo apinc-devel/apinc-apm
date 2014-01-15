@@ -34,7 +34,7 @@ from django.core.paginator import Paginator, InvalidPage
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.contrib import messages
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import get_user_model as Person
 
 from apm.apps.members.models import MemberRole 
@@ -192,7 +192,8 @@ def contribution_edit(request, user_id=None, contribution_id=None):
 
                 if not contribution.subscription_start_date:
                     messages.add_message(request, messages.WARNING,
-                        _('No project found for member %s' % contribution.person))
+                        u"%s %s" % (_('No project found for member'),
+                                    contribution.person))
                     page_dict.update({'form': form})
                     return render(request, 'contributions/contribution_edit.html', page_dict)
 
