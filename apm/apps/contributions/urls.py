@@ -17,7 +17,7 @@
 #   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 
-from django.conf.urls.defaults import *
+from django.conf.urls import *
 
 urlpatterns = patterns('apm.apps.contributions.views',
 
@@ -38,5 +38,6 @@ urlpatterns = patterns('apm.apps.contributions.views',
     url(r'^type/edit/(?P<contribution_type_id>\d+)/$', 'contribution_type_edit'),
     url(r'^type/delete/(?P<contribution_type_id>\d+)/$', 'contribution_type_delete'),
     url(r'^receipt/(?P<user_id>\d+)/(?P<contribution_id>\d+)/$', 'contribution_receipt'),
+    url(r'^pay/(?P<user_id>\d+)/$','pay_subscription'),
     #url(r'^request/$', 'subscription_request'),
 )

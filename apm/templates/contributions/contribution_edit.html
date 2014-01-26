@@ -87,6 +87,9 @@
     <div class="controls">
       <a class="btn btn-inverse" href="{{ back }}">{% trans "Cancel" %}</a>
       <input type="submit" class="btn btn-primary" value="{% trans "Save" %}" />
+      {% if form.instance.id and not form.instance.validated %}
+      <a class="btn btn-success" href="{% url "apm.apps.payments.views.paypal_create" form.instance.id %}?next={{ next }}">{% trans "Pay" %}</a>
+      {% endif %}
     </div>
   </div>
 </form>

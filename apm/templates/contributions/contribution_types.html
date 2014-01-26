@@ -12,8 +12,9 @@
             <colgroup>
                 <col span="1" style="width: 40%;">
                 <col span="1" style="width: 30%;">
-                <col span="1" style="width: 15%;">
-                <col span="1" style="width: 15%;">
+                <col span="1" style="width: 10%;">
+                <col span="1" style="width: 10%;">
+                <col span="1" style="width: 10%;">
             </colgroup>
             <thead>
                 <tr>
@@ -21,6 +22,7 @@
                     <th class="text-center">{% trans "Extends duration (month)" %}</th>
                     <th class="text-center">{% trans "Dues amount €" %}</th>
                     <th class="text-center">{% trans "Active" %}</th>
+                    <th class="text-center">{% trans "Is subscription" %}</th>
                 </tr>
             </thead>
             <tbody>
@@ -30,6 +32,7 @@
                     <td class="text-center">{{ type.extends_duration }}</td>
                     <td class="text-center">{{ type.dues_amount }}</td>
                     <td class="text-center">{{ type.active }}</td>
+                    <td class="text-center">{{ type.is_subscription }}</td>
                 </tr>
                 {% empty %}
                 <tr><td class="text-error">{% trans "No type defined yet !" %}</td></tr>

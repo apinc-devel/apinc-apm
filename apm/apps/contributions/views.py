@@ -75,6 +75,9 @@ def contribution_type_edit(request, contribution_type_id=None):
 
         if form.is_valid():
             contribution_type = form.save()
+            if contribution_type.is_subscription:
+                ContributionType.objects.set_subscription(contribution_type)
+
             #LogEntry.objects.log_action(
             #    user_id = request.user.id,
             #    content_type_id = ContentType.objects.get_for_model(contribution_type).pk,
@@ -170,7 +173,8 @@ def contribution_edit(request, user_id=None, contribution_id=None):
 
     page_dict = {'action_title': title, 'person': person,
         'types': ContributionType.objects.active(),
-        'back': request.META.get('HTTP_REFERER', '/')}
+        'back': request.META.get('HTTP_REFERER', '/'),
+        'next': request.GET.get('next')}
 
 #    if request.method == 'GET':
 #        if Contribution.objects.filter(person=person).exclude(
@@ -345,6 +349,46 @@ def contribution_receipt(request, user_id=None, contribution_id=None):
     receipt_buffer.close()
 
     return response
+
+
+def pay_subscription(request, user_id=None):
+
+    """ pay contribution, create the subscription if it does not exist """
+
+    person = get_object_or_404(Person(), id=user_id)
+
+    subscription = None
+    try:
+        subscription = Contribution.objects.not_validated().filter(person__id=user_id).filter(type__is_subscription__exact=True).order_by('subscription_start_date')[0]
+    except IndexError, e:
+        print e
+        subscription_type = ContributionType.objects.get_subscription()
+        subscription = Contribution(person=person, type=subscription_type,
+                dues_amount = subscription_type.dues_amount)
+
+        ### TODO pourrait être factorisé dans le modèle car on l'utilise aussi
+        ###      lors de l'appel à contribution_edit
+        subscription.subscription_start_date = subscription.person\
+                                    .get_next_subscription_start_date()
+
+        if not subscription.subscription_start_date:
+            messages.add_message(request, messages.WARNING,
+                u"%s %s" % (_('No project found for member'), person))
+            page_dict.update({'form': form})
+            return render(request, 'subscriptions/subscription_edit.html', page_dict)
+
+        subscription.subscription_end_date = subscription\
+            .subscription_start_date + relativedelta(
+             months=subscription.type.extends_duration, days=-1)
+        subscription.save()
+
+    if not subscription:
+        messages.add_message(request, messages.ERROR,
+            _('An error occured while trying to add a subscription, please contact administrators.'))
+        return redirect(reverse('apm.apps.members.views.details', args=[user_id]))
+
+    return redirect(reverse('apm.apps.payments.views.pay', kwargs={'contribution_id':subscription.id}))
+
 
 #@access_required(groups=['apinc-secretariat', 'apinc-tresorier'])
 #def regularize_user(request, user_id=None):

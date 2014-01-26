@@ -20,18 +20,19 @@
 import datetime
 from dateutil.relativedelta import relativedelta
 
+from paypalrestsdk import Payment as PaypalPayment
+
 from django.core.urlresolvers import reverse
 from django.core.paginator import Paginator, InvalidPage
 from django.shortcuts import get_object_or_404, render, redirect
-from django.http import HttpResponseRedirect, Http404
 from django.contrib import messages
 from django.utils.translation import ugettext as _
 
 from apm.apps.members.models import Person
-from apm.apps.payments.models import Payment
+from apm.apps.payments.models import Payment, PaypalMapping
 from apm.apps.payments.forms import PaymentForm
 from apm.decorators import access_required, confirm_required
-
+from apm.apps.contributions.models import Contribution
 
 @access_required(groups=['apinc-secretariat', 'apinc-tresorier'])
 def payments(request):
@@ -141,9 +142,114 @@ def payment_delete(request, payment_id=None):
     payment.delete()
     messages.add_message(request, messages.SUCCESS, _('Payment successfully deleted'))
 
-    return redirect(payments)
+    return redirect(request.POST.get('next', reverse(payments)))
 
 
-def payment_distribute(request, payment_id=None):
-    return
+def pay(request, contribution_id=None):
 
+    contribution = get_object_or_404(Contribution, id=contribution_id)
+    return render(request, 'payments/pay.html',
+        {'person': contribution.person, 'contribution': contribution,
+         'next' : request.GET.get('next', '/')})
+
+
+def paypal_create(request, contribution_id=None):
+    
+    contribution = get_object_or_404(Contribution, id=contribution_id)
+    paypal_mapping = PaypalMapping()
+
+    ### create paypal payment
+    paypal_payment = PaypalPayment({
+        "intent":  "sale",
+
+        # ###Payer
+        # A resource representing a Payer that funds a payment
+        # Payment Method as 'paypal'
+        "payer":  {
+            "payment_method":  "paypal" },
+
+        # ###Redirect URLs
+        "redirect_urls": {
+            "return_url": "%s?next=%s" % (request.build_absolute_uri(reverse(paypal_execute, kwargs={'contribution_id':contribution_id, 'uuid':paypal_mapping.uuid})), request.GET.get('next','/')),
+            "cancel_url": "%s?next=%s" % (request.build_absolute_uri(reverse(paypal_cancel, kwargs={'uuid':paypal_mapping.uuid})), request.GET.get('next','/')) },
+
+        # ###Transaction
+        # A transaction defines the contract of a
+        # payment - what is the payment for and who
+        # is fulfilling it.
+        "transactions":  [ {
+
+        # ### ItemList
+        "item_list": {
+          "items": [{
+            "name": contribution.type.label,
+            "sku": paypal_mapping.uuid,
+            "price": str(contribution.dues_amount),
+            "currency": "EUR",
+            "quantity": 1 }]},
+
+        # ###Amount
+        # Let's you specify a payment amount.
+        "amount":  {
+          "total":  str(contribution.dues_amount),
+          "currency":  "EUR" },
+        "description":  _("Contribution payment") + " %s." % contribution } ] } )
+
+    # Create Payment and return status
+    if paypal_payment.create():
+        paypal_mapping.payment_id = paypal_payment.id 
+        paypal_mapping.save()
+        #print("Payment[%s] created successfully"%(paypal_payment.id))
+        # Redirect the user to given approval url
+        for link in paypal_payment.links:
+            if link.method == "REDIRECT":
+                redirect_url = link.href
+                print("Redirect for approval: %s"%(redirect_url))
+                return redirect(redirect_url)
+    else:
+        print("Error while creating payment:")
+        print(paypal_payment.error)
+
+    messages.add_message(request, messages.ERROR,
+        _('An error occured while creating the payment, please contact administrators.'))
+    return redirect(request.GET.get('next', '/'))
+
+def paypal_execute(request, contribution_id=None, uuid=None):
+
+    payer_id = request.GET.get('PayerID') 
+    if not payer_id:
+        messages.add_message(request, messages.ERROR,
+            _('An error occured while processing the payment') + " %s " \
+                % (paypal_mapping.payment_id) + _("PayerID not found."))
+        return redirect(request.GET.get('next'))
+
+    paypal_mapping = get_object_or_404(PaypalMapping, uuid=uuid)
+    contribution = get_object_or_404(Contribution, id=contribution_id)
+    paypal_payment = PaypalPayment.find(paypal_mapping.payment_id)
+
+    if paypal_payment.execute({"payer_id": payer_id}):
+        #print("Payment[%s] execute successfully"%(paypal_payment.id))
+        payment = Payment(
+                emitter=contribution.person,
+                description = paypal_payment.id,
+                amount = paypal_payment.transactions[0]['amount']['total'],
+                date = datetime.datetime.now())
+        payment.save()
+        payment.contributions.add(contribution.id)
+
+        contribution.validated = True
+        contribution.save()
+        return redirect(request.GET.get('next'))
+    else:
+        messages.add_message(request, messages.ERROR,
+            _('An error occured while processing the payment') + " %s." \
+                % paypal_mapping.payment_id)
+        return redirect(request.GET.get('next'))
+        print(paypal_payment.error)
+
+def paypal_cancel(request, uuid=None):
+    paypal_mapping = get_object_or_404(PaypalMapping, uuid=uuid)
+    paypal_mapping.delete()
+    messages.add_message(request, messages.WARNING, _('The payment ') + " %s " \
+            % paypal_mapping.payment_id + _('has been cancelled'))
+    return redirect(request.GET.get('next'))

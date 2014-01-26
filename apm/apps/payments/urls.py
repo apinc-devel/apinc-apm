@@ -17,7 +17,7 @@
 #   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 
-from django.conf.urls.defaults import *
+from django.conf.urls import *
 
 urlpatterns = patterns('apm.apps.payments.views',
 
@@ -30,6 +30,9 @@ urlpatterns = patterns('apm.apps.payments.views',
     url(r'^add/user/(?P<user_id>\d+)/$', 'payment_edit'),
     url(r'^edit/(?P<user_id>\d+)/(?P<payment_id>\d+)/$', 'payment_edit'),
     url(r'^delete/(?P<payment_id>\d+)/$', 'payment_delete'),
-    url(r'^distribute/(?P<payment_id>\d+)/$', 'payment_distribute'),
+    url(r'^pay/(?P<contribution_id>\d+)/$', 'pay'),
+    url(r'^paypal/create/(?P<contribution_id>\d+)/$', 'paypal_create'),
+    url(r'^paypal/execute/(?P<contribution_id>\d+)/(?P<uuid>[0-9a-fA-F]{32})/$', 'paypal_execute'),
+    url(r'^paypal/cancel/(?P<uuid>[0-9a-fA-F]{32})/$', 'paypal_cancel'),
     #url(r'^request/$', 'subscription_request'),
 )

@@ -39,7 +39,7 @@
         <a class="btn" href="{% url "apm.apps.payments.views.payment_edit" payment.emitter.id payment.id %}?next={% url "apm.apps.payments.views.payment_details" payment.id %}">{% trans "Edit" %}</a>
       </td>
       <td>
-        <a class="btn" href="{% url "apm.apps.payments.views.payment_delete" payment.id %}?next={% url "apm.apps.payments.views.user_payments" payment.emitter.id %}">{% trans "Delete" %}</a>
+        <a class="btn btn-danger" href="{% url "apm.apps.payments.views.payment_delete" payment.id %}?next={% url "apm.apps.payments.views.user_payments" payment.emitter.id %}">{% trans "Delete" %}</a>
       </td>
     </tr>
     {% endif %}

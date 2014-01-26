@@ -329,3 +329,7 @@ TINYMCE_DEFAULT_CONFIG = {
     'theme_advanced_buttons3' : "",
     'relative_urls': False,
 }
+
+PAYPAL_MODE = 'sandbox' # or 'live'
+PAYPAL_CLIENT_ID = ''
+PAYPAL_CLIENT_SECRET = ''

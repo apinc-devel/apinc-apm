@@ -17,8 +17,12 @@
 #   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 
+import datetime
+import uuid
+
 from django.db import models
 from django.utils.translation import ugettext as _
+from django.dispatch import receiver
 
 from apm.apps.members.models import Person
 from apm.apps.contributions.models import Contribution
@@ -56,7 +60,7 @@ class Payment(models.Model):
         related_name='payment')
     description = models.CharField(max_length=512, blank=False, default="")
     amount = PositiveNormalizedDecimalField(max_digits=6, decimal_places=2, blank=False, default=0)
-    date = models.DateTimeField(verbose_name=_('payment date'), blank=False, default="")
+    date = models.DateTimeField(verbose_name=_('payment date'), blank=False, default=datetime.datetime.now())
     contributions = models.ManyToManyField(Contribution, null=True, blank=True, related_name='payments')
 
     def amount_to_use(self):
@@ -66,6 +70,12 @@ class Payment(models.Model):
             amount_to_use -= c.dues_amount
         return amount_to_use
 
+    def complete(self):
+        """amount covered by contributions"""
+        covered_amount = 0
+        for c in self.contributions.all():
+            covered_amount += c.dues_amount
+        return self.amount >= covered_amount
 
     def __unicode__(self):
         """unicode string for payment object"""
@@ -75,3 +85,19 @@ class Payment(models.Model):
         """Meta"""
         verbose_name = _('Payment')
         ordering = ['id']
+
+@receiver(models.signals.pre_delete, sender=Payment)
+def handle_deleted_payment(sender, instance, **kwargs):
+    for c in instance.contributions.all():
+        c.validated = False
+        c.save()
+
+class PaypalMapping(models.Model):
+    datetime = models.DateTimeField(verbose_name=_('payment date'), blank=False, default=datetime.datetime.now())
+    uuid = models.CharField(max_length=32, unique=True, blank=False, default=uuid.uuid1().hex)
+    payment_id = models.CharField(max_length=128, blank=False, default="")
+
+    def __unicode__(self):
+        """unicode string for paypal mapping object"""
+        return u'%s %s created on %s' % (self.uuid, self.payment_id, self.datetime)
+

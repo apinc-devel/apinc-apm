@@ -18,9 +18,9 @@
     <td>{% trans "Available amount" %}</td>
   </tr>
 {% for payment in payments_list %}
-    <tr>
+    {% if payment.complete %}<tr class="text-success">{% else %}<tr>{% endif %}
     <td>{{ payment.id }}</td>
-    <td class="text-info">{{ payment.date|date:"d/M/Y H:i" }}</td>
+    <td>{{ payment.date|date:"d/M/Y H:i" }}</td>
     <td>{{ payment.description }}</td>
     <td>{{ payment.emitter }}</td>
     <td>{{ payment.amount }}&nbsp;{% trans "euros" %}</td>
@@ -29,10 +29,10 @@
 
     {% if superadmin or secretariat_member or tresorier_member %}
     <td>
-    <a class="btn" href="{% url "apm.apps.payments.views.payment_edit" payment.emitter.id payment.id %}?next={% url "apm.apps.payments.views.user_payments" payment.emitter.id %}">{% trans "Edit" %}</a>
+        <a class="btn" href="{% url "apm.apps.payments.views.payment_edit" payment.emitter.id payment.id %}?next={{ request.path }}">{% trans "Edit" %}</a>
     </td>
     <td>
-    <a class="btn" href="{% url "apm.apps.payments.views.payment_delete" payment.id %}?next={% url "apm.apps.payments.views.user_payments" payment.emitter.id %}">{% trans "Delete" %}</a>
+        <a class="btn btn-danger" href="{% url "apm.apps.payments.views.payment_delete" payment.id %}?next={% url "apm.apps.payments.views.user_payments" payment.emitter.id %}"?next={{ request.path }}>{% trans "Delete" %}</a>
     </td>
     </tr>
     {% endif %}

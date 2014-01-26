@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-#   Copyright © 2011-2013 APINC Devel Team
+#   Copyright © 2011-2014 APINC Devel Team
 #
 #   This program is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
@@ -35,10 +35,25 @@ class ContributionTypeManager(models.Manager):
     def inactive(self):
         return self.filter(active__exact=False)
 
+    def set_subscription(self, contribution_type):
+        """Default contribution type"""
+        for ct in self.all():
+            ct.is_subscription = False
+            ct.save()
+        contribution_type.is_subscription = True
+        contribution_type.save()
+
+    def get_subscription(self):
+        subscription = self.filter(active__exact=True).filter(is_subscription__exact=True)
+        if subscription:
+            return subscription[0] 
+        ### FIXME should raise an exception ?
+        return None
+
 
 class ContributionType(models.Model):
     """
-    The types of s are defined via the manage app interface.
+    The types of contributions are defined via the manage app interface.
     Two types are distinghuishable :
         . those who extend the subscription duration (annual subscription for instance)
         . those who do not extend the subscription duration (donation for instance)
@@ -50,6 +65,7 @@ class ContributionType(models.Model):
     dues_amount = PositiveNormalizedDecimalField(max_digits=6, decimal_places=2,
         default=None, blank=True, null=True, verbose_name=_('dues amount'))
     active = models.BooleanField(verbose_name=_('active'), default=True)
+    is_subscription = models.BooleanField(default=False)
 
     objects = ContributionTypeManager()
 

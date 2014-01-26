@@ -10,13 +10,15 @@
     <div class="span12">
         <table class="table table-bordered table-striped">
             <colgroup>
-                <col span="1" style="width: 40%;">
+                <col span="1" style="width: 5%;">
+                <col span="1" style="width: 35%;">
                 <col span="1" style="width: 30%;">
                 <col span="1" style="width: 15%;">
                 <col span="1" style="width: 15%;">
             </colgroup>
             <thead>
                 <tr>
+                    <th class="text-center">{% trans "Id" %}</th>
                     <th>{% trans "Description" %}</th>
                     <th class="text-center">{% trans "Emitter" %}</th>
                     <th class="text-center">{% trans "Date" %}</th>
@@ -27,6 +29,7 @@
             <tbody>
                 {% for payment  in payment_list %}
                 {% if payment.active %}<tr>{% else %}<tr class="muted">{% endif %}
+                    <td class="text-center">{{ payment.id }}</td>
                     <td><a href="{% url "apm.apps.payments.views.payment_edit" payment.emitter.id payment.id %}">{{ payment.description }}</a></td>
                     <td class="text-center">{{ payment.emitter }}</td>
                     <td class="text-center">{{ payment.date }}</td>

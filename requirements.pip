@@ -5,6 +5,7 @@ python-dateutil==2.1
 pytz==2013b
 reportlab==2.7
 pillow==2.2.1
+paypalrestsdk==0.6.4
 #pexpect==2.4
 
 

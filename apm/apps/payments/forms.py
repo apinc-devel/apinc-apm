@@ -60,9 +60,3 @@ class PaymentForm(forms.ModelForm):
     class Meta:
         """Payment meta"""
         model = Payment
-
-class PaymentDistributeForm(forms.Form):
-
-    """Payment distribute Form"""
-
-

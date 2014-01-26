@@ -1,0 +1,38 @@
+{% extends 'members/base_members.html' %}
+{% load static from staticfiles %}
+{% load i18n %}
+
+{% block content_page %}
+<div class="page-header">
+  <h2>{% trans "Pay my subscription" %}</h2>
+</div>
+
+<div class="row-fluid">
+  <div class="span12">
+    <table class="table table-condensed">
+      <tr class="info">
+        <td>{% trans "Recorded date" %}</td>
+        <td>{% trans "Type" %}</td>
+        <td>{% trans "Start" %}</td>
+        <td>{% trans "End" %}</td>
+        <td>{% trans "Amount" %}</td>
+      </tr>
+      <tr>
+        <td>{{ contribution.recorded_date|date:"d/M/Y H:i" }}</td>
+        <td>{{ contribution.type.label }}</td>
+        <td>{{ contribution.subscription_start_date|default:"NA" }}</td>
+        <td>{{ contribution.subscription_end_date|default:"NA" }}</td>
+        <td>{{ contribution.dues_amount }}&nbsp;{% trans "euros" %}</td>
+      </tr>
+    </table>
+
+    <p class="text-center">
+    <a class="btn btn-success" href="{% url "apm.apps.payments.views.paypal_create" contribution.id %}?next={{ request.path }}">{% trans "Pay with Paypal" %}</a>
+    <a class="btn btn-success" href="{% static "images/rib_bplc.png" %}">{% trans "Pay by transfer" %}</a>
+    <a class="btn btn-success" href="{% url "legal-notice" %}">{% trans "Pay by check" %}</a>
+    </p>
+  </tr>
+</div><!--/span12 -->
+</div><!--/row-fluid -->
+
+{% endblock %}

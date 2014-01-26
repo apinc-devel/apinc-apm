@@ -44,7 +44,7 @@
                     <td class="text-center">{{ c.dues_amount }}&nbsp;{% trans "euros" %}</td>
                     <td class="text-center">
                     {% for p in c.payments.all %}
-                    <a href="{% url "apm.apps.payments.views.payment_details" p.id %}">(#{{ p.id }} {{ p.description }})</a>
+                    <a href="{% url "apm.apps.payments.views.payment_details" p.id %}">{{ p.description }}</a>
                     {% empty %}
                     {% trans "No payment found" %}
                     {% endfor %}
