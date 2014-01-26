@@ -86,7 +86,6 @@ class Person(AbstractUser):
         # log error
         return None
 
-
     def get_subscriptions(self):
         """
         /!\ local import to avoid recursive imports
@@ -94,7 +93,6 @@ class Person(AbstractUser):
         from apm.apps.contributions.models import Contribution
 
         return Contribution.objects.filter(person=self).filter(type__extends_duration__gt=0)
-
 
     def pending_subscriptions(self):
         """
@@ -135,6 +133,22 @@ class Person(AbstractUser):
             result = Contribution.objects.filter(person=self).order_by('-subscription_end_date')[0].subscription_end_date + relativedelta(days=+1)
 
         return result
+
+    def get_subscription_renewal_date(self):
+        """
+        /!\ local import to avoid recursive imports
+        """
+        from apm.apps.contributions.models import Contribution
+        
+        result = None
+
+        if self.get_subscriptions().filter(validated__exact=True).count() > 0:
+            result = Contribution.objects.filter(person=self).filter(validated__exact=True).order_by('-subscription_end_date')[0].subscription_end_date + relativedelta(days=+1)
+        else:
+            result = self.get_first_subscription_date()
+
+        return result
+
 
 class Role(models.Model):
     

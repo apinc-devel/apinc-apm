@@ -57,7 +57,7 @@
 						<form class="navbar-form pull-right" method="post" action="{% url "apm.apps.pages.views.logout" %}">
 							{% csrf_token %}
 							<ul class="nav">
-								<li><a href="{% url "apm.apps.members.views.details" user.id %}">{{ user.first_name }} {{ user.last_name }}</a></li>
+                                <li><a href="{% url "apm.apps.members.views.details" user.id %}">{{ user.first_name }} {{ user.last_name }}{% if user.get_subscription_renewal_date %} ({% trans "renewal" %} {{ user.get_subscription_renewal_date }}){% endif %}</a></li>
 								<button type="submit" class="btn">{% trans "Log out" %}</button>
 							</ul>
 						</form>
