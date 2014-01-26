@@ -23,9 +23,6 @@ import paypalrestsdk
 from django.conf import settings 
 
 paypalrestsdk.configure({
-  #"mode": "sandbox", # sandbox or live
-  #"client_id": "EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM",
-  #"client_secret": "EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM" })
   "mode": settings.PAYPAL_MODE,
   "client_id": settings.PAYPAL_CLIENT_ID,
   "client_secret": settings.PAYPAL_CLIENT_SECRET })

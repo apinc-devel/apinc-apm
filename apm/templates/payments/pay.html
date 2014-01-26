@@ -27,7 +27,7 @@
     </table>
 
     <p class="text-center">
-    <a class="btn btn-success" href="{% url "apm.apps.payments.views.paypal_create" contribution.id %}?next={{ request.path }}">{% trans "Pay with Paypal" %}</a>
+    <a class="btn btn-success" href="{% url "apm.apps.payments.views.paypal_create" contribution.id %}?next={% url "apm.apps.contributions.views.user_contributions" contribution.person.id %}">{% trans "Pay with Paypal" %}</a>
     <a class="btn btn-success" href="{% static "images/rib_bplc.png" %}">{% trans "Pay by transfer" %}</a>
     <a class="btn btn-success" href="{% url "legal-notice" %}">{% trans "Pay by check" %}</a>
     </p>

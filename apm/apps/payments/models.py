@@ -94,7 +94,7 @@ def handle_deleted_payment(sender, instance, **kwargs):
 
 class PaypalMapping(models.Model):
     datetime = models.DateTimeField(verbose_name=_('payment date'), blank=False, default=datetime.datetime.now())
-    uuid = models.CharField(max_length=32, unique=True, blank=False, default=uuid.uuid1().hex)
+    uuid = models.CharField(max_length=32, unique=True, blank=False, default=lambda:str(uuid.uuid1().hex))
     payment_id = models.CharField(max_length=128, blank=False, default="")
 
     def __unicode__(self):
