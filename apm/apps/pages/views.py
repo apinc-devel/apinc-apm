@@ -72,7 +72,8 @@ def edit(request, page):
                 content_type_id = ContentType.objects.get_for_model(text).pk,
                 object_id = text.pk, message = msg_log)
 
-            messages.add_message(request, messages.SUCCESS, _("Pseudo-static page '%s' updated." % page))
+            messages.add_message(request, messages.SUCCESS,
+                    _("Pseudo-static page") + "%s" % page + _("updated."))
 
             if text.slug.startswith("homepage") :
                 return HttpResponseRedirect(reverse('homepage'))

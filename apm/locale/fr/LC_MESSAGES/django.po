@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: APINC APM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-05 19:55+0100\n"
+"POT-Creation-Date: 2014-01-27 21:00+0100\n"
 "PO-Revision-Date: 2014-01-05 20:08+0100\n"
-"Last-Translator: \n"
+"Last-Translator: Laurent Bives\n"
 "Language-Team: APINC Devel Team <devel@list.apinc.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -25,7 +25,7 @@ msgstr "Etes-vous sûr de vouloir faire cette action"
 
 #: fields.py:33
 msgid "Introduce a positive number."
-msgstr ""
+msgstr "Saisir un nombre positif."
 
 #: apps/association/models.py:43
 msgid "Meeting Report"
@@ -53,116 +53,108 @@ msgstr "Document supprimé avec succès"
 
 #: apps/contributions/forms.py:36
 msgid "-- Select contribution type --"
-msgstr ""
+msgstr "-- Sélectionner un type de contribution --"
 
 #: apps/contributions/forms.py:45
 msgid "Introduce a strictly positive number."
-msgstr ""
+msgstr "Saisir un nombre strictement positif."
 
-#: apps/contributions/models.py:49
+#: apps/contributions/models.py:64
 msgid "duration (month)"
-msgstr ""
+msgstr "durée (mois)"
 
-#: apps/contributions/models.py:51
+#: apps/contributions/models.py:66
 msgid "dues amount"
-msgstr ""
+msgstr "montant dû"
 
-#: apps/contributions/models.py:52
+#: apps/contributions/models.py:67
 msgid "active"
-msgstr ""
+msgstr "actif"
 
-#: apps/contributions/models.py:62 apps/contributions/models.py:111
+#: apps/contributions/models.py:78 apps/contributions/models.py:127
 msgid "contribution type"
-msgstr ""
+msgstr "type de contribution"
 
-#: apps/contributions/models.py:109 apps/members/models.py:63
-#: apps/members/models.py:209
+#: apps/contributions/models.py:125 apps/members/models.py:63
+#: apps/members/models.py:223
 msgid "person"
 msgstr "personne"
 
-#: apps/contributions/models.py:114
-msgid "validated"
-msgstr ""
-
-#: apps/contributions/models.py:115
-#, fuzzy
-msgid "record date"
-msgstr "date de fin"
-
-#: apps/contributions/models.py:117
-#, fuzzy
-msgid "subscription start date"
-msgstr "date de publication"
-
-#: apps/contributions/models.py:119
-#, fuzzy
-msgid "subscription end date"
-msgstr "date de publication"
-
 #: apps/contributions/models.py:130
+msgid "validated"
+msgstr "valide"
+
+#: apps/contributions/models.py:131
+msgid "record date"
+msgstr "date d'enregistrement"
+
+#: apps/contributions/models.py:133
+msgid "subscription start date"
+msgstr "date de début de souscription"
+
+#: apps/contributions/models.py:135
+msgid "subscription end date"
+msgstr "date de fin de souscription"
+
+#: apps/contributions/models.py:146
 msgid "Contribution"
-msgstr ""
+msgstr "Contribution"
 
-#: apps/contributions/views.py:84
-#, fuzzy
+#: apps/contributions/views.py:87
 msgid "Contribution type has been successfully saved."
-msgstr "Les modifications ont été sauvées avec succès."
+msgstr "Le type de contribution a été sauvé avec succès."
 
-#: apps/contributions/views.py:96
+#: apps/contributions/views.py:99
 msgid "Do you really want to delete this contribution type"
-msgstr "Voulez-vous vraiment supprimer ce document"
+msgstr "Voulez-vous vraiment supprimer ce type de contribution"
 
-#: apps/contributions/views.py:103
-#, fuzzy
+#: apps/contributions/views.py:106
 msgid "Contribution type successfully deleted"
-msgstr "Document supprimé avec succès"
+msgstr "Type de contribution supprimé avec succès"
 
-#: apps/contributions/views.py:150
+#: apps/contributions/views.py:153
 msgid "Adding a contribution"
-msgstr ""
+msgstr "Ajouter une contribution"
 
-#: apps/contributions/views.py:156
-msgid ""
-"Person is not elligible for membership. You may check if person owns an "
-"APINC VHFFS project."
-msgstr ""
+#: apps/contributions/views.py:159
+msgid "Person is not elligible for membership."
+msgstr "La personne n'est pas éligible pour le statut membre"
 
-#: apps/contributions/views.py:168
+#: apps/contributions/views.py:171
 msgid "Contribution editor"
-msgstr ""
+msgstr "Editer une contribution"
 
-#: apps/contributions/views.py:195
-#, python-format
-msgid "No project found for member %s"
-msgstr ""
+#: apps/contributions/views.py:199 apps/contributions/views.py:376
+msgid "No project found for member"
+msgstr "Aucun projet trouvé pour le membre"
 
-#: apps/contributions/views.py:221
-#, fuzzy
+#: apps/contributions/views.py:226
 msgid "Do you really want to delete this contribution"
-msgstr "Voulez-vous vraiment supprimer ce document"
+msgstr "Voulez-vous vraiment supprimer cette contribution"
 
-#: apps/contributions/views.py:228
-#, fuzzy
+#: apps/contributions/views.py:233
 msgid "Contribution successfully deleted."
-msgstr "Document supprimé avec succès"
+msgstr "Contribution supprimée avec succès."
 
-#: apps/contributions/views.py:252
-#, fuzzy
+#: apps/contributions/views.py:257
 msgid "Do you really want to validate this contribution"
-msgstr "Voulez-vous vraiment supprimer ce document"
+msgstr "Voulez-vous vraiment valider cette contribution"
 
-#: apps/contributions/views.py:260
-#, fuzzy
+#: apps/contributions/views.py:265
 msgid "Contribution successfully validated."
-msgstr "Document supprimé avec succès"
+msgstr "Contribution validée avec succès"
 
-#: apps/contributions/views.py:276
+#: apps/contributions/views.py:281
 msgid "Contribution is not yet validated."
+msgstr "La contribution n'est pas encore validée."
+
+#: apps/contributions/views.py:387
+msgid "An error occured while trying to add a subscription, please contact administrators."
 msgstr ""
 
 #: apps/manage/forms.py:34
 msgid "-- Select apm group --"
-msgstr ""
+msgstr "-- Sélectionner un group apm --"
 
 #: apps/manage/models.py:53
 msgid "log entry"
@@ -176,7 +168,7 @@ msgstr ""
 msgid "slug"
 msgstr "slug"
 
-#: apps/manage/models.py:70 apps/members/models.py:141
+#: apps/manage/models.py:70 apps/members/models.py:155
 msgid "name"
 msgstr "nom"
 
@@ -189,50 +181,44 @@ msgid "email"
 msgstr "courriel"
 
 #: apps/manage/models.py:125
-#, fuzzy
 msgid "member"
-msgstr "Bureau"
+msgstr "Membre"
 
-#: apps/manage/models.py:127 apps/members/models.py:193
+#: apps/manage/models.py:127 apps/members/models.py:207
 msgid "start date"
 msgstr "date de début"
 
-#: apps/manage/models.py:129 apps/members/models.py:195
+#: apps/manage/models.py:129 apps/members/models.py:209
 msgid "end date"
 msgstr "date de fin"
 
-#: apps/manage/models.py:131 apps/members/models.py:197
+#: apps/manage/models.py:131 apps/members/models.py:211
 msgid "expiration date"
 msgstr "date d'expiration"
 
 #: apps/manage/views.py:51
 msgid "Following are listed organization board member roles."
-msgstr ""
+msgstr "Ci-dessous sont listés les rôles des membres de l'association."
 
 #: apps/manage/views.py:60
-msgid ""
-"Following are listed all apinc-apm groups used to manage permissions on "
-"apinc-apm application. These groups are handled statically."
-msgstr ""
+msgid "Following are listed all apinc-apm groups used to manage permissions on apinc-apm application. These groups are handled statically."
+msgstr "Ci-dessous sont listés les groupes apinc-apm utilisés pour gérer les permissions dans l'application apinc-apm. Ces groupes sont créés statiquement."
 
 #: apps/manage/views.py:98
-#, fuzzy
 msgid "Apm group membership has been successfully saved."
-msgstr "Les modifications sur la personne ont été sauvées avec succès."
+msgstr "Le groupe apm a été sauvé avec succès."
 
 #: apps/manage/views.py:110
-#, fuzzy
 msgid "Do you really want to delete this APM group membership"
-msgstr "Voulez-vous vraiment supprimer ce document"
+msgstr "Voulez-vous vraiment supprimer ce groupe APM"
 
 #: apps/manage/views.py:117
-#, fuzzy
 msgid "The groupmembership has been successfully deleted."
-msgstr "La nouvelle a été supprimée avec succès."
+msgstr "Le groupe a été supprimé avec succès."
 
 #: apps/members/forms.py:49
 msgid "-- Select member role --"
-msgstr ""
+msgstr "-- Sélectionner un rôle --"
 
 #: apps/members/models.py:47
 msgid "Male"
@@ -254,41 +240,38 @@ msgstr "Date de naissance"
 msgid "sex"
 msgstr "sexe"
 
-#: apps/members/models.py:142
+#: apps/members/models.py:156
 msgid "default rank"
 msgstr "classement par défault"
 
-#: apps/members/models.py:212
+#: apps/members/models.py:226
 msgid "Notes"
 msgstr "Notes"
 
-#: apps/members/models.py:213
-msgid ""
-"Donnees privees accessibles seulement par les admins ou le secretariat apinc."
+#: apps/members/models.py:227
+msgid "Donnees privees accessibles seulement par les admins ou le secretariat apinc."
 msgstr ""
 
-#: apps/members/models.py:221
+#: apps/members/models.py:235
 msgid "Person Private Data"
 msgstr "Données personnelles privées"
 
-#: apps/members/models.py:238
-#, fuzzy
+#: apps/members/models.py:252
 msgid "groupname"
-msgstr "nom"
+msgstr "nom de groupe"
 
-#: apps/members/models.py:240
-#, fuzzy
+#: apps/members/models.py:254
 msgid "creation date"
-msgstr "date d'expiration"
+msgstr "date de création"
 
-#: apps/members/models.py:243
-#: templates/contributions/contribution_types.html:23
+#: apps/members/models.py:257
+#: templates/contributions/contribution_types.html:24
 msgid "Active"
-msgstr ""
+msgstr "Active"
 
-#: apps/members/models.py:244
+#: apps/members/models.py:258
 msgid "Inactive"
-msgstr ""
+msgstr "Inactive"
 
 #: apps/members/views.py:84
 msgid "PersonPrivate modification have been successfully saved."
@@ -299,22 +282,18 @@ msgid "Modification of personal private profile for"
 msgstr "Modification des données personnelles privées pour"
 
 #: apps/members/views.py:126
-#, fuzzy
 msgid "Member role has been successfully saved."
-msgstr "La nouvelle a été supprimée avec succès."
+msgstr "Le rôle a été sauvé avec succès."
 
 #: apps/members/views.py:138
-#, fuzzy
 msgid "Do you really want to delete this member role"
-msgstr "Voulez-vous vraiment supprimer ce document"
+msgstr "Voulez-vous vraiment supprimer ce rôle"
 
 #: apps/members/views.py:145
-#, fuzzy
 msgid "The member role has been successfully deleted."
-msgstr "La nouvelle a été supprimée avec succès."
+msgstr "Le rôle a éré supprimé avec succès."
 
 #: apps/news/feeds.py:26
-#, fuzzy
 msgid "apinc.org site news"
 msgstr "Nouvelles de l'APINC"
 
@@ -362,51 +341,77 @@ msgstr "Utilisé pour les expressions régulières et templates <slug>.html."
 msgid "Pseudo-static page modified."
 msgstr "Page pseudo-statique modifiée."
 
-#: apps/pages/views.py:75
-#, python-format
-msgid "Pseudo-static page '%s' updated."
-msgstr "Page pseudo-statique '%s' mise à jour."
+#: apps/pages/views.py:76
+msgid "Pseudo-static page"
+msgstr "Page pseudo-statique"
+
+#: apps/pages/views.py:76
+msgid "updated."
+msgstr ""
 
 #: apps/payments/forms.py:31 templates/payments/payment_edit.html:53
-#, fuzzy
 msgid "Payment date"
-msgstr "date de fin"
+msgstr "Date de paiement"
 
 #: apps/payments/forms.py:56
 msgid "Invalid amount against selected contributions"
-msgstr ""
+msgstr "Montant incorrect en rapport avec les contributions sélectionnées"
 
-#: apps/payments/models.py:55
+#: apps/payments/models.py:59
 msgid "emitter"
 msgstr "émetteur"
 
-#: apps/payments/models.py:59
-#, fuzzy
+#: apps/payments/models.py:63 apps/payments/models.py:96
 msgid "payment date"
-msgstr "date de fin"
+msgstr "date de paiement"
 
-#: apps/payments/models.py:76 templates/contributions/contributions.html:34
+#: apps/payments/models.py:86 templates/contributions/contributions.html:34
 msgid "Payment"
 msgstr "Paiement"
 
-#: apps/payments/views.py:123
-#, fuzzy
+#: apps/payments/views.py:124
 msgid "Payment has been successfully saved."
-msgstr "Les modifications ont été sauvées avec succès."
+msgstr "Le paiement a été sauvé avec succès."
 
-#: apps/payments/views.py:135
-#, fuzzy
+#: apps/payments/views.py:136
 msgid "Do you really want to delete this payment"
-msgstr "Voulez-vous vraiment supprimer ce document"
+msgstr "Voulez-vous vraiment supprimer ce paiement"
 
-#: apps/payments/views.py:142
-#, fuzzy
+#: apps/payments/views.py:143
 msgid "Payment successfully deleted"
-msgstr "Document supprimé avec succès"
+msgstr "Paiement supprimé avec succès"
+
+#: apps/payments/views.py:196
+msgid "Contribution payment"
+msgstr "Paiement de la contribution"
+
+#: apps/payments/views.py:214
+msgid "An error occured while creating the payment, please contact administrators."
+msgstr "Une erreur s'est produite lors de la création du paiement, merci de contacter les administrateurs."
+
+#: apps/payments/views.py:222 apps/payments/views.py:245
+msgid "An error occured while processing the payment"
+msgstr "Une erreur s'est produite lors du traitement du paiement"
+
+#: apps/payments/views.py:223
+msgid "PayerID not found."
+msgstr "PayerID non trouvé"
+
+#: apps/payments/views.py:253
+msgid "The payment "
+msgstr "Le paiement"
+
+#: apps/payments/views.py:254
+msgid "has been cancelled"
+msgstr "a été annulé"
 
 #: templates/base.html:6
 msgid "APINC Plateform"
 msgstr "Plateforme APINC"
+
+#: templates/base.html:60
+msgid "renewal"
+msgstr "renouvellement le"
 
 #: templates/base.html:61
 msgid "Log out"
@@ -508,7 +513,7 @@ msgstr "L'association"
 
 #: templates/association/index.html:10
 #: templates/contributions/contributions.html:59
-#: templates/contributions/user_contributions.html:40
+#: templates/contributions/user_contributions.html:42
 #: templates/members/details.html:68 templates/members/details.html.py:99
 #: templates/members/details.html:116 templates/news/draft_details.html:20
 #: templates/news/published.html:16 templates/news/published_details.html:23
@@ -544,7 +549,7 @@ msgid "Upload report"
 msgstr "Ajouter un document"
 
 #: templates/association/upload_report.html:17
-#: templates/contributions/contribution_edit.html:88
+#: templates/contributions/contribution_edit.html:90
 #: templates/contributions/contribution_type_edit.html:34
 #: templates/manage/group_membership_edit.html:75
 #: templates/members/edit_form.html:14
@@ -554,7 +559,7 @@ msgid "Cancel"
 msgstr "Annuler"
 
 #: templates/association/upload_report.html:18
-#: templates/contributions/contribution_edit.html:89
+#: templates/contributions/contribution_edit.html:91
 #: templates/contributions/contribution_type_edit.html:35
 #: templates/manage/group_membership_edit.html:76
 #: templates/members/edit_form.html:15
@@ -596,9 +601,8 @@ msgid "Subscribe"
 msgstr "Souscrire"
 
 #: templates/auth/permission_denied.html:8
-#, fuzzy
 msgid "Permission denied!"
-msgstr "Autorisation refusée"
+msgstr "Autorisation refusée!"
 
 #: templates/auth/permission_denied.html:9
 msgid "You are not authorized to access this page."
@@ -606,53 +610,65 @@ msgstr "Vous n'êtes pas autorisé à accéder à cette page."
 
 #: templates/contributions/contribution_edit.html:20
 msgid "Attached payment details"
-msgstr ""
+msgstr "Détails du paiement attaché"
 
 #: templates/contributions/contribution_edit.html:25
 #: templates/manage/logs.html:4 templates/payments/payment_details.html:14
-#: templates/payments/payments.html:22
+#: templates/payments/payments.html:24
 #: templates/payments/user_payments.html:14
 msgid "Date"
 msgstr ""
 
 #: templates/contributions/contribution_edit.html:26
-#: templates/payments/payment_details.html:16
-#: templates/payments/payments.html:21
-#: templates/payments/user_payments.html:16
-msgid "Emitter"
-msgstr ""
+#: templates/payments/payment_details.html:15
+#: templates/payments/payment_edit.html:38 templates/payments/payments.html:22
+#: templates/payments/user_payments.html:15
+msgid "Description"
+msgstr "Description"
 
 #: templates/contributions/contribution_edit.html:27
+#: templates/payments/payment_details.html:16
+#: templates/payments/payments.html:23
+#: templates/payments/user_payments.html:16
+msgid "Emitter"
+msgstr "Emetteur"
+
+#: templates/contributions/contribution_edit.html:28
 #: templates/contributions/contributions.html:33
 #: templates/contributions/user_contributions.html:17
-#: templates/payments/payment_details.html:17
-#: templates/payments/payment_edit.html:45 templates/payments/payments.html:23
+#: templates/payments/pay.html:18 templates/payments/payment_details.html:17
+#: templates/payments/payment_edit.html:45 templates/payments/payments.html:25
 #: templates/payments/user_payments.html:17
 msgid "Amount"
 msgstr "Montant"
 
-#: templates/contributions/contribution_edit.html:28
+#: templates/contributions/contribution_edit.html:29
 #: templates/payments/payment_details.html:18
-#: templates/payments/payments.html:24
+#: templates/payments/payments.html:26
 #: templates/payments/user_payments.html:18
 msgid "Available amount"
-msgstr ""
+msgstr "Montant disponible"
 
-#: templates/contributions/contribution_edit.html:75
+#: templates/contributions/contribution_edit.html:77
 msgid "Dues amount"
-msgstr ""
+msgstr "Montant dû"
 
-#: templates/contributions/contribution_edit.html:82
+#: templates/contributions/contribution_edit.html:84
 msgid "Duration (month)"
-msgstr ""
+msgstr "Durée (mois)"
+
+#: templates/contributions/contribution_edit.html:93
+#: templates/contributions/user_contributions.html:39
+msgid "Pay"
+msgstr "Payer"
 
 #: templates/contributions/contribution_type_edit.html:7
 msgid "Contribution type editor"
-msgstr ""
+msgstr "Editeur de type de contribution"
 
 #: templates/contributions/contribution_type_edit.html:37
 #: templates/contributions/contributions.html:60
-#: templates/contributions/user_contributions.html:41
+#: templates/contributions/user_contributions.html:43
 #: templates/members/details.html:69 templates/members/details.html.py:100
 #: templates/news/draft_details.html:23
 #: templates/news/published_details.html:26
@@ -664,57 +680,60 @@ msgstr "Supprimer"
 
 #: templates/contributions/contribution_types.html:6
 msgid "Contribution types"
-msgstr ""
+msgstr "Types de contribution"
 
-#: templates/contributions/contribution_types.html:20
+#: templates/contributions/contribution_types.html:21
 msgid "Label"
 msgstr ""
 
-#: templates/contributions/contribution_types.html:21
-msgid "Extends duration (month)"
-msgstr ""
-
 #: templates/contributions/contribution_types.html:22
-msgid "Dues amount €"
-msgstr ""
+msgid "Extends duration (month)"
+msgstr "Etend la durée (mois)"
 
-#: templates/contributions/contribution_types.html:35
+#: templates/contributions/contribution_types.html:23
+msgid "Dues amount €"
+msgstr "Montant dû €"
+
+#: templates/contributions/contribution_types.html:25
+msgid "Is subscription"
+msgstr "Est une adhésion"
+
+#: templates/contributions/contribution_types.html:38
 msgid "No type defined yet !"
-msgstr ""
+msgstr "Pas de type défini pour le moment !"
 
 #: templates/contributions/contributions.html:7
 msgid "Contributions to validate"
-msgstr ""
+msgstr "Contributions à valider"
 
 #: templates/contributions/contributions.html:9
-#: templates/members/base_members.html:32
 #: templates/payments/payment_edit.html:91
 msgid "Contributions"
-msgstr ""
+msgstr "Contributions"
 
 #: templates/contributions/contributions.html:30
 msgid "Member"
-msgstr ""
+msgstr "Membre"
 
 #: templates/contributions/contributions.html:31
 #: templates/contributions/user_contributions.html:13
-#, fuzzy
+#: templates/payments/pay.html:14
 msgid "Recorded date"
-msgstr "date de fin"
+msgstr "Date d'enregistrement"
 
 #: templates/contributions/contributions.html:32
 #: templates/contributions/user_contributions.html:14
+#: templates/payments/pay.html:15
 msgid "Type"
 msgstr ""
 
 #: templates/contributions/contributions.html:36
-#, fuzzy
 msgid "Action"
-msgstr "Association"
+msgstr "Action"
 
 #: templates/contributions/contributions.html:45
 #: templates/contributions/user_contributions.html:26
-#: templates/payments/payment_details.html:17
+#: templates/payments/pay.html:25 templates/payments/payment_details.html:17
 #: templates/payments/payment_details.html:28
 #: templates/payments/payment_edit.html:76
 #: templates/payments/payment_edit.html:95
@@ -725,7 +744,7 @@ msgstr ""
 
 #: templates/contributions/contributions.html:50
 msgid "No payment found"
-msgstr ""
+msgstr "Pas de paiement trouvé"
 
 #: templates/contributions/contributions.html:56
 #: templates/contributions/user_contributions.html:37
@@ -734,7 +753,7 @@ msgstr "Reçu"
 
 #: templates/contributions/contributions.html:66
 msgid "No contribution yet !"
-msgstr ""
+msgstr "Pas de contribution pour le moment !"
 
 #: templates/contributions/contributions.html:78
 #: templates/contributions/contributions.html:85 templates/news/drafts.html:42
@@ -744,7 +763,7 @@ msgstr "de"
 
 #: templates/contributions/contributions.html:78
 msgid "results"
-msgstr ""
+msgstr "résultats"
 
 #: templates/contributions/contributions.html:81
 #: templates/news/draft_details.html:32 templates/news/drafts.html:38
@@ -767,13 +786,15 @@ msgstr "suivant"
 
 #: templates/contributions/user_contributions.html:6
 msgid "Contributions for"
-msgstr ""
+msgstr "Contributions pour"
 
 #: templates/contributions/user_contributions.html:15
+#: templates/payments/pay.html:16
 msgid "Start"
 msgstr "Début"
 
 #: templates/contributions/user_contributions.html:16
+#: templates/payments/pay.html:17
 msgid "End"
 msgstr "Fin"
 
@@ -783,89 +804,82 @@ msgstr "Statuts"
 
 #: templates/contributions/user_contributions.html:29
 msgid "Validated"
-msgstr ""
+msgstr "Validé"
 
 #: templates/contributions/user_contributions.html:31
 msgid "Not validated"
-msgstr ""
+msgstr "Non validé"
 
-#: templates/contributions/user_contributions.html:47
-#, fuzzy
+#: templates/contributions/user_contributions.html:49
 msgid "No contributions yet !"
-msgstr "Pas de message log trouvé !"
+msgstr "Pas de contributions pour le moment !"
 
 #: templates/groups/base_groups.html:13 templates/news/base_news.html:29
 msgid "Actions"
-msgstr ""
+msgstr "Actions"
 
 #: templates/groups/index.html:4
 msgid "Apinc groups"
 msgstr "Groupes Apinc"
 
 #: templates/manage/base_manage.html:16
-#, fuzzy
 msgid "Members"
-msgstr "Accès membre"
+msgstr "Membres"
 
 #: templates/manage/base_manage.html:17 templates/manage/groups.html:6
 #: templates/manage/members.html:6
-#, fuzzy
 msgid "List members"
-msgstr "Bureau"
+msgstr "Lister les membres"
 
 #: templates/manage/base_manage.html:25 templates/manage/roles.html:6
 msgid "List roles"
-msgstr ""
+msgstr "Lister les rôles"
 
 #: templates/manage/base_manage.html:26
-#, fuzzy
 msgid "List groups"
-msgstr "Lister les groupes Apinc"
+msgstr "Lister les groupes"
 
 #: templates/manage/base_manage.html:32
 msgid "Administrative tasks"
-msgstr ""
+msgstr "Tâche administrative"
 
-#: templates/manage/base_manage.html:33 templates/members/base_members.html:27
+#: templates/manage/base_manage.html:33
 msgid "List payments"
-msgstr ""
+msgstr "Lister les paiements"
 
-#: templates/manage/base_manage.html:34
-#, fuzzy
+#: templates/manage/base_manage.html:34 templates/members/base_members.html:32
 msgid "Add a payment"
-msgstr "Ajouter un document"
+msgstr "Ajouter un paiement"
 
-#: templates/manage/base_manage.html:35 templates/members/base_members.html:33
+#: templates/manage/base_manage.html:35
 msgid "List contributions"
-msgstr ""
+msgstr "Lister les contributions"
 
-#: templates/manage/base_manage.html:36 templates/members/base_members.html:34
-#, fuzzy
+#: templates/manage/base_manage.html:36 templates/members/base_members.html:29
 msgid "Add a contribution"
-msgstr "Ajouter un document"
+msgstr "Ajouter une contribution"
 
 #: templates/manage/base_manage.html:37
 msgid "List contribution types"
-msgstr ""
+msgstr "Lister les types de contribution"
 
 #: templates/manage/base_manage.html:38
 msgid "Add a contribution type"
-msgstr ""
+msgstr "Ajouter un type de contribution"
 
 #: templates/manage/group_membership_edit.html:14
 msgid "Add an apm group membership"
-msgstr ""
+msgstr "Ajouter un groupe apm"
 
 #: templates/manage/group_membership_edit.html:54
 #: templates/members/details.html:58 templates/members/details.html.py:89
 #: templates/members/member_role_edit.html:54
-#, fuzzy
 msgid "Start date"
-msgstr "date de début"
+msgstr "Date de début"
 
 #: templates/manage/groups.html:20
 msgid "Slug"
-msgstr ""
+msgstr "Slug"
 
 #: templates/manage/groups.html:21 templates/manage/members.html:20
 #: templates/manage/roles.html:19
@@ -877,7 +891,6 @@ msgid "Email"
 msgstr "Courriel"
 
 #: templates/manage/groups.html:35
-#, fuzzy
 msgid "No groups !"
 msgstr "Groupes Apinc"
 
@@ -887,16 +900,15 @@ msgstr "Utilisateur"
 
 #: templates/manage/logs.html:6
 msgid "Message"
-msgstr ""
+msgstr "Message"
 
 #: templates/manage/logs.html:15
 msgid "No logs yet !"
 msgstr "Pas de message log trouvé !"
 
 #: templates/manage/members.html:34
-#, fuzzy
 msgid "No members !"
-msgstr "Bureau"
+msgstr "Pas de membres !"
 
 #: templates/manage/roles.html:18
 msgid "Rank"
@@ -904,25 +916,23 @@ msgstr "Rang"
 
 #: templates/manage/roles.html:29
 msgid "No roles !"
-msgstr ""
+msgstr "Pas de rôles !"
 
 #: templates/members/base_members.html:15
-#, fuzzy
 msgid "Member account"
-msgstr "Accès membre"
+msgstr "Compte membre"
 
-#: templates/members/base_members.html:26
-msgid "Treasury"
-msgstr "Trésorerie"
+#: templates/members/base_members.html:27 templates/payments/pay.html:7
+msgid "Pay my subscription"
+msgstr "Régler ma cotisation"
 
-#: templates/members/base_members.html:29
-#, fuzzy
-msgid "Add payment"
-msgstr "Ajouter un document"
+#: templates/members/base_members.html:28
+msgid "List my contributions"
+msgstr "Lister mes contributions"
 
-#: templates/members/base_members.html:31
-msgid "Bank details"
-msgstr "Relevé d'identitié bancaire"
+#: templates/members/base_members.html:30
+msgid "List my payments"
+msgstr "Lister mes paiements"
 
 #: templates/members/details.html:4
 msgid "Member detail profile"
@@ -933,9 +943,8 @@ msgid "Personal profile"
 msgstr "Profil personnel"
 
 #: templates/members/details.html:13
-#, fuzzy
 msgid "username"
-msgstr "nom"
+msgstr "nom d'utilisateur"
 
 #: templates/members/details.html:15
 msgid "first name"
@@ -955,15 +964,11 @@ msgstr "Genre"
 
 #: templates/members/details.html:38
 msgid "VHFFS projects eligible for membership"
-msgstr ""
+msgstr "Projet VHFFS éligible pour le statut membre"
 
 #: templates/members/details.html:48
-msgid ""
-"These data are synced from APINC VHFFS Panel, to update these data please "
-"edit them from"
-msgstr ""
-"Ces données sont synchronisées depuis le panel APINC VHFFS, pour les mettre "
-"à jour merci d'utiliser"
+msgid "These data are synced from APINC VHFFS Panel, to update these data please edit them from"
+msgstr "Ces données sont synchronisées depuis le panel APINC VHFFS, pour les mettre à jour merci d'utiliser"
 
 #: templates/members/details.html:48
 msgid "the appropriate panel tab"
@@ -971,40 +976,35 @@ msgstr "l'onglet du panneau approprié"
 
 #: templates/members/details.html:53
 msgid "APM group memberships"
-msgstr ""
+msgstr "Groupe APM"
 
 #: templates/members/details.html:57
-#, fuzzy
 msgid "Group name"
-msgstr "Groupes"
+msgstr "Nom de groupe"
 
 #: templates/members/details.html:59 templates/members/details.html.py:90
-#, fuzzy
 msgid "End date"
-msgstr "date de fin"
+msgstr "Date de fin"
 
 #: templates/members/details.html:75
-#, fuzzy
 msgid "No apm group membership"
-msgstr "Bureau"
+msgstr "Pas de groupe APM"
 
 #: templates/members/details.html:77 templates/members/details.html.py:108
 msgid "Add"
-msgstr ""
+msgstr "Ajouter"
 
 #: templates/members/details.html:84
-#, fuzzy
 msgid "APINC roles"
-msgstr "Portail APINC"
+msgstr "Rôles APINC"
 
 #: templates/members/details.html:88
-#, fuzzy
 msgid "Role name"
-msgstr "nom"
+msgstr "Nom de rôle"
 
 #: templates/members/details.html:106
 msgid "No apinc role"
-msgstr ""
+msgstr "Pas de rôle Apinc"
 
 #: templates/members/details.html:114
 msgid "Person Private data"
@@ -1012,7 +1012,7 @@ msgstr "Données personnelles privées"
 
 #: templates/members/member_role_edit.html:14
 msgid "Add a role to a member"
-msgstr ""
+msgstr "Ajouter un rôle au membre"
 
 #: templates/news/base_news.html:5
 msgid "Apinc news"
@@ -1028,16 +1028,14 @@ msgstr "Voir les brouillons"
 
 #: templates/news/base_news.html:38
 msgid "Archives"
-msgstr ""
+msgstr "Archives"
 
 #: templates/news/draft_details.html:9
-#, fuzzy
 msgid "Drafted on"
 msgstr "Brouillon"
 
 #: templates/news/draft_details.html:13 templates/news/edit.html:41
 #: templates/news/published_details.html:16
-#, fuzzy
 msgid "Logs for this news"
 msgstr "Logs pour cette nouvelle"
 
@@ -1051,9 +1049,8 @@ msgid "View details"
 msgstr "Voir détails"
 
 #: templates/news/drafts.html:29
-#, fuzzy
 msgid "No draft available !"
-msgstr "Pas de document trouvé !"
+msgstr "Pas de brouillon trouvé !"
 
 #: templates/news/edit.html:10
 msgid "News editor"
@@ -1088,73 +1085,85 @@ msgstr "Portail APINC"
 #: templates/pages/homepage.html:25 templates/pages/homepage.html.py:39
 #: templates/pages/homepage.html:53
 msgid "Learn more"
-msgstr ""
+msgstr "En savoir plus"
 
 #: templates/pages/irc.html:4
 msgid "APINC IRC web client"
 msgstr "Client web APINC IRC"
 
-#: templates/payments/payment_details.html:6
-#, fuzzy
-msgid "Payment details"
-msgstr "Relevé d'identitié bancaire"
-
-#: templates/payments/payment_details.html:13
-#: templates/payments/user_payments.html:13
-msgid "Id"
+#: templates/payments/pay.html:30
+msgid "Pay with Paypal"
 msgstr ""
 
-#: templates/payments/payment_details.html:15
-#: templates/payments/payment_edit.html:38 templates/payments/payments.html:20
-#: templates/payments/user_payments.html:15
-#, fuzzy
-msgid "Description"
-msgstr "description"
+#: templates/payments/pay.html:31
+msgid "Pay by transfer"
+msgstr ""
+
+#: templates/payments/pay.html:32
+msgid "Pay by check"
+msgstr ""
+
+#: templates/payments/payment_details.html:6
+msgid "Payment details"
+msgstr "Details du paiement"
+
+#: templates/payments/payment_details.html:13
+#: templates/payments/payments.html:21
+#: templates/payments/user_payments.html:13
+msgid "Id"
+msgstr "Id"
 
 #: templates/payments/payment_details.html:23
 #: templates/payments/payment_edit.html:62
 msgid "Attached contributions"
-msgstr ""
+msgstr "Contributions attachées"
 
 #: templates/payments/payment_details.html:32
 #: templates/payments/payment_edit.html:80
 #: templates/payments/payment_edit.html:83
 msgid "No contribution attached yet."
-msgstr ""
+msgstr "Pas de contribution attachée pour le moment."
 
 #: templates/payments/payment_edit.html:8
-#, fuzzy
 msgid "Payment editor"
-msgstr "Editeur de nouvelle"
+msgstr "Editeur de paiement"
 
 #: templates/payments/payment_edit.html:47
 msgid "Amount to use"
-msgstr ""
+msgstr "Montant à ventiler"
 
 #: templates/payments/payment_edit.html:63
 msgid "Select contributions"
-msgstr ""
+msgstr "Sélectionner les contributions"
 
 #: templates/payments/payment_edit.html:64
 msgid "New contribution"
-msgstr ""
+msgstr "Nouvelle contribution"
 
 #: templates/payments/payments.html:6
 msgid "Payments"
-msgstr ""
+msgstr "Paiements"
 
-#: templates/payments/payments.html:37
+#: templates/payments/payments.html:40
 msgid "No payment defined yet !"
-msgstr ""
+msgstr "Pas de paiement défini pour le moment !"
 
 #: templates/payments/user_payments.html:6
 msgid "Payments for"
-msgstr ""
+msgstr "Paiements pour"
 
 #: templates/payments/user_payments.html:41
-#, fuzzy
 msgid "No payments yet !"
-msgstr "Pas de message log trouvé !"
+msgstr "Pas de paiement pour le moment !"
+
+#~ msgid "Person is not elligible for membership. You may check if person owns an APINC VHFFS project."
+#~ msgstr "Personne non éligible pour une adhésion. Vous devriez vérifier que la personne possède bien un projet APINC VHFFS."
+
+#~ msgid "Treasury"
+#~ msgstr "Trésorerie"
+
+#~ msgid "Bank details"
+#~ msgstr "Relevé d'identitié bancaire APINC"
 
 #, fuzzy
 #~ msgid "No members identified in the board !"
