@@ -374,8 +374,7 @@ def pay_subscription(request, user_id=None):
         if not subscription.subscription_start_date:
             messages.add_message(request, messages.WARNING,
                 u"%s %s" % (_('No project found for member'), person))
-            page_dict.update({'form': form})
-            return render(request, 'subscriptions/subscription_edit.html', page_dict)
+            return redirect(reverse('apm.apps.members.views.details', args=[user_id]))
 
         subscription.subscription_end_date = subscription\
             .subscription_start_date + relativedelta(
