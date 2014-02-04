@@ -29,7 +29,7 @@ from apm.apps.members.models import PersonPrivate, MemberRole, Project
 from apm.apps.members.forms import PersonForm, PersonPrivateForm, MemberRoleForm
 from apm.decorators import access_required, confirm_required
 
-@login_required(login_url=reverse_lazy('apm.apps.pages.views.login'))
+@access_required(groups=['apinc-secretariat', 'apinc-bureau'], allow_myself=True)
 def details(request, user_id):
 
     person = get_object_or_404(Person(), pk=user_id)
