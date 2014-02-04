@@ -61,12 +61,12 @@ def _set_user(vhffs_user):
             #raise error
             pass
         if vhffs_user['lastname']:
-            u.last_name=vhffs_user['lastname'][:30].encode('iso-8859-15').decode('utf-8')
+            u.last_name=vhffs_user['lastname'][:30]
         else:
             #raise error
             pass
         if vhffs_user['firstname']:
-            u.first_name=vhffs_user['firstname'][:30].encode('iso-8859-15').decode('utf-8')
+            u.first_name=vhffs_user['firstname'][:30]
         else:
             #raise error
             pass

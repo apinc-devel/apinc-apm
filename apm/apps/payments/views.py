@@ -27,6 +27,7 @@ from django.core.paginator import Paginator, InvalidPage
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
 from django.utils.translation import ugettext as _
+from django.utils.encoding import smart_text
 
 from apm.apps.members.models import Person
 from apm.apps.payments.models import Payment, PaypalMapping
@@ -193,7 +194,7 @@ def paypal_create(request, contribution_id=None):
         "amount":  {
           "total":  str(contribution.dues_amount),
           "currency":  "EUR" },
-        "description":  _("Contribution payment") + " %s." % contribution } ] } )
+          "description":  _("Contribution payment") + " %s." % smart_text(contribution) } ] } )
 
     # Create Payment and return status
     if paypal_payment.create():
