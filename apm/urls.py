@@ -47,6 +47,8 @@ urlpatterns = patterns('',
         name='contact'),
     url(r'^legal-notice/$', 'apm.apps.pages.views.page',
         { 'page': "legal-notice" }, name='legal-notice'),
+    url(r'^sponsors/$', 'apm.apps.pages.views.page',
+        { 'page': "sponsors" }, name='sponsors'),
 
     (r'^edit/(?P<page>[\w\-]+)/$', 'apm.apps.pages.views.edit'),
 

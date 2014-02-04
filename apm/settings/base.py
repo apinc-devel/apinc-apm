@@ -269,6 +269,7 @@ PSEUDO_STATIC_PAGES = [
     ("statutes", "Statuts de l'association"),
     ("by-laws", "Règlement intérieur"),
     ("services", "Services fournis par l'association"),
+    ("sponsors", "Sponsors"),
 ]
 
 # App groups
