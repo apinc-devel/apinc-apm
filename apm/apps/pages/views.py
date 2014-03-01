@@ -115,6 +115,8 @@ def login(request):
             if user:
                 auth.login(request, user)
                 next_page = request.POST.get('next', '/')
+                if not 'remember_me' in request.POST.keys():
+                    request.session.set_expiry(0)
                 if next_page == '/' \
                         or next_page == reverse('apm.apps.pages.views.login'):
                     return redirect(reverse('apm.apps.members.views.details',
