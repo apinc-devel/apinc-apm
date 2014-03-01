@@ -89,6 +89,18 @@ class Command(BaseCommand):
         except Exception, e:
             # TODO Error message handling
             raise CommandError('Filldb apm role "%s"' % e)		
+
+
+        try:
+        # cette partie regroupe les types de contribution
+            donation = contributions.ContributionType.objects.get(id=1)
+        except Exception, e:
+            # TODO Error 
+            donation = contributions.ContributionType()
+            donation.label = "Don"
+            donation.extends_duration = None
+            donation.save()
+            self.stdout.write("Type donation inserted.\n")
             
         if options.get('development', False):
             # Cette partie regroupe les valeurs fixes de la base,
@@ -248,20 +260,14 @@ class Command(BaseCommand):
 
                 # contributions
                 cotisation_annuelle = contributions.ContributionType()
-                cotisation_annuelle.label = "Cotisation annuelle"
+                cotisation_annuelle.label = "Cotisation annuelle 2014"
                 cotisation_annuelle.extends_duration = 12
                 cotisation_annuelle.dues_amount = 15
                 cotisation_annuelle.save()
                 self.stdout.write("Type cotisation annuelle inserted.\n")
 
-                donation = contributions.ContributionType()
-                donation.label = "Donation"
-                donation.extends_duration = None
-                donation.save()
-                self.stdout.write("Type donation inserted.\n")
-
                 contribution_type = contributions.ContributionType()
-                contribution_type.label = "Type contribution innactif"
+                contribution_type.label = "Type contribution innactive"
                 contribution_type.extends_duration = 1
                 contribution_type.dues_amount = 3.25
                 contribution_type.active = False

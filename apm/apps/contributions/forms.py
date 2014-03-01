@@ -33,7 +33,6 @@ class ContributionForm(forms.ModelForm):
         super(ContributionForm, self).__init__(*args, **kwargs)
 
         self.fields['type'].queryset = ContributionType.objects.active()
-        self.fields['type'].empty_label = _('-- Select contribution type --')
 
         if person_id:
             self.fields['person'].queryset = Person().objects.filter(id=person_id)
