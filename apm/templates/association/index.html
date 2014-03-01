@@ -26,19 +26,33 @@
 	<div class="row-fluid">
 		<div class="span12">
 			<h2>{% trans "Meeting reports and other documents" %}</h2>
-			<ul class="nav nav-list">
+
+            {% if meeting_reports %}
+            <table class="table table-condensed">
+                <tr>
+                  <td>{% trans "Document" %}</td>
+				  {% if superadmin or bureau_member or secretariat_member %}
+                  <td></td>
+                  {% endif %}
+                </tr>
 				{% for report  in meeting_reports %}
-				<li><a href="{{ MEDIA_URL }}{{ report.report_file.name }}">{{ report.get_report_type_display }} {{ report.pub_date|date:"F Y" }}</a>
-				{% if superadmin or bureau_member or secretariat_member %}
-				<li><a class="btn btn-danger" href="{% url "apm.apps.association.views.delete_report" report.id %}">Delete</a></li>
-				{% endif %}
-				{% empty %}
-				<li class="text-warn">{% trans "No report available !" %}</li>
-				{% if superadmin or bureau_member or secretariat_member %}
-				<li><a class="btn btn-success" href="{% url "apm.apps.association.views.upload_report" %}">{% trans "Add a report" %}</a></li>
-				{% endif %}
-				{% endfor %}
-			</div>
-		</div>
+                <tr>
+				    <td><a href="{{ MEDIA_URL }}{{ report.report_file.name }}">{{ report.get_report_type_display }} {% trans "from" %} {{ report.pub_date|date:"F Y" }}</a></td>
+				    {% if superadmin or bureau_member or secretariat_member %}
+                    <td><a class="btn btn-danger" href="{% url "apm.apps.association.views.delete_report" report.id %}">{% trans "Delete" %}</a></td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </table>
+            {% else %}
+				<p>{% trans "No report available !" %}</p>
+            {% endif %}
+
+			{% if superadmin or bureau_member or secretariat_member %}
+            <p><a class="btn btn-success" href="{% url "apm.apps.association.views.upload_report" %}">{% trans "Add a report" %}</a></td>
+            {% endif %}
+
+			</div><!--/span12-->
+		</div><!--/row-fluid-->
 	</div><!--/container-fluid -->
 	{% endblock %}
