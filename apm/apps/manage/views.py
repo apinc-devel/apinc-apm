@@ -32,7 +32,7 @@ def index(request):
 
     """manage index"""
 
-    return render(request, 'manage/index.html')
+    return redirect(members)
 
 
 @access_required(groups=['apinc-admin', 'apinc-secretariat', 'apinc-bureau'])
