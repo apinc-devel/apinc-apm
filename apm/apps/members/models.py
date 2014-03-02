@@ -62,7 +62,7 @@ class Person(AbstractUser):
         #db_table = 'auth_user' # nom de la table du modele standard auth.User
         verbose_name = _('person')
         #ordering = ['user__last_name', 'user__first_name']
-        ordering = ['last_name', 'first_name']
+        ordering = ['username', 'last_name', 'first_name']
 
     def __unicode__(self):
         """person unicode"""

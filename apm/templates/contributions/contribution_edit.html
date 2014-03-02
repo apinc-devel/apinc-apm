@@ -53,7 +53,7 @@
     <div class="controls">
       <select id="id_person" name="person">
       {% for p in form.fields.person.queryset %}
-      <option value="{{ p.id }}">{{ p.first_name|capfirst }} {{ p.last_name|capfirst }}</option>
+      <option value="{{ p.id }}">{{ p.username }} ({{ p.first_name|capfirst }} {{ p.last_name|capfirst }})</option>
       {% endfor %}
       </select>
     </div>
