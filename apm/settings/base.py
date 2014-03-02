@@ -303,7 +303,7 @@ APM_ROLES = [
 TMP_PATH = os.path.join(VAR_ROOT, "tmp") # donnees temporaires (unused yet) 
 
 VERSION = '0.1.0'
-JQUERY_VERSION = '1.9.1'
+JQUERY_VERSION = '1.11.0'
 JQUERY_UI_VERSION = '1.10.3'
 
 PORTAL_ADMIN = 'apinc-admin'
