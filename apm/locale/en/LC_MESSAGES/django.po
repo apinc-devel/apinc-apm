@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-27 21:00+0100\n"
+"POT-Creation-Date: 2014-03-06 22:24+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: APINC Devel Team <devel@lists.apinc.org>\n"
@@ -49,11 +49,7 @@ msgstr ""
 msgid "Reported successfully deleted"
 msgstr ""
 
-#: apps/contributions/forms.py:36
-msgid "-- Select contribution type --"
-msgstr ""
-
-#: apps/contributions/forms.py:45
+#: apps/contributions/forms.py:44
 msgid "Introduce a strictly positive number."
 msgstr ""
 
@@ -146,7 +142,7 @@ msgstr ""
 msgid "Contribution is not yet validated."
 msgstr ""
 
-#: apps/contributions/views.py:387
+#: apps/contributions/views.py:386
 msgid "An error occured while trying to add a subscription, please contact administrators."
 msgstr ""
 
@@ -367,40 +363,68 @@ msgstr ""
 msgid "Payment"
 msgstr ""
 
-#: apps/payments/views.py:124
+#: apps/payments/views.py:125
 msgid "Payment has been successfully saved."
 msgstr ""
 
-#: apps/payments/views.py:136
+#: apps/payments/views.py:137
 msgid "Do you really want to delete this payment"
 msgstr ""
 
-#: apps/payments/views.py:143
+#: apps/payments/views.py:144
 msgid "Payment successfully deleted"
 msgstr ""
 
-#: apps/payments/views.py:196
+#: apps/payments/views.py:197
 msgid "Contribution payment"
 msgstr ""
 
-#: apps/payments/views.py:214
+#: apps/payments/views.py:215
 msgid "An error occured while creating the payment, please contact administrators."
 msgstr ""
 
-#: apps/payments/views.py:222 apps/payments/views.py:245
+#: apps/payments/views.py:223 apps/payments/views.py:246
 msgid "An error occured while processing the payment"
 msgstr ""
 
-#: apps/payments/views.py:223
+#: apps/payments/views.py:224
 msgid "PayerID not found."
 msgstr ""
 
-#: apps/payments/views.py:253
+#: apps/payments/views.py:254
 msgid "The payment "
 msgstr ""
 
-#: apps/payments/views.py:254
+#: apps/payments/views.py:255
 msgid "has been cancelled"
+msgstr ""
+
+#: templates/404.html:4
+msgid "APINC - Page not found"
+msgstr ""
+
+#: templates/404.html:9
+msgid "Page not found"
+msgstr ""
+
+#: templates/404.html:11
+msgid "Please check your URL, if you clicked on a dead link please contact the administrator."
+msgstr ""
+
+#: templates/404.html:13 templates/500.html:13
+msgid "Back to home page"
+msgstr ""
+
+#: templates/500.html:4
+msgid "APINC - Ooooooops"
+msgstr ""
+
+#: templates/500.html:9
+msgid "Ooooops"
+msgstr ""
+
+#: templates/500.html:10
+msgid "An error happened! Please retry later, if the error persists, please contact the administrator."
 msgstr ""
 
 #: templates/base.html:6
@@ -502,6 +526,10 @@ msgid "Legal notice"
 msgstr ""
 
 #: templates/base.html:151
+msgid "Sponsors"
+msgstr ""
+
+#: templates/base.html:152
 msgid "Unless otherwise explicitly specified, all texts are licenced"
 msgstr ""
 
@@ -534,11 +562,32 @@ msgstr ""
 msgid "Meeting reports and other documents"
 msgstr ""
 
-#: templates/association/index.html:36
+#: templates/association/index.html:33
+msgid "Document"
+msgstr ""
+
+#: templates/association/index.html:40
+msgid "from"
+msgstr ""
+
+#: templates/association/index.html:42
+#: templates/contributions/contribution_type_edit.html:37
+#: templates/contributions/contributions.html:60
+#: templates/contributions/user_contributions.html:43
+#: templates/members/details.html:69 templates/members/details.html.py:100
+#: templates/news/draft_details.html:23
+#: templates/news/published_details.html:26
+#: templates/payments/payment_details.html:42
+#: templates/payments/payment_edit.html:109
+#: templates/payments/user_payments.html:35
+msgid "Delete"
+msgstr ""
+
+#: templates/association/index.html:48
 msgid "No report available !"
 msgstr ""
 
-#: templates/association/index.html:38
+#: templates/association/index.html:52
 msgid "Add a report"
 msgstr ""
 
@@ -547,7 +596,7 @@ msgid "Upload report"
 msgstr ""
 
 #: templates/association/upload_report.html:17
-#: templates/contributions/contribution_edit.html:90
+#: templates/contributions/contribution_edit.html:89
 #: templates/contributions/contribution_type_edit.html:34
 #: templates/manage/group_membership_edit.html:75
 #: templates/members/edit_form.html:14
@@ -557,7 +606,7 @@ msgid "Cancel"
 msgstr ""
 
 #: templates/association/upload_report.html:18
-#: templates/contributions/contribution_edit.html:91
+#: templates/contributions/contribution_edit.html:90
 #: templates/contributions/contribution_type_edit.html:35
 #: templates/manage/group_membership_edit.html:76
 #: templates/members/edit_form.html:15
@@ -587,14 +636,18 @@ msgid "Password"
 msgstr ""
 
 #: templates/auth/login.html:36
+msgid "Remember me"
+msgstr ""
+
+#: templates/auth/login.html:43
 msgid "Log-in"
 msgstr ""
 
-#: templates/auth/login.html:44
+#: templates/auth/login.html:51
 msgid "I don't know my password"
 msgstr ""
 
-#: templates/auth/login.html:45
+#: templates/auth/login.html:52
 msgid "Subscribe"
 msgstr ""
 
@@ -647,33 +700,26 @@ msgstr ""
 msgid "Available amount"
 msgstr ""
 
-#: templates/contributions/contribution_edit.html:77
+#: templates/contributions/contribution_edit.html:74
+#: templates/contributions/contribution_edit.html:76
 msgid "Dues amount"
 msgstr ""
 
-#: templates/contributions/contribution_edit.html:84
+#: templates/contributions/contribution_edit.html:81
+msgid "Duration"
+msgstr ""
+
+#: templates/contributions/contribution_edit.html:83
 msgid "Duration (month)"
 msgstr ""
 
-#: templates/contributions/contribution_edit.html:93
+#: templates/contributions/contribution_edit.html:92
 #: templates/contributions/user_contributions.html:39
 msgid "Pay"
 msgstr ""
 
 #: templates/contributions/contribution_type_edit.html:7
 msgid "Contribution type editor"
-msgstr ""
-
-#: templates/contributions/contribution_type_edit.html:37
-#: templates/contributions/contributions.html:60
-#: templates/contributions/user_contributions.html:43
-#: templates/members/details.html:69 templates/members/details.html.py:100
-#: templates/news/draft_details.html:23
-#: templates/news/published_details.html:26
-#: templates/payments/payment_details.html:42
-#: templates/payments/payment_edit.html:109
-#: templates/payments/user_payments.html:35
-msgid "Delete"
 msgstr ""
 
 #: templates/contributions/contribution_types.html:6

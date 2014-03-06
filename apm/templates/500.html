@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block pagetitle %}{% trans "APINC - Ooooooops" %}{% endblock %}
+
+{% block content %}
+<div class="container-fluid"> 
+<div class="row-fluid"> 
+   <h2>{% trans "Ooooops" %}</h2>
+   <p>{% trans "An error happened! Please retry later, if the error persists, please contact the administrator." %}</p>
+   {#<p>{% trans "You can note the error number to ask administrator what goes wrong." %}<br/>#}
+
+   <a class="btn btn-primary" href="{% url "apm.apps.pages.views.homepage" %}">{% trans "Back to home page" %}</a>
+</div><!--/row-fluid-->
+</div><!--container-fluid-->
+{% endblock %}

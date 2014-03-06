@@ -8,10 +8,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: APINC APM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-27 21:00+0100\n"
+"POT-Creation-Date: 2014-03-06 22:24+0100\n"
 "PO-Revision-Date: 2014-01-05 20:08+0100\n"
 "Last-Translator: Laurent Bives\n"
-"Language-Team: APINC Devel Team <devel@list.apinc.org>\n"
+"Language-Team: APINC Devel Team <devel@lists.apinc.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -51,11 +51,7 @@ msgstr "Voulez-vous vraiment supprimer ce document"
 msgid "Reported successfully deleted"
 msgstr "Document supprimé avec succès"
 
-#: apps/contributions/forms.py:36
-msgid "-- Select contribution type --"
-msgstr "-- Sélectionner un type de contribution --"
-
-#: apps/contributions/forms.py:45
+#: apps/contributions/forms.py:44
 msgid "Introduce a strictly positive number."
 msgstr "Saisir un nombre strictement positif."
 
@@ -148,9 +144,9 @@ msgstr "Contribution validée avec succès"
 msgid "Contribution is not yet validated."
 msgstr "La contribution n'est pas encore validée."
 
-#: apps/contributions/views.py:387
+#: apps/contributions/views.py:386
 msgid "An error occured while trying to add a subscription, please contact administrators."
-msgstr ""
+msgstr "Une erreur s'est produite au moment de l'ajout de votre adhésion, merci de contacter un administrateur."
 
 #: apps/manage/forms.py:34
 msgid "-- Select apm group --"
@@ -369,41 +365,69 @@ msgstr "date de paiement"
 msgid "Payment"
 msgstr "Paiement"
 
-#: apps/payments/views.py:124
+#: apps/payments/views.py:125
 msgid "Payment has been successfully saved."
 msgstr "Le paiement a été sauvé avec succès."
 
-#: apps/payments/views.py:136
+#: apps/payments/views.py:137
 msgid "Do you really want to delete this payment"
 msgstr "Voulez-vous vraiment supprimer ce paiement"
 
-#: apps/payments/views.py:143
+#: apps/payments/views.py:144
 msgid "Payment successfully deleted"
 msgstr "Paiement supprimé avec succès"
 
-#: apps/payments/views.py:196
+#: apps/payments/views.py:197
 msgid "Contribution payment"
 msgstr "Paiement de la contribution"
 
-#: apps/payments/views.py:214
+#: apps/payments/views.py:215
 msgid "An error occured while creating the payment, please contact administrators."
 msgstr "Une erreur s'est produite lors de la création du paiement, merci de contacter les administrateurs."
 
-#: apps/payments/views.py:222 apps/payments/views.py:245
+#: apps/payments/views.py:223 apps/payments/views.py:246
 msgid "An error occured while processing the payment"
 msgstr "Une erreur s'est produite lors du traitement du paiement"
 
-#: apps/payments/views.py:223
+#: apps/payments/views.py:224
 msgid "PayerID not found."
 msgstr "PayerID non trouvé"
 
-#: apps/payments/views.py:253
+#: apps/payments/views.py:254
 msgid "The payment "
 msgstr "Le paiement"
 
-#: apps/payments/views.py:254
+#: apps/payments/views.py:255
 msgid "has been cancelled"
 msgstr "a été annulé"
+
+#: templates/404.html:4
+msgid "APINC - Page not found"
+msgstr "APINC - Page non trouvée"
+
+#: templates/404.html:9
+msgid "Page not found"
+msgstr "Page non trouvée"
+
+#: templates/404.html:11
+msgid "Please check your URL, if you clicked on a dead link please contact the administrator."
+msgstr "Merci de vérifier votre URL, si vous avez cliquez sur un lien mort merci de contacter les administrateurs."
+
+#: templates/404.html:13 templates/500.html:13
+msgid "Back to home page"
+msgstr "Retour à la page d'accueil"
+
+#: templates/500.html:4
+msgid "APINC - Ooooooops"
+msgstr ""
+
+#: templates/500.html:9
+msgid "Ooooops"
+msgstr ""
+
+#: templates/500.html:10
+msgid "An error happened! Please retry later, if the error persists, please contact the administrator."
+msgstr "Une erreur s'est produite! Merci de réessayer plus tard, si l'erreur persiste, merci de contacter les administrateurs."
 
 #: templates/base.html:6
 msgid "APINC Plateform"
@@ -504,6 +528,10 @@ msgid "Legal notice"
 msgstr "Mentions légales"
 
 #: templates/base.html:151
+msgid "Sponsors"
+msgstr ""
+
+#: templates/base.html:152
 msgid "Unless otherwise explicitly specified, all texts are licenced"
 msgstr "Sauf mention spécifique, tous les textes sont sous licence"
 
@@ -536,11 +564,32 @@ msgstr "Pas de membre dans le bureau !"
 msgid "Meeting reports and other documents"
 msgstr "Compte-rendus et autres documents"
 
-#: templates/association/index.html:36
+#: templates/association/index.html:33
+msgid "Document"
+msgstr ""
+
+#: templates/association/index.html:40
+msgid "from"
+msgstr ""
+
+#: templates/association/index.html:42
+#: templates/contributions/contribution_type_edit.html:37
+#: templates/contributions/contributions.html:60
+#: templates/contributions/user_contributions.html:43
+#: templates/members/details.html:69 templates/members/details.html.py:100
+#: templates/news/draft_details.html:23
+#: templates/news/published_details.html:26
+#: templates/payments/payment_details.html:42
+#: templates/payments/payment_edit.html:109
+#: templates/payments/user_payments.html:35
+msgid "Delete"
+msgstr "Supprimer"
+
+#: templates/association/index.html:48
 msgid "No report available !"
 msgstr "Pas de document trouvé !"
 
-#: templates/association/index.html:38
+#: templates/association/index.html:52
 msgid "Add a report"
 msgstr "Ajouter un document"
 
@@ -549,7 +598,7 @@ msgid "Upload report"
 msgstr "Ajouter un document"
 
 #: templates/association/upload_report.html:17
-#: templates/contributions/contribution_edit.html:90
+#: templates/contributions/contribution_edit.html:89
 #: templates/contributions/contribution_type_edit.html:34
 #: templates/manage/group_membership_edit.html:75
 #: templates/members/edit_form.html:14
@@ -559,7 +608,7 @@ msgid "Cancel"
 msgstr "Annuler"
 
 #: templates/association/upload_report.html:18
-#: templates/contributions/contribution_edit.html:91
+#: templates/contributions/contribution_edit.html:90
 #: templates/contributions/contribution_type_edit.html:35
 #: templates/manage/group_membership_edit.html:76
 #: templates/members/edit_form.html:15
@@ -589,14 +638,19 @@ msgid "Password"
 msgstr "Mot de passe"
 
 #: templates/auth/login.html:36
+#, fuzzy
+msgid "Remember me"
+msgstr "Membre"
+
+#: templates/auth/login.html:43
 msgid "Log-in"
 msgstr "Connexion"
 
-#: templates/auth/login.html:44
+#: templates/auth/login.html:51
 msgid "I don't know my password"
 msgstr "Je ne sais pas mon mot de passe"
 
-#: templates/auth/login.html:45
+#: templates/auth/login.html:52
 msgid "Subscribe"
 msgstr "Souscrire"
 
@@ -649,15 +703,21 @@ msgstr "Montant"
 msgid "Available amount"
 msgstr "Montant disponible"
 
-#: templates/contributions/contribution_edit.html:77
+#: templates/contributions/contribution_edit.html:74
+#: templates/contributions/contribution_edit.html:76
 msgid "Dues amount"
 msgstr "Montant dû"
 
-#: templates/contributions/contribution_edit.html:84
+#: templates/contributions/contribution_edit.html:81
+#, fuzzy
+msgid "Duration"
+msgstr "Durée (mois)"
+
+#: templates/contributions/contribution_edit.html:83
 msgid "Duration (month)"
 msgstr "Durée (mois)"
 
-#: templates/contributions/contribution_edit.html:93
+#: templates/contributions/contribution_edit.html:92
 #: templates/contributions/user_contributions.html:39
 msgid "Pay"
 msgstr "Payer"
@@ -665,18 +725,6 @@ msgstr "Payer"
 #: templates/contributions/contribution_type_edit.html:7
 msgid "Contribution type editor"
 msgstr "Editeur de type de contribution"
-
-#: templates/contributions/contribution_type_edit.html:37
-#: templates/contributions/contributions.html:60
-#: templates/contributions/user_contributions.html:43
-#: templates/members/details.html:69 templates/members/details.html.py:100
-#: templates/news/draft_details.html:23
-#: templates/news/published_details.html:26
-#: templates/payments/payment_details.html:42
-#: templates/payments/payment_edit.html:109
-#: templates/payments/user_payments.html:35
-msgid "Delete"
-msgstr "Supprimer"
 
 #: templates/contributions/contribution_types.html:6
 msgid "Contribution types"
@@ -1093,15 +1141,15 @@ msgstr "Client web APINC IRC"
 
 #: templates/payments/pay.html:30
 msgid "Pay with Paypal"
-msgstr ""
+msgstr "Payer via Paypal"
 
 #: templates/payments/pay.html:31
 msgid "Pay by transfer"
-msgstr ""
+msgstr "Payer par virement"
 
 #: templates/payments/pay.html:32
 msgid "Pay by check"
-msgstr ""
+msgstr "Payer par chèque"
 
 #: templates/payments/payment_details.html:6
 msgid "Payment details"
@@ -1155,6 +1203,9 @@ msgstr "Paiements pour"
 #: templates/payments/user_payments.html:41
 msgid "No payments yet !"
 msgstr "Pas de paiement pour le moment !"
+
+#~ msgid "-- Select contribution type --"
+#~ msgstr "-- Sélectionner un type de contribution --"
 
 #~ msgid "Person is not elligible for membership. You may check if person owns an APINC VHFFS project."
 #~ msgstr "Personne non éligible pour une adhésion. Vous devriez vérifier que la personne possède bien un projet APINC VHFFS."
