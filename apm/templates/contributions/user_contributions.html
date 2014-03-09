@@ -7,58 +7,62 @@
 </div>
 
 <div class="row-fluid">
-<div class="span12">
-<table class="table table-condensed">
-  <tr class="info">
-    <td>{% trans "Recorded date" %}</td>
-    <td>{% trans "Type" %}</td>
-    <td>{% trans "Start" %}</td>
-    <td>{% trans "End" %}</td>
-    <td>{% trans "Amount" %}</td>
-    <td>{% trans "Status" %}</td>
-  </tr>
-{% for c in contributions_list %}
-{% if c.validated %}<tr class="text-success">{% else %}<tr class="text-error">{% endif %}
-    <td>{{ c.recorded_date|date:"d/M/Y H:i" }}</td>
-    <td>{{ c.type.label }}</td>
-    <td>{{ c.subscription_start_date|default:"NA" }}</td>
-    <td>{{ c.subscription_end_date|default:"NA" }}</td>
-    <td>{{ c.dues_amount }}&nbsp;{% trans "euros" %}</td>
-    <td>
-    {% if c.validated  %}
-        {% trans "Validated" %}
-    {% else %}
-        {% trans "Not validated" %}
-    {% endif %}
-    </td>
+  <div class="span12">
+    <table class="table table-condensed">
+      <tr class="info">
+        <td>{% trans "Recorded date" %}</td>
+        <td>{% trans "Type" %}</td>
+        <td>{% trans "Start" %}</td>
+        <td>{% trans "End" %}</td>
+        <td>{% trans "Amount" %}</td>
+        <td>{% trans "Status" %}</td>
+      </tr>
+      {% for c in contributions_list %}
+      {% if c.validated %}<tr class="text-success">{% else %}<tr class="text-error">{% endif %}
+          <td>{{ c.recorded_date|date:"d/M/Y H:i" }}</td>
+          <td>{{ c.type.label }}</td>
+          <td>{{ c.subscription_start_date|default:"NA" }}</td>
+          <td>{{ c.subscription_end_date|default:"NA" }}</td>
+          <td>{{ c.dues_amount }}&nbsp;{% trans "euros" %}</td>
+          <td>
+            {% if c.validated  %}
+            {% trans "Validated" %}
+            {% else %}
+            {% trans "Not validated" %}
+            {% endif %}
+          </td>
 
-    <td>
-    {% if c.validated %}
-    <a class="btn" href="{% url "apm.apps.contributions.views.contribution_receipt" c.person.id c.id %}?next={% url "apm.apps.contributions.views.user_contributions" c.person.id %}">{% trans "Receipt" %}</a>
-    {% else %}
-    <a class="btn btn-success" href="{% url "apm.apps.payments.views.pay" c.id %}?next={{ request.path }}">{% trans "Pay" %}</a>
-    {% endif %}
-    {% if not c.validated or superadmin or secretariat_member or tresorier_member %}
-    <a class="btn" href="{% url "apm.apps.contributions.views.contribution_edit" c.person.id c.id %}?next={% url "apm.apps.contributions.views.user_contributions" c.person.id %}">{% trans "Edit" %}</a>
-    <a class="btn btn-danger" href="{% url "apm.apps.contributions.views.contribution_delete" c.id %}?next={% url "apm.apps.contributions.views.user_contributions" c.person.id %}">{% trans "Delete" %}</a>
-    {% endif %}
-    </td>
-</tr>
+          <td>
+            {% if c.validated %}
+            <a class="btn" href="{% url "apm.apps.contributions.views.contribution_receipt" c.person.id c.id %}?next={% url "apm.apps.contributions.views.user_contributions" c.person.id %}">{% trans "Receipt" %}</a>
+            {% else %}
+            <a class="btn btn-success" href="{% url "apm.apps.payments.views.pay" c.id %}?next={{ request.path }}">{% trans "Pay" %}</a>
+            {% endif %}
+            {% if not c.validated or superadmin or secretariat_member or tresorier_member %}
+            <a class="btn" href="{% url "apm.apps.contributions.views.contribution_edit" c.person.id c.id %}?next={% url "apm.apps.contributions.views.user_contributions" c.person.id %}">{% trans "Edit" %}</a>
+            {% endif %}
+            {% if not c.validated %}
+            {% if superadmin or secretariat_member or tresorier_member %}
+            <a class="btn btn-danger" href="{% url "apm.apps.contributions.views.contribution_delete" c.id %}?next={% url "apm.apps.contributions.views.user_contributions" c.person.id %}">{% trans "Delete" %}</a>
+            {% endif %}
+            {% endif %}
+          </td>
+        </tr>
 
-{% empty %}
-<tr><td class="text-info">{% trans "No contributions yet !" %}</td></tr>
-{% endfor %}
+        {% empty %}
+        <tr><td class="text-info">{% trans "No contributions yet !" %}</td></tr>
+        {% endfor %}
 
-</table>
-</div><!--/span12 -->
-</div><!--/row-fluid -->
+      </table>
+    </div><!--/span12 -->
+  </div><!--/row-fluid -->
 
-{% comment %}
-{% if superadmin or secretariat_member or tresorier_member %}
-    {% if not is_subscriber %}
-    <p class=alert>{{ person }} has no valid contribution !</p>&nbsp;<a href="{% url "apm.apps.contributions.views.regularize_user" user.id %}?next={% url "apm.apps.contributions.views.user_contributions" user.id %}">{% trans "Regularize user contribution"%}</a>
-    {% endif %}
-{% endif %}
-{% endcomment %}
+  {% comment %}
+  {% if superadmin or secretariat_member or tresorier_member %}
+  {% if not is_subscriber %}
+  <p class=alert>{{ person }} has no valid contribution !</p>&nbsp;<a href="{% url "apm.apps.contributions.views.regularize_user" user.id %}?next={% url "apm.apps.contributions.views.user_contributions" user.id %}">{% trans "Regularize user contribution"%}</a>
+  {% endif %}
+  {% endif %}
+  {% endcomment %}
 
-{% endblock %}
+  {% endblock %}
