@@ -9,7 +9,7 @@ paypalrestsdk==0.6.4
 #pexpect==2.4
 
 
-MySQL-python==1.2.4
+MySQL-python==1.2.5
 #south==0.7.3
 
 # wsgi HTTP server
