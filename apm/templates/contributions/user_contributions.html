@@ -33,9 +33,10 @@
           </td>
 
           <td>
-            {% if c.validated %}
+              {% if c.validated and c.dues_amount > 0 %}
             <a class="btn" href="{% url "apm.apps.contributions.views.contribution_receipt" c.person.id c.id %}?next={% url "apm.apps.contributions.views.user_contributions" c.person.id %}">{% trans "Receipt" %}</a>
-            {% else %}
+            {% endif %}
+            {% if not c.validated %}
             <a class="btn btn-success" href="{% url "apm.apps.payments.views.pay" c.id %}?next={{ request.path }}">{% trans "Pay" %}</a>
             {% endif %}
             {% if not c.validated or superadmin or secretariat_member or tresorier_member %}
