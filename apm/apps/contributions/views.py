@@ -292,9 +292,10 @@ def contribution_receipt(request, user_id=None, contribution_id=None):
                             topMargin=72,bottomMargin=18)
     apinc_receipt=[]
     logo = os.path.join(settings.STATIC_ROOT, "images/entete_recu.png")
+    signature = settings.APINC_SIGNATURE_TRESORIER
      
     full_name = "%s %s" % (person.last_name, person.first_name)
-    address_parts = ["c/o FFCU", "173 rue de Charenton", "75012, PARIS"]
+    address_parts = settings.APINC_SIEGE_ADDRESS
      
     styles=getSampleStyleSheet()
     styles.add(ParagraphStyle(name='Justify', alignment=TA_JUSTIFY))
@@ -324,24 +325,22 @@ def contribution_receipt(request, user_id=None, contribution_id=None):
     ptext = '<font size=12>Fait à Paris, le %s.</font>' % datetime.datetime.now().strftime('%Y-%m-%d')
     apinc_receipt.append(Paragraph(ptext, styles["Normal"]))
 
-    apinc_receipt.append(Spacer(1, 12))
-     
-    # Create return address
-    #ptext = '<font size=12>%s</font>' % full_name
-    #apinc_receipt.append(Paragraph(ptext, styles["Normal"]))       
-    #for part in address_parts:
-    #    ptext = '<font size=12>%s</font>' % part.strip()
-    #    apinc_receipt.append(Paragraph(ptext, styles["Normal"]))   
-     
-     
+    apinc_receipt.append(Spacer(1, 27))
+    
+    # signature
+    im = Image(signature)
+    im.hAlign='LEFT'
+    apinc_receipt.append(im)
+
     # Create footer 
-    apinc_receipt.append(Spacer(1, 200))
+    apinc_receipt.append(Spacer(1, 142))
     ptext = '<font size=10><b>APINC - Association Pour l\'Internet Non Commercial</b><br/>' + \
             'Association loi de 1901.<br/>' + \
-            'Numero SIREN : 448 004 556 Numero CNIL : 783317<br/>' + \
-            'Siege social : APINC c/o FFCU<br/>' + \
-            '173 rue de Charenton, 72012 PARIS<br/>' + \
-            'http://www.apinc.org</font>'
+            'Numéro SIREN : %s - Numéro CNIL : %s<br/>' % (settings.APINC_SIREN, settings.APINC_CNIL) + \
+            'Siège social : %s<br/>' % (address_parts[0])
+    for part in address_parts[1:]:
+        ptext += '%s<br/>' % (part.strip())
+    ptext += 'http://www.apinc.org</font>'
     apinc_receipt.append(Paragraph(ptext, styles["Normal"]))
     doc.build(apinc_receipt)    
 

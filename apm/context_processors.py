@@ -52,7 +52,6 @@ def user_groups(request):
         'superadmin'         : superadmin or settings.PORTAL_ADMIN in user_groups,
         'secretariat_member' : 'apinc-secretariat' in user_groups,
         'bureau_member'      : 'apinc-bureau' in user_groups,
-        'secretariat_member' : 'apinc-secretariat' in user_groups,
         'tresorier_member'   : 'apinc-tresorier' in user_groups,
         'contributeur'       : 'apinc-contributeur' in user_groups,
     }
