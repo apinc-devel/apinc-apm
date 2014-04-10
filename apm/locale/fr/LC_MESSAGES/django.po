@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: APINC APM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-06 22:24+0100\n"
-"PO-Revision-Date: 2014-01-05 20:08+0100\n"
+"POT-Creation-Date: 2014-04-10 23:56+0200\n"
+"PO-Revision-Date: 2014-04-10 23:55:26+0100\n"
 "Last-Translator: Laurent Bives\n"
 "Language-Team: APINC Devel Team <devel@lists.apinc.org>\n"
 "Language: fr\n"
@@ -120,7 +120,7 @@ msgstr "La personne n'est pas éligible pour le statut membre"
 msgid "Contribution editor"
 msgstr "Editer une contribution"
 
-#: apps/contributions/views.py:199 apps/contributions/views.py:376
+#: apps/contributions/views.py:199 apps/contributions/views.py:375
 msgid "No project found for member"
 msgstr "Aucun projet trouvé pour le membre"
 
@@ -144,7 +144,7 @@ msgstr "Contribution validée avec succès"
 msgid "Contribution is not yet validated."
 msgstr "La contribution n'est pas encore validée."
 
-#: apps/contributions/views.py:386
+#: apps/contributions/views.py:385
 msgid "An error occured while trying to add a subscription, please contact administrators."
 msgstr "Une erreur s'est produite au moment de l'ajout de votre adhésion, merci de contacter un administrateur."
 
@@ -434,8 +434,8 @@ msgid "APINC Plateform"
 msgstr "Plateforme APINC"
 
 #: templates/base.html:60
-msgid "renewal"
-msgstr "renouvellement le"
+msgid "due date"
+msgstr "échéance le"
 
 #: templates/base.html:61
 msgid "Log out"
@@ -540,8 +540,8 @@ msgid "The organization"
 msgstr "L'association"
 
 #: templates/association/index.html:10
-#: templates/contributions/contributions.html:59
-#: templates/contributions/user_contributions.html:42
+#: templates/contributions/contributions.html:58
+#: templates/contributions/user_contributions.html:43
 #: templates/members/details.html:68 templates/members/details.html.py:99
 #: templates/members/details.html:116 templates/news/draft_details.html:20
 #: templates/news/published.html:16 templates/news/published_details.html:23
@@ -574,8 +574,8 @@ msgstr ""
 
 #: templates/association/index.html:42
 #: templates/contributions/contribution_type_edit.html:37
-#: templates/contributions/contributions.html:60
-#: templates/contributions/user_contributions.html:43
+#: templates/contributions/contributions.html:59
+#: templates/contributions/user_contributions.html:47
 #: templates/members/details.html:69 templates/members/details.html.py:100
 #: templates/news/draft_details.html:23
 #: templates/news/published_details.html:26
@@ -638,9 +638,8 @@ msgid "Password"
 msgstr "Mot de passe"
 
 #: templates/auth/login.html:36
-#, fuzzy
 msgid "Remember me"
-msgstr "Membre"
+msgstr "Se souvenir de moi"
 
 #: templates/auth/login.html:43
 msgid "Log-in"
@@ -709,7 +708,6 @@ msgid "Dues amount"
 msgstr "Montant dû"
 
 #: templates/contributions/contribution_edit.html:81
-#, fuzzy
 msgid "Duration"
 msgstr "Durée (mois)"
 
@@ -718,7 +716,7 @@ msgid "Duration (month)"
 msgstr "Durée (mois)"
 
 #: templates/contributions/contribution_edit.html:92
-#: templates/contributions/user_contributions.html:39
+#: templates/contributions/user_contributions.html:40
 msgid "Pay"
 msgstr "Payer"
 
@@ -775,11 +773,11 @@ msgstr "Date d'enregistrement"
 msgid "Type"
 msgstr ""
 
-#: templates/contributions/contributions.html:36
+#: templates/contributions/contributions.html:35
 msgid "Action"
 msgstr "Action"
 
-#: templates/contributions/contributions.html:45
+#: templates/contributions/contributions.html:44
 #: templates/contributions/user_contributions.html:26
 #: templates/payments/pay.html:25 templates/payments/payment_details.html:17
 #: templates/payments/payment_details.html:28
@@ -790,42 +788,42 @@ msgstr "Action"
 msgid "euros"
 msgstr ""
 
-#: templates/contributions/contributions.html:50
+#: templates/contributions/contributions.html:49
 msgid "No payment found"
 msgstr "Pas de paiement trouvé"
 
-#: templates/contributions/contributions.html:56
+#: templates/contributions/contributions.html:55
 #: templates/contributions/user_contributions.html:37
 msgid "Receipt"
 msgstr "Reçu"
 
-#: templates/contributions/contributions.html:66
+#: templates/contributions/contributions.html:65
 msgid "No contribution yet !"
 msgstr "Pas de contribution pour le moment !"
 
-#: templates/contributions/contributions.html:78
-#: templates/contributions/contributions.html:85 templates/news/drafts.html:42
+#: templates/contributions/contributions.html:77
+#: templates/contributions/contributions.html:84 templates/news/drafts.html:42
 #: templates/news/index.html:32 templates/news/published.html:41
 msgid "of"
 msgstr "de"
 
-#: templates/contributions/contributions.html:78
+#: templates/contributions/contributions.html:77
 msgid "results"
 msgstr "résultats"
 
-#: templates/contributions/contributions.html:81
+#: templates/contributions/contributions.html:80
 #: templates/news/draft_details.html:32 templates/news/drafts.html:38
 #: templates/news/index.html:28 templates/news/published.html:37
 #: templates/news/published_details.html:34
 msgid "previous"
 msgstr "précédent"
 
-#: templates/contributions/contributions.html:85 templates/news/drafts.html:42
+#: templates/contributions/contributions.html:84 templates/news/drafts.html:42
 #: templates/news/index.html:32 templates/news/published.html:41
 msgid "page"
 msgstr ""
 
-#: templates/contributions/contributions.html:89
+#: templates/contributions/contributions.html:88
 #: templates/news/draft_details.html:38 templates/news/drafts.html:46
 #: templates/news/index.html:36 templates/news/published.html:45
 #: templates/news/published_details.html:40
@@ -858,7 +856,7 @@ msgstr "Validé"
 msgid "Not validated"
 msgstr "Non validé"
 
-#: templates/contributions/user_contributions.html:49
+#: templates/contributions/user_contributions.html:54
 msgid "No contributions yet !"
 msgstr "Pas de contributions pour le moment !"
 
@@ -1204,6 +1202,9 @@ msgstr "Paiements pour"
 msgid "No payments yet !"
 msgstr "Pas de paiement pour le moment !"
 
+#~ msgid "renewal"
+#~ msgstr "renouvellement le"
+
 #~ msgid "-- Select contribution type --"
 #~ msgstr "-- Sélectionner un type de contribution --"
 
@@ -1216,14 +1217,12 @@ msgstr "Pas de paiement pour le moment !"
 #~ msgid "Bank details"
 #~ msgstr "Relevé d'identitié bancaire APINC"
 
-#, fuzzy
 #~ msgid "No members identified in the board !"
 #~ msgstr "Pas de membre dans le bureau !"
 
 #~ msgid "Who are we ?"
 #~ msgstr "Qui sommes nous ?"
 
-#, fuzzy
 #~ msgid "the panel user preference tab"
 #~ msgstr "l'onglet user préférence du panel"
 
