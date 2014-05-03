@@ -340,3 +340,6 @@ TINYMCE_DEFAULT_CONFIG = {
 PAYPAL_MODE = 'sandbox' # or 'live'
 PAYPAL_CLIENT_ID = ''
 PAYPAL_CLIENT_SECRET = ''
+
+PIWIK_URL = 'http://localhost/piwik/'
+PIWIK_SITE_ID = '0'

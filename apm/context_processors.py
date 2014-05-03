@@ -30,6 +30,8 @@ def base(request):
         'current_year'       : datetime.date.today().year,
         'apinc_siren'        : settings.APINC_SIREN,
         'apinc_cnil'         : settings.APINC_CNIL,
+        'piwik_url'          : settings.PIWIK_URL,
+        'piwik_site_id'      : settings.PIWIK_SITE_ID,
     }
 
 def versions(request):
